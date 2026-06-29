@@ -1,0 +1,66 @@
+GERBANG KALAM
+│
+├── Kalam
+├── Isim
+├── Fi'il
+├── Huruf
+└── Penjaga Kalam
+
+▼
+
+KOTA I'RAB
+│
+├── باب الإعراب
+├── المعرب
+├── المبني
+├── أقسام الإعراب
+└── Penjaga I'rab
+
+▼
+
+KOTA MARFU'AT
+│
+├── علامات الرفع
+├── الفاعل
+├── نائب الفاعل
+├── المبتدأ
+├── الخبر
+├── اسم كان
+├── خبر إن
+└── Penjaga Marfu'at
+
+▼
+
+KOTA MANSUBAT
+│
+├── علامات النصب
+├── المفعول به
+├── المفعول المطلق
+├── المفعول فيه
+├── الحال
+├── التمييز
+├── الاستثناء
+└── Penjaga Mansubat
+
+▼
+
+KOTA MAJRURAT
+│
+├── علامات الجر
+├── المجرور بالحرف
+├── المضاف إليه
+└── Penjaga Majrurat
+
+▼
+
+KOTA TAWABI'
+│
+├── النعت
+├── العطف
+├── التوكيد
+├── البدل
+└── Penjaga Tawabi'
+
+▼
+
+ISTANA AGUNG AJRUMIYYAH

@@ -1,0 +1,71 @@
+.matan-irab-page {
+  width: 100vw;
+  height: 100vh;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.82)),
+    url("/src/assets/maps/kotairab.webp");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.matan-card {
+  width: min(850px, 92vw);
+  padding: 34px;
+  background: rgba(3, 37, 32, 0.93);
+  border: 3px solid #facc15;
+  border-radius: 28px;
+  color: white;
+  text-align: center;
+  box-shadow: 0 0 35px rgba(250, 204, 21, 0.45);
+}
+
+.matan-card h1 {
+  font-family: "Amiri", serif;
+  direction: rtl;
+  font-size: clamp(38px, 5vw, 60px);
+  color: #facc15;
+  margin: 0 0 18px;
+}
+
+.matan-text {
+  font-family: "Amiri", serif;
+  direction: rtl;
+  font-size: clamp(25px, 4vw, 47px);
+  color: #fde68a;
+  line-height: 1.7;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(250, 204, 21, 0.45);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.matan-meaning {
+  font-size: clamp(17px, 2vw, 22px);
+  line-height: 1.7;
+  margin: 24px auto;
+  max-width: 760px;
+}
+
+.matan-next {
+  border: 2px solid #facc15;
+  background: linear-gradient(135deg, #15803d, #064e3b);
+  color: #fff7cc;
+  font-weight: bold;
+  border-radius: 16px;
+  padding: 13px 24px;
+  cursor: pointer;
+}
+
+.matan-back {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.matan-next {
+  font-size: 20px;
+}

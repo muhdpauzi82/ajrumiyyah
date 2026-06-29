@@ -1,0 +1,109 @@
+.kota-irab-wrap {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: #181717;
+}
+
+.map-frame {
+  position: relative;
+  width: min(100vw, 150vh);
+  aspect-ratio: 6 / 4;
+}
+
+.kota-irab-map {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* hotspot invisible */
+.hotspot {
+  position: absolute;
+  cursor: pointer;
+  border:  none;
+  background:none;
+  animation: none;
+}
+
+/* kedudukan hotspot */
+.huruf {
+  left: 61%;
+  top: 26%;
+  width: 20%;
+  height: 15%;
+}
+
+.fiil {
+  left: 53%;
+  top: 45%;
+  width: 20%;
+  height: 15%;
+}
+
+.isim {
+  left: 32%;
+  top: 50%;
+  width: 10%;
+  height: 25%;
+}
+
+.lembah {
+  left: 18%;
+  top: 55%;
+  width: 10%;
+  height: 15%;
+}
+
+.boss {
+  left: 48%;
+  top: 8%;
+  width: 20%;
+  height: 15%;
+}
+
+/* kawasan berkunci */
+.disabled {
+  cursor: not-allowed;
+}
+
+.lock-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  font-size: clamp(28px, 4vw, 52px);
+  z-index: 20;
+  color: #ffd700;
+  text-shadow: 0 0 12px #000, 0 0 18px gold;
+  pointer-events: none;
+}
+
+/* butang kembali */
+.back-map {
+  position: absolute;
+  left: 210px;
+  bottom: 35px;
+  z-index: 10;
+  padding: 12px 88px;
+  border: none;
+  border-radius: 14px;
+  background: transparent;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+.kembali {
+  left: 1%;
+  top: 83%;
+  width: 14%;
+  height: 12%;
+}
+.back-map:hover {
+  transform: scale(1.05);
+  background:none;
+}

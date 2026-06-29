@@ -1,0 +1,121 @@
+.world-wrap {
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.world-frame {
+  position: relative;
+  width: min(100vw, 150vh);
+  aspect-ratio: 3 / 2;
+}
+
+.world-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.world-zone {
+  position: absolute;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.open {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  animation: none;
+}
+
+.locked {
+  background: rgba(0, 0, 0, 0.0);
+  border: none;
+  cursor: not-allowed;
+}
+
+.gerbang {
+  left: 38%;
+  top: 58%;
+  width: 24%;
+  height: 25%;
+}
+
+.irab {
+  left: 10%;
+  top: 12%;
+  width: 26%;
+  height: 28%;
+}
+
+.marfuat {
+  left: 70%;
+  top: 12%;
+  width: 24%;
+  height: 29%;
+}
+
+.mansubat {
+  left: 70%;
+  top: 42%;
+  width: 24%;
+  height: 24%;
+}
+
+.majrurat {
+  left: 7%;
+  top: 42%;
+  width: 27%;
+  height: 24%;
+}
+
+.tawabi {
+  left: 68%;
+  top: 67%;
+  width: 25%;
+  height: 22%;
+}
+
+.istana {
+  left: 40%;
+  top: 13%;
+  width: 22%;
+  height: 26%;
+}
+
+.back-world {
+  position: absolute;
+  left: 260px;
+  bottom: 21px;
+  z-index: 10;
+  padding: 12px 48px;
+  border: none;
+  border-radius: 14px;
+  background: transparent;
+  color: white;
+  font-weight: bold;
+}
+
+.lock-icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+
+  font-size: 28px;
+  color: #b82015;
+  text-shadow: 0 0 10px #ffd760;
+
+  background: rgba(224, 90, 90, 0);
+  border-radius: 50%;
+  padding: 2px 2px;
+
+  pointer-events: none;
+}
+

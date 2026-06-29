@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.home {
+  min-height: 100vh;
+  background-image: url("../assets/backgrounds/home-bg.webp");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+  font-family: Georgia, serif;
+}
+
+.header {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  background: #075aa8;
+  color: #ffd760;
+  padding: 14px 32px;
+  border-radius: 18px;
+  border: 3px solid #ffd760;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.resource-box {
+  background: rgba(255,255,255,.9);
+  padding: 14px 28px;
+  border-radius: 18px;
+  display: flex;
+  gap: 24px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.hero-content {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  text-shadow: 2px 2px 8px black;
+}
+
+.hero-content h1 {
+  font-size: 60px;
+  color: #ffe08a;
+}
+
+.hero-content p {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.continue-btn {
+  margin-top: 20px;
+  padding: 16px 38px;
+  border: none;
+  border-radius: 18px;
+  background: #ffd760;
+  color: #1b1b1b;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.menu-grid {
+  position: absolute;
+  left: 50%;
+  bottom: 35px;
+  transform: translateX(-50%);
+  width: min(1050px, 92%);
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+}
+
+.menu-card {
+  height: 115px;
+  border-radius: 18px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgba(255,255,255,.5);
+  font-size: 34px;
+  font-weight: bold;
+}
+
+.menu-card h3 {
+  margin-top: 8px;
+  font-size: 18px;
+}
+
+.blue { background: rgba(0,123,255,.85); }
+.green { background: rgba(40,167,69,.85); }
+.gold { background: rgba(194,137,0,.85); }
+.purple { background: rgba(111,66,193,.85); }
+.cyan { background: rgba(0,153,204,.85); }
+.red { background: rgba(220,53,69,.85); }
+
+
+.menu-card{
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.menu-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 10px 25px rgba(0,0,0,.35);
+}

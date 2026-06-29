@@ -1,0 +1,51 @@
+export const cities = [
+  {
+    id: "gerbang-kalam",
+    name: "Gerbang Kalam",
+    icon: "🗝️",
+    route: "/gerbang-kalam",
+    unlocked: true,
+  },
+  {
+    id: "kota-irab",
+    name: "Kota I'rab",
+    icon: "🏙️",
+    route: "/kota-irab",
+    unlocked: false,
+  },
+  {
+    id: "kota-marfuat",
+    name: "Kota Marfu'at",
+    icon: "🏙️",
+    route: "/kota-marfuat",
+    unlocked: false,
+  },
+  {
+    id: "kota-mansubat",
+    name: "Kota Mansubat",
+    icon: "🏙️",
+    route: "/kota-mansubat",
+    unlocked: false,
+  },
+  {
+    id: "kota-majrurat",
+    name: "Kota Majrurat",
+    icon: "🏙️",
+    route: "/kota-majrurat",
+    unlocked: false,
+  },
+  {
+    id: "kota-tawabi",
+    name: "Kota Tawabi'",
+    icon: "🏙️",
+    route: "/kota-tawabi",
+    unlocked: false,
+  },
+  {
+    id: "istana-agung",
+    name: "Istana Agung",
+    icon: "👑",
+    route: "/istana-agung",
+    unlocked: false,
+  },
+];
