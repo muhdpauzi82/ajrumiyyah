@@ -1,0 +1,401 @@
+
+.gate-result-screen {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-image:
+    linear-gradient(rgba(2, 6, 23, 0.45), rgba(2, 6, 23, 0.75)),
+    url("/images/bg/rehat-minda-result.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gate-start-screen,
+.gate-challenge,
+.gate-result-screen {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-image:
+    linear-gradient(rgba(2, 6, 23, 0.30), rgba(2, 6, 23, 0.45)),
+    url("/images/bg/rehat-minda-result.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  font-family: Arial, sans-serif;
+
+}
+
+.gate-start-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gate-start-card {
+  width: min(90%, 540px);
+  min-height: 650px;
+  padding: 18px 20px 24px;
+  text-align: center;
+  border-radius: 24px;
+  background: rgba(15, 23, 42, 0.88);
+  border: 2px solid #facc15;
+  box-shadow: 0 0 35px rgba(250, 204, 21, 0.35);
+}
+
+.gate-start-card h1 {
+  font-size: clamp(26px, 3vw, 42px);
+  color: #7af309;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 8px;
+  text-align: center;
+
+  text-shadow:
+     0 0 6px rgba(122,243,9,.45),
+    0 0 12px rgba(122,243,9,.25);
+}
+
+
+.gate-start-button {
+  margin-top: 22px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #22c55e, #15803d);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.gate-hud {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(94vw, 980px);
+  z-index: 10;
+  padding: 14px 20px;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.82);
+  border: 1px solid rgba(250, 204, 21, 0.65);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gate-hud h2 {
+  margin: 0;
+  color: #facc15;
+}
+
+.gate-hud p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.gate-stats {
+  display: flex;
+  gap: 14px;
+  font-weight: bold;
+}
+
+.gate-play-area {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.falling-word {
+  position: absolute;
+  top: -70px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 2px solid #facc15;
+  background: rgba(255, 255, 255, 0.95);
+  color: #111827;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  animation-name: fallDown;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  box-shadow: 0 0 18px rgba(250, 204, 21, 0.45);
+}
+
+@keyframes fallDown {
+  from {
+    transform: translateY(-80px);
+  }
+
+  to {
+    transform: translateY(110vh);
+  }
+}
+
+.gate-teacher-box {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92vw, 720px);
+  padding: 16px 20px;
+  border-radius: 20px;
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(34, 197, 94, 0.7);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.gate-teacher-avatar {
+  font-size: 42px;
+}
+
+.gate-teacher-message {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.gate-final-result {
+  margin: 4px auto 10px;
+  width: min(90%, 440px);
+
+  padding: 10px 12px;
+
+  border-radius: 22px;
+
+  background: rgba(15, 23, 42, 0.82);
+
+  border: 2px solid rgba(250, 204, 21, 0.75);
+
+  box-shadow:
+    0 0 24px rgba(250, 204, 21, 0.25),
+    inset 0 0 18px rgba(255,255,255,.05);
+
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+
+  gap: 10px;
+}
+
+.gate-retry-button {
+  margin-top: 12px;
+  padding: 12px 24px;
+  border: 2px solid #facc15;
+  border-radius: 999px;
+  background: transparent;
+  color: #facc15;
+  font-weight: bold;
+  cursor: pointer;
+}
+.floating-score {
+  position: absolute;
+  z-index: 20;
+  color: #22c55e;
+  font-size: 28px;
+  font-weight: 900;
+  pointer-events: none;
+  animation: floatUp 0.8s ease-out forwards;
+  text-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
+}
+
+@keyframes floatUp {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-45px) scale(1.4);
+  }
+}
+.gate-countdown {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(70px, 14vw, 170px);
+  font-weight: 900;
+  color: #facc15;
+  text-shadow: 0 0 30px rgba(250, 204, 21, 0.9);
+  pointer-events: none;
+}
+
+.floating-score.wrong {
+  color: #ef4444;
+  text-shadow: 0 0 12px rgba(239, 68, 68, 0.9);
+}
+.gate-result-stat{
+    padding:8px 10px;
+    min-height:68px;
+    font-size:28px;
+    font-weight:800;
+    border-radius:14px;
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    transition:.25s;
+}
+
+.gate-result-stat span {
+  display: block;
+  font-size: 12px;
+  font-weight:700;
+  opacity: 0.80;
+  margin-bottom: 5px;
+  color: #fef3c7;
+}
+.stat-score { border-color: #facc15; box-shadow: 0 0 18px rgba(250,204,21,.35); }
+.stat-record { border-color: #fb923c; box-shadow: 0 0 18px rgba(251,146,60,.35); }
+.stat-combo { border-color: #f97316; box-shadow: 0 0 18px rgba(249,115,22,.35); }
+.stat-correct { border-color: #22c55e; box-shadow: 0 0 18px rgba(34,197,94,.35); }
+.stat-wrong { border-color: #ef4444; box-shadow: 0 0 18px rgba(239,68,68,.35); }
+.stat-accuracy { border-color: #38bdf8; box-shadow: 0 0 18px rgba(56,189,248,.35); }
+.stat-time { border-color: #8b5cf6; box-shadow: 0 0 18px rgba(139,92,246,.35); }
+.stat-grade { border-color: #f59e0b; box-shadow: 0 0 18px rgba(245,158,11,.35); }
+
+.danger-pulse {
+  animation: dangerPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes dangerPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 18px rgba(239, 68, 68, 0.35);
+  }
+
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 0 30px rgba(239, 68, 68, 0.8);
+  }
+}
+.gate-start-screen {
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+.gate-start-card {
+  max-height: calc(100dvh - 36px);
+  overflow: hidden;
+  transform: scale(0.90);
+  transform-origin: center;
+}
+
+.gate-start-card h1 {
+  font-size: clamp(34px, 4.2vw, 50px);
+  line-height: 1.05;
+  margin: 0 0 14px;
+}
+
+.gate-final-result {
+  margin: 8px auto;
+}
+
+.gate-start-button,
+.gate-retry-button {
+  margin-top: 10px;
+}
+.gate-final-result > div {
+  animation: statPop 0.45s ease both;
+}
+
+.gate-final-result > div:nth-child(1) { animation-delay: 0.05s; }
+.gate-final-result > div:nth-child(2) { animation-delay: 0.12s; }
+.gate-final-result > div:nth-child(3) { animation-delay: 0.19s; }
+.gate-final-result > div:nth-child(4) { animation-delay: 0.26s; }
+.gate-final-result > div:nth-child(5) { animation-delay: 0.33s; }
+.gate-final-result > div:nth-child(6) { animation-delay: 0.40s; }
+.gate-final-result > div:nth-child(7) { animation-delay: 0.47s; }
+.gate-final-result > div:nth-child(8) { animation-delay: 0.54s; }
+
+@keyframes statPop {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.gate-result-actions {
+  animation: actionsUp 0.5s ease both;
+  animation-delay: 0.75s;
+}
+
+@keyframes actionsUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.gate-start-card h1 {
+  animation: titleDrop 0.5s ease both;
+}
+
+@keyframes titleDrop {
+  from {
+    opacity: 0;
+    transform: translateY(-18px) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.gate-reward-box {
+  width: min(86%, 390px);
+  margin: 6px auto 0;
+  padding: 6px 10px;
+  border: 1px solid #facc15;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.82);
+  text-align: center;
+}
+
+.gate-reward-box h3 {
+  margin: 0 0 4px;
+  font-size: 13px;
+  color: #facc15;
+}
+
+.gate-reward-list {
+  display: flex;
+  justify-content: center;
+  gap: 6px 12px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.gate-no-reward {
+  margin: 0;
+  color: #fca5a5;
+  font-size: 12px;
+}

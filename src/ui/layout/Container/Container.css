@@ -1,0 +1,22 @@
+.ads-container{
+    width:100%;
+    margin:0 auto;
+    padding:0 var(--space-lg);
+    box-sizing:border-box;
+}
+
+.ads-container-sm{
+    max-width:640px;
+}
+
+.ads-container-md{
+    max-width:900px;
+}
+
+.ads-container-lg{
+    max-width:1200px;
+}
+
+.ads-container-xl{
+    max-width:1440px;
+}

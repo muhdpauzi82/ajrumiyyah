@@ -1,0 +1,47 @@
+.question-page {
+  width: 100vw;
+  height: 100vh;
+  background:
+    radial-gradient(circle, rgba(0,0,0,.12), rgba(0,0,0,.72)),
+    url("/src/assets/backgrounds/bg-madrasah-irab.webp");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.question-count {
+  color: #86efac;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+
+.question-progress {
+  width: 100%;
+  height: 14px;
+  border: 2px solid #facc15;
+  border-radius: 999px;
+  background: rgba(0,0,0,.45);
+  overflow: hidden;
+  margin-bottom: 26px;
+}
+
+.question-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #16a34a, #facc15);
+  transition: width .35s ease;
+}
+
+.question-text {
+  color: #fff7cc;
+  font-size: clamp(24px, 3vw, 38px);
+  line-height: 1.45;
+  margin: 20px 0 30px;
+}
+
+.question-options {
+  display: grid;
+  gap: 16px;
+}

@@ -1,0 +1,32 @@
+.ads-card {
+  border-radius: var(--radius-lg);
+  color: var(--color-text);
+  box-shadow: var(--shadow-md);
+}
+
+.ads-card-default {
+  background: var(--color-surface-soft);
+  border: 2px solid var(--color-border);
+}
+
+.ads-card-green {
+  background: rgba(20, 83, 45, 0.9);
+  border: 2px solid var(--color-primary);
+}
+
+.ads-card-gold {
+  background: rgba(120, 53, 15, 0.9);
+  border: 2px solid var(--color-secondary);
+}
+
+.ads-card-small {
+  padding: var(--space-sm);
+}
+
+.ads-card-medium {
+  padding: var(--space-lg);
+}
+
+.ads-card-large {
+  padding: var(--space-xl);
+}

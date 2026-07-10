@@ -31,7 +31,7 @@ export default function BabIrabMatan() {
           className="matan-next"
           onClick={() => {
             localStorage.setItem("babIrabMatanDone", "true");
-            navigate("/bab-irab-animasi");
+            navigate("/bab-irab-learning")
           }}
         >
           ✨ Lihat Animasi I&apos;rab

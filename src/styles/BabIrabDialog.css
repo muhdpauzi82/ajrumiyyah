@@ -1,0 +1,21 @@
+.majlis-page {
+  width: 100vw;
+  height: 100vh;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: black;
+  position: relative;
+  overflow: hidden;
+}
+
+.hotspot-masuk {
+  position: absolute;
+  left: 34%;
+  top: 58%;
+  width: 32%;
+  height: 18%;
+  border: none;
+  background: rgba(0, 255, 0, 0.08); /* sementara nampak */
+  cursor: pointer;
+}

@@ -1,0 +1,1 @@
+Semua kandungan, dunia, mini game dan boss dalam AJRUMIYYAH hendaklah mengikuti susunan asal Matan Al-Ajrumiyyah. Elemen permainan hanya digunakan untuk memperkayakan pengalaman pembelajaran, bukan mengubah struktur ilmu.

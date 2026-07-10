@@ -1,0 +1,47 @@
+.ads-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  padding: var(--space-md);
+}
+
+.ads-dialog {
+  background: var(--color-background);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  color: var(--color-text);
+  text-align: center;
+  padding: var(--space-lg);
+}
+
+.ads-dialog-small {
+  width: min(90vw, 360px);
+}
+
+.ads-dialog-medium {
+  width: min(90vw, 480px);
+}
+
+.ads-dialog-large {
+  width: min(92vw, 720px);
+}
+
+.ads-dialog-title {
+  margin: 0 0 var(--space-md);
+  color: var(--color-secondary);
+}
+
+.ads-dialog-content {
+  margin-bottom: var(--space-lg);
+  color: var(--color-muted);
+}
+
+.ads-dialog-actions {
+  display: flex;
+  justify-content: center;
+}

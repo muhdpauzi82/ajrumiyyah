@@ -1,0 +1,10 @@
+:root {
+  --font-body: Arial, sans-serif;
+  --font-title: Georgia, serif;
+  --font-arabic: "Amiri", serif;
+
+  --text-sm: 0.85rem;
+  --text-md: 1rem;
+  --text-lg: 1.2rem;
+  --text-xl: 1.6rem;
+}

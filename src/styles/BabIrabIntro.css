@@ -8,9 +8,11 @@
   width: 100vw;
   height: 100vh;
   background:
-    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.8)),
-    url("/src/assets/maps/kotairab.webp");
-  background-size: cover;
+linear-gradient(
+rgba(0,0,0,.18),
+rgba(0,0,0,.42)
+),
+url("/src/assets/maps/bg-madrasah-irab.webp");
   background-position: center;
   overflow: hidden;
   display: flex;

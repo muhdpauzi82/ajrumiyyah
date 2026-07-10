@@ -27,7 +27,7 @@ export default function KotaIrab() {
     <img  src={kotaIrabMap}  className="irab-map"  alt="Kota I'rab"/>
 
        <button
-  className="irab-hotspot madrasah"  onClick={() => navigate("/bab-irab-intro")}
+  className="irab-hotspot madrasah"  onClick={() => navigate("/bab-irab-dialog")}
 />
 <button
   className="irab-hotspot kembali"  onClick={() => navigate("/worldmap")}

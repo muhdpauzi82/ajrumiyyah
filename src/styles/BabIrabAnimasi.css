@@ -1,0 +1,119 @@
+.irab-animasi-page {
+  width: 100vw;
+  height: 100vh;
+  background:
+    linear-gradient(rgba(0,0,0,.28), rgba(0,0,0,.7)),
+    url("/src/assets/maps/bg-madrasah-irab.webp");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flow-vertical {
+  font-family: "Amiri", serif;
+  direction: rtl;
+  color: #86efac;
+  .flow-vertical {
+  font-size: clamp(28px, 3.5vw, 42px);
+  line-height: 1.25;
+}  margin: 18px 0;
+}
+
+.flow-vertical b {
+  display: block;
+  color: #facc15;
+  font-family: Arial, sans-serif;
+  font-size: 34px;
+  animation: arrowMove 1s infinite;
+}
+.animasi-card {
+  width: min(900px, 90vw);
+  padding: 36px;
+  text-align: center;
+  color: white;
+  background: rgba(2, 35, 30, .88);
+  border: 3px solid #facc15;
+  border-radius: 30px;
+  box-shadow: 0 0 35px rgba(250,204,21,.45);
+}
+
+.animasi-card h1 {
+  color: #fde68a;
+  font-size: clamp(26px, 3vw, 42px);
+}
+
+.arabic-example {
+  font-family: "Amiri", serif;
+  direction: rtl;
+  font-size: clamp(48px, 8vw, 90px);
+  color: #fff7cc;
+  margin: 28px 0;
+  text-shadow: 0 0 18px rgba(250,204,21,.7);
+}
+
+.ending-glow {
+  font-size: clamp(20px, 2.4vw, 30px);
+  color: #d1fae5;
+}
+
+.ending-glow span {
+  font-family: "Amiri", serif;
+  direction: rtl;
+  color: #facc15;
+  font-size: 1.6em;
+  text-shadow: 0 0 20px gold;
+  animation: glowEnd 1.2s infinite;
+}
+
+.animasi-card p {
+  font-size: clamp(18px, 2vw, 26px);
+  line-height: 1.6;
+}
+
+.summary {
+  font-family: "Amiri", serif;
+  direction: rtl;
+  color: #86efac;
+  font-size: clamp(28px, 4vw, 48px);
+  margin: 20px 0;
+}
+
+.animasi-next,
+.animasi-back {
+  border: 2px solid #facc15;
+  background: linear-gradient(135deg, #15803d, #064e3b);
+  color: #fff7cc;
+  font-weight: bold;
+  border-radius: 16px;
+  padding: 13px 24px;
+  cursor: pointer;
+}
+
+.animasi-back {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.animasi-next {
+  font-size: 20px;
+}
+
+@keyframes glowEnd {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.8); }
+}
+.sentence {
+  font-size: clamp(50px, 8vw, 92px);
+}
+
+.focus-word {
+  font-family: "Amiri", serif;
+  direction: rtl;
+  font-size: clamp(58px, 7vw, 90px);
+  color: white;
+  margin: 10px 0;
+  line-height: 1.1;
+}

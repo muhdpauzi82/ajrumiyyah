@@ -1,0 +1,9 @@
+.ads-grid{
+    display:grid;
+}
+
+.ads-gap-xs{gap:var(--space-xs);}
+.ads-gap-sm{gap:var(--space-sm);}
+.ads-gap-md{gap:var(--space-md);}
+.ads-gap-lg{gap:var(--space-lg);}
+.ads-gap-xl{gap:var(--space-xl);}

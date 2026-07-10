@@ -1,0 +1,14 @@
+:root {
+  --transition-fast: 0.18s ease;
+  --transition-normal: 0.25s ease;
+}
+
+@keyframes ads-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
