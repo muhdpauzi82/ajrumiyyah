@@ -1,0 +1,40 @@
+
+.guardian-crystal-status {
+  position: absolute;
+  top: 15.8%;
+  left: -2%;
+
+  width: 19%;
+  height: 70%;
+
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 5%;
+
+  z-index: 9;
+}
+
+.crystal-value {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  padding-bottom: 5%;
+
+  color: #fff7d0;
+  font-size: clamp(10px, 1vw, 18px);
+  font-weight: 900;
+  text-shadow: 0 2px 4px #000;
+}
+
+.crystal-green {
+  color: #93ff96;
+}
+
+.crystal-red {
+  color: #ff9384;
+}
+
+.crystal-purple {
+  color: #d29cff;
+}

@@ -1,0 +1,248 @@
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: #020504;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  font: inherit;
+}
+
+.guardian-screen {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+  height: 100dvh;
+
+  overflow: hidden;
+  background: #020504;
+}
+
+.guardian-stage {
+  position: relative;
+
+  width: min(100vw, calc(100dvh * 1.5));
+  aspect-ratio: 3 / 2;
+
+  flex: 0 0 auto;
+  overflow: hidden;
+
+  background: #050907;
+  user-select: none;
+  isolation: isolate;
+}
+
+.guardian-background {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+  object-fit: contain;
+  object-position: center;
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+.guardian-typing-text {
+  position: relative;
+
+  width: 100%;
+  min-height: 68%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.guardian-typing-text p {
+  margin: 0.18% 0;
+
+  color: #f4ead5;
+  font-size: clamp(10px, 1.08vw, 18px);
+  line-height: 1.3;
+  text-align: center;
+
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.15),
+    0 -2px 3px rgba(0,0,0,.75);
+}
+
+
+.guardian-start-visible {
+  animation: guardian-start-appear 420ms ease both;
+}
+
+@keyframes guardian-start-appear {
+  from {
+    opacity: 0;
+    transform: translateY(18%) scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+ 
+.guardian-countdown{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:clamp(80px,10vw,180px);
+
+    font-weight:900;
+
+    color:#ffe45c;
+
+    text-shadow:
+        0 0 15px rgba(255,208,90,.9),
+        0 0 45px rgba(255,208,90,.5);
+
+    z-index:100;
+}
+
+.guardian-countdown-text {
+  width: 100%;
+  min-height: 180px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #ffe45c;
+
+  font-size: clamp(65px, 8vw, 145px);
+  font-weight: 900;
+  line-height: 1;
+
+  text-shadow:
+    0 2px 0 #704200,
+    0 0 15px rgba(255, 215, 79, 0.95),
+    0 0 38px rgba(255, 176, 0, 0.55);
+
+  animation: guardian-countdown-pulse 700ms ease both;
+}
+
+@keyframes guardian-countdown-pulse {
+  0% {
+    opacity: 0;
+    transform: scale(1.45);
+  }
+
+  35% {
+    opacity: 1;
+    transform: scale(0.92);
+  }
+
+  60% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.guardian-playing-question {
+  margin: 0;
+
+  color: #f7edda;
+  font-size: clamp(18px, 1.8vw, 31px);
+  font-weight: 800;
+  text-align: center;
+}
+
+
+.guardian-question-panel {
+  transition:
+    box-shadow 300ms ease,
+    filter 300ms ease;
+}
+
+.guardian-stage:has(.guardian-success-petals)
+.guardian-question-panel {
+  box-shadow:
+    inset 0 0 30px rgba(68, 210, 118, 0.18),
+    0 0 28px rgba(255, 205, 71, 0.48);
+}
+
+.crystal-value{
+
+opacity:.35;
+
+transition:.35s;
+
+filter:brightness(.8);
+
+}
+.crystal-value.active{
+
+opacity:1;
+
+transform:scale(1.08);
+
+filter:
+
+brightness(1.35)
+
+drop-shadow(0 0 12px currentColor)
+
+drop-shadow(0 0 25px currentColor);
+
+animation:
+
+crystalPulse 1s infinite;
+
+}
+@keyframes crystalPulse{
+
+0%{
+
+transform:scale(1);
+
+}
+
+50%{
+
+transform:scale(1.08);
+
+}
+
+100%{
+
+transform:scale(1);
+
+}
+
+}
+

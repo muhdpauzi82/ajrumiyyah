@@ -1,0 +1,101 @@
+.guardian-character {
+  position: absolute;
+
+  right: 4%;
+  bottom: 15%;
+
+  width: 27%;
+  height: auto;
+
+  object-fit: contain;
+
+  z-index: 7;
+
+  pointer-events: none;
+  user-select: none;
+}
+
+.guardian-character{
+    transition:
+        opacity .25s ease,
+        transform .25s ease;
+}
+
+.guardian-book-glow {
+  position: absolute;
+  left: 32%;
+  top: 48%;
+
+  width: 25%;
+  height: 20%;
+
+  border-radius: 50%;
+
+  opacity: 0;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.guardian-book-glow.is-active {
+  animation: guardian-book-glow 500ms ease;
+}
+
+.guardian-question-rising {
+  position: absolute;
+  left: 43%;
+  top: 58%;
+
+  width: 34%;
+
+  transform: translateX(-50%);
+
+  color: #fff4cc;
+  font-size: clamp(16px, 1.7vw, 30px);
+  font-weight: 800;
+  text-align: center;
+
+  opacity: 0;
+  z-index: 12;
+}
+
+.guardian-question-rising.is-rising {
+  animation: guardian-question-rise 900ms ease forwards;
+}
+
+
+@keyframes guardian-book-glow {
+  0% {
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(255, 210, 80, 0);
+  }
+
+  45% {
+    opacity: 1;
+    box-shadow:
+      0 0 35px rgba(255, 222, 112, 0.9),
+      0 0 75px rgba(255, 167, 28, 0.65);
+  }
+
+  100% {
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(255, 210, 80, 0);
+  }
+}
+
+@keyframes guardian-question-rise {
+  0% {
+    top: 58%;
+    opacity: 0;
+    transform: translateX(-50%) scale(0.9);
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 26%;
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}

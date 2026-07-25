@@ -68,12 +68,18 @@ export default function NotaHuruf() {
 }
 
 const styles = {
-  page: {
-    minHeight: "100vh",
-    padding: "30px",
-    background: "linear-gradient(to bottom, #dff5c9, #96c96b)",
-    fontFamily: "Arial",
-  },
+ page: {
+  width: "100%",
+  height: "100vh",
+  overflowY: "auto",
+  overflowX: "hidden",
+
+  boxSizing: "border-box",
+  padding: "30px",
+
+  background: "linear-gradient(to bottom, #dff5c9, #96c96b)",
+  fontFamily: "Arial",
+},
   backBtn: {
     padding: "10px 18px",
     borderRadius: "12px",

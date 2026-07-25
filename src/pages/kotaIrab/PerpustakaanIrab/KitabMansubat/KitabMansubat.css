@@ -1,0 +1,986 @@
+/* =========================================
+   ASAS
+========================================= */
+
+.kitab-viewport,
+.kitab-viewport *,
+.kitab-viewport *::before,
+.kitab-viewport *::after {
+  box-sizing: border-box;
+}
+
+.kitab-viewport {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at top,
+      #174a37 0%,
+      #0c3023 55%,
+      #061b14 100%
+    );
+}
+
+/*
+  Kanvas tetap.
+  Keseluruhan kanvas ini akan dikecilkan
+  melalui transform: scale() dalam JSX.
+*/
+
+.kitab-mansub-screen {
+  width: 1200px;
+  height: 700px;
+
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  transform-origin: center center;
+}
+
+/* =========================================
+   FRAME UTAMA
+========================================= */
+
+.kitab-mansub-book {
+  position: relative;
+
+  width: 1100px;
+  height: 620px;
+
+  display: grid;
+  grid-template-rows: 150px minmax(0, 1fr) 72px;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fffdf4 0%,
+      #f7f0dc 100%
+    );
+
+  border: 8px solid #c7a755;
+  border-radius: 24px;
+
+  box-shadow:
+    0 28px 60px rgba(0, 0, 0, 0.48),
+    inset 0 0 0 3px #1f5d42;
+}
+
+.kitab-mansub-book::before {
+  content: "";
+
+  position: absolute;
+  inset: 11px;
+
+  z-index: 5;
+
+  pointer-events: none;
+
+  border: 1px solid rgba(199, 167, 85, 0.68);
+  border-radius: 14px;
+}
+
+/* =========================================
+   BADGE KITAB
+========================================= */
+
+.kitab-identity {
+  position: absolute;
+  top: -3px;
+  left: 50%;
+
+  z-index: 20;
+
+  min-width: 230px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 5px 24px;
+
+  color: #f8df83;
+
+  background:
+    linear-gradient(
+      180deg,
+      #176344,
+      #0c442f
+    );
+
+  border: 2px solid #d4af4f;
+  border-radius: 0 0 16px 16px;
+
+  transform: translateX(-50%);
+
+  box-shadow:
+    0 5px 12px rgba(0, 0, 0, 0.25);
+}
+
+.kitab-identity-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.kitab-identity-small,
+.kitab-identity strong {
+  font-family:
+    var(--font-title, "Cormorant Garamond", serif);
+
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.kitab-identity-small {
+  display: inline;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+.kitab-header {
+  position: relative;
+  z-index: 2;
+  margin-top: 20px;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 26px 40px 10px;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(236, 245, 225, 0.96),
+      rgba(255, 253, 244, 0.94)
+    );
+
+  border-bottom: 2px solid #d4bc78;
+}
+
+.kitab-header::after {
+  content: "◆";
+
+  width: 390px;
+
+  margin-top: 6px;
+
+  color: #b58b2d;
+
+  font-size: 11px;
+  line-height: 1px;
+
+  border-bottom: 1px solid #c9a857;
+}
+
+.kitab-arabic-title {
+  max-width: 900px;
+
+  margin: 0;
+
+  font-family:
+    var(--font-arabic, "Amiri", serif);
+
+  font-size: 62px;
+  font-weight: 700;
+  line-height: 0.98;
+
+  color: #124a35;
+}
+
+.kitab-header h1 {
+  margin: 6px 0 0;
+
+  font-family:
+    var(--font-title, "Cormorant Garamond", serif);
+
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1;
+
+  color: #7a5620;
+}
+
+.kitab-header p {
+  max-width: 720px;
+
+  margin: 8px auto 0;
+
+  font-family:
+    var(--font-body, "Merriweather", serif);
+
+  font-size: 17px;
+  line-height: 1.4;
+
+  color: #526858;
+}
+
+/* =========================================
+   KANDUNGAN
+========================================= */
+
+.kitab-content {
+  position: relative;
+  z-index: 2;
+
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  padding: 14px 36px;
+
+  font-family:
+    var(--font-body, "Merriweather", serif);
+}
+
+.kitab-explanation {
+  flex: 0 0 auto;
+
+  margin: 0 auto 12px;
+
+  text-align: center;
+
+  font-size: 19px;
+  line-height: 1.35;
+
+  color: #334c3d;
+}
+
+/* =========================================
+   SUSUN ATUR PELAJARAN
+========================================= */
+
+.lesson-layout {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 20px;
+
+  overflow: hidden;
+}
+
+/* =========================================
+   MENU KIRI
+========================================= */
+
+.lesson-sidebar {
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  padding: 14px;
+
+  background:
+    linear-gradient(
+      160deg,
+      #e5f0df,
+      #d3e5cd
+    );
+
+  border: 2px solid #b89a49;
+  border-radius: 16px;
+
+  box-shadow:
+    inset 0 0 0 3px rgba(255, 255, 255, 0.42);
+}
+
+.lesson-sidebar h3 {
+  margin: 0;
+
+  text-align: center;
+
+  font-family:
+    var(--font-title, "Cormorant Garamond", serif);
+
+  font-size: 25px;
+  line-height: 1.1;
+
+  color: #174c37;
+}
+
+.lesson-sidebar-divider {
+  margin: 4px 0 8px;
+
+  text-align: center;
+
+  color: #a47d30;
+
+  font-size: 10px;
+}
+
+.lesson-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lesson-item {
+  position: relative;
+
+  width: 100%;
+  min-height: 48px;
+
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) 16px;
+  align-items: center;
+  gap: 8px;
+
+  padding: 7px 10px;
+
+  text-align: left;
+
+  font-family:
+    var(--font-body, "Merriweather", serif);
+
+  font-size: 13px;
+  font-weight: 700;
+
+  color: #315744;
+
+  background: rgba(255, 255, 255, 0.76);
+
+  border: 1px solid #b8cdbb;
+  border-radius: 11px;
+
+  cursor: pointer;
+
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.lesson-item:hover {
+  transform: translateX(3px);
+
+  border-color: #b69239;
+
+  box-shadow:
+    0 5px 12px rgba(25, 76, 55, 0.15);
+}
+
+.lesson-item.active {
+  color: #fff9df;
+
+  background:
+    linear-gradient(
+      135deg,
+      #166344,
+      #0f4933
+    );
+
+  border-color: #d3b45a;
+
+  box-shadow:
+    0 7px 15px rgba(17, 78, 54, 0.28),
+    inset 0 0 0 1px rgba(255, 238, 170, 0.38);
+}
+
+.lesson-item-number {
+  width: 28px;
+  height: 28px;
+
+  display: grid;
+  place-items: center;
+
+  color: #315744;
+
+  background: #edf5e9;
+
+  border: 1px solid #a8bea9;
+  border-radius: 50%;
+
+  font-size: 13px;
+}
+
+.lesson-item.active .lesson-item-number {
+  color: #143f2f;
+
+  background: #f4d66d;
+
+  border-color: #ffe6a0;
+}
+
+.lesson-item-label {
+  min-width: 0;
+
+  line-height: 1.2;
+}
+
+.lesson-item-arrow {
+  justify-self: end;
+
+  font-size: 22px;
+  line-height: 1;
+}
+
+.lesson-tip {
+  margin-top: auto;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 9px 10px;
+
+  color: #365444;
+
+  background: rgba(255, 253, 233, 0.52);
+
+  border: 1px solid rgba(169, 145, 79, 0.38);
+  border-radius: 10px;
+}
+
+.lesson-tip-icon {
+  flex: 0 0 auto;
+
+  font-size: 20px;
+}
+
+.lesson-tip p {
+  margin: 0;
+
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+/* =========================================
+   PANEL CONTOH
+========================================= */
+
+.lesson-example {
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  padding: 13px 22px;
+
+  text-align: center;
+
+  background:
+    radial-gradient(
+      circle at center,
+      #fffef8,
+      #f7efd8
+    );
+
+  border: 2px solid #c5a552;
+  border-radius: 16px;
+
+  box-shadow:
+    inset 0 0 28px rgba(178, 145, 65, 0.1);
+
+  animation: exampleFade 260ms ease;
+}
+
+@keyframes exampleFade {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.example-header {
+  margin-bottom: 4px;
+
+  font-family:
+    var(--font-title, "Cormorant Garamond", serif);
+
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.15;
+
+  color: #15513a;
+}
+
+.arabic-sentence {
+  margin: 0;
+
+  font-family:
+    var(--font-arabic, "Amiri", serif);
+
+  font-size: 66px;
+  font-weight: 700;
+  line-height: 1.95;
+
+  color: #183829;
+
+  white-space: nowrap;
+}
+
+.arabic-highlight {
+  display: inline;
+
+  color: #f20b3c;
+
+  text-shadow:
+    0 0 5px rgba(242, 11, 60, 0.35),
+    0 0 12px rgba(255, 204, 88, 0.28);
+
+  animation: irabBlink 1.25s ease-in-out infinite;
+}
+
+@keyframes irabBlink {
+  0%,
+  100% {
+    color: #f20b3c;
+
+    text-shadow:
+      0 0 4px rgba(242, 11, 60, 0.32);
+  }
+
+  50% {
+    color: #ff6b86;
+
+    text-shadow:
+      0 0 10px rgba(242, 11, 60, 0.8),
+      0 0 18px rgba(255, 205, 74, 0.5);
+  }
+}
+
+/* Penunjuk kecil ayat kepada kategori */
+
+.example-pointer {
+  width: 2px;
+  height: 15px;
+
+  margin: -2px 0 1px;
+
+  background: #6e9a70;
+}
+
+.pointer-line,
+.pointer-dot {
+  display: none;
+}
+
+.example-category {
+  min-width: 230px;
+  max-width: 90%;
+
+  padding: 5px 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  color: #fff8d9;
+
+  background:
+    linear-gradient(
+      135deg,
+      #1a6848,
+      #0f4732
+    );
+
+  border: 2px solid #d0af50;
+  border-radius: 999px;
+
+  box-shadow:
+    0 5px 12px rgba(17, 73, 50, 0.22);
+}
+
+.example-category-arabic {
+  font-family:
+    var(--font-arabic, "Amiri", serif);
+
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.example-category-malay {
+  font-family:
+    var(--font-body, "Merriweather", serif);
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.example-description {
+  max-width: 620px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  margin: 9px auto 0;
+  padding: 7px 14px;
+
+  color: #385344;
+
+  background: rgba(228, 239, 215, 0.65);
+
+  border: 1px solid rgba(131, 161, 119, 0.48);
+  border-radius: 10px;
+}
+
+.example-description p {
+  margin: 0;
+
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.description-check {
+  flex: 0 0 auto;
+
+  width: 25px;
+  height: 25px;
+
+  display: grid;
+  place-items: center;
+
+  color: #fff7bd;
+  background: #327b42;
+
+  border-radius: 50%;
+
+  font-weight: 900;
+}
+
+/* =========================================
+   HALAMAN MATAN
+========================================= */
+
+.kitab-matan-signs {
+  flex: 1;
+
+  width: min(760px, 100%);
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+  gap: 14px;
+
+  margin: 2px auto 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.kitab-matan-signs li {
+  min-height: 115px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 10px;
+
+  font-family:
+    var(--font-arabic, "Amiri", serif);
+
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+
+  color: #15513a;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f7fbef,
+      #e5efdb
+    );
+
+  border: 2px solid #c5a552;
+  border-radius: 16px;
+
+  box-shadow:
+    0 7px 14px rgba(37, 73, 52, 0.11);
+}
+
+/* =========================================
+   HALAMAN RINGKASAN
+========================================= */
+
+.kitab-summary {
+  flex: 1;
+
+  width: min(760px, 100%);
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-content: center;
+  gap: 14px;
+
+  margin: auto;
+  padding: 0;
+
+  list-style: none;
+}
+
+.kitab-summary li {
+  min-height: 105px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px;
+
+  color: #174f39;
+
+  background: #e5f0df;
+
+  border: 1px solid #bd9e4d;
+  border-radius: 14px;
+}
+
+.kitab-summary li > span {
+  font-family:
+    var(--font-arabic, "Amiri", serif);
+
+  font-size: 39px;
+  line-height: 1.1;
+}
+
+.kitab-summary li small {
+  margin-top: 5px;
+
+  font-family:
+    var(--font-body, "Merriweather", serif);
+
+  font-size: 14px;
+}
+
+/* =========================================
+   HALAMAN TAMAT
+========================================= */
+
+.kitab-message {
+  margin: auto;
+
+  text-align: center;
+
+  font-family:
+    var(--font-title, "Cormorant Garamond", serif);
+
+  font-size: 34px;
+  line-height: 1.4;
+
+  color: #174d38;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.kitab-footer {
+  position: relative;
+  z-index: 2;
+
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  padding: 8px 28px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #e8f0df,
+      #d5e5d0
+    );
+
+  border-top: 2px solid #c8a957;
+}
+
+.kitab-footer button {
+  min-width: 150px;
+
+  padding: 9px 18px;
+
+  font-family:
+    var(--font-title, "Cormorant Garamond", serif);
+
+  font-size: 17px;
+  font-weight: 800;
+
+  color: #fff8dc;
+
+  background:
+    linear-gradient(
+      135deg,
+      #176246,
+      #0e432f
+    );
+
+  border: 2px solid #c9a64e;
+  border-radius: 11px;
+
+  cursor: pointer;
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease;
+}
+
+.kitab-footer button:first-child {
+  justify-self: start;
+}
+
+.kitab-footer button:last-child {
+  justify-self: end;
+}
+
+.kitab-footer button:hover {
+  transform: translateY(-2px);
+
+  filter: brightness(1.08);
+
+  box-shadow:
+    0 7px 15px rgba(11, 55, 38, 0.28);
+}
+
+.kitab-page-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.kitab-page-progress > span {
+  font-family:
+    var(--font-body, "Merriweather", serif);
+
+  font-size: 12px;
+  font-weight: 700;
+
+  color: #466453;
+}
+
+.page-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.page-dot {
+  width: 7px;
+  height: 7px;
+
+  display: block;
+
+  background: #adc1ae;
+
+  border-radius: 50%;
+}
+
+.page-dot.completed {
+  background: #648d6c;
+}
+
+.page-dot.active {
+  background: #e1b735;
+
+  box-shadow:
+    0 0 7px rgba(225, 183, 53, 0.8);
+}
+/* ================================
+   MATAN KHAS MANSUBAT
+================================ */
+/*=========================
+   MANSUB MATAN
+==========================*/
+
+.mansub-signs{
+
+    width:760px;
+
+    margin:18px auto 0;
+
+    display:grid;
+
+    grid-template-columns:repeat(6,1fr);
+
+    gap:18px;
+
+    justify-items:center;
+
+    align-items:center;
+}
+
+.mansub-signs li{
+    width:250px;
+    height:110px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+}
+
+/* baris pertama */
+
+.mansub-signs li:nth-child(1){
+    grid-column:1 / span 2;
+}
+
+.mansub-signs li:nth-child(2){
+    grid-column:3 / span 2;
+}
+
+.mansub-signs li:nth-child(3){
+    grid-column:5 / span 2;
+}
+
+/* baris kedua */
+
+.mansub-signs li:nth-child(4){
+    grid-column:2 / span 2;
+}
+
+.mansub-signs li:nth-child(5){
+    grid-column:4 / span 2;
+}

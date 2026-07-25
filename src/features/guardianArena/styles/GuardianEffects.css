@@ -1,0 +1,103 @@
+
+.guardian-success-petals {
+  position: absolute;
+  inset: 0;
+
+  overflow: hidden;
+  pointer-events: none;
+
+  z-index: 60;
+}
+
+.success-petal {
+  position: absolute;
+  top: -8%;
+  left: var(--petal-left);
+
+  width: clamp(7px, 0.8vw, 13px);
+  height: clamp(12px, 1.3vw, 21px);
+
+  border-radius: 75% 20% 70% 25%;
+
+  opacity: 0;
+
+  animation:
+    guardian-petal-fall
+    var(--petal-duration)
+    ease-in
+    var(--petal-delay)
+    forwards;
+}
+
+.petal-0 {
+  background:
+    radial-gradient(
+      circle at 35% 25%,
+      #fff8c5,
+      #ffd84f 48%,
+      #bc761a 100%
+    );
+
+  box-shadow: 0 0 8px rgba(255, 210, 68, 0.75);
+}
+
+.petal-1 {
+  background:
+    radial-gradient(
+      circle at 35% 25%,
+      #d9ffe0,
+      #4ade80 48%,
+      #116632 100%
+    );
+
+  box-shadow: 0 0 8px rgba(74, 222, 128, 0.65);
+}
+
+.petal-2 {
+  background:
+    radial-gradient(
+      circle at 35% 25%,
+      #ffffff,
+      #fff0bd 55%,
+      #d3a03b 100%
+    );
+
+  box-shadow: 0 0 7px rgba(255, 245, 205, 0.7);
+}
+
+@keyframes guardian-petal-fall {
+  0% {
+    opacity: 0;
+    transform:
+      translate3d(0, -20px, 0)
+      rotate(0deg)
+      scale(0.65);
+  }
+
+  12% {
+    opacity: 1;
+  }
+
+  55% {
+    transform:
+      translate3d(
+        calc(var(--petal-drift) * -0.45),
+        52vh,
+        0
+      )
+      rotate(calc(var(--petal-rotation) * 0.55))
+      scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate3d(
+        var(--petal-drift),
+        108vh,
+        0
+      )
+      rotate(var(--petal-rotation))
+      scale(0.85);
+  }
+}

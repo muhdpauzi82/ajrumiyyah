@@ -1,0 +1,496 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+button {
+  font: inherit;
+}
+
+.perpustakaan-page {
+  width: 100vw;
+  height: 100dvh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+  background: #050d09;
+}
+
+.perpustakaan-viewport {
+  position: relative;
+
+  width: min(100vw, calc(100dvh * 4 / 3));
+  height: min(100dvh, calc(100vw * 3 / 4));
+   object-fit:cover;
+
+  flex: 0 0 auto;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.perpustakaan-bg {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+  object-fit: fill;
+
+  pointer-events: none;
+  user-select: none;
+
+  z-index: 0;
+}
+
+/* ======================================================
+   HOTSPOT KEMBALI
+====================================================== */
+
+.perpustakaan-back-hotspot {
+  position: absolute;
+
+  left: 1.8%;
+  top: 3.4%;
+  width: 13%;
+  height: 6.5%;
+
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+
+  cursor: pointer;
+  background: transparent;
+
+  z-index: 20;
+}
+
+.perpustakaan-back-hotspot:hover {
+  background: rgba(255, 214, 105, 0.08);
+
+  box-shadow:
+    0 0 12px rgba(255, 206, 86, 0.28),
+    inset 0 0 10px rgba(255, 219, 125, 0.12);
+}
+
+/* ======================================================
+   PROGRESS KANAN ATAS
+====================================================== */
+
+.perpustakaan-progress-layer {
+  position: absolute;
+
+  right: 4.1%;
+  top: 4.8%;
+  width: 19%;
+  height: 9%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8%;
+
+  padding: 0 2%;
+
+  color: #f8d982;
+  text-align: center;
+
+  z-index: 5;
+}
+
+.perpustakaan-progress-layer strong {
+  font-family: Georgia, serif;
+  font-size: clamp(10px, 1.25vw, 21px);
+}
+
+.perpustakaan-progress-track {
+  width: 100%;
+  height: 14%;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(255, 211, 107, 0.8);
+  border-radius: 999px;
+
+  background: rgba(0, 0, 0, 0.58);
+}
+
+.perpustakaan-progress-track span {
+  display: block;
+
+  width: 0;
+  height: 100%;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #397521,
+      #6dbb3b,
+      #d4c74e
+    );
+
+  box-shadow:
+    0 0 10px rgba(126, 216, 67, 0.65);
+
+  transition: width 400ms ease;
+}
+
+/* ======================================================
+   EMPAT KITAB
+====================================================== */
+
+.perpustakaan-books-layer {
+  position: absolute;
+
+  left: 11.5%;
+  top: 23.2%;
+  width: 77%;
+  height: 35.7%;
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2.1%;
+
+  z-index: 8;
+}
+
+.perpustakaan-book-slot {
+  position: relative;
+
+  min-width: 0;
+  height: 100%;
+}
+
+.perpustakaan-book-button {
+  position: absolute;
+  inset: 0;
+
+  width: 85%;
+  height: 100%;
+
+  padding: 0;
+  border: 0;
+
+  cursor: pointer;
+  background: transparent;
+}
+
+.perpustakaan-book-image {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+  object-fit: contain;
+
+  user-select: none;
+  pointer-events: none;
+
+  transform-origin: center bottom;
+
+  filter:
+    brightness(0.92)
+    saturate(0.9);
+
+  transition:
+    transform 180ms ease,
+    filter 180ms ease;
+}
+
+.perpustakaan-book-slot:hover
+  .perpustakaan-book-image {
+  transform: translateY(-1.2%) scale(1.025);
+
+  filter:
+    brightness(1.08)
+    saturate(1.08)
+    drop-shadow(
+      0 0 10px rgba(255, 199, 70, 0.55)
+    );
+}
+
+.perpustakaan-book-slot.selected
+  .perpustakaan-book-image {
+  transform: translateY(-1.5%) scale(1.035);
+
+  filter:
+    brightness(1.1)
+    saturate(1.12)
+    drop-shadow(
+      0 0 14px rgba(255, 201, 66, 0.75)
+    );
+}
+
+.perpustakaan-completed-badge {
+  position: absolute;
+
+  right: 3%;
+  top: 1%;
+
+  width: 16%;
+  aspect-ratio: 1;
+
+  display: grid;
+  place-items: center;
+
+  border: 2px solid #ffd96a;
+  border-radius: 50%;
+
+  color: white;
+  font-size: clamp(10px, 1.45vw, 25px);
+  font-weight: 900;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #50ce72,
+      #11833d 70%
+    );
+
+  box-shadow:
+    0 0 10px rgba(64, 221, 113, 0.7),
+    inset 0 0 5px rgba(255, 255, 255, 0.5);
+
+  z-index: 4;
+}
+
+.perpustakaan-open-book {
+  position: absolute;
+
+  left: 18%;
+  bottom: 3.5%;
+  width: 64%;
+  height: 12%;
+
+  padding: 0;
+  border: 1px solid rgba(255, 211, 99, 0.8);
+  border-radius: 999px;
+
+  color: #f8dc84;
+  font-size: clamp(7px, 0.72vw, 13px);
+  font-weight: 900;
+
+  cursor: pointer;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(30, 70, 40, 0.94),
+      rgba(10, 31, 19, 0.96)
+    );
+
+  box-shadow:
+    inset 0 0 7px rgba(255, 210, 83, 0.16);
+
+  z-index: 6;
+
+  transition:
+    transform 150ms ease,
+    filter 150ms ease;
+}
+
+.perpustakaan-open-book:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.18);
+}
+
+/* ======================================================
+   PANEL KITAB TERPILIH
+====================================================== */
+
+.perpustakaan-selected-layer {
+  position: absolute;
+
+  left: 20.5%;
+  top: 65.3%;
+  width: 61%;
+  height: 18.2%;
+
+  display: grid;
+  grid-template-columns: 1.6fr 0.85fr 1fr;
+  align-items: center;
+  gap: 3%;
+
+  color: #f4dfae;
+
+  z-index: 8;
+}
+
+.selected-book-main {
+  min-width: 0;
+  padding-left: 18%;
+}
+
+.selected-book-main h2 {
+  margin: 0;
+
+  color: #f8d475;
+  font-family: Georgia, serif;
+  font-size: clamp(13px, 2.1vw, 36px);
+}
+
+.selected-book-main p {
+  margin: 4% 0 6%;
+
+  font-size: clamp(7px, 0.72vw, 13px);
+  line-height: 1.45;
+}
+
+.selected-book-open-button {
+  min-width: 72%;
+  min-height: 28%;
+
+  padding: 1.5% 7%;
+
+  border: 1px solid #dcb54f;
+  border-radius: 999px;
+
+  color: #f9dd86;
+  font-size: clamp(7px, 0.67vw, 12px);
+  font-weight: 900;
+
+  cursor: pointer;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(23, 93, 51, 0.95),
+      rgba(5, 45, 28, 0.98)
+    );
+
+  box-shadow:
+    0 0 10px rgba(221, 175, 58, 0.18),
+    inset 0 0 7px rgba(255, 220, 110, 0.13);
+}
+
+.selected-book-sign,
+.selected-book-example {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12%;
+
+  text-align: center;
+}
+
+.selected-book-sign span,
+.selected-book-example span {
+  color: #d9bd75;
+  font-size: clamp(7px, 0.67vw, 12px);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+}
+
+.selected-book-sign strong,
+.selected-book-example strong {
+  color: #ffe4a1;
+  font-family: "Amiri", serif;
+  font-size: clamp(16px, 2vw, 34px);
+}
+
+/* ======================================================
+   HOTSPOT BUTANG SELESAI
+====================================================== */
+
+.perpustakaan-complete-hotspot {
+  position: absolute;
+
+  left: 27%;
+  bottom: 2.4%;
+  width: 46%;
+  height: 8.5%;
+
+  padding: 0;
+  border: 0;
+  border-radius: 18px;
+
+  cursor: pointer;
+  background: transparent;
+
+  z-index: 20;
+}
+
+.perpustakaan-complete-hotspot.locked {
+  cursor: not-allowed;
+
+  background:
+    rgba(0, 0, 0, 0.15);
+}
+
+.perpustakaan-complete-hotspot.ready {
+  animation:
+    perpustakaan-ready-glow 1.8s
+    ease-in-out infinite;
+}
+
+.perpustakaan-complete-hotspot.ready:hover {
+  background:
+    rgba(255, 220, 103, 0.08);
+}
+
+.perpustakaan-back-hotspot:focus-visible,
+.perpustakaan-book-button:focus-visible,
+.perpustakaan-open-book:focus-visible,
+.selected-book-open-button:focus-visible,
+.perpustakaan-complete-hotspot:focus-visible {
+  outline: 3px solid #ffe08a;
+  outline-offset: -3px;
+}
+
+@keyframes perpustakaan-ready-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 8px rgba(255, 196, 47, 0.25);
+  }
+
+  50% {
+    box-shadow:
+      0 0 25px rgba(255, 201, 57, 0.72);
+  }
+}
+
+/* ======================================================
+   SKRIN KECIL
+====================================================== */
+
+@media (max-aspect-ratio: 4 / 3) {
+  .perpustakaan-progress-layer {
+    gap: 5%;
+  }
+
+  .selected-book-main p {
+    line-height: 1.25;
+  }
+}
+
+@media (max-width: 700px) {
+  .perpustakaan-open-book {
+    font-size: clamp(5px, 1.25vw, 9px);
+  }
+
+  .selected-book-main p {
+    margin-top: 2%;
+    margin-bottom: 3%;
+  }
+
+  .selected-book-open-button {
+    min-height: 23%;
+  }
+}

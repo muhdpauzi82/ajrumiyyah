@@ -1,0 +1,621 @@
+.bab-irab-screen {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+  background: #15130f;
+}
+
+.bab-irab-stage {
+  position: relative;
+
+  width: min(100vw, calc(100dvh * 16 / 9));
+  aspect-ratio: 16 / 9;
+
+  overflow: hidden;
+  isolation: isolate;
+
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.bab-irab-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* =========================
+   HOTSPOT KEMBALI
+========================= */
+
+.bab-irab-back-hotspot {
+  position: absolute;
+  left: 9%;
+  bottom: 1.7%;
+  z-index: 10;
+
+  width: 13%;
+  height: 6.5%;
+
+  border: 0;
+  border-radius: 20px;
+  cursor: pointer;
+
+  background: transparent;
+}
+
+.bab-irab-back-hotspot:hover {
+  background: rgb(255 255 255 / 8%);
+}
+
+/* =========================
+   PANEL PROGRES
+========================= */
+
+.bab-irab-progress-content {
+  position: absolute;
+  left:10%;
+  top: 18.5%;
+  z-index: 5;
+
+  width: 13%;
+  height: 17%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: #174c34;
+  text-align: center;
+}
+
+.bab-irab-progress-label {
+  font-size: clamp(7px, 1.2vw, 21px);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.bab-irab-progress-content strong {
+  margin-top: 5%;
+
+  font-size: clamp(7px, 1vw, 18px);
+}
+
+.bab-irab-progress-content p {
+  margin: 2% 0 7%;
+
+  font-size: clamp(6px, 0.8vw, 14px);
+}
+
+.bab-irab-progress-track {
+  width: 75%;
+  height: 9%;
+
+  overflow: hidden;
+  border: 1px solid rgb(150 107 31 / 55%);
+  border-radius: 999px;
+
+  background: rgb(95 69 27 / 13%);
+}
+
+.bab-irab-progress-fill {
+  height: 100%;
+  border-radius: inherit;
+
+  background: linear-gradient(
+    90deg,
+    #16643e,
+    #2c8a59
+  );
+
+  transition: width 300ms ease;
+}
+
+/* =========================
+   STATUS UJIAN
+========================= */
+
+.bab-irab-status-content {
+  position: absolute;
+  left: 10%;
+  top: 40%;
+  z-index: 5;
+
+  width: 12%;
+  height: 18%;
+
+  color: #174c34;
+}
+
+.bab-irab-status-label {
+  display: block;
+
+  margin-bottom: 12%;
+
+  text-align: center;
+  font-size: clamp(7px, 1.15vw, 20px);
+  font-weight: 800;
+}
+
+.bab-irab-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 5% 8%;
+  padding-bottom: 4%;
+
+  border-bottom: 1px solid rgb(165 118 32 / 30%);
+
+  font-size: clamp(6px, 0.82vw, 14px);
+}
+
+.bab-irab-status-row strong {
+  font-size: clamp(7px, 1vw, 18px);
+}
+
+/* =========================
+   KANDUNGAN DALAM KITAB
+========================= */
+
+.bab-irab-question-area {
+  position: absolute;
+  left: 24%;
+  top: 22%;
+  z-index: 5;
+
+  width: 52%;
+  height: 58%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: #322617;
+  text-align: center;
+}
+
+.bab-irab-vocabulary {
+  width: 88%;
+}
+
+.bab-irab-arabic-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bab-irab-arabic-line h2 {
+  margin: 0;
+
+  color: #184f35;
+
+  font-family: "Amiri", "Traditional Arabic", serif;
+  font-size: clamp(18px, 3.4vw, 60px);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.bab-irab-vocabulary p {
+  margin: 1% 0 0;
+
+  color: #765c37;
+  font-size: clamp(7px, 1vw, 18px);
+}
+
+
+.bab-irab-sentence {
+  margin: 3% 0 1%;
+
+  color: #2c2418;
+
+  font-family: "Amiri", "Traditional Arabic", serif;
+  font-size: clamp(15px, 2.5vw, 44px);
+  line-height: 1.5;
+}
+
+.bab-irab-question {
+  max-width: 92%;
+
+  margin: 2.5% 0 3.5%;
+
+  color: #2c2418;
+
+  font-size: clamp(16px, 1.9vw, 34px);
+  font-weight: 800;
+  line-height: 1.45;
+
+  text-align: center;
+}
+
+/* =========================
+   PILIHAN JAWAPAN
+========================= */
+
+.bab-irab-options {
+  width: 83%;
+  margin: -1% auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5%;
+  align-items: center;
+}
+
+.bab-irab-option {
+  width: 98%;
+  min-height: clamp(38px, 5vw, 72px);
+
+  padding: 0 4%;
+
+  border: 2px solid #004d0a;
+  border-radius: 999px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  color: #244c38;
+  background: linear-gradient(
+    180deg,
+    rgba(243, 243, 240, 0.95),
+    rgba(163, 221, 173, 0.92)
+  );
+
+  font-family: "Amiri", serif;
+  font-size: clamp(24px, 2.2vw, 42px);
+  line-height: 1.2;
+
+  font-weight: 700;
+
+  transition: all .2s ease;
+}
+
+.bab-irab-option:hover:not(:disabled){
+    transform: scale(1.02);
+    box-shadow: 0 0 18px rgba(196,145,38,.25);
+}
+
+.bab-irab-option.correct {
+  border-color: #247442;
+  background: linear-gradient(#d9f0d9, #a8d6ae);
+  color: #164c2d;
+}
+
+.bab-irab-option.wrong {
+  border-color: #a2473e;
+  background: linear-gradient(#f2d2c9, #dda9a0);
+  color: #772a26;
+}
+
+.bab-irab-option.inactive {
+  opacity: 0.5;
+}
+
+.bab-irab-next-button {
+  margin-top: 3%;
+  padding: 1.8% 7%;
+
+  border: 2px solid #d0a34b;
+  border-radius: 999px;
+
+  cursor: pointer;
+
+  color: #fff5c2;
+  background: linear-gradient(#28734c, #125034);
+
+  font-family: inherit;
+  font-size: clamp(7px, 1vw, 18px);
+  font-weight: 800;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(15%);
+
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.bab-irab-next-button.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* =========================
+   NOMBOR SOALAN BAWAH
+========================= */
+
+.bab-irab-question-navigation {
+  position: absolute;
+  left: 17%;
+  right: 17%;
+  bottom: 1.6%;
+  z-index: 6;
+
+  height: 10%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.45%;
+
+  overflow: hidden;
+}
+
+.bab-irab-number {
+  flex: 0 0 auto;
+
+  width: 3.05%;
+  min-width: 16px;
+  aspect-ratio: 1;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgb(156 111 30 / 70%);
+  border-radius: 50%;
+
+  color: #584425;
+  background: rgb(255 247 216 / 80%);
+
+  font-size: clamp(5px, 0.7vw, 13px);
+  font-weight: 700;
+}
+
+.bab-irab-number.current {
+  border-color: #d6ae49;
+  color: #fff4bb;
+  background: #17623f;
+
+  transform: scale(1.13);
+}
+
+.bab-irab-number.completed {
+  color: #17492f;
+  background: #d8e8cd;
+}
+
+/* =========================
+   SKRIN KECIL
+========================= */
+
+@media (max-aspect-ratio: 4 / 3) {
+  .bab-irab-stage {
+    width: 100vw;
+    height: auto;
+  }
+}
+/* =========================================
+   PAPARAN KEPUTUSAN AKHIR
+========================================= */
+
+.bab-irab-result-overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 4%;
+
+  background: rgba(28, 19, 8, 0.62);
+  backdrop-filter: blur(3px);
+
+  z-index: 50;
+
+  animation: babIrabResultFadeIn 0.35s ease-out;
+}
+
+.bab-irab-result-card {
+  width: min(520px, 70%);
+  min-height: 330px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: clamp(22px, 4vw, 48px);
+
+  text-align: center;
+
+  color: #183f2c;
+
+  background:
+    linear-gradient(
+      rgba(255, 248, 220, 0.94),
+      rgba(250, 229, 174, 0.96)
+    );
+
+  border: clamp(2px, 0.25vw, 4px) solid #b88a36;
+  border-radius: clamp(18px, 2vw, 30px);
+
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.45),
+    inset 0 0 30px rgba(174, 124, 40, 0.18);
+
+  animation: babIrabResultCardIn 0.45s ease-out;
+}
+
+.bab-irab-result-card.passed {
+  border-color: #987323;
+}
+
+.bab-irab-result-card.failed {
+  border-color: #9c5a38;
+}
+
+.bab-irab-result-arabic {
+  margin-bottom: 2%;
+
+  color: #9a7421;
+
+  font-family: "Amiri", serif;
+  font-size: clamp(28px, 3vw, 52px);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.bab-irab-result-icon {
+  margin-bottom: 2%;
+
+  font-size: clamp(30px, 3.5vw, 56px);
+}
+
+.bab-irab-result-card h2 {
+  margin: 0;
+
+  color: #174a32;
+
+  font-family: Georgia, serif;
+  font-size: clamp(22px, 2.4vw, 42px);
+  letter-spacing: 0.05em;
+}
+
+.bab-irab-result-card.failed h2 {
+  color: #7d3f29;
+}
+
+.bab-irab-result-message {
+  max-width: 390px;
+
+  margin: 4% 0 3%;
+
+  color: #4d3a20;
+
+  font-size: clamp(13px, 1.25vw, 20px);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.bab-irab-result-score {
+  display: flex;
+  flex-direction: column;
+
+  margin: 1% 0 2%;
+}
+
+.bab-irab-result-score span {
+  color: #6e5730;
+
+  font-size: clamp(11px, 1vw, 16px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.bab-irab-result-score strong {
+  margin-top: 2%;
+
+  color: #145032;
+
+  font-size: clamp(32px, 4vw, 64px);
+  line-height: 1;
+}
+
+.bab-irab-result-card.failed
+  .bab-irab-result-score strong {
+  color: #8a432b;
+}
+
+.bab-irab-result-detail {
+  margin: 1% 0 4%;
+
+  color: #654c29;
+
+  font-size: clamp(11px, 1vw, 16px);
+  font-weight: 700;
+}
+
+.bab-irab-result-button {
+  min-width: clamp(170px, 18vw, 260px);
+
+  margin-top: 3%;
+  padding: clamp(10px, 1vw, 15px)
+    clamp(22px, 2.5vw, 38px);
+
+  color: #fff9de;
+
+  border: 2px solid #d4b663;
+  border-radius: 999px;
+
+  font-family: Georgia, serif;
+  font-size: clamp(12px, 1.1vw, 18px);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 7px 15px rgba(44, 30, 9, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+}
+
+.bab-irab-result-button.passed {
+  background:
+    linear-gradient(
+      180deg,
+      #327956,
+      #174c35
+    );
+}
+
+.bab-irab-result-button.failed {
+  background:
+    linear-gradient(
+      180deg,
+      #a65c36,
+      #763820
+    );
+}
+
+.bab-irab-result-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.bab-irab-result-button:active {
+  transform: translateY(1px);
+}
+
+@keyframes babIrabResultFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes babIrabResultCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

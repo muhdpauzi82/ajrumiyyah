@@ -1,0 +1,73 @@
+
+.guardian-question-panel {
+  position: absolute;
+  top: 15.5%;
+  left: 18.5%;
+
+  width: 52%;
+  min-height: 22%;
+
+  padding: 2.2% 2.5%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid rgba(183, 136, 48, 0.65);
+  border-radius: 1.2vw;
+
+  color: #f4ead5;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3, 15, 13, 0.94),
+      rgba(1, 7, 6, 0.88)
+    );
+
+  box-shadow:
+    inset 0 0 24px rgba(45, 118, 83, 0.18),
+    0 0 18px rgba(0, 0, 0, 0.65);
+
+  text-align: center;
+  z-index: 8;
+}
+
+.guardian-question-number {
+  margin-bottom: 1.1%;
+
+  color: #e8b84a;
+  font-size: clamp(10px, 1vw, 16px);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.guardian-question-panel p {
+  margin: 0.45% 0;
+
+  font-size: clamp(11px, 1.18vw, 20px);
+  line-height: 1.35;
+}
+
+.guardian-start-button {
+  margin-top: 2.5%;
+  padding: 1.3% 5%;
+
+  border: 2px solid #d8a846;
+  border-radius: 999px;
+
+  color: #fff2bd;
+  background:
+    linear-gradient(180deg, #236b45, #0c3826);
+
+  font-size: clamp(10px, 1vw, 17px);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+
+  box-shadow:
+    0 0 14px rgba(62, 223, 133, 0.35),
+    inset 0 0 8px rgba(255, 255, 255, 0.12);
+
+  cursor: pointer;
+}

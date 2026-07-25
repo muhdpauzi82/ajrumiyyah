@@ -1,0 +1,814 @@
+/* =====================================================
+   LATIHAN MARFU‘AT
+===================================================== */
+
+.majrur-training-screen {
+  min-height: 100vh;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  box-sizing: border-box;
+
+  background:
+    linear-gradient(
+      rgba(8, 38, 29, 0.82),
+      rgba(5, 28, 22, 0.9)
+    ),
+    url("/images/kotaIrab/bg-latihan-irab.webp")
+      center / cover no-repeat;
+
+  color: #2c261d;
+}
+
+/* =====================================================
+   KAD UTAMA
+===================================================== */
+
+.majrur-training-card {
+  width: min(1180px, 100%);
+  min-height: 650px;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 250, 225, 0.98),
+      rgba(239, 226, 184, 0.98)
+    );
+
+  border: 4px solid #b7903f;
+  border-radius: 24px;
+
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.36),
+    inset 0 0 0 3px rgba(255, 245, 190, 0.45);
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.majrur-training-header {
+  min-height: 94px;
+
+  display: grid;
+  grid-template-columns: 170px 1fr 100px;
+  align-items: center;
+
+  padding: 16px 28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #195f45,
+      #0a3d2c
+    );
+
+  border-bottom: 4px solid #c9a34d;
+
+  color: #fff4c9;
+}
+
+.majrur-training-header button {
+  min-height: 44px;
+
+  padding: 9px 16px;
+
+  color: #fff2c5;
+  background: rgba(255, 255, 255, 0.08);
+
+  border: 1px solid rgba(255, 233, 160, 0.55);
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 160ms ease,
+    background 160ms ease;
+}
+
+.majrur-training-header button:hover {
+  transform: translateX(-3px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.majrur-training-header > div {
+  text-align: center;
+}
+
+.majrur-training-header span {
+  display: block;
+
+  color: #d8c894;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.majrur-training-header h1 {
+  margin: 4px 0 0;
+
+  font-family: Georgia, serif;
+  font-size: clamp(25px, 3vw, 38px);
+  letter-spacing: 0.08em;
+}
+
+.majrur-training-header > strong {
+  justify-self: end;
+
+  min-width: 72px;
+
+  padding: 10px 12px;
+
+  text-align: center;
+
+  color: #234835;
+  background: #f0d778;
+
+  border: 2px solid #ffeaa2;
+  border-radius: 12px;
+
+  font-size: 18px;
+}
+
+/* =====================================================
+   PROGRESS BAR
+===================================================== */
+
+.majrur-progress-track {
+  width: 100%;
+  height: 8px;
+
+  overflow: hidden;
+
+  background: #c8b77e;
+}
+
+.majrur-progress-track span {
+  display: block;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      #318a5f,
+      #ddbe55
+    );
+
+  transition: width 350ms ease;
+}
+
+/* =====================================================
+   RUANG SOALAN
+===================================================== */
+
+.majrur-question-area {
+  flex: 1;
+
+  display: grid;
+  grid-template-columns:
+    minmax(260px, 0.9fr)
+    minmax(360px, 1.3fr)
+    minmax(220px, 0.7fr);
+
+  gap: 22px;
+
+  padding: 28px;
+}
+
+/* =====================================================
+   PANEL SOALAN
+===================================================== */
+
+.majrur-question-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 26px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffdf1,
+      #eee1b7
+    );
+
+  border: 2px solid #b99a54;
+  border-radius: 18px;
+
+  box-shadow:
+    inset 0 0 18px rgba(116, 81, 25, 0.1);
+}
+
+.majrur-question-number {
+  width: fit-content;
+
+  padding: 6px 12px;
+
+  color: #f7e9b1;
+  background: #1c6448;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.majrur-question-panel h2 {
+  margin: 20px 0 0;
+
+  color: #30271b;
+
+  font-size: clamp(19px, 2vw, 27px);
+  line-height: 1.45;
+}
+
+.majrur-question-arabic {
+  margin: 22px 0 0;
+
+  color: #1c5c43;
+
+  font-family: "Amiri", serif;
+  font-size: clamp(27px, 3vw, 42px);
+  font-weight: 700;
+  line-height: 1.7;
+
+  text-align: center;
+}
+
+/* =====================================================
+   PILIHAN JAWAPAN
+===================================================== */
+
+.majrur-answer-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 13px;
+}
+
+.majrur-answer {
+  width: 100%;
+  min-height: 72px;
+
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 10px 18px;
+
+  color: #30291f;
+  background: rgba(255, 253, 238, 0.96);
+
+  border: 2px solid #b9a46d;
+  border-radius: 14px;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 12px rgba(63, 48, 19, 0.1);
+
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+.majrur-answer:hover:not(:disabled) {
+  transform: translateX(6px);
+
+  background: #fff8d5;
+  border-color: #8e702e;
+}
+
+.majrur-answer > span {
+  width: 40px;
+  height: 40px;
+
+  display: grid;
+  place-items: center;
+
+  color: #fff3c5;
+  background: #255f47;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.majrur-answer strong {
+  font-size: clamp(15px, 1.5vw, 20px);
+  line-height: 1.5;
+}
+
+.majrur-answer strong[lang="ar"] {
+  font-family: "Amiri", serif;
+  font-size: clamp(22px, 2.2vw, 31px);
+  text-align: right;
+}
+
+/* Jawapan betul */
+
+.majrur-answer.correct {
+  color: #16472f;
+  background: #d9f0d9;
+
+  border-color: #3a915b;
+}
+
+.majrur-answer.correct > span {
+  background: #27834e;
+}
+
+/* Jawapan salah */
+
+.majrur-answer.wrong {
+  color: #6b2824;
+  background: #f5d7d2;
+
+  border-color: #b9564e;
+}
+
+.majrur-answer.wrong > span {
+  background: #a94841;
+}
+
+/* Pilihan lain selepas menjawab */
+
+.majrur-answer.muted {
+  opacity: 0.5;
+}
+
+.majrur-answer:disabled {
+  cursor: default;
+}
+
+/* =====================================================
+   PANEL STATUS
+===================================================== */
+
+.majrur-status-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 24px;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      155deg,
+      #f5e8bd,
+      #dfca88
+    );
+
+  border: 2px solid #a98a43;
+  border-radius: 18px;
+}
+
+.majrur-status-panel > span {
+  color: #69572d;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.majrur-status-panel > strong {
+  margin-top: 16px;
+
+  color: #41361f;
+
+  font-size: 20px;
+}
+
+.majrur-status-panel p {
+  margin: 15px 0 0;
+
+  color: #51462e;
+
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.majrur-status-panel .status-correct {
+  color: #247248;
+}
+
+.majrur-status-panel .status-wrong {
+  color: #a3423d;
+}
+
+/* =====================================================
+   NOMBOR SOALAN
+===================================================== */
+
+.majrur-training-footer {
+  min-height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  padding: 13px 20px;
+
+  background: rgba(51, 45, 27, 0.08);
+
+  border-top: 1px solid rgba(116, 90, 40, 0.3);
+}
+
+.majrur-training-footer span {
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+  place-items: center;
+
+  color: #6d6040;
+  background: #e8ddbb;
+
+  border: 1px solid #b8a36b;
+  border-radius: 50%;
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.majrur-training-footer span.active {
+  color: #fff2bf;
+  background: #176044;
+
+  border-color: #d5b64f;
+
+  transform: scale(1.12);
+}
+
+.majrur-training-footer span.completed {
+  color: #245b40;
+  background: #cce4ce;
+
+  border-color: #59916d;
+}
+
+/* =====================================================
+   HALAMAN KEPUTUSAN
+===================================================== */
+
+.majrur-result-card {
+  width: min(720px, 100%);
+
+  padding: 46px 38px;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffbed,
+      #eadcad
+    );
+
+  border: 4px solid #bd9848;
+  border-radius: 26px;
+
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.38);
+}
+
+.majrur-result-icon {
+  width: 82px;
+  height: 82px;
+
+  display: grid;
+  place-items: center;
+
+  margin: 0 auto 18px;
+
+  background: #1b6548;
+
+  border: 4px solid #d8b952;
+  border-radius: 50%;
+
+  font-size: 38px;
+}
+
+.majrur-result-kicker {
+  margin: 0;
+
+  color: #78622d;
+
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.majrur-result-card h1 {
+  margin: 10px 0;
+
+  color: #1d5942;
+
+  font-family: Georgia, serif;
+  font-size: clamp(30px, 4vw, 46px);
+}
+
+.majrur-result-card > p {
+  color: #554b35;
+  line-height: 1.6;
+}
+
+.majrur-result-score {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 14px;
+
+  margin: 30px 0;
+}
+
+.majrur-result-score div {
+  padding: 18px 10px;
+
+  background: rgba(255, 252, 232, 0.8);
+
+  border: 2px solid #bca365;
+  border-radius: 14px;
+}
+
+.majrur-result-score span {
+  display: block;
+
+  color: #6d6249;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.majrur-result-score strong {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #175d42;
+
+  font-size: 32px;
+}
+
+.majrur-result-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 12px;
+}
+
+.majrur-result-actions button {
+  min-width: 150px;
+  min-height: 45px;
+
+  padding: 10px 17px;
+
+  color: #fff3c5;
+  background:
+    linear-gradient(
+      135deg,
+      #1f704f,
+      #114934
+    );
+
+  border: 2px solid #d1b252;
+  border-radius: 11px;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 160ms ease,
+    filter 160ms ease;
+}
+
+.majrur-result-actions button:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.1);
+}
+
+/* =====================================================
+   RESPONSIF
+===================================================== */
+
+@media (max-width: 950px) {
+  .majrur-training-screen {
+    align-items: flex-start;
+  }
+
+  .majrur-training-header {
+    grid-template-columns: 130px 1fr 75px;
+
+    padding-inline: 16px;
+  }
+
+  .majrur-question-area {
+    grid-template-columns: 1fr 1.2fr;
+  }
+
+  .majrur-status-panel {
+    grid-column: 1 / -1;
+
+    min-height: 130px;
+  }
+}
+
+@media (max-width: 680px) {
+  .majrur-training-screen {
+    padding: 10px;
+  }
+
+  .majrur-training-card {
+    min-height: auto;
+
+    border-radius: 16px;
+  }
+
+  .majrur-training-header {
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+
+    min-height: auto;
+  }
+
+  .majrur-training-header button {
+    grid-column: 1 / -1;
+    grid-row: 2;
+
+    width: 100%;
+  }
+
+  .majrur-training-header > div {
+    text-align: left;
+  }
+
+  .majrur-question-area {
+    grid-template-columns: 1fr;
+
+    padding: 16px;
+  }
+
+  .majrur-question-panel,
+  .majrur-status-panel {
+    padding: 20px;
+  }
+
+  .majrur-answer {
+    min-height: 64px;
+  }
+
+  .majrur-result-card {
+    padding: 30px 18px;
+  }
+
+  .majrur-result-score {
+    grid-template-columns: 1fr;
+  }
+
+  .majrur-result-actions {
+    flex-direction: column;
+  }
+
+  .majrur-result-actions button {
+    width: 100%;
+  }
+}
+.majrur-answer-text {
+  width: 100%;
+
+  font-family: "Amiri", serif;
+  font-size: clamp(24px, 2.3vw, 34px);
+  font-weight: 700;
+  line-height: 1.6;
+
+  text-align: right;
+}
+.kitab-complete-content {
+  width: min(86%, 680px);
+  margin: 3% auto 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(18px, 2.2vw, 30px);
+}
+
+.kitab-message {
+  margin: 0;
+
+  color: #4b3a20;
+  font-size: clamp(15px, 1.25vw, 21px);
+  font-weight: 700;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.kitab-training-hotspot {
+  width: min(92%, 470px);
+  min-height: clamp(72px, 7vw, 100px);
+
+  padding: clamp(12px, 1.4vw, 20px);
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: clamp(12px, 1.4vw, 20px);
+
+  border: 2px solid #c89b32;
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff9df,
+      #f3e2a3
+    );
+
+  color: #164b3a;
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 18px rgba(80, 55, 12, 0.2);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.kitab-training-hotspot:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 24px rgba(80, 55, 12, 0.28);
+}
+
+.kitab-training-icon {
+  width: clamp(42px, 4.2vw, 60px);
+  aspect-ratio: 1;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: #07523e;
+  color: #f5d36c;
+
+  font-size: clamp(20px, 2vw, 30px);
+}
+
+.kitab-training-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  text-align: left;
+}
+
+.kitab-training-text strong {
+  font-size: clamp(15px, 1.3vw, 21px);
+}
+
+.kitab-training-text small {
+  color: #6c5a36;
+  font-size: clamp(11px, 0.9vw, 15px);
+}
+
+.kitab-training-arrow {
+  color: #936914;
+  font-size: clamp(22px, 2vw, 30px);
+  font-weight: 900;
+}

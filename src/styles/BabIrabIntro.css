@@ -128,11 +128,11 @@ url("/src/assets/maps/bg-madrasah-irab.webp");
   height: 18%;
 }
 
-/* 6 Istana */
-.istana {
-  left: 61%;
-  top: 58%;
-  width: 25%;
+/* 6 istana Qadi */
+.istana-qadi {
+  left: 25%;
+  top: 57%;
+  width: 23%;
   height: 18%;
 }
 

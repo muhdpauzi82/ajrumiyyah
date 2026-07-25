@@ -113,7 +113,7 @@ if (failed) {
       <div style={styles.card}>
 
         <div style={{fontSize:"90px"}}>
-          <img src="/images/penjaga-kalam-icon.png" />
+          <img src="../../../images/penjaga-kalam-icon.png" />
         </div>
 
         <h1 style={styles.title}>
@@ -128,7 +128,7 @@ if (failed) {
     lineHeight:"1.8"
   }}
 >
-   <img src="/images/penjaga-kalam-icon.png" />
+   <img src="../../../images/penjaga-kalam-icon.png" />
    Wahai penuntut ilmu!
   <br /><br />
 Penjaga Utama masih belum membenarkan

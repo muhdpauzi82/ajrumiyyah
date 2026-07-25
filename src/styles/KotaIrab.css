@@ -1,109 +1,104 @@
-.kota-irab-wrap {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  background: #181717;
+.kota-irab-wrap{
+    width:100vw;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    background:#181717;
 }
 
-.map-frame {
-  position: relative;
-  width: min(100vw, 150vh);
-  aspect-ratio: 6 / 4;
+.map-frame{
+    position:relative;
+    width:min(100vw,150vh);
+    aspect-ratio:6/4;
 }
 
-.kota-irab-map {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+.irab-map{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+    pointer-events:none;
 }
 
-/* hotspot invisible */
-.hotspot {
-  position: absolute;
+/* ========================= */
+
+.irab-hotspot{
+    position:absolute;
+    border:none;
+    background:transparent;
+    cursor:pointer;
+    z-index:20;
+}
+.irab-hotspot.unlocked {
   cursor: pointer;
-  border:  none;
-  background:none;
-  animation: none;
 }
 
-/* kedudukan hotspot */
-.huruf {
-  left: 61%;
-  top: 26%;
-  width: 20%;
-  height: 15%;
-}
-
-.fiil {
-  left: 53%;
-  top: 45%;
-  width: 20%;
-  height: 15%;
-}
-
-.isim {
-  left: 32%;
-  top: 50%;
-  width: 10%;
-  height: 25%;
-}
-
-.lembah {
-  left: 18%;
-  top: 55%;
-  width: 10%;
-  height: 15%;
-}
-
-.boss {
-  left: 48%;
-  top: 8%;
-  width: 20%;
-  height: 15%;
-}
-
-/* kawasan berkunci */
-.disabled {
+.irab-hotspot.disabled {
   cursor: not-allowed;
+  filter: brightness(0.55) grayscale(0.35);
 }
 
-.lock-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  
-  font-size: clamp(28px, 4vw, 52px);
-  z-index: 20;
-  color: #ffd700;
-  text-shadow: 0 0 12px #000, 0 0 18px gold;
-  pointer-events: none;
+/* ========================= */
+/* HOTSPOT */
+/* ========================= */
+
+.madrasah{
+    left:7%;
+    top:28%;
+    width:18%;
+    height:18%;
 }
 
-/* butang kembali */
-.back-map {
-  position: absolute;
-  left: 210px;
-  bottom: 35px;
-  z-index: 10;
-  padding: 12px 88px;
-  border: none;
-  border-radius: 14px;
-  background: transparent;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
+.perpustakaan{
+    left:27%;
+    top:23%;
+    width:18%;
+    height:18%;
 }
-.kembali {
-  left: 1%;
-  top: 83%;
-  width: 14%;
-  height: 12%;
+
+.lorong{
+    left:46%;
+    top:36%;
+    width:18%;
+    height:18%;
 }
-.back-map:hover {
-  transform: scale(1.05);
-  background:none;
+
+.dataran{
+    left:58%;
+    top:58%;
+    width:18%;
+    height:18%;
+}
+
+.dewan{
+    left:34%;
+    top:66%;
+    width:18%;
+    height:18%;
+}
+
+.istana-qadi{
+    left:73%;
+    top:18%;
+    width:18%;
+    height:22%;
+}
+
+.kembali{
+    left:1%;
+    top:84%;
+    width:14%;
+    height:10%;
+}
+
+/* ========================= */
+
+.irab-hotspot.unlocked:hover {
+  filter:
+    brightness(1.15)
+    drop-shadow(
+      0 0 12px rgba(255, 215, 90, 0.8)
+    );
 }

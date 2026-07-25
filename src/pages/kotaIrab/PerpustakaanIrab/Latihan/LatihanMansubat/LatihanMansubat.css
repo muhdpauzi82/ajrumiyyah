@@ -1,0 +1,718 @@
+/* =====================================================
+   LATIHAN MARFU‘AT
+===================================================== */
+
+.mansub-training-screen {
+  min-height: 100vh;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  box-sizing: border-box;
+
+  background:
+    linear-gradient(
+      rgba(8, 38, 29, 0.82),
+      rgba(5, 28, 22, 0.9)
+    ),
+    url("/images/kotaIrab/bg-latihan-irab.webp")
+      center / cover no-repeat;
+
+  color: #2c261d;
+}
+
+/* =====================================================
+   KAD UTAMA
+===================================================== */
+
+.mansub-training-card {
+  width: min(1180px, 100%);
+  min-height: 650px;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 250, 225, 0.98),
+      rgba(239, 226, 184, 0.98)
+    );
+
+  border: 4px solid #b7903f;
+  border-radius: 24px;
+
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.36),
+    inset 0 0 0 3px rgba(255, 245, 190, 0.45);
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.mansub-training-header {
+  min-height: 94px;
+
+  display: grid;
+  grid-template-columns: 170px 1fr 100px;
+  align-items: center;
+
+  padding: 16px 28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #195f45,
+      #0a3d2c
+    );
+
+  border-bottom: 4px solid #c9a34d;
+
+  color: #fff4c9;
+}
+
+.mansub-training-header button {
+  min-height: 44px;
+
+  padding: 9px 16px;
+
+  color: #fff2c5;
+  background: rgba(255, 255, 255, 0.08);
+
+  border: 1px solid rgba(255, 233, 160, 0.55);
+  border-radius: 10px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 160ms ease,
+    background 160ms ease;
+}
+
+.mansub-training-header button:hover {
+  transform: translateX(-3px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.mansub-training-header > div {
+  text-align: center;
+}
+
+.mansub-training-header span {
+  display: block;
+
+  color: #d8c894;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.mansub-training-header h1 {
+  margin: 4px 0 0;
+
+  font-family: Georgia, serif;
+  font-size: clamp(25px, 3vw, 38px);
+  letter-spacing: 0.08em;
+}
+
+.mansub-training-header > strong {
+  justify-self: end;
+
+  min-width: 72px;
+
+  padding: 10px 12px;
+
+  text-align: center;
+
+  color: #234835;
+  background: #f0d778;
+
+  border: 2px solid #ffeaa2;
+  border-radius: 12px;
+
+  font-size: 18px;
+}
+
+/* =====================================================
+   PROGRESS BAR
+===================================================== */
+
+.mansub-progress-track {
+  width: 100%;
+  height: 8px;
+
+  overflow: hidden;
+
+  background: #c8b77e;
+}
+
+.mansub-progress-track span {
+  display: block;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      #318a5f,
+      #ddbe55
+    );
+
+  transition: width 350ms ease;
+}
+
+/* =====================================================
+   RUANG SOALAN
+===================================================== */
+
+.mansub-question-area {
+  flex: 1;
+
+  display: grid;
+  grid-template-columns:
+    minmax(260px, 0.9fr)
+    minmax(360px, 1.3fr)
+    minmax(220px, 0.7fr);
+
+  gap: 22px;
+
+  padding: 28px;
+}
+
+/* =====================================================
+   PANEL SOALAN
+===================================================== */
+
+.mansub-question-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 26px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffdf1,
+      #eee1b7
+    );
+
+  border: 2px solid #b99a54;
+  border-radius: 18px;
+
+  box-shadow:
+    inset 0 0 18px rgba(116, 81, 25, 0.1);
+}
+
+.mansub-question-number {
+  width: fit-content;
+
+  padding: 6px 12px;
+
+  color: #f7e9b1;
+  background: #1c6448;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.mansub-question-panel h2 {
+  margin: 20px 0 0;
+
+  color: #30271b;
+
+  font-size: clamp(19px, 2vw, 27px);
+  line-height: 1.45;
+}
+
+.mansub-question-arabic {
+  margin: 22px 0 0;
+
+  color: #1c5c43;
+
+  font-family: "Amiri", serif;
+  font-size: clamp(27px, 3vw, 42px);
+  font-weight: 700;
+  line-height: 1.7;
+
+  text-align: center;
+}
+
+/* =====================================================
+   PILIHAN JAWAPAN
+===================================================== */
+
+.mansub-answer-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 13px;
+}
+
+.mansub-answer {
+  width: 100%;
+  min-height: 72px;
+
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 10px 18px;
+
+  color: #30291f;
+  background: rgba(255, 253, 238, 0.96);
+
+  border: 2px solid #b9a46d;
+  border-radius: 14px;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 12px rgba(63, 48, 19, 0.1);
+
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+.mansub-answer:hover:not(:disabled) {
+  transform: translateX(6px);
+
+  background: #fff8d5;
+  border-color: #8e702e;
+}
+
+.mansub-answer > span {
+  width: 40px;
+  height: 40px;
+
+  display: grid;
+  place-items: center;
+
+  color: #fff3c5;
+  background: #255f47;
+
+  border-radius: 10px;
+
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.mansub-answer strong {
+  font-size: clamp(15px, 1.5vw, 20px);
+  line-height: 1.5;
+}
+
+.mansub-answer strong[lang="ar"] {
+  font-family: "Amiri", serif;
+  font-size: clamp(22px, 2.2vw, 31px);
+  text-align: right;
+}
+
+/* Jawapan betul */
+
+.mansub-answer.correct {
+  color: #16472f;
+  background: #d9f0d9;
+
+  border-color: #3a915b;
+}
+
+.mansub-answer.correct > span {
+  background: #27834e;
+}
+
+/* Jawapan salah */
+
+.mansub-answer.wrong {
+  color: #6b2824;
+  background: #f5d7d2;
+
+  border-color: #b9564e;
+}
+
+.mansub-answer.wrong > span {
+  background: #a94841;
+}
+
+/* Pilihan lain selepas menjawab */
+
+.mansub-answer.muted {
+  opacity: 0.5;
+}
+
+.mansub-answer:disabled {
+  cursor: default;
+}
+
+/* =====================================================
+   PANEL STATUS
+===================================================== */
+
+.mansub-status-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 24px;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      155deg,
+      #f5e8bd,
+      #dfca88
+    );
+
+  border: 2px solid #a98a43;
+  border-radius: 18px;
+}
+
+.mansub-status-panel > span {
+  color: #69572d;
+
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.mansub-status-panel > strong {
+  margin-top: 16px;
+
+  color: #41361f;
+
+  font-size: 20px;
+}
+
+.mansub-status-panel p {
+  margin: 15px 0 0;
+
+  color: #51462e;
+
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.mansub-status-panel .status-correct {
+  color: #247248;
+}
+
+.mansub-status-panel .status-wrong {
+  color: #a3423d;
+}
+
+/* =====================================================
+   NOMBOR SOALAN
+===================================================== */
+
+.mansub-training-footer {
+  min-height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  padding: 13px 20px;
+
+  background: rgba(51, 45, 27, 0.08);
+
+  border-top: 1px solid rgba(116, 90, 40, 0.3);
+}
+
+.mansub-training-footer span {
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+  place-items: center;
+
+  color: #6d6040;
+  background: #e8ddbb;
+
+  border: 1px solid #b8a36b;
+  border-radius: 50%;
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.mansub-training-footer span.active {
+  color: #fff2bf;
+  background: #176044;
+
+  border-color: #d5b64f;
+
+  transform: scale(1.12);
+}
+
+.mansub-training-footer span.completed {
+  color: #245b40;
+  background: #cce4ce;
+
+  border-color: #59916d;
+}
+
+/* =====================================================
+   HALAMAN KEPUTUSAN
+===================================================== */
+
+.mansub-result-card {
+  width: min(720px, 100%);
+
+  padding: 46px 38px;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffbed,
+      #eadcad
+    );
+
+  border: 4px solid #bd9848;
+  border-radius: 26px;
+
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.38);
+}
+
+.mansub-result-icon {
+  width: 82px;
+  height: 82px;
+
+  display: grid;
+  place-items: center;
+
+  margin: 0 auto 18px;
+
+  background: #1b6548;
+
+  border: 4px solid #d8b952;
+  border-radius: 50%;
+
+  font-size: 38px;
+}
+
+.mansub-result-kicker {
+  margin: 0;
+
+  color: #78622d;
+
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.mansub-result-card h1 {
+  margin: 10px 0;
+
+  color: #1d5942;
+
+  font-family: Georgia, serif;
+  font-size: clamp(30px, 4vw, 46px);
+}
+
+.mansub-result-card > p {
+  color: #554b35;
+  line-height: 1.6;
+}
+
+.mansub-result-score {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 14px;
+
+  margin: 30px 0;
+}
+
+.mansub-result-score div {
+  padding: 18px 10px;
+
+  background: rgba(255, 252, 232, 0.8);
+
+  border: 2px solid #bca365;
+  border-radius: 14px;
+}
+
+.mansub-result-score span {
+  display: block;
+
+  color: #6d6249;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.mansub-result-score strong {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #175d42;
+
+  font-size: 32px;
+}
+
+.mansub-result-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 12px;
+}
+
+.mansub-result-actions button {
+  min-width: 150px;
+  min-height: 45px;
+
+  padding: 10px 17px;
+
+  color: #fff3c5;
+  background:
+    linear-gradient(
+      135deg,
+      #1f704f,
+      #114934
+    );
+
+  border: 2px solid #d1b252;
+  border-radius: 11px;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 160ms ease,
+    filter 160ms ease;
+}
+
+.mansub-result-actions button:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.1);
+}
+
+/* =====================================================
+   RESPONSIF
+===================================================== */
+
+@media (max-width: 950px) {
+  .mansub-training-screen {
+    align-items: flex-start;
+  }
+
+  .mansub-training-header {
+    grid-template-columns: 130px 1fr 75px;
+
+    padding-inline: 16px;
+  }
+
+  .mansub-question-area {
+    grid-template-columns: 1fr 1.2fr;
+  }
+
+  .mansub-status-panel {
+    grid-column: 1 / -1;
+
+    min-height: 130px;
+  }
+}
+
+@media (max-width: 680px) {
+  .mansub-training-screen {
+    padding: 10px;
+  }
+
+  .mansub-training-card {
+    min-height: auto;
+
+    border-radius: 16px;
+  }
+
+  .mansub-training-header {
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+
+    min-height: auto;
+  }
+
+  .mansub-training-header button {
+    grid-column: 1 / -1;
+    grid-row: 2;
+
+    width: 100%;
+  }
+
+  .mansub-training-header > div {
+    text-align: left;
+  }
+
+  .mansub-question-area {
+    grid-template-columns: 1fr;
+
+    padding: 16px;
+  }
+
+  .mansub-question-panel,
+  .mansub-status-panel {
+    padding: 20px;
+  }
+
+  .mansub-answer {
+    min-height: 64px;
+  }
+
+  .mansub-result-card {
+    padding: 30px 18px;
+  }
+
+  .mansub-result-score {
+    grid-template-columns: 1fr;
+  }
+
+  .mansub-result-actions {
+    flex-direction: column;
+  }
+
+  .mansub-result-actions button {
+    width: 100%;
+  }
+}
+.mansub-answer-text {
+  width: 100%;
+
+  font-family: "Amiri", serif;
+  font-size: clamp(24px, 2.3vw, 34px);
+  font-weight: 700;
+  line-height: 1.6;
+
+  text-align: right;
+}

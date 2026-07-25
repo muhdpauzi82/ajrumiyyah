@@ -36,25 +36,43 @@ export default function BabIrabAnimasi() {
     if (step < stages.length - 1) {
       setStep(step + 1);
     } else {
-      navigate("/bab-irab-latihan");
+      navigate("/bab-irab-quiz");
     }
   }
 
   return (
+  <main className="irab-animasi-screen">
     <div className="irab-animasi-page">
-      <button className="animasi-back" onClick={() => navigate("/bab-irab-matan")}>
+      <button
+        className="animasi-back"
+        onClick={() => navigate("/bab-irab-learning")}
+      >
         ← Kembali
       </button>
 
       <div className="animasi-card">
         <h1>Perhatikan Perubahan I&apos;rab</h1>
 
-         <div className="focus-word">
-          <span>{current.word}</span>
-          <span className="ending">{current.end}</span>
+        <div
+          className="focus-word"
+          dir="rtl"
+          lang="ar"
+        >
+          <span className="word-base">
+            {current.word}
+          </span>
+
+          <span
+            key={`${step}-${current.end}`}
+            className="ending"
+          >
+            {current.end}
+          </span>
         </div>
 
-        <div className="label">{current.label}</div>
+        <div className="label">
+          {current.label}
+        </div>
 
         <p>{current.note}</p>
 
@@ -66,10 +84,13 @@ export default function BabIrabAnimasi() {
           <span>مُحَمَّدٍ</span>
         </div>
 
-        <button className="animasi-next" onClick={next}>
-          {step < stages.length - 1 ? "Seterusnya" : "Teruskan Latihan"}
-        </button>
+       <button className="animasi-next" onClick={next}>
+  {step < stages.length - 1
+    ? "Seterusnya"
+    : "📝 Mulakan Kuiz"}
+</button>
       </div>
     </div>
-  );
+  </main>
+);
 }

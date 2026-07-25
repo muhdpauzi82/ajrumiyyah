@@ -54,7 +54,7 @@ export default function AkademiFiil() {
       setCurrent(current + 1);
     } else {
       if (wrongCount === 0 && betul) {
-        localStorage.setItem("fiilPertengahanDone", "true");
+       localStorage.setItem("fiilAkademiDone", "true");
          alert("📚 Akademi Fi'il selesai! Menara Fi'il terbuka.");
          navigate("/jejak-fiil");
       } else {

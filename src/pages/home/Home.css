@@ -4,121 +4,733 @@
   box-sizing: border-box;
 }
 
-.home {
-  min-height: 100vh;
-  background-image: url("../assets/backgrounds/home-bg.webp");
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  overflow: hidden;
-  font-family: Georgia, serif;
-}
+/* =====================================================
+   SKRIN LUAR
+===================================================== */
 
-.header {
-  position: absolute;
-  top: 24px;
-  left: 24px;
-  right: 24px;
+.home-screen {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100dvh;
+
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+
+  overflow: hidden;
+  background: #000;
 }
 
-.logo {
-  background: #075aa8;
-  color: #ffd760;
-  padding: 14px 32px;
-  border-radius: 18px;
-  border: 3px solid #ffd760;
-  font-size: 36px;
-  font-weight: bold;
+/* =====================================================
+   FRAME UTAMA 3:2
+===================================================== */
+
+.home-stage {
+  position: relative;
+
+  width: min(100vw, calc(100dvh * 1.5));
+  aspect-ratio: 3 / 2;
+
+  overflow: hidden;
+  isolation: isolate;
 }
 
-.resource-box {
-  background: rgba(255,255,255,.9);
-  padding: 14px 28px;
-  border-radius: 18px;
-  display: flex;
-  gap: 24px;
-  font-size: 24px;
-  font-weight: bold;
-}
+/* =====================================================
+   GAMBAR LATAR
+===================================================== */
 
-.hero-content {
+.home-background {
   position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: white;
-  text-shadow: 2px 2px 8px black;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+  object-position: center;
+
+  display: block;
+
+  pointer-events: none;
+  user-select: none;
+
+  z-index: 0;
 }
 
-.hero-content h1 {
-  font-size: 60px;
-  color: #ffe08a;
-}
+/* =====================================================
+   HOTSPOT ASAS
+   Tengah kekal transparent
+===================================================== */
 
-.hero-content p {
-  font-size: 18px;
-  font-weight: bold;
-}
+.home-hotspot {
+  position: absolute;
 
-.continue-btn {
-  margin-top: 20px;
-  padding: 16px 38px;
+  padding: 0;
+
   border: none;
-  border-radius: 18px;
-  background: #ffd760;
-  color: #1b1b1b;
-  font-size: 22px;
-  font-weight: bold;
+  outline: none;
+
+  background: transparent;
+
   cursor: pointer;
+
+  z-index: 5;
+
+  -webkit-tap-highlight-color: transparent;
 }
 
-.menu-grid {
+/* Garisan kuning */
+
+.home-hotspot::before {
+  content: "";
+
   position: absolute;
+  inset: 0;
+
+  border: clamp(1px, 0.13vw, 3px) solid transparent;
+  border-radius: clamp(7px, 0.8vw, 16px);
+
+  background: transparent;
+
+  pointer-events: none;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease,
+    opacity 180ms ease;
+
+  opacity: 0;
+}
+
+/* Hover: hanya garisan bersinar */
+
+.home-hotspot:hover::before,
+.home-hotspot:focus-visible::before {
+  border-color: #ffe46b;
+
+  box-shadow:
+    0 0 0.25vw rgba(255, 231, 105, 1),
+    0 0 0.65vw rgba(255, 213, 55, 0.95),
+    0 0 1.25vw rgba(255, 190, 20, 0.7);
+
+  opacity: 1;
+}
+
+/* Klik */
+
+.home-hotspot:active::before {
+  transform: scale(0.96);
+
+  border-color: #fff4ad;
+
+  box-shadow:
+    0 0 0.35vw rgba(255, 245, 175, 1),
+    0 0 0.85vw rgba(255, 220, 72, 1);
+}
+
+/* =====================================================
+   BUTANG TERUSKAN PENGEMBARAAN
+===================================================== */
+
+.home-continue-hotspot {
+  left: 38%;
+  top: 41.5%;
+
+  width: 26.8%;
+  height: 11%;
+}
+
+.home-continue-hotspot::before {
+  border-radius: clamp(10px, 1.2vw, 24px);
+}
+
+/* =====================================================
+   MENU BAWAH
+
+   Kedudukan berdasarkan gambar latar semasa.
+   Semua ukuran menggunakan peratus supaya responsif.
+===================================================== */
+
+/* Peta Dunia */
+.home-menu {
+  position: absolute;
+
   left: 50%;
-  bottom: 35px;
+  bottom: 22%;
+
+  width: 61%;
+
   transform: translateX(-50%);
-  width: min(1050px, 92%);
+
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 14px;
+  gap: 1.5%;
+
+  z-index: 6;
 }
 
-.menu-card {
-  height: 115px;
-  border-radius: 18px;
-  color: white;
+.home-menu-button {
+  position: relative;
+
+  min-width: 0;
+  aspect-ratio: 1 / 1;
+
+  padding: 7% 5%;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 2px solid rgba(255,255,255,.5);
-  font-size: 34px;
-  font-weight: bold;
+
+  border: clamp(1px, 0.12vw, 3px) solid transparent;
+  border-radius: clamp(8px, 0.8vw, 16px);
+
+  background: transparent;
+
+  color: #ffe89a;
+  font-family: Georgia, serif;
+
+  cursor: pointer;
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
-.menu-card h3 {
-  margin-top: 8px;
-  font-size: 18px;
+.home-menu-button img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+  object-fit: contain;
+
+  pointer-events: none;
+  user-select: none;
+
+  filter:
+    drop-shadow(0 0.25vw 0.4vw rgba(0, 0, 0, 0.9));
 }
 
-.blue { background: rgba(0,123,255,.85); }
-.green { background: rgba(40,167,69,.85); }
-.gold { background: rgba(194,137,0,.85); }
-.purple { background: rgba(111,66,193,.85); }
-.cyan { background: rgba(0,153,204,.85); }
-.red { background: rgba(220,53,69,.85); }
+.home-menu-button span {
+  margin-top: 3%;
 
+  font-size: clamp(8px, 0.9vw, 16px);
+  font-weight: 800;
+  white-space: nowrap;
 
-.menu-card{
-  cursor:pointer;
-  transition:0.3s;
+  text-shadow:
+    0 0.15vw 0.2vw #000,
+    0 0 0.5vw #000;
 }
 
-.menu-card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 10px 25px rgba(0,0,0,.35);
+.home-menu-button:hover,
+.home-menu-button:focus-visible {
+  transform: translateY(-7%);
+
+  border-color: #ffe36b;
+
+  box-shadow:
+    0 0 0.25vw rgba(255, 230, 105, 1),
+    0 0 0.7vw rgba(255, 205, 45, 0.85),
+    0 0 1.2vw rgba(255, 183, 16, 0.55);
+}
+
+.home-menu-button:active {
+  transform: scale(0.96);
+}
+.home-peta-hotspot {
+  left: 8.8%;
+  bottom: 5.8%;
+
+  width: 13.3%;
+  height: 15.2%;
+}
+
+/* Kitab */
+
+.home-kitab-hotspot {
+  left: 22.4%;
+  bottom: 5.8%;
+
+  width: 10.7%;
+  height: 15.2%;
+}
+
+/* Artifak / Inventori */
+
+.home-artifak-hotspot {
+  left: 39%;
+  bottom: 5.8%;
+
+  width: 10.6%;
+  height: 15.2%;
+}
+
+/* Pencapaian */
+
+.home-pencapaian-hotspot {
+  left: 49.8%;
+  bottom: 5.8%;
+
+  width: 10.9%;
+  height: 15.2%;
+}
+
+/* Koleksi */
+
+.home-koleksi-hotspot {
+  left: 61%;
+  bottom: 5.8%;
+
+  width: 10.7%;
+  height: 15.2%;
+}
+
+/* Tetapan */
+
+.home-tetapan-hotspot {
+  left: 72%;
+  bottom: 5.8%;
+
+  width: 10.5%;
+  height: 15.2%;
+}
+
+/* =====================================================
+   SKRIN SENTUH
+   Garisan kekal muncul sekejap ketika ditekan
+===================================================== */
+
+@media (hover: none) {
+  .home-hotspot:active::before {
+    opacity: 1;
+  }
+}
+
+/* =====================================================
+   PROFIL PENGEMBARA
+===================================================== */
+
+.home-player-profile {
+  position: absolute;
+
+  left: 7%;
+  bottom: 11%;
+
+  width: 27%;
+  height: 14%;
+
+  display: grid;
+  grid-template-columns: 25% 1fr;
+  align-items: center;
+  gap: 3%;
+
+  padding: 1.2% 1.5%;
+
+  color: #f7e7b0;
+
+  z-index: 8;
+}
+
+.home-player-avatar {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
+  display: grid;
+  place-items: center;
+
+  border: clamp(1px, 0.14vw, 3px) solid #d8ba59;
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #527e43,
+      #15351f 65%,
+      #06150c
+    );
+
+  color: #ffe898;
+
+ cursor: default;
+
+  box-shadow:
+    inset 0 0 0.6vw rgba(255, 230, 150, 0.16),
+    0 0 0.5vw rgba(0, 0, 0, 0.8);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.home-player-avatar span {
+  font-family: Georgia, serif;
+  font-size: clamp(18px, 2.2vw, 38px);
+  font-weight: 900;
+}
+
+
+
+.home-player-details {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.home-player-title {
+  color: #cdbd8f;
+
+  font-size: clamp(6px, 0.58vw, 11px);
+  font-weight: 800;
+  letter-spacing: 0.07em;
+}
+
+.home-player-name {
+  margin-top: 2%;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  color: #ffe89a;
+
+  font-family: Georgia, serif;
+  font-size: clamp(9px, 1vw, 18px);
+}
+
+.home-player-world,
+.home-player-completed {
+  margin-top: 2%;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  color: #e5d8b5;
+
+  font-size: clamp(6px, 0.58vw, 11px);
+}
+
+
+/* =====================================================
+   MODAL PROFIL
+===================================================== */
+
+.home-profile-modal-backdrop {
+  position: absolute;
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(3px);
+
+  z-index: 1000;
+}
+
+.home-profile-modal {
+  width: min(38%, 470px);
+
+  padding: 2.5%;
+
+  border: clamp(1px, 0.15vw, 3px) solid #d6b454;
+  border-radius: clamp(10px, 1vw, 20px);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(20, 53, 36, 0.98),
+      rgba(5, 22, 14, 0.99)
+    );
+
+  color: #f8e9b5;
+
+  box-shadow:
+    0 0 1.8vw rgba(0, 0, 0, 0.9),
+    0 0 1vw rgba(255, 205, 62, 0.25);
+}
+
+.home-profile-modal h2 {
+  color: #ffe28a;
+
+  font-family: Georgia, serif;
+  font-size: clamp(18px, 2vw, 34px);
+  text-align: center;
+}
+
+.home-profile-modal label {
+  display: block;
+
+  margin-top: 7%;
+  margin-bottom: 2%;
+
+  color: #ddcea4;
+
+  font-size: clamp(10px, 0.9vw, 16px);
+}
+
+.home-profile-modal input {
+  width: 100%;
+
+  padding: 3% 4%;
+
+  border: 1px solid #b99843;
+  border-radius: clamp(6px, 0.6vw, 12px);
+  outline: none;
+
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff0b0;
+
+  font-family: Georgia, serif;
+  font-size: clamp(13px, 1.2vw, 21px);
+}
+
+.home-profile-modal input:focus {
+  border-color: #ffe26a;
+
+  box-shadow:
+    0 0 0.35vw rgba(255, 225, 105, 0.8);
+}
+
+.home-profile-modal-actions {
+  margin-top: 7%;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4%;
+}
+
+.home-profile-modal-actions button {
+  padding: 4%;
+
+  border-radius: clamp(6px, 0.55vw, 11px);
+
+  font-family: Georgia, serif;
+  font-size: clamp(10px, 0.85vw, 16px);
+  font-weight: 900;
+
+  cursor: pointer;
+}
+
+.home-profile-cancel {
+  border: 1px solid #907e57;
+
+  background: rgba(48, 48, 39, 0.92);
+  color: #e7dbbd;
+}
+
+.home-profile-save {
+  border: 1px solid #ffe58a;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f9da70,
+      #c9951c
+    );
+
+  color: #241600;
+}
+
+/* =====================================================
+   PERJALANAN SEMASA
+===================================================== */
+
+/* =====================================================
+   PERJALANAN SEMASA
+===================================================== */
+
+.home-current-journey {
+  position: absolute;
+
+  right: 8%;
+  bottom: 4.4%;
+
+  width: 27%;
+  height: 14%;
+
+  display: grid;
+  grid-template-columns: 57% 43%;
+  align-items: center;
+
+  padding: 1% 1.35%;
+
+  color: #f7e7b0;
+
+  overflow: hidden;
+
+  z-index: 8;
+}
+
+/* =========================
+   MAKLUMAT PERJALANAN
+========================= */
+
+.home-journey-info {
+  min-width: 0;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding-right: 5%;
+}
+
+.home-journey-heading {
+  color: #d2c18c;
+
+  font-size: clamp(6px, 0.55vw, 10px);
+  font-weight: 900;
+  letter-spacing: 0.07em;
+  line-height: 1;
+
+  white-space: nowrap;
+}
+
+.home-journey-world {
+  margin-top: 6%;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  color: #ffe89a;
+
+  font-family: Georgia, serif;
+  font-size: clamp(10px, 1.05vw, 18px);
+  line-height: 1;
+}
+
+.home-journey-chapter {
+  margin-top: 4%;
+
+  color: #e6d8ad;
+
+  font-size: clamp(6px, 0.54vw, 10px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* =========================
+   PROGRESS
+========================= */
+
+.home-journey-progress-row {
+  width: 100%;
+
+  margin-top: 7%;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6%;
+}
+
+.home-journey-track {
+  width: 100%;
+  height: clamp(5px, 0.5vw, 9px);
+
+  overflow: hidden;
+
+  border: clamp(1px, 0.08vw, 2px) solid #d0ab46;
+  border-radius: 999px;
+
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.home-journey-fill {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #4f9f29,
+      #b2df4a
+    );
+
+  box-shadow:
+    0 0 0.5vw rgba(165, 225, 74, 0.75);
+
+  transition: width 500ms ease;
+}
+
+.home-journey-value {
+  color: #dff06b;
+
+  font-size: clamp(7px, 0.65vw, 12px);
+  font-weight: 900;
+}
+
+.home-journey-hint {
+  margin-top: 5%;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  color: #d2c7a5;
+
+  font-size: clamp(5px, 0.45vw, 8px);
+}
+
+/* =========================
+   HOTSPOT IMEJ KOTA
+========================= */
+
+.home-journey-map-button {
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  place-items: center;
+
+  padding: 5%;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+.home-journey-map {
+  width: 95%;
+  height: 60%;
+  position: relative;
+  top: -35%;
+  object-fit: cover;
+  object-position: center;
+
+  border: 1px solid rgba(226, 187, 74, 0.75);
+  border-radius: 8px;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease;
+}
+
+.home-journey-map-button:hover .home-journey-map,
+.home-journey-map-button:focus-visible .home-journey-map {
+
+  border-color: #ffe477;
+
+  box-shadow:
+    0 0 6px rgba(255, 220, 90, 0.65),
+    0 0 14px rgba(255, 190, 30, 0.35);
+
+  filter: brightness(1.03);
 }

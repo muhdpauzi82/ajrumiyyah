@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/home/Home";
 import WorldMap from "./pages/WorldMap";
+import Settings from "./pages/home/menu/setting/Settings";
 
 /* =========================
    GERBANG KALAM
@@ -65,6 +66,21 @@ import BabIrabAnimasi from "./pages/kotaIrab/BabIrabAnimasi";
 import BabIrabLearning from "./pages/kotaIrab/BabIrabLearning";
 import BabIrabExercise from "./pages/kotaIrab/BabIrabExercise";
 import BabIrabSelesai from "./pages/kotaIrab/BabIrabSelesai";
+import PerpustakaanIrab from "./pages/kotaIrab/PerpustakaanIrab/PerpustakaanIrab";
+import LorongLatihan from "./pages/kotaIrab/LorongLatihan/LorongLatihan";
+import DataranIrab from "./pages/kotaIrab/DataranIrab/DataranIrab";
+import DewanPengijazahan from "./pages/kotaIrab/DewanPengijazahan/DewanPengijazahan";
+import IstanaQadhi from "./pages/kotaIrab/IstanaQadhi/IstanaQadhi";
+import BabIrabQuiz from "./pages/kotaIrab/Quiz/BabIrabQuiz";
+import KitabMarfuat from "./pages/kotaIrab/PerpustakaanIrab/KitabMarfuat/KitabMarfuat";
+import KitabMansubat from "./pages/kotaIrab/PerpustakaanIrab/KitabMansubat/KitabMansubat";
+import KitabMajrurat from "./pages/kotaIrab/PerpustakaanIrab/KitabMajrurat/KitabMajrurat";
+import KitabMajzum from "./pages/kotaIrab/PerpustakaanIrab/KitabMajzumat/KitabMajzumat";
+import LatihanMarfuat from  "./pages/kotaIrab/PerpustakaanIrab/Latihan/LatihanMarfuat/LatihanMarfuat";
+import LatihanMansubat from  "./pages/kotaIrab/PerpustakaanIrab/Latihan/LatihanMansubat/LatihanMansubat";
+import LatihanMajrurat from "./pages/kotaIrab/PerpustakaanIrab/Latihan/LatihanMajrurat/LatihanMajrurat";
+import LatihanMajzumat from "./pages/kotaIrab/PerpustakaanIrab/Latihan/LatihanMajzumat/LatihanMajzumat";
+
 
 /* =========================
    HALAMAN SAMPINGAN
@@ -78,6 +94,9 @@ import DeveloperSandbox from "./pages/DeveloperSandbox";
 ========================= */
 
 import GateChallenge from "./game/GateChallenge";
+import GuardianArena from "./features/guardianArena/GuardianArena.jsx";
+import ChapterComplete from "./features/chapterComplete/ChapterComplete";
+
 
 export default function App() {
   return (
@@ -86,6 +105,7 @@ export default function App() {
         {/* Halaman utama */}
         <Route path="/" element={<Home />} />
         <Route path="/worldmap" element={<WorldMap />} />
+        <Route  path="/settings"  element={<Settings />}/>
 
         {/* Gerbang Kalam */}
         <Route path="/gerbang-kalam" element={<GerbangKalam />} />
@@ -120,25 +140,46 @@ export default function App() {
         <Route path="/anugerah-huruf" element={<AnugerahHuruf />} />
 
         {/* Kota I'rab */}
-        <Route path="/kota-irab" element={<KotaIrab />} />
-        <Route path="/bab-irab-intro" element={<BabIrabIntro />} />
-        <Route path="/bab-irab-matan" element={<BabIrabMatan />} />
-        <Route path="/bab-irab-dialog" element={<BabIrabDialog />} />
-        <Route path="/bab-irab-animasi" element={<BabIrabAnimasi />} />
-        <Route path="/bab-irab-learning" element={<BabIrabLearning />} />
-        <Route path="/bab-irab-exercise" element={<BabIrabExercise />} />
-        <Route path="/bab-irab-selesai" element={<BabIrabSelesai />} />
+<Route path="/kota-irab" element={<KotaIrab />} />
+<Route path="/bab-irab-intro" element={<BabIrabIntro />} />
+<Route path="/bab-irab-matan" element={<BabIrabMatan />} />
+<Route path="/bab-irab-dialog" element={<BabIrabDialog />} />
+<Route path="/bab-irab-learning" element={<BabIrabLearning />} />
+<Route path="/bab-irab-animasi" element={<BabIrabAnimasi />} />
+<Route  path="/bab-irab-latihan"  element={<BabIrabExercise />}/>
+<Route  path="/bab-irab-selesai"  element={<BabIrabSelesai />}/>
+<Route  path="/perpustakaan-irab"  element={<PerpustakaanIrab />}/>
+<Route  path="/lorong-latihan-irab"  element={<LorongLatihan />}/>
+<Route  path="/dataran-irab"  element={<DataranIrab />}/>
+<Route  path="/dewan-pengijazahan-irab"  element={<DewanPengijazahan />}/>
+<Route  path="/istana-qadhi-irab"  element={<IstanaQadhi />}/>
+<Route  path="/bab-irab-quiz"  element={<BabIrabQuiz />}/>
+
+
+
+<Route  path="/kitab-marfuat"  element={<KitabMarfuat />}/>
+<Route  path="/kitab-mansubat"  element={<KitabMansubat />}/>
+<Route  path="/kitab-majrurat"  element={<KitabMajrurat />}/>
+<Route  path="/kitab-majzum"  element={<KitabMajzum />}/>
+
+<Route  path="/latihan-marfuat"  element={<LatihanMarfuat />}/>
+<Route  path="/latihan-mansubat"  element={<LatihanMansubat />}/>
+<Route  path="/latihan-majrurat"  element={<LatihanMajrurat />}/>
+<Route  path="/latihan-majzumat"  element={<LatihanMajzumat />}/>
+
 
         {/* Halaman sampingan */}
         <Route path="/inventory" element={<Inventory />} />
         <Route path="/sandbox" element={<DeveloperSandbox />} />
 
         {/* Ujian game */}
-        <Route
-          path="/test-gate"
-          element={<GateChallenge gameType="isim" />}
-        />
+        <Route path="/test-gate" element={<GateChallenge gameType="isim" />} />
+        <Route path="/guardian-arena" element={<GuardianArena />} />
+        <Route  path="/chapter-complete" element={  <ChapterComplete   correctCount={40}
+         totalQuestions={40} /> }/>
+     
 
+        
         {/* Route tidak dijumpai */}
         <Route path="*" element={<Home />} />
       </Routes>

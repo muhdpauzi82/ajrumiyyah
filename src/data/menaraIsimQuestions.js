@@ -1,184 +1,182 @@
-
-
-export const menaraIsim  = [
-  {
-    question: "Yang manakah Fi'il Madhi?",
-    options: ["نَصَرَ", "يَنْصُرُ", "اُنْصُرْ"],
-    answer: "نَصَرَ",
-    explain: "نَصَرَ menunjukkan perbuatan yang telah berlaku."
-  },
-  {
-    question: "Yang manakah Fi'il Mudhari'?",
-    options: ["فَتَحَ", "يَفْتَحُ", "اِفْتَحْ"],
-    answer: "يَفْتَحُ",
-    explain: "يَفْتَحُ menunjukkan perbuatan sedang atau akan berlaku."
-  },
-  {
-    question: "Yang manakah Fi'il Amar?",
-    options: ["ضَرَبَ", "يَضْرِبُ", "اِضْرِبْ"],
-    answer: "اِضْرِبْ",
-    explain: "اِضْرِبْ ialah arahan."
-  },
-  {
-    question: "كَتَبَ ialah...",
-    options: ["Fi'il Madhi", "Fi'il Mudhari'", "Fi'il Amar"],
-    answer: "Fi'il Madhi",
-    explain: "كَتَبَ menunjukkan perbuatan telah menulis."
-  },
-  {
-    question: "يَكْتُبُ ialah...",
-    options: ["Fi'il Mudhari'", "Fi'il Madhi", "Fi'il Amar"],
-    answer: "Fi'il Mudhari'",
-    explain: "يَكْتُبُ menunjukkan sedang atau akan menulis."
-  },
-  {
-    question: "اُكْتُبْ ialah...",
-    options: ["Fi'il Amar", "Fi'il Madhi", "Fi'il Mudhari'"],
-    answer: "Fi'il Amar",
-    explain: "اُكْتُبْ bermaksud tulislah."
-  },
-  {
-    question: "ذَهَبَ ialah...",
-    options: ["Fi'il Madhi", "Fi'il Mudhari'", "Fi'il Amar"],
-    answer: "Fi'il Madhi",
-    explain: "ذَهَبَ menunjukkan telah pergi."
-  },
-  {
-    question: "يَذْهَبُ ialah...",
-    options: ["Fi'il Mudhari'", "Fi'il Madhi", "Fi'il Amar"],
-    answer: "Fi'il Mudhari'",
-    explain: "يَذْهَبُ menunjukkan sedang atau akan pergi."
-  },
-  {
-    question: "اِذْهَبْ ialah...",
-    options: ["Fi'il Amar", "Fi'il Madhi", "Fi'il Mudhari'"],
-    answer: "Fi'il Amar",
-    explain: "اِذْهَبْ bermaksud pergilah."
-  },
-  {
-    question: "جَلَسَ ialah...",
-    options: ["Fi'il Madhi", "Fi'il Mudhari'", "Fi'il Amar"],
-    answer: "Fi'il Madhi",
-    explain: "جَلَسَ menunjukkan telah duduk."
-  },
-  {
-    question: "يَجْلِسُ ialah...",
-    options: ["Fi'il Mudhari'", "Fi'il Amar", "Fi'il Madhi"],
-    answer: "Fi'il Mudhari'",
-    explain: "يَجْلِسُ menunjukkan sedang atau akan duduk."
-  },
-  {
-    question: "اِجْلِسْ ialah...",
-    options: ["Fi'il Amar", "Fi'il Madhi", "Fi'il Mudhari'"],
-    answer: "Fi'il Amar",
-    explain: "اِجْلِسْ bermaksud duduklah."
-  },
-  {
-    question: "فَتَحَ menunjukkan...",
-    options: ["Telah membuka", "Sedang membuka", "Bukalah"],
-    answer: "Telah membuka",
-    explain: "فَتَحَ ialah Fi'il Madhi."
-  },
-  {
-    question: "يَفْتَحُ menunjukkan...",
-    options: ["Sedang atau akan membuka", "Telah membuka", "Bukalah"],
-    answer: "Sedang atau akan membuka",
-    explain: "يَفْتَحُ ialah Fi'il Mudhari'."
-  },
-  {
-    question: "اِفْتَحْ menunjukkan...",
-    options: ["Bukalah", "Telah membuka", "Sedang membuka"],
-    answer: "Bukalah",
-    explain: "اِفْتَحْ ialah Fi'il Amar."
-  },
-  {
-    question: "Pilih pasangan yang betul.",
-    options: ["قَرَأَ = Madhi", "قَرَأَ = Mudhari'", "قَرَأَ = Amar"],
-    answer: "قَرَأَ = Madhi",
-    explain: "قَرَأَ menunjukkan telah membaca."
-  },
-  {
-    question: "Pilih pasangan yang betul.",
-    options: ["يَقْرَأُ = Mudhari'", "يَقْرَأُ = Madhi", "يَقْرَأُ = Amar"],
-    answer: "يَقْرَأُ = Mudhari'",
-    explain: "يَقْرَأُ menunjukkan sedang atau akan membaca."
-  },
-  {
-    question: "Pilih pasangan yang betul.",
-    options: ["اِقْرَأْ = Amar", "اِقْرَأْ = Madhi", "اِقْرَأْ = Mudhari'"],
-    answer: "اِقْرَأْ = Amar",
-    explain: "اِقْرَأْ bermaksud bacalah."
-  },
-  {
-    question: "Yang manakah susunan betul?",
-    options: ["Madhi - Mudhari' - Amar", "Isim - Huruf - Amar", "Jar - Nasab - Rafa'"],
-    answer: "Madhi - Mudhari' - Amar",
-    explain: "Tiga jenis asas Fi'il ialah Madhi, Mudhari' dan Amar."
-  },
-  {
-    question: "Fi'il Madhi berkaitan dengan masa...",
-    options: ["Lampau", "Sekarang sahaja", "Perintah"],
-    answer: "Lampau",
-    explain: "Fi'il Madhi menunjukkan perbuatan yang telah berlaku."
-  },
-  {
-    question: "Fi'il Mudhari' berkaitan dengan masa...",
-    options: ["Sekarang atau akan datang", "Lampau sahaja", "Perintah sahaja"],
-    answer: "Sekarang atau akan datang",
-    explain: "Fi'il Mudhari' menunjukkan sedang atau akan berlaku."
-  },
-  {
-    question: "Fi'il Amar berkaitan dengan...",
-    options: ["Arahan", "Masa lampau", "Nama benda"],
-    answer: "Arahan",
-    explain: "Fi'il Amar ialah kata kerja perintah."
-  },
-  {
-    question: "Yang manakah bukan Fi'il Madhi?",
-    options: ["يَكْتُبُ", "كَتَبَ", "ذَهَبَ"],
-    answer: "يَكْتُبُ",
-    explain: "يَكْتُبُ ialah Fi'il Mudhari'."
-  },
-  {
-    question: "Yang manakah bukan Fi'il Mudhari'?",
-    options: ["كَتَبَ", "يَذْهَبُ", "يَجْلِسُ"],
-    answer: "كَتَبَ",
-    explain: "كَتَبَ ialah Fi'il Madhi."
-  },
-  {
-    question: "Yang manakah bukan Fi'il Amar?",
-    options: ["يَكْتُبُ", "اُكْتُبْ", "اِجْلِسْ"],
-    answer: "يَكْتُبُ",
-    explain: "يَكْتُبُ ialah Fi'il Mudhari'."
-  },
-  {
-    question: "سَيَكْتُبُ berasal daripada Fi'il...",
-    options: ["Mudhari'", "Madhi", "Amar"],
-    answer: "Mudhari'",
-    explain: "سَ masuk pada Fi'il Mudhari'."
-  },
-  {
-    question: "قَدْ كَتَبَ mengandungi Fi'il...",
-    options: ["Madhi", "Mudhari'", "Amar"],
-    answer: "Madhi",
-    explain: "كَتَبَ ialah Fi'il Madhi."
-  },
-  {
-    question: "سَوْفَ يَذْهَبُ mengandungi Fi'il...",
-    options: ["Mudhari'", "Madhi", "Amar"],
-    answer: "Mudhari'",
-    explain: "يَذْهَبُ ialah Fi'il Mudhari'."
-  },
-  {
-    question: "كَتَبَتْ ialah Fi'il...",
-    options: ["Madhi", "Mudhari'", "Amar"],
-    answer: "Madhi",
-    explain: "كَتَبَتْ menerima Ta' Ta'nith Sakinah dan menunjukkan masa lampau."
-  },
-  {
-    question: "Tahap Menara Bina' Fi'il menguji...",
-    options: ["Kenal jenis Fi'il", "Tanda Isim sahaja", "Huruf Jar sahaja"],
-    answer: "Kenal jenis Fi'il",
-    explain: "Tahap ini menguji penguasaan Madhi, Mudhari' dan Amar."
-  }
+export const menaraIsim = [
+{
+question:"Yang manakah merupakan isim nakirah?",
+options:["كِتَابٌ","الْكِتَابُ","هَذَا"],
+answer:"كِتَابٌ",
+explain:"كتابٌ ialah isim nakirah kerana tidak mempunyai Alif Lam."
+},
+{
+question:"Yang manakah merupakan isim ma'rifah?",
+options:["الْمَسْجِدُ","مَسْجِدٌ","قَلَمٌ"],
+answer:"الْمَسْجِدُ",
+explain:"Alif Lam menjadikan isim itu ma'rifah."
+},
+{
+question:"Yang manakah merupakan isim 'alam?",
+options:["مُحَمَّدٌ","رَجُلٌ","بَيْتٌ"],
+answer:"مُحَمَّدٌ",
+explain:"محمد ialah nama khas."
+},
+{
+question:"Yang manakah merupakan dhamir?",
+options:["هُوَ","مُحَمَّدٌ","كِتَابٌ"],
+answer:"هُوَ",
+explain:"هو ialah dhamir munfasil."
+},
+{
+question:"Yang manakah merupakan isim isyarah?",
+options:["هَذَا","مُحَمَّدٌ","كِتَابٌ"],
+answer:"هَذَا",
+explain:"هذا ialah isim isyarah."
+},
+{
+question:"Yang manakah merupakan isim mawsul?",
+options:["الَّذِي","هَذَا","هُوَ"],
+answer:"الَّذِي",
+explain:"الذي ialah isim mawsul."
+},
+{
+question:"Yang manakah merupakan isim istifham?",
+options:["مَنْ","هَذَا","الَّذِي"],
+answer:"مَنْ",
+explain:"من digunakan untuk bertanya."
+},
+{
+question:"Yang manakah merupakan isim syarat?",
+options:["مَنْ","هُوَ","الَّذِي"],
+answer:"مَنْ",
+explain:"من juga digunakan sebagai isim syarat."
+},
+{
+question:"Perkataan manakah menerima tanwin?",
+options:["قَلَمٌ","الْقَلَمُ","هَذَا"],
+answer:"قَلَمٌ",
+explain:"Tanwin merupakan tanda isim."
+},
+{
+question:"Perkataan manakah mempunyai Alif Lam?",
+options:["الطَّالِبُ","طَالِبٌ","هَذَا"],
+answer:"الطَّالِبُ",
+explain:"أل ialah tanda isim."
+},
+{
+question:"Dalam ayat (حَضَرَ مُحَمَّدٌ)، apakah isim?",
+options:["مُحَمَّدٌ","حَضَرَ","Tiada"],
+answer:"مُحَمَّدٌ",
+explain:"محمد ialah isim."
+},
+{
+question:"Dalam ayat (فِي الْمَسْجِدِ إِمَامٌ)، apakah isim pertama?",
+options:["الْمَسْجِدِ","إِمَامٌ","Tiada"],
+answer:"الْمَسْجِدِ",
+explain:"المسجد ialah isim pertama."
+},
+{
+question:"Dalam ayat (فِي الْمَسْجِدِ إِمَامٌ)، apakah isim kedua?",
+options:["إِمَامٌ","الْمَسْجِدِ","Tiada"],
+answer:"إِمَامٌ",
+explain:"إمام ialah isim kedua."
+},
+{
+question:"Dalam ayat (مُحَمَّدٌ مُجْتَهِدٌ)، berapakah bilangan isim?",
+options:["2","1","3"],
+answer:"2",
+explain:"محمد dan مجتهد ialah dua isim."
+},
+{
+question:"Dalam ayat (الْمُعَلِّمُ فِي الْفَصْلِ)، berapakah bilangan isim?",
+options:["2","1","3"],
+answer:"2",
+explain:"المعلم dan الفصل ialah isim."
+},
+{
+question:"Dalam ayat (الطَّالِبُ مَاهِرٌ)، apakah isim kedua?",
+options:["مَاهِرٌ","الطَّالِبُ","Tiada"],
+answer:"مَاهِرٌ",
+explain:"ماهر ialah isim."
+},
+{
+question:"Yang manakah merupakan nama tempat?",
+options:["مَدْرَسَةٌ","مُعَلِّمٌ","مُحَمَّدٌ"],
+answer:"مَدْرَسَةٌ",
+explain:"مدرسة ialah nama tempat."
+},
+{
+question:"Yang manakah merupakan nama masa?",
+options:["يَوْمٌ","مَسْجِدٌ","قَلَمٌ"],
+answer:"يَوْمٌ",
+explain:"يوم ialah nama masa."
+},
+{
+question:"Yang manakah merupakan nama manusia?",
+options:["رَجُلٌ","بَيْتٌ","قَلَمٌ"],
+answer:"رَجُلٌ",
+explain:"رجل ialah nama manusia."
+},
+{
+question:"Yang manakah merupakan nama haiwan?",
+options:["أَسَدٌ","قَلَمٌ","مَدْرَسَةٌ"],
+answer:"أَسَدٌ",
+explain:"أسد ialah nama haiwan."
+},
+{
+question:"Yang manakah merupakan nama benda?",
+options:["كُرْسِيٌّ","رَجُلٌ","يَوْمٌ"],
+answer:"كُرْسِيٌّ",
+explain:"كرسي ialah nama benda."
+},
+{
+question:"Yang manakah merupakan isim yang mempunyai Alif Lam?",
+options:["الْبَيْتُ","بَيْتٌ","هُوَ"],
+answer:"الْبَيْتُ",
+explain:"أل ialah tanda isim."
+},
+{
+question:"Yang manakah merupakan isim yang menerima tanwin?",
+options:["بَابٌ","الْبَابُ","هَذَا"],
+answer:"بَابٌ",
+explain:"Tanwin ialah tanda isim."
+},
+{
+question:"Dalam ayat (جَاءَ الْوَلَدُ إِلَى الْبَيْتِ)، berapakah bilangan isim?",
+options:["2","1","3"],
+answer:"2",
+explain:"الولد dan البيت ialah isim."
+},
+{
+question:"Dalam ayat (الْقَلَمُ جَدِيدٌ)، apakah isim kedua?",
+options:["جَدِيدٌ","الْقَلَمُ","Tiada"],
+answer:"جَدِيدٌ",
+explain:"جديد ialah isim."
+},
+{
+question:"Dalam ayat (هَذَا مُعَلِّمٌ)، apakah isim yang pertama?",
+options:["هَذَا","مُعَلِّمٌ","Tiada"],
+answer:"هَذَا",
+explain:"هذا ialah isim isyarah."
+},
+{
+question:"Dalam ayat (هَذَا مُعَلِّمٌ)، apakah isim yang kedua?",
+options:["مُعَلِّمٌ","هَذَا","Tiada"],
+answer:"مُعَلِّمٌ",
+explain:"معلم ialah isim."
+},
+{
+question:"Dalam ayat (الَّذِي فَازَ مُجْتَهِدٌ)، apakah isim mawsul?",
+options:["الَّذِي","مُجْتَهِدٌ","Tiada"],
+answer:"الَّذِي",
+explain:"الذي ialah isim mawsul."
+},
+{
+question:"Dalam ayat (مَنْ حَضَرَ؟)، apakah isim istifham?",
+options:["مَنْ","حَضَرَ","Tiada"],
+answer:"مَنْ",
+explain:"من ialah isim istifham."
+},
+{
+question:"Apakah tanda isim yang terdapat pada (الْمُسْلِمُ)?",
+options:["Alif Lam","Tanwin","Huruf Jar"],
+answer:"Alif Lam",
+explain:"أل ialah salah satu tanda isim."
+}
 ];

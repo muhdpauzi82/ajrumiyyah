@@ -107,13 +107,13 @@ useEffect(() => {
         />
 
         {/* Penjaga Kalam */}
-       <button
+<button
   className={`hotspot boss ${
     penjagaOpen ? "" : "disabled"
   }`}
   onClick={() => {
     if (penjagaOpen) {
-      navigate("/penjaga-kalam");
+      navigate("/guardian-arena");
     } else {
       alert(
         "Lengkapkan Jejak Isim, Fi'il dan Huruf dahulu."
