@@ -87,7 +87,7 @@ import LatihanMajzumat from "./pages/kotaIrab/PerpustakaanIrab/Latihan/LatihanMa
 ========================= */
 
 import Inventory from "./pages/Inventory";
-import DeveloperSandbox from "./pages/DeveloperSandbox";
+
 
 /* =========================
    GAME
@@ -170,7 +170,7 @@ export default function App() {
 
         {/* Halaman sampingan */}
         <Route path="/inventory" element={<Inventory />} />
-        <Route path="/sandbox" element={<DeveloperSandbox />} />
+   
 
         {/* Ujian game */}
         <Route path="/test-gate" element={<GateChallenge gameType="isim" />} />
