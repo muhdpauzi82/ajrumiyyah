@@ -1,7 +1,7 @@
 export * from "./layout";
 
-export { default as Button } from "./Button";
-export { default as Card } from "./Card";
-export { default as Dialog } from "./Dialog";
-export { default as ProgressBar } from "./Progress";
-export { default as Badge } from "./Badge";
+export { default as Button } from "./button";
+export { default as Card } from "./card";
+export { default as Dialog } from "./dialog";
+export { default as ProgressBar } from "./progress";
+export { default as Badge } from "./badge";
