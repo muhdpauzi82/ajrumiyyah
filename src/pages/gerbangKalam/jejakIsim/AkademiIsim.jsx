@@ -255,11 +255,7 @@ export default function AkademiIsim() {
           </div>
 
           <section className="akademi-question-box">
-            <span className="akademi-question-label">
-              SOALAN
-            </span>
-
-            <h2>{currentQuestion.question}</h2>
+           <h2>{currentQuestion.question}</h2>
           </section>
 
           <div className="akademi-answer-list">

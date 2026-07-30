@@ -357,9 +357,7 @@ export default function SarjanaHuruf() {
             </div>
 
             <section className="sarjana-huruf-question">
-              <span>SOALAN</span>
-
-              <h2 dir="auto">
+                <h2 dir="auto">
                 {currentQuestion.question}
               </h2>
             </section>

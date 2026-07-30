@@ -330,24 +330,6 @@
   text-align: center;
 }
 
-.isim-question-label {
-  position: absolute;
-
-  top: -0.7cqw;
-  left: 1.1cqw;
-
-  padding: 0.2cqw 0.65cqw;
-
-  border-radius: 999px;
-
-  background: #174f20;
-  color: #fffbd7;
-
-  font-size: clamp(7px, 0.62cqw, 11px);
-  font-weight: 900;
-  letter-spacing: 0.08em;
-}
-
 .isim-question-box h2 {
   margin: 0;
 

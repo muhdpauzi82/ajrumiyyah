@@ -1248,15 +1248,7 @@
     border-radius: 11px;
   }
 
-  .sarjana-question-label {
-    top: -8px;
-
-    padding: 2px 13px;
-
-    font-size: clamp(7px, 1.7vh, 10px);
-  }
-
-  .sarjana-question-box h2 {
+    .sarjana-question-box h2 {
     font-size: clamp(14px, 3.6vh, 22px);
     line-height: 1.2;
   }

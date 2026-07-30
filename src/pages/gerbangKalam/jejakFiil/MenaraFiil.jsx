@@ -294,11 +294,7 @@ export default function MenaraFiil() {
           </div>
 
           <section className="fiil-question-box">
-            <span className="fiil-question-label">
-              SOALAN
-            </span>
-
-            <h2>{currentQuestion.question}</h2>
+           <h2>{currentQuestion.question}</h2>
           </section>
 
           <div className="fiil-answer-list">

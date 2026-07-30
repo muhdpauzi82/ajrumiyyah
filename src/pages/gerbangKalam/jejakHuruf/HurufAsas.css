@@ -207,13 +207,6 @@
   text-align: center;
 }
 
-.huruf-question-label {
-  color: #17776f;
-  font-size: clamp(7px, 0.65cqw, 11px);
-  font-weight: 900;
-  letter-spacing: 0.12em;
-}
-
 .huruf-question-box h2 {
   margin: 0.45cqw 0 0;
 

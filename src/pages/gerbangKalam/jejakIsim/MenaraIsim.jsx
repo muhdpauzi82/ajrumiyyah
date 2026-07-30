@@ -250,11 +250,7 @@ export default function MenaraIsim() {
           </div>
 
           <section className="menara-question-box">
-            <span className="menara-question-label">
-              SOALAN
-            </span>
-
-            <h2>{currentQuestion.question}</h2>
+           <h2>{currentQuestion.question}</h2>
           </section>
 
           <div className="menara-answer-list">

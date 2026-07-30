@@ -171,10 +171,7 @@ export default function SarjanaIsim() {
       finalWrongCount === 0;
 
     if (passed) {
-      localStorage.setItem(
-        "sarjanaIsimDone",
-        "true"
-      );
+      localStorage.setItem( "sarjanaIsimDone","true");
 
       playSound("reward.mp3", 0.7);
 
@@ -452,11 +449,7 @@ export default function SarjanaIsim() {
             </div>
 
             <section className="sarjana-question-box">
-              <div className="sarjana-question-label">
-                📖 SOALAN
-              </div>
-
-              <h2>
+                     <h2>
                 {currentQuestion.question}
               </h2>
             </section>

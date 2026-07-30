@@ -50,7 +50,6 @@ import HurufAsas from "./pages/gerbangKalam/jejakHuruf/HurufAsas";
 import HurufAkademi from "./pages/gerbangKalam/jejakHuruf/HurufAkademi";
 import MenaraHuruf from "./pages/gerbangKalam/jejakHuruf/MenaraHuruf";
 import SarjanaHuruf from "./pages/gerbangKalam/jejakHuruf/SarjanaHuruf";
-import AnugerahHuruf from "./pages/gerbangKalam/jejakHuruf/AnugerahHuruf";
 
 /* =========================
    KOTA I'RAB
@@ -135,8 +134,7 @@ export default function App() {
         <Route path="/huruf-akademi" element={<HurufAkademi />} />
         <Route path="/menara-huruf" element={<MenaraHuruf />} />
         <Route path="/sarjana-huruf" element={<SarjanaHuruf />} />
-        <Route path="/anugerah-huruf" element={<AnugerahHuruf />} />
-
+       
         {/* Kota I'rab */}
 <Route path="/kota-irab" element={<KotaIrab />} />
 <Route path="/bab-irab-intro" element={<BabIrabIntro />} />

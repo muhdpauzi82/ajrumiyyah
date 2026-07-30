@@ -358,9 +358,7 @@ export default function SarjanaFiil() {
             </div>
 
             <section className="sarjana-fiil-question">
-              <span>SOALAN</span>
-
-              <h2
+                           <h2
                 dir="auto"
                 lang="ar"
               >

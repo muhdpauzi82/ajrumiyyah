@@ -291,10 +291,6 @@ export default function MenaraHuruf() {
           </div>
 
           <section className="huruf-question-box">
-            <span className="huruf-question-label">
-              SOALAN
-            </span>
-
             <h2 dir="auto">
               {currentQuestion.question}
             </h2>

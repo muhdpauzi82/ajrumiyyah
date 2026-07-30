@@ -258,11 +258,7 @@ export default function IsimAsas() {
           </div>
 
           <section className="isim-question-box">
-            <span className="isim-question-label">
-              SOALAN
-            </span>
-
-            <h2>{currentQuestion.question}</h2>
+          <h2>{currentQuestion.question}</h2>
           </section>
 
           <div className="isim-answer-list">

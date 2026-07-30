@@ -778,16 +778,7 @@
     border-radius: 17px;
   }
 
-  .menara-question-label {
-    top: -10px;
-    left: 12px;
-
-    padding: 3px 9px;
-
-    font-size: 9px;
-  }
-
-  .menara-question-box h2 {
+    .menara-question-box h2 {
     font-size: clamp(17px, 5.2vw, 25px);
     line-height: 1.35;
   }

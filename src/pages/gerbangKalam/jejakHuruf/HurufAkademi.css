@@ -588,11 +588,7 @@
     line-height: 1.25;
   }
 
-  .akademi-question-label {
-    font-size: clamp(5px, 0.52cqw, 8px);
-  }
-
-  .akademi-answer-list {
+   .akademi-answer-list {
     margin-top: 0.4cqw;
     gap: 0.35cqw;
 

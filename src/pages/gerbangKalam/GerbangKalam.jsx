@@ -1,105 +1,139 @@
-import { useState, useEffect } from "react";
-import "./GerbangKalam.css";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import "./GerbangKalam.css";
 import gerbangMap from "../../assets/maps/gerbangkalam.webp";
 
 export default function GerbangKalam() {
   const navigate = useNavigate();
-useEffect(() => {
-  const bgMusic = new Audio("../../sounds/gerbangutama.mp3");
 
-  bgMusic.loop = true;
-  bgMusic.volume = 0.2;
+  useEffect(() => {
+    const bgMusic = new Audio(
+      "/sounds/gerbangutama.mp3"
+    );
 
-  bgMusic.play().catch(() => {});
+    bgMusic.loop = true;
+    bgMusic.volume = 0.2;
 
-  return () => {
-    bgMusic.pause();
-    bgMusic.currentTime = 0;
-  };
-}, []);
+    bgMusic.play().catch(() => {});
+
+    return () => {
+      bgMusic.pause();
+      bgMusic.currentTime = 0;
+    };
+  }, []);
+
   const kalamIntroDone =
     localStorage.getItem("kalamIntro") === "true";
 
   const isimDone =
-    localStorage.getItem("artifact_isim") === "true";
+    localStorage.getItem("sarjanaIsimDone") ===
+    "true";
 
   const fiilDone =
-  localStorage.getItem("artifact_fiil") === "true";
+    localStorage.getItem("sarjanaFiilDone") ===
+    "true";
 
   const hurufDone =
-  localStorage.getItem("artifact_huruf") === "true";
+    localStorage.getItem("sarjanaHurufDone") ===
+    "true";
 
   const penjagaOpen =
-  isimDone && fiilDone && hurufDone;
+    isimDone && fiilDone && hurufDone;
+
+  function masukJejak(
+    path,
+    unlocked,
+    lockedMessage
+  ) {
+    if (!unlocked) {
+      alert(lockedMessage);
+      return;
+    }
+
+    navigate(path);
+  }
 
   return (
-    <div className="gerbang-wrap">
-      <div className="gerbang-map-frame">
-
+    <main className="gerbang-wrap">
+      <section className="gerbang-map-frame">
         <img
           src={gerbangMap}
           className="gerbang-map"
           alt="Gerbang Kalam"
+          draggable="false"
         />
 
         {/* Hutan Huruf */}
         <button
-  className={`hotspot huruf ${fiilDone ? "" : "disabled"}`}
-  onClick={() => {
-    if (fiilDone) {
-      navigate("/jejak-huruf");
-    } else {
-      alert("Selesaikan Gunung Fi'il dahulu.");
-    }
-  }}
->
-  {!fiilDone && (
-    <span className="lock-icon">🔒</span>
-  )}
-</button>
+          type="button"
+          aria-label="Masuk ke Jejak Huruf"
+          className={`hotspot huruf ${
+            fiilDone ? "" : "disabled"
+          }`}
+          onClick={() =>
+            masukJejak(
+              "/jejak-huruf",
+              fiilDone,
+              "🔒 Selesaikan Sarjana Fi‘il dahulu."
+            )
+          }
+        >
+          {!fiilDone && (
+            <span className="lock-icon">
+              🔒
+            </span>
+          )}
+        </button>
 
         {/* Gunung Fi'il */}
         <button
-  className={`hotspot fiil ${
-    isimDone ? "" : "disabled"
-  }`}
-  onClick={() => {
-    if (isimDone) {
-      navigate("/jejak-fiil");
-    } else {
-      alert("Selesaikan Lembah Isim dahulu.");
-    }
-  }}
->
-  {!isimDone && (
-    <span className="lock-icon">🔒</span>
-  )}
-</button>
+          type="button"
+          aria-label="Masuk ke Jejak Fi'il"
+          className={`hotspot fiil ${
+            isimDone ? "" : "disabled"
+          }`}
+          onClick={() =>
+            masukJejak(
+              "/jejak-fiil",
+              isimDone,
+              "🔒 Selesaikan Sarjana Isim dahulu."
+            )
+          }
+        >
+          {!isimDone && (
+            <span className="lock-icon">
+              🔒
+            </span>
+          )}
+        </button>
 
         {/* Lembah Isim */}
         <button
+          type="button"
+          aria-label="Masuk ke Jejak Isim"
           className={`hotspot isim ${
             kalamIntroDone ? "" : "disabled"
           }`}
-          onClick={() => {
-            if (kalamIntroDone) {
-              navigate("/jejak-isim");
-            } else {
-              alert(
-                "Selesaikan Lembah Kalam dahulu."
-              );
-            }
-          }}
+          onClick={() =>
+            masukJejak(
+              "/jejak-isim",
+              kalamIntroDone,
+              "🔒 Selesaikan Lembah Kalam dahulu."
+            )
+          }
         >
           {!kalamIntroDone && (
-            <span className="lock-icon">🔒</span>
+            <span className="lock-icon">
+              🔒
+            </span>
           )}
         </button>
 
         {/* Lembah Kalam */}
         <button
+          type="button"
+          aria-label="Masuk ke Lembah Kalam"
           className="hotspot lembah"
           onClick={() =>
             navigate("/lembah-kalam")
@@ -107,33 +141,34 @@ useEffect(() => {
         />
 
         {/* Penjaga Kalam */}
-<button
-  className={`hotspot boss ${
-    penjagaOpen ? "" : "disabled"
-  }`}
-  onClick={() => {
-    if (penjagaOpen) {
-      navigate("/guardian-arena");
-    } else {
-      alert(
-        "Lengkapkan Jejak Isim, Fi'il dan Huruf dahulu."
-      );
-    }
-  }}
->
-  {!penjagaOpen && (
-    <span className="lock-icon">🔒</span>
-  )}
-</button>
-
-      </div>
+        <button
+          type="button"
+          aria-label="Masuk ke Arena Penjaga Kalam"
+          className={`hotspot boss ${
+            penjagaOpen ? "" : "disabled"
+          }`}
+          onClick={() =>
+            masukJejak(
+              "/guardian-arena",
+              penjagaOpen,
+              "🔒 Lengkapkan Sarjana Isim, Fi‘il dan Huruf dahulu."
+            )
+          }
+        >
+          {!penjagaOpen && (
+            <span className="lock-icon">
+              🔒
+            </span>
+          )}
+        </button>
+      </section>
 
       <button
+        type="button"
+        aria-label="Kembali ke Peta Dunia"
         className="back-map"
         onClick={() => navigate("/worldmap")}
-      >
-       
-      </button>
-    </div>
+      />
+    </main>
   );
 }
