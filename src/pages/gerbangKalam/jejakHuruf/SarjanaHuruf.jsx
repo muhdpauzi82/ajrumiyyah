@@ -151,7 +151,7 @@ export default function SarjanaHuruf() {
         "true"
       );
 
-      playSound("reward.mp3", 0.7);
+      playSound("winning.mp3", 0.7);
 
       setResult({
         passed: true,

@@ -121,7 +121,7 @@ export default function FiilAsas() {
         "true"
       );
 
-      playSound("reward.mp3", 0.65);
+      playSound("levelup.mp3", 0.65);
 
       setFeedback({
         type: "complete",
