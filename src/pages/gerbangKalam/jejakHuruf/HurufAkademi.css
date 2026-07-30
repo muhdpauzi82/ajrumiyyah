@@ -1,0 +1,734 @@
+.akademi-quiz-screen {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  overflow: hidden;
+  background: #073f43;
+
+  display: grid;
+  place-items: center;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+.akademi-quiz-frame {
+  position: relative;
+
+  width: min(100vw, calc(100vh * 16 / 9));
+  height: min(100vh, calc(100vw * 9 / 16));
+
+  overflow: hidden;
+  container-type: inline-size;
+
+  background: #0d6568;
+}
+
+.akademi-quiz-background {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(4, 61, 63, 0.42),
+      rgba(255, 255, 255, 0.06),
+      rgba(4, 61, 63, 0.42)
+    ),
+    url("/images/jejak-huruf.webp")
+      center / cover no-repeat;
+
+  filter:
+    brightness(1.08)
+    saturate(1.05);
+}
+
+.akademi-back-button {
+  position: absolute;
+  top: 3%;
+  left: 2.5%;
+  z-index: 20;
+
+  padding: 0.7cqw 1.4cqw;
+
+  border: 0.12cqw solid #ffe49a;
+  border-radius: 0.8cqw;
+
+  background:
+    linear-gradient(
+      180deg,
+      #227f78,
+      #10514f
+    );
+
+  color: #fff8d5;
+  font-size: clamp(10px, 1cqw, 17px);
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0.32cqw 0 #073c3b,
+    0 0 1cqw rgba(54, 210, 191, 0.4);
+}
+
+.akademi-quiz-card {
+  position: absolute;
+  top: 4%;
+  left: 27%;
+  z-index: 5;
+
+  width: 46%;
+  height: 92%;
+
+  padding: 1.5% 2%;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 0.22cqw solid #d6a94d;
+  border-radius: 1.7cqw;
+
+  background:
+    linear-gradient(
+      150deg,
+      rgba(255, 255, 244, 0.98),
+      rgba(244, 229, 181, 0.98)
+    );
+
+  box-shadow:
+    0 0.8cqw 0 rgba(15, 74, 69, 0.85),
+    0 0 2.3cqw rgba(50, 205, 181, 0.45);
+}
+
+.akademi-quiz-header {
+  flex: 0 0 auto;
+  text-align: center;
+}
+
+.akademi-location-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45cqw;
+
+  padding: 0.4cqw 1.2cqw;
+
+  border: 0.1cqw solid #f0cd6d;
+  border-radius: 999px;
+
+  background: #136d68;
+  color: #fff0aa;
+
+  font-size: clamp(8px, 0.78cqw, 13px);
+  font-weight: 900;
+}
+
+.akademi-quiz-title {
+  margin: 0.55cqw 0 0.15cqw;
+
+  color: #145853;
+  font-family: Georgia, serif;
+  font-size: clamp(23px, 2.5cqw, 42px);
+  line-height: 1;
+}
+
+.akademi-quiz-subtitle {
+  margin: 0;
+
+  color: #625a3c;
+  font-size: clamp(8px, 0.82cqw, 14px);
+  font-weight: 600;
+}
+
+.akademi-progress-area {
+  margin-top: 0.8cqw;
+}
+
+.akademi-progress-text {
+  margin-bottom: 0.3cqw;
+
+  display: flex;
+  justify-content: space-between;
+
+  color: #185e59;
+  font-size: clamp(8px, 0.78cqw, 13px);
+  font-weight: 800;
+}
+
+.akademi-progress-track {
+  height: 0.7cqw;
+  overflow: hidden;
+
+  border: 0.09cqw solid #438d81;
+  border-radius: 999px;
+
+  background: #c6d6b0;
+}
+
+.akademi-progress-fill {
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      #167c74,
+      #42c7b2,
+      #f0d26a
+    );
+
+  transition: width 0.35s ease;
+}
+
+.akademi-question-box {
+  min-height: 21%;
+  margin-top: 0.9cqw;
+  padding: 0.85cqw 1.2cqw;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: 0.13cqw solid #31877c;
+  border-radius: 1cqw;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff,
+      #f5eac5
+    );
+
+  text-align: center;
+}
+
+.akademi-question-label {
+  color: #17776f;
+  font-size: clamp(7px, 0.65cqw, 11px);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.akademi-question-box h2 {
+  margin: 0.45cqw 0 0;
+
+  color: #173d38;
+  font-size: clamp(15px, 1.6cqw, 27px);
+  line-height: 1.35;
+}
+
+.akademi-answer-list {
+  flex: 1;
+  min-height: 0;
+
+  margin-top: 0.9cqw;
+
+  display: grid;
+  grid-template-rows:
+    repeat(3, minmax(0, 1fr));
+  gap: 0.65cqw;
+}
+
+.akademi-answer-button {
+  width: 100%;
+  min-height: 0;
+
+  padding: 0.45cqw 1cqw;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0.13cqw solid #2b9285;
+  border-radius: 0.9cqw;
+
+  background:
+    linear-gradient(
+      180deg,
+      #e9fff6,
+      #9de4d3
+    );
+
+  color: #123d38;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0.25cqw 0 #17665f,
+    0 0 0.7cqw rgba(51, 192, 172, 0.3);
+
+  transition:
+    transform 0.18s ease,
+    filter 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.akademi-answer-button:hover:not(:disabled) {
+  transform: translateY(-0.13cqw);
+  filter: brightness(1.06);
+}
+
+.akademi-answer-button:disabled {
+  cursor: default;
+}
+
+.akademi-answer-text {
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size: clamp(24px, 2.15cqw, 38px);
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.akademi-answer--correct {
+  border-color: #168142;
+
+  background:
+    linear-gradient(
+      180deg,
+      #d9ffd8,
+      #7ed083
+    );
+}
+
+.akademi-answer--wrong {
+  border-color: #b72727;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffd5cf,
+      #eb8076
+    );
+}
+
+.akademi-answer--dimmed {
+  opacity: 0.38;
+}
+
+.akademi-question-navigation {
+  flex: 0 0 auto;
+
+  margin-top: 0.8cqw;
+
+  display: flex;
+  justify-content: center;
+  gap: 0.4cqw;
+}
+
+.akademi-question-dot {
+  width: 1.65cqw;
+  height: 1.65cqw;
+
+  display: grid;
+  place-items: center;
+
+  border: 0.08cqw solid #6da296;
+  border-radius: 50%;
+
+  background: #d6d9af;
+  color: #315d54;
+
+  font-size: clamp(6px, 0.58cqw, 10px);
+  font-weight: 800;
+}
+
+.akademi-question-dot--completed {
+  background: #269486;
+  color: #fff4bd;
+}
+
+.akademi-question-dot--current {
+  transform: scale(1.16);
+
+  border-color: #ffe893;
+  background: #115c58;
+  color: #fff4b5;
+
+  box-shadow: 0 0 0.55cqw #51cfba;
+}
+
+.akademi-feedback-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+
+  display: grid;
+  place-items: center;
+
+  background: rgba(10, 60, 59, 0.22);
+}
+
+.akademi-feedback-overlay--result {
+  background: rgba(5, 42, 42, 0.76);
+  backdrop-filter: blur(0.25cqw);
+}
+
+.akademi-feedback-card {
+  width: 31%;
+  min-height: 28%;
+  padding: 2% 2.3%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: 0.2cqw solid #f0cb70;
+  border-radius: 1.5cqw;
+
+  background:
+    linear-gradient(
+      150deg,
+      #fffbea,
+      #eadca9
+    );
+
+  color: #21433d;
+  text-align: center;
+
+  box-shadow:
+    0 0.65cqw 0 #195f58,
+    0 0 2cqw rgba(66, 211, 187, 0.48);
+}
+
+.akademi-feedback-icon {
+  width: 4cqw;
+  height: 4cqw;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: #13736b;
+  color: #fff2a9;
+
+  font-size: clamp(22px, 2.5cqw, 42px);
+  font-weight: 900;
+}
+
+.akademi-feedback-card h2 {
+  margin: 0.8cqw 0 0.4cqw;
+
+  color: #155d58;
+  font-size: clamp(18px, 2cqw, 34px);
+}
+
+.akademi-feedback-card p {
+  margin: 0;
+
+  color: #514b38;
+  font-size: clamp(9px, 0.95cqw, 16px);
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.akademi-feedback-card--correct {
+  border-color: #63ca83;
+}
+
+.akademi-feedback-card--wrong,
+.akademi-feedback-card--failed {
+  border-color: #dc745f;
+}
+
+.akademi-result-button {
+  margin-top: 1.2cqw;
+  padding: 0.75cqw 1.3cqw;
+
+  border: 0.12cqw solid #ffe598;
+  border-radius: 0.8cqw;
+
+  background:
+    linear-gradient(
+      180deg,
+      #34a898,
+      #15655f
+    );
+
+  color: #fff5ca;
+  font-size: clamp(9px, 0.9cqw, 15px);
+  font-weight: 900;
+
+  cursor: pointer;
+
+  box-shadow: 0 0.28cqw 0 #0b403d;
+}
+
+.akademi-empty-state {
+  color: white;
+  font-size: 24px;
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+  .akademi-quiz-card {
+    top: 2%;
+    left: 23%;
+
+    width: 54%;
+    height: 96%;
+
+    padding: 1% 1.5%;
+  }
+
+  .akademi-back-button {
+    top: 2%;
+    left: 1%;
+  }
+
+  .akademi-quiz-subtitle {
+    display: none;
+  }
+
+  .akademi-question-box {
+    min-height: 19%;
+    margin-top: 0.5cqw;
+  }
+
+  .akademi-answer-list {
+    margin-top: 0.55cqw;
+    gap: 0.4cqw;
+  }
+
+  .akademi-question-navigation {
+    margin-top: 0.4cqw;
+  }
+
+  .akademi-feedback-card {
+    width: 39%;
+  }
+}
+
+@media (orientation: portrait) and (max-width: 768px) {
+  .akademi-quiz-screen::before {
+    content:
+      "Sila pusingkan telefon ke mod landskap untuk menjawab latihan.";
+
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+
+    display: grid;
+    place-items: center;
+
+    padding: 40px;
+
+    background: #075b5c;
+    color: #fff4bd;
+
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .akademi-quiz-frame {
+    visibility: hidden;
+  }
+}
+/* Paparan laptop kecil dan telefon landskap */
+@media (orientation: landscape) and (max-height: 650px) {
+  .akademi-quiz-card {
+    top: 2%;
+    left: 25%;
+
+    width: 50%;
+    height: 96%;
+
+    padding: 0.8% 1.2%;
+    border-radius: 1.2cqw;
+  }
+
+  .akademi-location-badge {
+    padding: 0.25cqw 0.8cqw;
+    font-size: clamp(6px, 0.68cqw, 10px);
+  }
+
+  .akademi-quiz-title {
+    margin: 0.3cqw 0 0;
+    font-size: clamp(17px, 2cqw, 29px);
+  }
+
+  .akademi-quiz-subtitle {
+    display: none;
+  }
+
+  .akademi-progress-area {
+    margin-top: 0.4cqw;
+  }
+
+  .akademi-progress-text {
+    font-size: clamp(6px, 0.65cqw, 10px);
+  }
+
+  .akademi-progress-track {
+    height: 0.45cqw;
+  }
+
+  .akademi-question-box {
+    min-height: 18%;
+    margin-top: 0.4cqw;
+    padding: 0.4cqw 0.8cqw;
+  }
+
+  .akademi-question-box h2 {
+    margin-top: 0.25cqw;
+
+    font-size: clamp(13px, 1.3cqw, 19px);
+    line-height: 1.25;
+  }
+
+  .akademi-question-label {
+    font-size: clamp(5px, 0.52cqw, 8px);
+  }
+
+  .akademi-answer-list {
+    margin-top: 0.4cqw;
+    gap: 0.35cqw;
+
+    grid-template-rows:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .akademi-answer-button {
+    padding: 0.2cqw 0.6cqw;
+    border-radius: 0.6cqw;
+    box-shadow: 0 0.15cqw 0 #17665f;
+  }
+
+  .akademi-answer-text {
+    font-size: clamp(13px, 1.55cqw, 23px);
+    line-height: 1.15;
+
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .akademi-question-navigation {
+    margin-top: 0.3cqw;
+    gap: 0.2cqw;
+  }
+
+  .akademi-question-dot {
+    width: 1.25cqw;
+    height: 1.25cqw;
+
+    font-size: clamp(4px, 0.48cqw, 7px);
+  }
+
+  .akademi-back-button {
+    top: 1.5%;
+    left: 1%;
+
+    padding: 0.4cqw 0.7cqw;
+    font-size: clamp(7px, 0.75cqw, 11px);
+  }
+}
+/* Paparan laptop kecil dan telefon landskap */
+@media (orientation: landscape) and (max-height: 650px) {
+  .akademi-quiz-card {
+    top: 2%;
+    left: 25%;
+
+    width: 50%;
+    height: 96%;
+
+    padding: 0.8% 1.2%;
+    border-radius: 1.2cqw;
+  }
+
+  .akademi-location-badge {
+    padding: 0.25cqw 0.8cqw;
+    font-size: clamp(6px, 0.68cqw, 10px);
+  }
+
+  .akademi-quiz-title {
+    margin: 0.3cqw 0 0;
+    font-size: clamp(17px, 2cqw, 29px);
+  }
+
+  .akademi-quiz-subtitle {
+    display: none;
+  }
+
+  .akademi-progress-area {
+    margin-top: 0.4cqw;
+  }
+
+  .akademi-progress-text {
+    font-size: clamp(6px, 0.65cqw, 10px);
+  }
+
+  .akademi-progress-track {
+    height: 0.45cqw;
+  }
+
+  .akademi-question-box {
+    min-height: 18%;
+    margin-top: 0.4cqw;
+    padding: 0.4cqw 0.8cqw;
+  }
+
+  .akademi-question-box h2 {
+    margin-top: 0.25cqw;
+
+    font-size: clamp(11px, 1.3cqw, 19px);
+    line-height: 1.25;
+  }
+
+  .akademi-question-label {
+    font-size: clamp(5px, 0.52cqw, 8px);
+  }
+
+  .akademi-answer-list {
+    margin-top: 0.4cqw;
+    gap: 0.35cqw;
+
+    grid-template-rows:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .akademi-answer-button {
+    padding: 0.2cqw 0.6cqw;
+    border-radius: 0.6cqw;
+    box-shadow: 0 0.15cqw 0 #17665f;
+  }
+
+  .akademi-answer-text {
+    font-size: clamp(13px, 1.55cqw, 23px);
+    line-height: 1.15;
+
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .akademi-question-navigation {
+    margin-top: 0.3cqw;
+    gap: 0.2cqw;
+  }
+
+  .akademi-question-dot {
+    width: 1.25cqw;
+    height: 1.25cqw;
+
+    font-size: clamp(4px, 0.48cqw, 7px);
+  }
+
+  .akademi-back-button {
+    top: 1.5%;
+    left: 1%;
+
+    padding: 0.4cqw 0.7cqw;
+    font-size: clamp(7px, 0.75cqw, 11px);
+  }
+}

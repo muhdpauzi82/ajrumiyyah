@@ -1,34 +1,60 @@
 .gerbang-wrap {
+  position: fixed;
+  inset: 0;
+
   width: 100vw;
-  height: 100vh;
-  background: #181717;
+  height: 100dvh;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   overflow: hidden;
-  position: relative;
+  background: #181717;
 }
 
-.map-frame {
+.gerbang-map-frame {
   position: relative;
-  width: min(100vw, 150vh);
-  aspect-ratio: 3 / 2;
+
+  width: min(100vw, calc(100dvh * 16 / 9));
+  height: min(100dvh, calc(100vw * 9 / 16));
+
+  aspect-ratio: 16 / 9;
+
+  overflow: hidden;
+  isolation: isolate;
+
+  container-type: inline-size;
 }
 
 .gerbang-map {
+  position: absolute;
+  inset: 0;
+
   width: 100%;
   height: 100%;
-  object-fit: contain;
+
   display: block;
+
+  object-fit: fill;
+  object-position: center;
+
+  user-select: none;
+  pointer-events: none;
+
+  z-index: 0;
 }
 
-/* hotspot invisible */
 .hotspot {
   position: absolute;
+
+  padding: 0;
+  border: 0;
+
+  background: transparent;
   cursor: pointer;
-  border:  none;
-  background:none;
-  animation: none;
+
+  z-index: 20;
 }
 
 /* kedudukan hotspot */
@@ -85,22 +111,40 @@
   pointer-events: none;
 }
 
-/* butang kembali */
-.back-map {
+/* butang kembali */.back-map {
   position: absolute;
-  left: 210px;
-  bottom: 35px;
-  z-index: 10;
-  padding: 12px 88px;
-  border: none;
-  border-radius: 14px;
+
+  top: 2.4%;
+  right: 14%;
+  left: auto;
+  bottom: auto;
+
+  width: 15.5%;
+  height: 6.5%;
+
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+
   background: transparent;
-  color: white;
-  font-weight: bold;
   cursor: pointer;
+
+  z-index: 30;
+
+  transition:
+    transform 180ms ease,
+    filter 180ms ease;
 }
 
-.back-map:hover {
-  transform: scale(1.05);
-  background:none;
+.back-map:hover,
+.back-map:focus-visible {
+  transform: scale(1.04);
+
+  filter:
+    brightness(1.12)
+    drop-shadow(0 0 8px rgba(255, 216, 74, 0.72));
+}
+
+.back-map:active {
+  transform: scale(0.96);
 }

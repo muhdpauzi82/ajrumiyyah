@@ -1,239 +1,504 @@
-import { useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
-import { hurufAsas, hurufAkademi, hurufMenara }from "../../../data/hurufQuestions";
 
-function shuffle(array) {
-  return [...array].sort(() => Math.random() - 0.5);
+import "./SarjanaHuruf.css";
+
+import {
+  hurufAsas,
+  hurufAkademi,
+  hurufMenara,
+} from "../../../data/hurufQuestions";
+
+const TOTAL_QUESTIONS = 20;
+const ANSWER_DELAY = 750;
+
+function playSound(fileName, volume = 0.5) {
+  const audio = new Audio(`/sounds/${fileName}`);
+
+  audio.volume = volume;
+  audio.play().catch(() => {});
+}
+
+function shuffleArray(items) {
+  const result = [...items];
+
+  for (
+    let index = result.length - 1;
+    index > 0;
+    index -= 1
+  ) {
+    const randomIndex = Math.floor(
+      Math.random() * (index + 1)
+    );
+
+    [result[index], result[randomIndex]] = [
+      result[randomIndex],
+      result[index],
+    ];
+  }
+
+  return result;
+}
+
+function prepareQuestions() {
+  const allQuestions = [
+    ...hurufAsas,
+    ...hurufAkademi,
+    ...hurufMenara,
+  ];
+
+  return shuffleArray(allQuestions)
+    .slice(
+      0,
+      Math.min(
+        TOTAL_QUESTIONS,
+        allQuestions.length
+      )
+    )
+    .map((question) => ({
+      ...question,
+      options: shuffleArray(question.options),
+    }));
 }
 
 export default function SarjanaHuruf() {
   const navigate = useNavigate();
-  const semuaSoalan = [ ...hurufAsas, ...hurufAkademi, ...hurufMenara,];
-  const [questions] = useState(() =>  shuffle(semuaSoalan).slice(0, 20));
-  const [current, setCurrent] = useState(0);
-  const [score, setScore] = useState(0);
+  const timeoutRef = useRef(null);
+
+  const [questions, setQuestions] = useState(
+    () => prepareQuestions()
+  );
+
   const [started, setStarted] = useState(false);
+  const [currentIndex, setCurrentIndex] =
+    useState(0);
 
-  const q = questions[current];
-  const options = shuffle(q.options);
+  const [correctCount, setCorrectCount] =
+    useState(0);
 
-    function jawab(pilihan) {
-    const betul = pilihan === q.answer;
-    const newScore = betul ? score + 1 : score;
+  const [selectedAnswer, setSelectedAnswer] =
+    useState(null);
 
-   setScore(newScore);
+  const [answerStatus, setAnswerStatus] =
+    useState(null);
 
-  if (current < questions.length - 1) {
-    setCurrent(current + 1);
-  } else {
-    if (newScore === questions.length) {
-      localStorage.setItem("hurufSarjanaDone", "true");
-      alert("👑 Tahniah! Monolit Huruf Purba terbuka.");
-      navigate("/jejak-huruf");
+  const [result, setResult] = useState(null);
 
-    } else {
-      alert("Belum sempurna. Cuba lagi sehingga semua betul.");
-      window.location.reload();
+  const currentQuestion =
+    questions[currentIndex];
+
+  useEffect(() => {
+    const bgMusic = new Audio("/sounds/boss.mp3");
+
+    bgMusic.loop = true;
+    bgMusic.volume = 0.2;
+
+    bgMusic.play().catch(() => {});
+
+    return () => {
+      bgMusic.pause();
+      bgMusic.currentTime = 0;
+
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  function kembaliKeJejak() {
+    if (timeoutRef.current) {
+      window.clearTimeout(timeoutRef.current);
     }
+
+    navigate("/jejak-huruf");
   }
-}
+
+  function mulakanSarjana() {
+    playSound("click.mp3", 0.35);
+
+    setStarted(true);
+    setCurrentIndex(0);
+    setCorrectCount(0);
+    setSelectedAnswer(null);
+    setAnswerStatus(null);
+    setResult(null);
+  }
+
+  function ulangSarjana() {
+    setQuestions(prepareQuestions());
+    setCurrentIndex(0);
+    setCorrectCount(0);
+    setSelectedAnswer(null);
+    setAnswerStatus(null);
+    setResult(null);
+    setStarted(true);
+
+    playSound("click.mp3", 0.35);
+  }
+
+  function tamatSarjana(finalScore) {
+    const passed =
+      finalScore === questions.length;
+
+    if (passed) {
+      localStorage.setItem(
+        "sarjanaHurufDone",
+        "true"
+      );
+
+      playSound("reward.mp3", 0.7);
+
+      setResult({
+        passed: true,
+        score: finalScore,
+        title: "Sarjana Huruf Selesai!",
+        message:
+          "Tahniah! Anda telah menguasai semua tahap Huruf.",
+      });
+
+      return;
+    }
+
+    playSound("wrong.mp3", 0.5);
+
+    setResult({
+      passed: false,
+      score: finalScore,
+      title: "Belum Mencapai Tahap Sarjana",
+      message:
+        "Sarjana Huruf memerlukan semua jawapan betul. Sila ulang semula cabaran.",
+    });
+  }
+
+  function jawab(answer) {
+    if (
+      selectedAnswer !== null ||
+      result ||
+      !currentQuestion
+    ) {
+      return;
+    }
+
+    const isCorrect =
+      answer === currentQuestion.answer;
+
+    const updatedCorrectCount = isCorrect
+      ? correctCount + 1
+      : correctCount;
+
+    setSelectedAnswer(answer);
+    setAnswerStatus(
+      isCorrect ? "correct" : "wrong"
+    );
+
+    if (isCorrect) {
+      setCorrectCount(updatedCorrectCount);
+      playSound("correct.mp3");
+    } else {
+      playSound("wrong.mp3");
+    }
+
+    const isLastQuestion =
+      currentIndex === questions.length - 1;
+
+    timeoutRef.current = window.setTimeout(
+      () => {
+        if (isLastQuestion) {
+          tamatSarjana(updatedCorrectCount);
+          return;
+        }
+
+        setCurrentIndex(
+          (previousIndex) =>
+            previousIndex + 1
+        );
+
+        setSelectedAnswer(null);
+        setAnswerStatus(null);
+      },
+      ANSWER_DELAY
+    );
+  }
+
+  function getAnswerClass(answer) {
+    if (selectedAnswer === null) {
+      return "";
+    }
+
+    if (answer === currentQuestion.answer) {
+      return "sarjana-huruf-answer--correct";
+    }
+
+    if (answer === selectedAnswer) {
+      return "sarjana-huruf-answer--wrong";
+    }
+
+    return "sarjana-huruf-answer--dimmed";
+  }
+
+  if (!questions.length) {
+    return (
+      <main className="sarjana-huruf-screen">
+        <div className="sarjana-huruf-empty">
+          Soalan Sarjana Huruf tidak ditemui.
+        </div>
+      </main>
+    );
+  }
+
+  const progressPercentage =
+    ((currentIndex + 1) /
+      questions.length) *
+    100;
 
   return (
-    <div style={styles.page}>
-      <div style={styles.overlay}></div>
+    <main className="sarjana-huruf-screen">
+      <div className="sarjana-huruf-frame">
+        <div
+          className="sarjana-huruf-background"
+          aria-hidden="true"
+        />
 
-      <button style={styles.backBtn} onClick={() => navigate("/jejak-huruf")}>
-        ⬅ Kembali
-      </button>
+        <button
+          type="button"
+          className="sarjana-huruf-back"
+          onClick={kembaliKeJejak}
+        >
+          ← Kembali
+        </button>
 
-      <div style={styles.card}>
         {!started ? (
-          <>
-            <div style={styles.badge}>👑 BOSS FINAL</div>
-            <h1 style={styles.title}>SARJANA FI'IL</h1>
+          <section className="sarjana-huruf-intro">
+            <span className="sarjana-huruf-intro-badge">
+              CABARAN TERAKHIR
+            </span>
 
-            <div style={styles.ruleBox}>
-              📚 20 Soalan Campuran
-              <br />
-              ❌ Tiada Penjelasan
-              <br />
-              ⚡ Jawab Terus
-              <br />
-              🏆 Mesti Betul Semua
+            <h1>Sarjana Huruf</h1>
+
+            <p className="sarjana-huruf-intro-text">
+              Buktikan penguasaan anda terhadap
+              jenis, fungsi dan penggunaan huruf.
+            </p>
+
+            <div className="sarjana-huruf-rules">
+              <div>
+                <strong>20</strong>
+                <span>Soalan campuran</span>
+              </div>
+
+              <div>
+                <strong>3</strong>
+                <span>Pilihan jawapan</span>
+              </div>
+
+              <div>
+                <strong>100%</strong>
+                <span>Syarat kelulusan</span>
+              </div>
             </div>
 
-            <button style={styles.startBtn} onClick={() => setStarted(true)}>
-              ⚔️ MULAKAN BOSS BATTLE
+            <p className="sarjana-huruf-warning">
+              Tiada penerangan diberikan semasa
+              cabaran berlangsung.
+            </p>
+
+            <button
+              type="button"
+              className="sarjana-huruf-start"
+              onClick={mulakanSarjana}
+            >
+              Mulakan Cabaran
             </button>
-          </>
+          </section>
         ) : (
-          <>
-            <div style={styles.badge}>👑 Sarjana Isim</div>
+          <section className="sarjana-huruf-content">
+            <header className="sarjana-huruf-header">
+              <div>
+                <span className="sarjana-huruf-level">
+                  TAHAP SARJANA
+                </span>
 
-            <div style={styles.status}>
-              Soalan {current + 1} /20 {questions.length} | Skor {score}
+                <h1>Sarjana Huruf</h1>
+              </div>
+
+              <div className="sarjana-huruf-score">
+                <span>Skor semasa</span>
+
+                <strong>
+                  {correctCount}/{questions.length}
+                </strong>
+              </div>
+            </header>
+
+            <div className="sarjana-huruf-progress">
+              <div className="sarjana-huruf-progress-info">
+                <span>
+                  Soalan {currentIndex + 1}
+                </span>
+
+                <span>
+                  daripada {questions.length}
+                </span>
+              </div>
+
+              <div className="sarjana-huruf-progress-track">
+                <div
+                  className="sarjana-huruf-progress-fill"
+                  style={{
+                    width: `${progressPercentage}%`,
+                  }}
+                />
+              </div>
             </div>
 
-            <div style={styles.questionBox}>
-              <h2>{q.question}</h2>
+            <section className="sarjana-huruf-question">
+              <span>SOALAN</span>
+
+              <h2 dir="auto">
+                {currentQuestion.question}
+              </h2>
+            </section>
+
+            <div className="sarjana-huruf-answer-list">
+              {currentQuestion.options.map(
+                (answer, index) => (
+                  <button
+                    type="button"
+                    key={`${currentIndex}-${index}-${answer}`}
+                    className={[
+                      "sarjana-huruf-answer",
+                      getAnswerClass(answer),
+                    ]
+                      .filter(Boolean)
+                      .join(" ")}
+                    disabled={
+                      selectedAnswer !== null
+                    }
+                    onClick={() => {
+                      playSound(
+                        "click.mp3",
+                        0.3
+                      );
+
+                      jawab(answer);
+                    }}
+                  >
+                    <span className="sarjana-huruf-answer-number">
+                      {String.fromCharCode(
+                        65 + index
+                      )}
+                    </span>
+
+                    <span
+                      className="sarjana-huruf-answer-text"
+                      dir="auto"
+                    >
+                      {answer}
+                    </span>
+                  </button>
+                )
+              )}
             </div>
 
-            <div style={styles.answers}>
-              {options.map((pilihan, index) => (
+            <footer className="sarjana-huruf-navigation">
+              {questions.map((_, index) => {
+                const classes = [
+                  "sarjana-huruf-question-number",
+                ];
+
+                if (index < currentIndex) {
+                  classes.push(
+                    "sarjana-huruf-question-number--done"
+                  );
+                }
+
+                if (index === currentIndex) {
+                  classes.push(
+                    "sarjana-huruf-question-number--current"
+                  );
+                }
+
+                return (
+                  <span
+                    key={index}
+                    className={classes.join(" ")}
+                  >
+                    {index + 1}
+                  </span>
+                );
+              })}
+            </footer>
+
+            {answerStatus && (
+              <div
+                className={[
+                  "sarjana-huruf-feedback",
+                  `sarjana-huruf-feedback--${answerStatus}`,
+                ].join(" ")}
+              >
+                {answerStatus === "correct"
+                  ? "Betul"
+                  : "Belum tepat"}
+              </div>
+            )}
+          </section>
+        )}
+
+        {result && (
+          <div className="sarjana-huruf-result-overlay">
+            <section
+              className={[
+                "sarjana-huruf-result",
+                result.passed
+                  ? "sarjana-huruf-result--passed"
+                  : "sarjana-huruf-result--failed",
+              ].join(" ")}
+            >
+              <div className="sarjana-huruf-result-icon">
+                {result.passed ? "★" : "↻"}
+              </div>
+
+              <span className="sarjana-huruf-result-label">
+                KEPUTUSAN AKHIR
+              </span>
+
+              <h2>{result.title}</h2>
+
+              <div className="sarjana-huruf-final-score">
+                <strong>{result.score}</strong>
+                <span>
+                  / {questions.length}
+                </span>
+              </div>
+
+              <p>{result.message}</p>
+
+              <div className="sarjana-huruf-result-actions">
+                {!result.passed && (
+                  <button
+                    type="button"
+                    onClick={ulangSarjana}
+                  >
+                    Ulang Sarjana Huruf
+                  </button>
+                )}
+
                 <button
-                  key={index}
-                  style={styles.answerBtn}
-                  onClick={() => jawab(pilihan)}
+                  type="button"
+                  onClick={kembaliKeJejak}
                 >
-                  {pilihan}
+                  Kembali ke Jejak Huruf
                 </button>
-              ))}
-            </div>
-          </>
+              </div>
+            </section>
+          </div>
         )}
       </div>
-    </div>
+    </main>
   );
 }
-
-const styles = {
-  page: {
-  width: "100vw",
-  height: "100vh",
-  overflow: "hidden",
-
-  backgroundImage: "url('/images/sarjanahuruf.webp')",
-  backgroundSize: "contain",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-  backgroundColor: "black",
-
-  position: "fixed",
-  inset: 0,
-
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-
-  fontFamily: "Arial",
-},
-  
-  overlay: {
-  display: "none",
-},
-
-  backBtn: {
-    position: "absolute",
-    top: "20px",
-    left: "20px",
-    zIndex: 10,
-    background: "#082f6b",
-    color: "#ffd700",
-    border: "2px solid #ffd700",
-    borderRadius: "14px",
-    padding: "10px 18px",
-    fontWeight: "bold",
-    cursor: "pointer",
-  },
-
-  card: {
-  position: "relative",
-  zIndex: 2,
-  width: "min(700px, 90vw)",
-  maxHeight: "88vh",
-
-  background: "transparent",
-  border: "4px solid #ffd700",
-  borderRadius: "30px",
-  padding: "20px",
-  textAlign: "center",
-  boxShadow: "0 0 40px rgba(255,215,0,.8)",
-},
-
-  badge: {
-    display: "inline-block",
-    background: "#021630",
-    color: "#ffd700",
-    padding: "10px 20px",
-    borderRadius: "20px",
-    border: "2px solid #ffd700",
-    fontWeight: "bold",
-  },
-
-  title: {
-  color: "#ffd700",
-  fontSize: "clamp(24px, 4vw, 48px)",
-  margin: "10px 0",
-  lineHeight: "1.1",
-},
-
-  ruleBox: {
-  marginTop: "15px",
-  padding: "10px",
-
-  width: "80%",
-  maxWidth: "400px",
-  marginLeft: "auto",
-  marginRight: "auto",
-
-  background: "#088a3a",
-  color: "#ffd700",
-
-  borderRadius: "18px",
-  border: "2px solid #ffd700",
-
-  fontWeight: "bold",
-  fontSize: "16px",
-  lineHeight: "1.4",
-},
-  startBtn: {
-  marginTop: "25px",
-  width: "70%",
-  maxWidth: "320px",
-  background: "linear-gradient(to bottom,#ffd700,#c89f00)",
-  color: "#001133",
-  border: "none",
-  borderRadius: "20px",
-  padding: "16px",
-  fontSize: "clamp(18px, 3vw, 26px)",
-  fontWeight: "bold",
-  cursor: "pointer",
-  boxShadow: "0 0 25px gold",
-},
-
-  status: {
-    margin: "20px auto",
-    background: "#ffd700",
-    color: "#001133",
-    borderRadius: "18px",
-    padding: "10px",
-    fontWeight: "bold",
-  },
-
-  questionBox: {
-    background: "white",
-    border: "4px solid #d4af37",
-    borderRadius: "22px",
-    padding: "20px",
-    margin: "20px 0",
-    color: "#111",
-  },
-
-  answers: {
-    display: "grid",
-    gap: "14px",
-    justifyItems: "center",
-  },
-
-  answerBtn: {
-  width: "70%",
-  minHeight: "55px",
-  borderRadius: "20px",
-  border: "3px solid #c5ec14",
-  background: "linear-gradient(to bottom, #078a42, #48581a)",
-  color: "#d5f3b4",
-  fontSize: "30px",
-  fontWeight: "bold",
-  cursor: "pointer",
-},
-};

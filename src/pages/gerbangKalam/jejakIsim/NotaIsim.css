@@ -1,0 +1,563 @@
+/* =====================================================
+   RESET HALAMAN MATAN
+===================================================== */
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* =====================================================
+   SKRIN UTAMA
+===================================================== */
+
+.matan-screen {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100dvh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 25%,
+      rgba(255, 250, 200, 0.68),
+      transparent 38%
+    ),
+    linear-gradient(
+      180deg,
+      #dff6bf 0%,
+      #b6df83 48%,
+      #82bd58 100%
+    );
+}
+
+/* =====================================================
+   KANVAS 1600 × 900
+===================================================== */
+
+.matan-frame {
+  position: relative;
+
+  width: min(100vw, calc(100dvh * 16 / 9));
+  height: min(100dvh, calc(100vw * 9 / 16));
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+  isolation: isolate;
+
+  container-type: inline-size;
+}
+
+/* Corak cahaya latar */
+
+.matan-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(255, 255, 255, 0.38),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 85% 80%,
+      rgba(255, 226, 128, 0.24),
+      transparent 28%
+    );
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* =====================================================
+   KAD UTAMA
+===================================================== */
+
+.matan-card {
+  position: relative;
+  z-index: 2;
+
+  width: 90%;
+  height: 86%;
+
+  padding: 1.6% 2.2%;
+
+  display: flex;
+  flex-direction: column;
+
+  border: clamp(3px, 0.35cqw, 6px) solid #81511f;
+  border-radius: 2cqw;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 252, 229, 0.99),
+      rgba(250, 239, 190, 0.98)
+    );
+
+  box-shadow:
+    0 1.2cqw 2.8cqw rgba(48, 31, 12, 0.3),
+    inset 0 0 0 0.35cqw rgba(255, 224, 141, 0.45);
+
+  overflow: hidden;
+
+  animation: matanEnter 450ms ease both;
+}
+
+/* Hiasan dalaman kad */
+
+.matan-card::before {
+  content: "";
+  position: absolute;
+  inset: 1.1%;
+
+  border: 1px solid rgba(139, 92, 35, 0.36);
+  border-radius: 1.5cqw;
+
+  pointer-events: none;
+}
+
+/* =====================================================
+   BUTANG KEMBALI
+===================================================== */
+
+.matan-back {
+  position: absolute;
+
+  top: 3%;
+  left: 3%;
+
+  min-width: 10%;
+  height: 6.5%;
+
+  padding: 0 1.5%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid #e5bd68;
+  border-radius: 0.9cqw;
+
+  background:
+    linear-gradient(
+      180deg,
+      #80552b,
+      #533014
+    );
+
+  color: #fff7d1;
+
+  font-family: Georgia, serif;
+  font-size: clamp(10px, 1.05cqw, 18px);
+  font-weight: 800;
+
+  box-shadow:
+    0 0.35cqw 0 #35200e,
+    0 0.6cqw 1.2cqw rgba(0, 0, 0, 0.22);
+
+  cursor: pointer;
+  z-index: 10;
+
+  transition:
+    transform 180ms ease,
+    filter 180ms ease;
+}
+
+.matan-back:hover,
+.matan-back:focus-visible {
+  transform: translateY(-2px);
+  filter: brightness(1.12);
+}
+
+.matan-back:active {
+  transform: translateY(2px);
+  box-shadow: 0 0.12cqw 0 #35200e;
+}
+
+/* =====================================================
+   KEPALA HALAMAN
+===================================================== */
+
+.matan-header {
+  position: relative;
+  z-index: 2;
+
+  height: 14%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1%;
+
+  flex: 0 0 auto;
+}
+
+.matan-header span {
+  font-size: clamp(28px, 3.1cqw, 54px);
+  line-height: 1;
+}
+
+.matan-header h1 {
+  margin: 0;
+
+  color: #3e240d;
+
+  font-family: Georgia, serif;
+  font-size: clamp(28px, 3.6cqw, 62px);
+  font-weight: 900;
+  line-height: 1;
+
+  text-align: center;
+
+  text-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* =====================================================
+   KANDUNGAN DUA KOLUM
+===================================================== */
+
+.matan-content {
+  position: relative;
+  z-index: 2;
+
+  flex: 1;
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: 1.12fr 0.88fr;
+  gap: 2%;
+
+  overflow: hidden;
+}
+
+.matan-left,
+.matan-right {
+  min-width: 0;
+  min-height: 0;
+}
+
+/* =====================================================
+   KOLUM MATAN ARAB
+===================================================== */
+
+.matan-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.matan-left h2,
+.info-box h2 {
+  margin: 0 0 1.5%;
+
+  color: #593617;
+
+  font-family: Georgia, serif;
+  font-size: clamp(15px, 1.45cqw, 25px);
+  font-weight: 900;
+}
+
+.matan-arabic {
+  flex: 1;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 2% 5%;
+
+  border: 2px solid #d1a54e;
+  border-radius: 1.35cqw;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(255, 255, 255, 0.34),
+      transparent 42%
+    ),
+    linear-gradient(
+      180deg,
+      #f9e9ae,
+      #efd184
+    );
+
+  color: #583003;
+
+  font-family: "Amiri", "Traditional Arabic", serif;
+  font-size: clamp(29px, 3cqw, 52px);
+  font-weight: 700;
+  line-height: 1.62;
+
+  text-align: center;
+
+  box-shadow:
+    inset 0 0 1.2cqw rgba(143, 88, 18, 0.13);
+}
+
+.matan-arabic p {
+  margin: 0.15em 0;
+  padding: 0;
+}
+
+/* =====================================================
+   KOLUM MAKLUMAT
+===================================================== */
+
+.matan-right {
+  display: grid;
+  grid-template-rows: 0.95fr 1.05fr;
+  gap: 4%;
+}
+
+.info-box {
+  min-height: 0;
+
+  padding: 4%;
+
+  border: 2px solid #c49549;
+  border-radius: 1.25cqw;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fffced,
+      #f7edc8
+    );
+
+  box-shadow:
+    inset 0 0 0 0.18cqw rgba(255, 255, 255, 0.56),
+    0 0.35cqw 0.9cqw rgba(96, 60, 17, 0.12);
+
+  overflow: hidden;
+}
+
+.info-box p {
+  margin: 0;
+
+  color: #59462d;
+
+  font-size: clamp(11px, 1.08cqw, 19px);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* =====================================================
+   GRID TANDA ISIM
+===================================================== */
+
+.sign-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8% 5%;
+}
+
+.sign-grid span {
+  min-height: 3.2cqw;
+
+  padding: 4% 3%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid #99b968;
+  border-radius: 0.75cqw;
+
+  background:
+    linear-gradient(
+      180deg,
+      #edf7d8,
+      #d7e9b2
+    );
+
+  color: #34511c;
+
+  font-size: clamp(10px, 1cqw, 17px);
+  font-weight: 900;
+  line-height: 1.2;
+
+  text-align: center;
+}
+
+/* =====================================================
+   BAHAGIAN BAWAH
+===================================================== */
+
+.matan-footer {
+  position: relative;
+  z-index: 2;
+
+  height: 14%;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  flex: 0 0 auto;
+}
+
+/* =====================================================
+   BUTANG SELESAI
+===================================================== */
+
+.matan-footer button {
+  min-width: 27%;
+  height: 62%;
+
+  padding: 0 2.4%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 2px solid #f2d07c;
+  border-radius: 1cqw;
+
+  background:
+    linear-gradient(
+      180deg,
+      #59b96c,
+      #2c7a42
+    );
+
+  color: #ffffff;
+
+  font-family: Georgia, serif;
+  font-size: clamp(11px, 1.2cqw, 21px);
+  font-weight: 900;
+  letter-spacing: 0.03em;
+
+  box-shadow:
+    0 0.45cqw 0 #1b512a,
+    0 0.8cqw 1.2cqw rgba(35, 73, 37, 0.22);
+
+  cursor: pointer;
+
+  transition:
+    transform 180ms ease,
+    filter 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.matan-footer button:hover,
+.matan-footer button:focus-visible {
+  transform: translateY(-3px);
+  filter: brightness(1.1);
+}
+
+.matan-footer button:active {
+  transform: translateY(3px);
+
+  box-shadow:
+    0 0.12cqw 0 #1b512a;
+}
+
+/* =====================================================
+   ANIMASI
+===================================================== */
+
+@keyframes matanEnter {
+  from {
+    opacity: 0;
+    transform: translateY(2%) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =====================================================
+   SKRIN RENDAH
+===================================================== */
+
+@media (max-height: 650px) {
+  .matan-card {
+    width: 92%;
+    height: 91%;
+    padding: 1.2% 2%;
+  }
+
+  .matan-header {
+    height: 12%;
+  }
+
+  .matan-footer {
+    height: 12%;
+  }
+
+  .matan-arabic {
+    font-size: clamp(25px, 2.7cqw, 46px);
+    line-height: 1.46;
+  }
+
+  .info-box {
+    padding: 3%;
+  }
+}
+
+/* =====================================================
+   TELEFON POTRET
+===================================================== */
+
+@media (orientation: portrait) {
+  .matan-frame {
+    width: 100vw;
+    height: 100dvh;
+  }
+
+  .matan-card {
+    width: 94%;
+    height: 92%;
+  }
+
+  .matan-content {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1.05fr 0.95fr;
+    gap: 2%;
+  }
+
+  .matan-right {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 2%;
+  }
+
+  .matan-arabic {
+    font-size: clamp(24px, 6vw, 42px);
+    line-height: 1.4;
+  }
+
+  .matan-header h1 {
+    font-size: clamp(24px, 7vw, 44px);
+  }
+
+  .matan-back {
+    top: 1.5%;
+    left: 2%;
+  }
+}

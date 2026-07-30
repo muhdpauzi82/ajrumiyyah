@@ -28,7 +28,6 @@ import IsimAsas from "./pages/gerbangKalam/jejakIsim/IsimAsas";
 import AkademiIsim from "./pages/gerbangKalam/jejakIsim/AkademiIsim";
 import MenaraIsim from "./pages/gerbangKalam/jejakIsim/MenaraIsim";
 import SarjanaIsim from "./pages/gerbangKalam/jejakIsim/SarjanaIsim";
-import AnugerahIsim from "./pages/gerbangKalam/jejakIsim/AnugerahIsim";
 
 /* =========================
    JEJAK FI'IL
@@ -40,7 +39,6 @@ import FiilAsas from "./pages/gerbangKalam/jejakFiil/FiilAsas";
 import AkademiFiil from "./pages/gerbangKalam/jejakFiil/AkademiFiil";
 import MenaraFiil from "./pages/gerbangKalam/jejakFiil/MenaraFiil";
 import SarjanaFiil from "./pages/gerbangKalam/jejakFiil/SarjanaFiil";
-import AnugerahFiil from "./pages/gerbangKalam/jejakFiil/AnugerahFiil";
 
 /* =========================
    JEJAK HURUF
@@ -119,7 +117,7 @@ export default function App() {
         <Route path="/isim-pertengahan" element={<AkademiIsim />} />
         <Route path="/menara-isim" element={<MenaraIsim />} />
         <Route path="/sarjana-isim" element={<SarjanaIsim />} />
-        <Route path="/anugerah-isim" element={<AnugerahIsim />} />
+       
 
         {/* Jejak Fi'il */}
         <Route path="/jejak-fiil" element={<JejakFiil />} />
@@ -128,7 +126,7 @@ export default function App() {
         <Route path="/fiil-akademi" element={<AkademiFiil />} />
         <Route path="/menara-fiil" element={<MenaraFiil />} />
         <Route path="/sarjana-fiil" element={<SarjanaFiil />} />
-        <Route path="/anugerah-fiil" element={<AnugerahFiil />} />
+       
 
         {/* Jejak Huruf */}
         <Route path="/jejak-huruf" element={<JejakHuruf />} />

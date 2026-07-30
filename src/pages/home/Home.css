@@ -1,7 +1,28 @@
+/* =====================================================
+   HOME V2 — LANDSKAP 1600 × 900
+===================================================== */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* =====================================================
@@ -16,29 +37,38 @@
   height: 100dvh;
 
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
   overflow: hidden;
+
   background: #000;
 }
 
 /* =====================================================
-   FRAME UTAMA 3:2
+   KANVAS UTAMA 16:9
 ===================================================== */
 
 .home-stage {
   position: relative;
 
-  width: min(100vw, calc(100dvh * 1.5));
-  aspect-ratio: 3 / 2;
+  width: min(100vw, calc(100dvh * 16 / 9));
+  height: min(100dvh, calc(100vw * 9 / 16));
+
+  aspect-ratio: 16 / 9;
+
+  flex: 0 0 auto;
 
   overflow: hidden;
   isolation: isolate;
+
+  container-type: inline-size;
+
+  background: #10251b;
 }
 
 /* =====================================================
-   GAMBAR LATAR
+   BACKGROUND
 ===================================================== */
 
 .home-background {
@@ -48,20 +78,19 @@
   width: 100%;
   height: 100%;
 
-  object-fit: contain;
-  object-position: center;
-
   display: block;
 
-  pointer-events: none;
+  object-fit: fill;
+  object-position: center;
+
   user-select: none;
+  pointer-events: none;
 
   z-index: 0;
 }
 
 /* =====================================================
    HOTSPOT ASAS
-   Tengah kekal transparent
 ===================================================== */
 
 .home-hotspot {
@@ -69,19 +98,15 @@
 
   padding: 0;
 
-  border: none;
-  outline: none;
+  border: 0;
+  outline: 0;
 
   background: transparent;
 
   cursor: pointer;
 
-  z-index: 5;
-
-  -webkit-tap-highlight-color: transparent;
+  z-index: 20;
 }
-
-/* Garisan kuning */
 
 .home-hotspot::before {
   content: "";
@@ -89,116 +114,153 @@
   position: absolute;
   inset: 0;
 
-  border: clamp(1px, 0.13vw, 3px) solid transparent;
-  border-radius: clamp(7px, 0.8vw, 16px);
-
-  background: transparent;
-
-  pointer-events: none;
-
-  transition:
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease,
-    opacity 180ms ease;
+  border: 2px solid transparent;
+  border-radius: 14px;
 
   opacity: 0;
-}
 
-/* Hover: hanya garisan bersinar */
+  transition:
+    opacity 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
 
 .home-hotspot:hover::before,
 .home-hotspot:focus-visible::before {
-  border-color: #ffe46b;
+  opacity: 1;
+
+  border-color: #ffe36b;
 
   box-shadow:
-    0 0 0.25vw rgba(255, 231, 105, 1),
-    0 0 0.65vw rgba(255, 213, 55, 0.95),
-    0 0 1.25vw rgba(255, 190, 20, 0.7);
-
-  opacity: 1;
+    0 0 6px rgba(255, 231, 105, 1),
+    0 0 16px rgba(255, 205, 45, 0.8);
 }
-
-/* Klik */
 
 .home-hotspot:active::before {
   transform: scale(0.96);
-
-  border-color: #fff4ad;
-
-  box-shadow:
-    0 0 0.35vw rgba(255, 245, 175, 1),
-    0 0 0.85vw rgba(255, 220, 72, 1);
 }
 
 /* =====================================================
-   BUTANG TERUSKAN PENGEMBARAAN
+   TETAPAN ATAS KANAN
 ===================================================== */
 
-.home-continue-hotspot {
-  left: 38%;
-  top: 41.5%;
+.home-settings-hotspot {
+  top: 1.8%;
+  right: 2.3%;
 
-  width: 26.8%;
-  height: 11%;
+  width: 10.8%;
+  height: 6.5%;
+}
+
+/* =====================================================
+   BUTANG TERUSKAN
+===================================================== */
+.home-continue-button{
+
+position:absolute;
+
+left:40%;
+
+top:41%;
+
+width:20%;
+
+padding:0;
+
+border:none;
+
+background:transparent;
+
+cursor:pointer;
+
+z-index:30;
+
+transition:.2s;
+
+}
+
+.home-continue-button img{
+
+width:100%;
+
+display:block;
+
+pointer-events:none;
+
+}
+
+.home-continue-button:hover{
+
+transform:scale(1.04);
+
+filter:brightness(1.08);
+
+}
+
+.home-continue-button:active{
+
+transform:scale(.97);
+
+}
+.home-continue-hotspot {
+  left: 40.5%;
+  top: 49.2%;
+
+  width: 18.8%;
+  height: 12.5%;
 }
 
 .home-continue-hotspot::before {
-  border-radius: clamp(10px, 1.2vw, 24px);
+  border-radius: 28px;
 }
 
 /* =====================================================
-   MENU BAWAH
-
-   Kedudukan berdasarkan gambar latar semasa.
-   Semua ukuran menggunakan peratus supaya responsif.
+   MENU UTAMA
+   Peta Dunia, Kitab, Pencapaian, Tetapan
 ===================================================== */
 
-/* Peta Dunia */
 .home-menu {
   position: absolute;
 
-  left: 50%;
-  bottom: 22%;
+  left: 29.5%;
+  top: 64%;
 
-  width: 61%;
-
-  transform: translateX(-50%);
+  width: 42%;
+  height: 16.5%;
 
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 1.5%;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2.4%;
 
-  z-index: 6;
+  z-index: 15;
 }
 
 .home-menu-button {
   position: relative;
 
+  width: 100%;
+  height: 100%;
   min-width: 0;
-  aspect-ratio: 1 / 1;
 
-  padding: 7% 5%;
+  display: grid;
+  place-items: center;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 0;
 
-  border: clamp(1px, 0.12vw, 3px) solid transparent;
-  border-radius: clamp(8px, 0.8vw, 16px);
+  border: 2px solid transparent;
+  border-radius: 18px;
 
   background: transparent;
 
-  color: #ffe89a;
-  font-family: Georgia, serif;
-
+  overflow: hidden;
   cursor: pointer;
 
   transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease;
+    transform 160ms ease,
+    filter 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
 }
 
 .home-menu-button img {
@@ -206,447 +268,519 @@
   height: 100%;
 
   display: block;
+
   object-fit: contain;
+  object-position: center;
 
-  pointer-events: none;
   user-select: none;
-
-  filter:
-    drop-shadow(0 0.25vw 0.4vw rgba(0, 0, 0, 0.9));
+  pointer-events: none;
 }
 
 .home-menu-button span {
-  margin-top: 3%;
-
-  font-size: clamp(8px, 0.9vw, 16px);
-  font-weight: 800;
-  white-space: nowrap;
-
-  text-shadow:
-    0 0.15vw 0.2vw #000,
-    0 0 0.5vw #000;
+  display: none;
 }
 
 .home-menu-button:hover,
 .home-menu-button:focus-visible {
-  transform: translateY(-7%);
+  transform: translateY(-3%);
+
+  filter: brightness(1.08);
 
   border-color: #ffe36b;
 
   box-shadow:
-    0 0 0.25vw rgba(255, 230, 105, 1),
-    0 0 0.7vw rgba(255, 205, 45, 0.85),
-    0 0 1.2vw rgba(255, 183, 16, 0.55);
+    0 0 8px rgba(255, 230, 105, 0.85),
+    0 0 18px rgba(255, 194, 31, 0.5);
 }
 
 .home-menu-button:active {
   transform: scale(0.96);
 }
-.home-peta-hotspot {
-  left: 8.8%;
-  bottom: 5.8%;
-
-  width: 13.3%;
-  height: 15.2%;
-}
-
-/* Kitab */
-
-.home-kitab-hotspot {
-  left: 22.4%;
-  bottom: 5.8%;
-
-  width: 10.7%;
-  height: 15.2%;
-}
-
-/* Artifak / Inventori */
-
-.home-artifak-hotspot {
-  left: 39%;
-  bottom: 5.8%;
-
-  width: 10.6%;
-  height: 15.2%;
-}
-
-/* Pencapaian */
-
-.home-pencapaian-hotspot {
-  left: 49.8%;
-  bottom: 5.8%;
-
-  width: 10.9%;
-  height: 15.2%;
-}
-
-/* Koleksi */
-
-.home-koleksi-hotspot {
-  left: 61%;
-  bottom: 5.8%;
-
-  width: 10.7%;
-  height: 15.2%;
-}
-
-/* Tetapan */
-
-.home-tetapan-hotspot {
-  left: 72%;
-  bottom: 5.8%;
-
-  width: 10.5%;
-  height: 15.2%;
-}
-
 /* =====================================================
-   SKRIN SENTUH
-   Garisan kekal muncul sekejap ketika ditekan
+   SENARAI DUNIA SEBELAH KANAN
 ===================================================== */
 
-@media (hover: none) {
-  .home-hotspot:active::before {
-    opacity: 1;
+.home-side-worlds {
+  position: absolute;
+
+  top: 11.8%;
+  right: 2.2%;
+
+  width: 22%;
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.45cqw;
+
+  z-index: 24;
+}
+
+.home-side-world-button {
+  position: relative;
+
+  width: 100%;
+  height: 4.8cqw;
+  flex: 0 0 auto;
+
+  padding: 0;
+  border: 0;
+
+  background: transparent;
+  cursor: pointer;
+}
+
+.home-side-world-button img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: contain;
+  object-position: center;
+
+  user-select: none;
+  pointer-events: none;
+}
+
+.home-side-world-button:hover,
+.home-side-world-button:focus-visible {
+  transform: translateX(-3%) scale(1.025);
+
+  filter:
+    brightness(1.1)
+    drop-shadow(
+      0 0 7px rgba(255, 213, 61, 0.55)
+    );
+}
+
+.home-side-world-button:active {
+  transform: scale(0.97);
+}
+
+/* Dunia semasa */
+
+.home-side-world-button.is-current {
+  animation: homeCurrentWorldGlow 1.8s ease-in-out infinite;
+}
+
+@keyframes homeCurrentWorldGlow {
+  0%,
+  100% {
+    filter:
+      brightness(1)
+      drop-shadow(
+        0 0 2px rgba(255, 214, 68, 0.25)
+      );
+  }
+
+  50% {
+    filter:
+      brightness(1.13)
+      drop-shadow(
+        0 0 10px rgba(255, 214, 68, 0.75)
+      );
   }
 }
 
+/* Dunia terkunci */
+
+.home-side-world-button.is-locked {
+  cursor: not-allowed;
+
+  filter:
+    brightness(0.72)
+    saturate(0.78);
+}
+
+.home-side-world-button.is-locked:hover {
+  transform: none;
+
+  filter:
+    brightness(0.76)
+    saturate(0.8);
+}
+
+.home-side-world-lock {
+  position: absolute;
+
+  right: 7%;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  display: grid;
+  place-items: center;
+
+  width: 12%;
+  aspect-ratio: 1;
+
+  font-size: clamp(8px, 1.15cqw, 19px);
+
+  pointer-events: none;
+
+  filter:
+    drop-shadow(
+      0 2px 2px rgba(0, 0, 0, 0.7)
+    );
+} 
+
 /* =====================================================
-   PROFIL PENGEMBARA
+   PANEL BAWAH
+===================================================== */
+
+.home-player-profile,
+.home-current-journey {
+  position: absolute;
+  bottom: 2.2%;
+  height: 17.2%;
+
+  overflow: hidden;
+
+  border: 3px solid #b8862d;
+  border-radius: 17px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 246, 207, 0.98) 0%,
+      rgba(245, 220, 157, 0.98) 100%
+    );
+
+  box-shadow:
+    inset 0 0 0 3px rgba(255, 252, 224, 0.78),
+    inset 0 -6px 12px rgba(151, 95, 24, 0.12),
+    0 4px 8px rgba(0, 0, 0, 0.38);
+
+  z-index: 18;
+}
+
+/* =====================================================
+   TAJUK PANEL
+===================================================== */
+
+.home-panel-heading {
+  position: absolute;
+
+  left: 5%;
+  top: 8%;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #174a30;
+
+  font-family: Georgia, serif;
+  font-size: clamp(10px, 1.12cqw, 19px);
+  font-weight: 900;
+  line-height: 1;
+
+  white-space: nowrap;
+}
+
+.home-panel-heading-icon,
+.home-panel-location-icon {
+  color: #12663c;
+  font-size: 0.1em;
+}
+
+/* =====================================================
+   PANEL PROFIL
 ===================================================== */
 
 .home-player-profile {
+  left: 7%;
+  width: 24.5%;
+}
+
+.home-profile-body {
   position: absolute;
 
-  left: 7%;
-  bottom: 11%;
-
-  width: 27%;
-  height: 14%;
+  left: 6%;
+  right: 6%;
+  top: 31%;
+  bottom: 7%;
 
   display: grid;
-  grid-template-columns: 25% 1fr;
+  grid-template-columns: 25% minmax(0, 1fr);
   align-items: center;
-  gap: 3%;
-
-  padding: 1.2% 1.5%;
-
-  color: #f7e7b0;
-
-  z-index: 8;
+  gap: 8%;
 }
 
 .home-player-avatar {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1;
 
   display: grid;
   place-items: center;
 
-  border: clamp(1px, 0.14vw, 3px) solid #d8ba59;
+  padding: 0;
+
+  border: 3px solid #d3a034;
   border-radius: 50%;
 
   background:
     radial-gradient(
-      circle at 35% 30%,
-      #527e43,
-      #15351f 65%,
-      #06150c
+      circle at 40% 30%,
+      #177a4a,
+      #07502f 60%,
+      #032c1b
     );
 
-  color: #ffe898;
+  color: #ffe6a0;
 
- cursor: default;
+  font-family: Georgia, serif;
+   font-size: clamp(20px, 2.3cqw, 39px);
+  font-weight: 900;
+  line-height: 1;
+
+  text-shadow:
+    0 2px 2px rgba(0, 0, 0, 0.55);
 
   box-shadow:
-    inset 0 0 0.6vw rgba(255, 230, 150, 0.16),
-    0 0 0.5vw rgba(0, 0, 0, 0.8);
+    inset 0 0 0 3px rgba(4, 39, 24, 0.82),
+    0 3px 5px rgba(0, 0, 0, 0.35);
+
+  cursor: pointer;
 
   transition:
-    transform 180ms ease,
-    box-shadow 180ms ease;
+    transform 160ms ease,
+    filter 160ms ease;
 }
 
-.home-player-avatar span {
-  font-family: Georgia, serif;
-  font-size: clamp(18px, 2.2vw, 38px);
-  font-weight: 900;
+.home-player-avatar:hover,
+.home-player-avatar:focus-visible {
+  transform: scale(1.05);
+  filter: brightness(1.12);
 }
 
-
+.home-player-avatar:active {
+  transform: scale(0.96);
+}
 
 .home-player-details {
   min-width: 0;
+  height: 80%;
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
-
-.home-player-title {
-  color: #cdbd8f;
-
-  font-size: clamp(6px, 0.58vw, 11px);
-  font-weight: 800;
-  letter-spacing: 0.07em;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .home-player-name {
-  margin-top: 2%;
+  width: 100%;
 
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  color: #ffe89a;
+  color: #2c2118;
 
   font-family: Georgia, serif;
-  font-size: clamp(9px, 1vw, 18px);
+  font-size: clamp(12px, 1.25cqw, 21px);
+  font-weight: 900;
+  line-height: 1.1;
 }
 
-.home-player-world,
-.home-player-completed {
-  margin-top: 2%;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-
-  color: #e5d8b5;
-
-  font-size: clamp(6px, 0.58vw, 11px);
-}
-
-
-/* =====================================================
-   MODAL PROFIL
-===================================================== */
-
-.home-profile-modal-backdrop {
-  position: absolute;
-  inset: 0;
+.home-player-edit-button {
+  width: 82%;
+  min-height: 31%;
 
   display: grid;
   place-items: center;
 
-  background: rgba(0, 0, 0, 0.72);
-  backdrop-filter: blur(3px);
+  padding: 2% 5%;
 
-  z-index: 1000;
-}
-
-.home-profile-modal {
-  width: min(38%, 470px);
-
-  padding: 2.5%;
-
-  border: clamp(1px, 0.15vw, 3px) solid #d6b454;
-  border-radius: clamp(10px, 1vw, 20px);
+  border: 2px solid #a57521;
+  border-radius: 999px;
 
   background:
     linear-gradient(
       180deg,
-      rgba(20, 53, 36, 0.98),
-      rgba(5, 22, 14, 0.99)
+      #19834d,
+      #07552f
     );
 
-  color: #f8e9b5;
-
-  box-shadow:
-    0 0 1.8vw rgba(0, 0, 0, 0.9),
-    0 0 1vw rgba(255, 205, 62, 0.25);
-}
-
-.home-profile-modal h2 {
-  color: #ffe28a;
+  color: #fff1bc;
 
   font-family: Georgia, serif;
-  font-size: clamp(18px, 2vw, 34px);
-  text-align: center;
-}
-
-.home-profile-modal label {
-  display: block;
-
-  margin-top: 7%;
-  margin-bottom: 2%;
-
-  color: #ddcea4;
-
-  font-size: clamp(10px, 0.9vw, 16px);
-}
-
-.home-profile-modal input {
-  width: 100%;
-
-  padding: 3% 4%;
-
-  border: 1px solid #b99843;
-  border-radius: clamp(6px, 0.6vw, 12px);
-  outline: none;
-
-  background: rgba(0, 0, 0, 0.4);
-  color: #fff0b0;
-
-  font-family: Georgia, serif;
-  font-size: clamp(13px, 1.2vw, 21px);
-}
-
-.home-profile-modal input:focus {
-  border-color: #ffe26a;
-
-  box-shadow:
-    0 0 0.35vw rgba(255, 225, 105, 0.8);
-}
-
-.home-profile-modal-actions {
-  margin-top: 7%;
-
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4%;
-}
-
-.home-profile-modal-actions button {
-  padding: 4%;
-
-  border-radius: clamp(6px, 0.55vw, 11px);
-
-  font-family: Georgia, serif;
-  font-size: clamp(10px, 0.85vw, 16px);
+   font-size: clamp(7px, 0.75cqw, 13px);
   font-weight: 900;
+  line-height: 1;
+
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 222, 122, 0.25),
+    0 2px 3px rgba(0, 0, 0, 0.3);
 
   cursor: pointer;
+
+  transition:
+    transform 150ms ease,
+    filter 150ms ease;
 }
 
-.home-profile-cancel {
-  border: 1px solid #907e57;
-
-  background: rgba(48, 48, 39, 0.92);
-  color: #e7dbbd;
+.home-player-edit-button:hover,
+.home-player-edit-button:focus-visible {
+  filter: brightness(1.12);
 }
 
-.home-profile-save {
-  border: 1px solid #ffe58a;
-
-  background:
-    linear-gradient(
-      180deg,
-      #f9da70,
-      #c9951c
-    );
-
-  color: #241600;
+.home-player-edit-button:active {
+  transform: scale(0.96);
 }
 
 /* =====================================================
-   PERJALANAN SEMASA
-===================================================== */
-
-/* =====================================================
-   PERJALANAN SEMASA
+   PANEL PERJALANAN SEMASA
 ===================================================== */
 
 .home-current-journey {
-  position: absolute;
-
-  right: 8%;
-  bottom: 4.4%;
-
-  width: 27%;
-  height: 14%;
-
-  display: grid;
-  grid-template-columns: 57% 43%;
-  align-items: center;
-
-  padding: 1% 1.35%;
-
-  color: #f7e7b0;
-
-  overflow: hidden;
-
-  z-index: 8;
+  left: 32%;
+  width: 35.8%;
 }
 
-/* =========================
-   MAKLUMAT PERJALANAN
-========================= */
+.home-journey-main {
+  position: absolute;
 
-.home-journey-info {
+  left: 6%;
+  right: 6%;
+  top: 28%;
+  height: 48%;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 35%;
+  align-items: center;
+  gap: 6%;
+}
+
+.home-journey-details {
   min-width: 0;
-  height: 100%;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  padding-right: 5%;
-}
-
-.home-journey-heading {
-  color: #d2c18c;
-
-  font-size: clamp(6px, 0.55vw, 10px);
-  font-weight: 900;
-  letter-spacing: 0.07em;
-  line-height: 1;
-
-  white-space: nowrap;
 }
 
 .home-journey-world {
-  margin-top: 6%;
+  display: block;
 
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  color: #ffe89a;
+  color: #175632;
 
   font-family: Georgia, serif;
-  font-size: clamp(10px, 1.05vw, 18px);
+  font-size: clamp(12px, 1.42cqw, 24px);
+  font-weight: 900;
   line-height: 1;
 }
 
 .home-journey-chapter {
-  margin-top: 4%;
-
-  color: #e6d8ad;
-
-  font-size: clamp(6px, 0.54vw, 10px);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-
-/* =========================
-   PROGRESS
-========================= */
-
-.home-journey-progress-row {
-  width: 100%;
+  display: block;
 
   margin-top: 7%;
 
+  color: #432e1d;
+
+  font-family: Georgia, serif;
+  font-size: clamp(9px, 0.96cqw, 16px);
+  font-weight: 900;
+  line-height: 1;
+}
+
+/* =====================================================
+   MINI MAP
+===================================================== */
+
+.home-journey-map-button {
+  width: 100%;
+  height: 100%;
+
+  padding: 0;
+
+  border: 3px solid #bd8827;
+  border-radius: 11px;
+
+  background: #e8ca7b;
+
+  overflow: hidden;
+  cursor: pointer;
+
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 242, 174, 0.9),
+    0 3px 5px rgba(0, 0, 0, 0.35);
+
+  transition:
+    transform 160ms ease,
+    filter 160ms ease;
+}
+
+.home-journey-map-button img,
+.home-journey-map {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+
+  pointer-events: none;
+  user-select: none;
+
+  transition:
+    transform 220ms ease,
+    filter 220ms ease;
+}
+
+.home-journey-map-button:hover img,
+.home-journey-map-button:focus-visible img {
+  transform: scale(1.06);
+  filter: brightness(1.08);
+}
+
+.home-journey-map-button:active {
+  transform: scale(0.97);
+}
+
+/* =====================================================
+   PROGRESS BAR
+===================================================== */
+
+.home-journey-progress-row {
+  position: absolute;
+
+  left: 6%;
+  right: 6%;
+  bottom: 7%;
+
+  height: 11%;
+
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) 11%;
   align-items: center;
-  gap: 6%;
+  gap: 3%;
 }
 
 .home-journey-track {
   width: 100%;
-  height: clamp(5px, 0.5vw, 9px);
+  height: 100%;
 
   overflow: hidden;
 
-  border: clamp(1px, 0.08vw, 2px) solid #d0ab46;
+  border: 2px solid #71531a;
   border-radius: 999px;
 
-  background: rgba(0, 0, 0, 0.7);
+  background: #3d2c14;
+
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.58);
 }
 
 .home-journey-fill {
+  position: relative;
+
   height: 100%;
 
   border-radius: inherit;
@@ -654,83 +788,66 @@
   background:
     linear-gradient(
       90deg,
-      #4f9f29,
-      #b2df4a
+      #3da82d,
+      #a8db39
     );
 
   box-shadow:
-    0 0 0.5vw rgba(165, 225, 74, 0.75);
+    0 0 7px rgba(111, 207, 45, 0.65);
 
   transition: width 500ms ease;
 }
 
-.home-journey-value {
-  color: #dff06b;
+.home-journey-fill::after {
+  content: "";
 
-  font-size: clamp(7px, 0.65vw, 12px);
-  font-weight: 900;
-}
+  position: absolute;
 
-.home-journey-hint {
-  margin-top: 5%;
+  top: 0;
+  left: -30%;
 
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-
-  color: #d2c7a5;
-
-  font-size: clamp(5px, 0.45vw, 8px);
-}
-
-/* =========================
-   HOTSPOT IMEJ KOTA
-========================= */
-
-.home-journey-map-button {
-  width: 100%;
+  width: 24%;
   height: 100%;
 
-  display: grid;
-  place-items: center;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.45),
+      transparent
+    );
 
-  padding: 5%;
-
-  border: none;
-  outline: none;
-
-  background: transparent;
-
-  cursor: pointer;
-
-  -webkit-tap-highlight-color: transparent;
+  animation: journeyShine 2.4s linear infinite;
 }
 
-.home-journey-map {
-  width: 95%;
-  height: 60%;
-  position: relative;
-  top: -35%;
-  object-fit: cover;
-  object-position: center;
-
-  border: 1px solid rgba(226, 187, 74, 0.75);
-  border-radius: 8px;
-
-  transition:
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    filter 180ms ease;
+@keyframes journeyShine {
+  to {
+    left: 120%;
+  }
 }
 
-.home-journey-map-button:hover .home-journey-map,
-.home-journey-map-button:focus-visible .home-journey-map {
+.home-journey-value {
+  color: #174c2e;
 
-  border-color: #ffe477;
+  font-family: Georgia, serif;
+  font-size: clamp(9px, 0.95cqw, 16px);
+  font-weight: 900;
+  line-height: 1;
+  text-align: right;
+}
 
-  box-shadow:
-    0 0 6px rgba(255, 220, 90, 0.65),
-    0 0 14px rgba(255, 190, 30, 0.35);
+/* =====================================================
+   SKRIN SENTUH
+===================================================== */
 
-  filter: brightness(1.03);
+@media (hover: none) {
+  .home-hotspot:active::before {
+    opacity: 1;
+  }
+
+  .home-menu-button:hover {
+    transform: none;
+    border-color: transparent;
+    box-shadow: none;
+  }
 }

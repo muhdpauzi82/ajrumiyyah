@@ -1,239 +1,509 @@
-import { useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
-import { fiilAsas, fiilAkademi, fiilMenara } from "../../../data/fiilQuestions";
 
-function shuffle(array) {
-  return [...array].sort(() => Math.random() - 0.5);
+import "./SarjanaFiil.css";
+
+import {
+  fiilAsas,
+  fiilAkademi,
+  fiilMenara,
+} from "../../../data/fiilQuestions";
+
+const TOTAL_QUESTIONS = 20;
+const ANSWER_DELAY = 750;
+
+function playSound(fileName, volume = 0.5) {
+  const audio = new Audio(`/sounds/${fileName}`);
+
+  audio.volume = volume;
+  audio.play().catch(() => {});
+}
+
+function shuffleArray(items) {
+  const result = [...items];
+
+  for (
+    let index = result.length - 1;
+    index > 0;
+    index -= 1
+  ) {
+    const randomIndex = Math.floor(
+      Math.random() * (index + 1)
+    );
+
+    [result[index], result[randomIndex]] = [
+      result[randomIndex],
+      result[index],
+    ];
+  }
+
+  return result;
+}
+
+function prepareQuestions() {
+  const allQuestions = [
+    ...fiilAsas,
+    ...fiilAkademi,
+    ...fiilMenara,
+  ];
+
+  return shuffleArray(allQuestions)
+    .slice(
+      0,
+      Math.min(
+        TOTAL_QUESTIONS,
+        allQuestions.length
+      )
+    )
+    .map((question) => ({
+      ...question,
+      options: shuffleArray(question.options),
+    }));
 }
 
 export default function SarjanaFiil() {
   const navigate = useNavigate();
-  const semuaSoalan = [...fiilAsas, ...fiilAkademi, ...fiilMenara];
+  const timeoutRef = useRef(null);
 
-  const [questions] = useState(() => shuffle(semuaSoalan).slice(0, 20));
-  const [current, setCurrent] = useState(0);
-  const [score, setScore] = useState(0);
+  const [questions, setQuestions] = useState(
+    () => prepareQuestions()
+  );
+
   const [started, setStarted] = useState(false);
+  const [currentIndex, setCurrentIndex] =
+    useState(0);
 
-  const q = questions[current];
-  const options = shuffle(q.options);
+  const [correctCount, setCorrectCount] =
+    useState(0);
 
-  function jawab(pilihan) {
-    const betul = pilihan === q.answer;
-    const newScore = betul ? score + 1 : score;
+  const [selectedAnswer, setSelectedAnswer] =
+    useState(null);
 
-    setScore(newScore);
+  const [answerStatus, setAnswerStatus] =
+    useState(null);
 
-    if (current < questions.length - 1) {
-  setCurrent(current + 1);
-} else {
-  if (newScore === questions.length) {
-    localStorage.setItem("fiilSarjanaDone", "true");
-    navigate("../../../jejak-fiil");
-   return;
+  const [result, setResult] = useState(null);
+
+  const currentQuestion =
+    questions[currentIndex];
+
+  const progressPercentage =
+    questions.length > 0
+      ? ((currentIndex + 1) /
+          questions.length) *
+        100
+      : 0;
+
+  useEffect(() => {
+    const bgMusic = new Audio("/sounds/boss.mp3");
+
+    bgMusic.loop = true;
+    bgMusic.volume = 0.2;
+
+    bgMusic.play().catch(() => {});
+
+    return () => {
+      bgMusic.pause();
+      bgMusic.currentTime = 0;
+
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  function kembaliKeJejak() {
+    if (timeoutRef.current) {
+      window.clearTimeout(timeoutRef.current);
+    }
+
+    navigate("/jejak-fiil");
   }
 
-  alert(`❌ Skor ${newScore}/20. Sila ulang Boss Battle.`);
-  navigate("../../../jejak-fiil");
-}
+  function mulakanSarjana() {
+    playSound("click.mp3", 0.35);
+
+    setStarted(true);
+    setCurrentIndex(0);
+    setCorrectCount(0);
+    setSelectedAnswer(null);
+    setAnswerStatus(null);
+    setResult(null);
+  }
+
+  function ulangSarjana() {
+    setQuestions(prepareQuestions());
+    setCurrentIndex(0);
+    setCorrectCount(0);
+    setSelectedAnswer(null);
+    setAnswerStatus(null);
+    setResult(null);
+    setStarted(true);
+
+    playSound("click.mp3", 0.35);
+  }
+
+  function tamatSarjana(finalScore) {
+    const passed =
+      finalScore === questions.length;
+
+    if (passed) {
+      localStorage.setItem(
+        "sarjanaFiilDone",
+        "true"
+      );
+
+      playSound("reward.mp3", 0.7);
+
+      setResult({
+        passed: true,
+        score: finalScore,
+        title: "Sarjana Fi‘il Selesai!",
+        message:
+          "Tahniah! Anda telah menguasai semua tahap Fi‘il.",
+      });
+
+      return;
+    }
+
+    playSound("wrong.mp3", 0.5);
+
+    setResult({
+      passed: false,
+      score: finalScore,
+      title: "Belum Mencapai Tahap Sarjana",
+      message:
+        "Sarjana Fi‘il memerlukan semua jawapan betul. Sila ulang semula cabaran.",
+    });
+  }
+
+  function jawab(answer) {
+    if (
+      selectedAnswer !== null ||
+      result ||
+      !currentQuestion
+    ) {
+      return;
+    }
+
+    const isCorrect =
+      answer === currentQuestion.answer;
+
+    const updatedCorrectCount = isCorrect
+      ? correctCount + 1
+      : correctCount;
+
+    setSelectedAnswer(answer);
+    setAnswerStatus(
+      isCorrect ? "correct" : "wrong"
+    );
+
+    if (isCorrect) {
+      setCorrectCount(updatedCorrectCount);
+      playSound("correct.mp3");
+    } else {
+      playSound("wrong.mp3");
+    }
+
+    const isLastQuestion =
+      currentIndex === questions.length - 1;
+
+    timeoutRef.current = window.setTimeout(
+      () => {
+        if (isLastQuestion) {
+          tamatSarjana(updatedCorrectCount);
+          return;
+        }
+
+        setCurrentIndex(
+          (previousIndex) =>
+            previousIndex + 1
+        );
+
+        setSelectedAnswer(null);
+        setAnswerStatus(null);
+      },
+      ANSWER_DELAY
+    );
+  }
+
+  function getAnswerClass(answer) {
+    if (selectedAnswer === null) {
+      return "";
+    }
+
+    if (answer === currentQuestion.answer) {
+      return "sarjana-fiil-answer--correct";
+    }
+
+    if (answer === selectedAnswer) {
+      return "sarjana-fiil-answer--wrong";
+    }
+
+    return "sarjana-fiil-answer--dimmed";
+  }
+
+  if (!questions.length) {
+    return (
+      <main className="sarjana-fiil-screen">
+        <div className="sarjana-fiil-empty">
+          Soalan Sarjana Fi‘il tidak ditemui.
+        </div>
+      </main>
+    );
   }
 
   return (
-    <div style={styles.page}>
-      <div style={styles.overlay}></div>
+    <main className="sarjana-fiil-screen">
+      <div className="sarjana-fiil-frame">
+        <div
+          className="sarjana-fiil-background"
+          aria-hidden="true"
+        />
 
-      <button style={styles.backBtn} onClick={() => navigate("../../../jejak-fiil")}>
-        ⬅ Kembali
-      </button>
+        <button
+          type="button"
+          className="sarjana-fiil-back"
+          onClick={kembaliKeJejak}
+        >
+          ← Kembali
+        </button>
 
-      <div style={styles.card}>
         {!started ? (
-          <>
-            <div style={styles.badge}>👑 BOSS FINAL</div>
-            <h1 style={styles.title}>SARJANA FI'IL</h1>
-
-            <div style={styles.ruleBox}>
-              📚 20 Soalan Campuran
-              <br />
-              ❌ Tiada Penjelasan
-              <br />
-              ⚡ Jawab Terus
-              <br />
-              🏆 Mesti Betul Semua
+          <section className="sarjana-fiil-intro">
+            <div className="sarjana-fiil-intro-badge">
+              CABARAN TERAKHIR
             </div>
 
-            <button style={styles.startBtn} onClick={() => setStarted(true)}>
-              ⚔️ MULAKAN BOSS BATTLE
+            <h1>Sarjana Fi‘il</h1>
+
+            <p className="sarjana-fiil-intro-text">
+              Buktikan penguasaan anda terhadap
+              fi‘il māḍī, muḍāri‘ dan amar.
+            </p>
+
+            <div className="sarjana-fiil-rules">
+              <div>
+                <strong>20</strong>
+                <span>Soalan campuran</span>
+              </div>
+
+              <div>
+                <strong>3</strong>
+                <span>Pilihan jawapan</span>
+              </div>
+
+              <div>
+                <strong>100%</strong>
+                <span>Syarat kelulusan</span>
+              </div>
+            </div>
+
+            <p className="sarjana-fiil-warning">
+              Tiada penerangan diberikan semasa
+              cabaran berlangsung.
+            </p>
+
+            <button
+              type="button"
+              className="sarjana-fiil-start"
+              onClick={mulakanSarjana}
+            >
+              Mulakan Cabaran
             </button>
-          </>
+          </section>
         ) : (
-          <>
-            <div style={styles.badge}>👑 Sarjana Isim</div>
+          <section className="sarjana-fiil-content">
+            <header className="sarjana-fiil-header">
+              <div>
+                <span className="sarjana-fiil-level">
+                  TAHAP SARJANA
+                </span>
 
-            <div style={styles.status}>
-              Soalan {current + 1} / {questions.length} | Skor {score}
+                <h1>Sarjana Fi‘il</h1>
+              </div>
+
+              <div className="sarjana-fiil-score">
+                <span>Skor semasa</span>
+                <strong>
+                  {correctCount}/{questions.length}
+                </strong>
+              </div>
+            </header>
+
+            <div className="sarjana-fiil-progress">
+              <div className="sarjana-fiil-progress-info">
+                <span>
+                  Soalan {currentIndex + 1}
+                </span>
+
+                <span>
+                  daripada {questions.length}
+                </span>
+              </div>
+
+              <div className="sarjana-fiil-progress-track">
+                <div
+                  className="sarjana-fiil-progress-fill"
+                  style={{
+                    width: `${progressPercentage}%`,
+                  }}
+                />
+              </div>
             </div>
 
-            <div style={styles.questionBox}>
-              <h2>{q.question}</h2>
+            <section className="sarjana-fiil-question">
+              <span>SOALAN</span>
+
+              <h2
+                dir="auto"
+                lang="ar"
+              >
+                {currentQuestion.question}
+              </h2>
+            </section>
+
+            <div className="sarjana-fiil-answer-list">
+              {currentQuestion.options.map(
+                (answer, index) => (
+                  <button
+                    type="button"
+                    key={`${currentIndex}-${index}-${answer}`}
+                    className={[
+                      "sarjana-fiil-answer",
+                      getAnswerClass(answer),
+                    ]
+                      .filter(Boolean)
+                      .join(" ")}
+                    disabled={
+                      selectedAnswer !== null
+                    }
+                    onClick={() => {
+                      playSound(
+                        "click.mp3",
+                        0.3
+                      );
+
+                      jawab(answer);
+                    }}
+                  >
+                    <span className="sarjana-fiil-answer-number">
+                      {String.fromCharCode(
+                        65 + index
+                      )}
+                    </span>
+
+                    <span
+                      className="sarjana-fiil-answer-text"
+                      dir="rtl"
+                      lang="ar"
+                    >
+                      {answer}
+                    </span>
+                  </button>
+                )
+              )}
             </div>
 
-            <div style={styles.answers}>
-              {options.map((pilihan, index) => (
+            <footer className="sarjana-fiil-navigation">
+              {questions.map((_, index) => {
+                const classes = [
+                  "sarjana-fiil-question-number",
+                ];
+
+                if (index < currentIndex) {
+                  classes.push(
+                    "sarjana-fiil-question-number--done"
+                  );
+                }
+
+                if (index === currentIndex) {
+                  classes.push(
+                    "sarjana-fiil-question-number--current"
+                  );
+                }
+
+                return (
+                  <span
+                    key={index}
+                    className={classes.join(" ")}
+                  >
+                    {index + 1}
+                  </span>
+                );
+              })}
+            </footer>
+
+            {answerStatus && (
+              <div
+                className={[
+                  "sarjana-fiil-feedback",
+                  `sarjana-fiil-feedback--${answerStatus}`,
+                ].join(" ")}
+              >
+                {answerStatus === "correct"
+                  ? "Betul"
+                  : "Belum tepat"}
+              </div>
+            )}
+          </section>
+        )}
+
+        {result && (
+          <div className="sarjana-fiil-result-overlay">
+            <section
+              className={[
+                "sarjana-fiil-result",
+                result.passed
+                  ? "sarjana-fiil-result--passed"
+                  : "sarjana-fiil-result--failed",
+              ].join(" ")}
+            >
+              <div className="sarjana-fiil-result-icon">
+                {result.passed ? "★" : "↻"}
+              </div>
+
+              <span className="sarjana-fiil-result-label">
+                KEPUTUSAN AKHIR
+              </span>
+
+              <h2>{result.title}</h2>
+
+              <div className="sarjana-fiil-final-score">
+                <strong>{result.score}</strong>
+                <span>
+                  / {questions.length}
+                </span>
+              </div>
+
+              <p>{result.message}</p>
+
+              <div className="sarjana-fiil-result-actions">
+                {!result.passed && (
+                  <button
+                    type="button"
+                    onClick={ulangSarjana}
+                  >
+                    Ulang Sarjana Fi‘il
+                  </button>
+                )}
+
                 <button
-                  key={index}
-                  style={styles.answerBtn}
-                  onClick={() => jawab(pilihan)}
+                  type="button"
+                  onClick={kembaliKeJejak}
                 >
-                  {pilihan}
+                  Kembali ke Jejak Fi‘il
                 </button>
-              ))}
-            </div>
-          </>
+              </div>
+            </section>
+          </div>
         )}
       </div>
-    </div>
+    </main>
   );
 }
-
-const styles = {
-  page: {
-  width: "100vw",
-  height: "100vh",
-  overflow: "hidden",
-
-  backgroundImage: "url('/images/sarjanafiil.webp')",
-  backgroundSize: "contain",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-  backgroundColor: "black",
-
-  position: "fixed",
-  inset: 0,
-
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-
-  fontFamily: "Arial",
-},
-  
-  overlay: {
-  display: "none",
-},
-
-  backBtn: {
-    position: "absolute",
-    top: "20px",
-    left: "20px",
-    zIndex: 10,
-    background: "#082f6b",
-    color: "#e23939",
-    border: "2px solid #e27e56",
-    borderRadius: "14px",
-    padding: "10px 18px",
-    fontWeight: "bold",
-    cursor: "pointer",
-  },
-
-  card: {
-  position: "relative",
-  zIndex: 2,
-  width: "min(700px, 90vw)",
-  maxHeight: "88vh",
-
-  background: "transparent",
-  border: "4px solid #ff7b00",
-  borderRadius: "30px",
-  padding: "20px",
-  textAlign: "center",
-  boxShadow: "0 0 40px rgba(255, 145, 0, 0.8)",
-},
-
-  badge: {
-    display: "inline-block",
-    background: "#021630",
-    color: "#ff7b00",
-    padding: "10px 20px",
-    borderRadius: "20px",
-    border: "2px solid #ffa600",
-    fontWeight: "bold",
-  },
-
-  title: {
-  color: "#ff7300",
-  fontSize: "clamp(24px, 4vw, 48px)",
-  margin: "10px 0",
-  lineHeight: "1.1",
-},
-
-  ruleBox: {
-  marginTop: "15px",
-  padding: "10px",
-
-  width: "80%",
-  maxWidth: "400px",
-  marginLeft: "auto",
-  marginRight: "auto",
-
-  background: "#088a3a",
-  color: "#ffd700",
-
-  borderRadius: "18px",
-  border: "2px solid #ffd700",
-
-  fontWeight: "bold",
-  fontSize: "16px",
-  lineHeight: "1.4",
-},
-  startBtn: {
-  marginTop: "25px",
-  width: "70%",
-  maxWidth: "320px",
-  background: "linear-gradient(to bottom,#ffd700,#c89f00)",
-  color: "#001133",
-  border: "none",
-  borderRadius: "20px",
-  padding: "16px",
-  fontSize: "clamp(18px, 3vw, 26px)",
-  fontWeight: "bold",
-  cursor: "pointer",
-  boxShadow: "0 0 25px gold",
-},
-
-  status: {
-    margin: "20px auto",
-    background: "#ffd700",
-    color: "#001133",
-    borderRadius: "18px",
-    padding: "10px",
-    fontWeight: "bold",
-  },
-
-  questionBox: {
-    background: "white",
-    border: "4px solid #d4af37",
-    borderRadius: "22px",
-    padding: "20px",
-    margin: "20px 0",
-    color: "#111",
-  },
-
-  answers: {
-    display: "grid",
-    gap: "14px",
-    justifyItems: "center",
-  },
-
-  answerBtn: {
-  width: "70%",
-  minHeight: "55px",
-  borderRadius: "20px",
-  border: "3px solid #c5ec14",
-  background: "linear-gradient(to bottom, #078a42, #48581a)",
-  color: "#d5f3b4",
-  fontSize: "30px",
-  fontWeight: "bold",
-  cursor: "pointer",
-},
-};

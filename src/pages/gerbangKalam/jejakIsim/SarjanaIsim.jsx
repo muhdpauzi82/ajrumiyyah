@@ -1,240 +1,609 @@
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { isimAsas, isimPertengahan } from "../../../data/isimQuestions";
-import { menaraIsim } from "../../../data/menaraIsimQuestions";
 
-function shuffle(array) {
-  return [...array].sort(() => Math.random() - 0.5);
+import "./SarjanaIsim.css";
+
+import {
+  isimAsas,
+  isimPertengahan,
+} from "../../../data/isimQuestions";
+
+import {
+  menaraIsim,
+} from "../../../data/menaraIsimQuestions";
+
+const TOTAL_QUESTIONS = 20;
+const CORRECT_DELAY = 850;
+const WRONG_DELAY = 1800;
+
+function shuffleArray(items) {
+  const result = [...items];
+
+  for (
+    let index = result.length - 1;
+    index > 0;
+    index -= 1
+  ) {
+    const randomIndex = Math.floor(
+      Math.random() * (index + 1)
+    );
+
+    [result[index], result[randomIndex]] = [
+      result[randomIndex],
+      result[index],
+    ];
+  }
+
+  return result;
+}
+
+function prepareQuestions(questionBank) {
+  return shuffleArray(questionBank)
+    .slice(
+      0,
+      Math.min(
+        TOTAL_QUESTIONS,
+        questionBank.length
+      )
+    )
+    .map((question) => ({
+      ...question,
+      options: shuffleArray(question.options),
+    }));
+}
+
+function playSound(fileName, volume = 0.5) {
+  const audio = new Audio(`/sounds/${fileName}`);
+
+  audio.volume = volume;
+
+  audio.play().catch(() => {
+    // Audio mungkin menunggu interaksi pengguna.
+  });
 }
 
 export default function SarjanaIsim() {
   const navigate = useNavigate();
-  const semuaSoalan = [...isimAsas, ...isimPertengahan, ...menaraIsim];
+  const timeoutRef = useRef(null);
 
-  const [questions] = useState(() => shuffle(semuaSoalan).slice(0, 20));
-  const [current, setCurrent] = useState(0);
-  const [score, setScore] = useState(0);
+  const questionBank = useMemo(
+    () => [
+      ...isimAsas,
+      ...isimPertengahan,
+      ...menaraIsim,
+    ],
+    []
+  );
+
+  const [questions, setQuestions] = useState(
+    () => prepareQuestions(questionBank)
+  );
+
   const [started, setStarted] = useState(false);
+  const [currentIndex, setCurrentIndex] =
+    useState(0);
+  const [correctCount, setCorrectCount] =
+    useState(0);
+  const [wrongCount, setWrongCount] =
+    useState(0);
 
-  const q = questions[current];
-  const options = shuffle(q.options);
+  const [selectedAnswer, setSelectedAnswer] =
+    useState(null);
 
-  function jawab(pilihan) {
-    const betul = pilihan === q.answer;
-    const newScore = betul ? score + 1 : score;
+  const [feedback, setFeedback] =
+    useState(null);
 
-    setScore(newScore);
+  const currentQuestion =
+    questions[currentIndex];
 
-    if (current < questions.length - 1) {
-  setCurrent(current + 1);
-} else {
-  if (newScore === questions.length) {
-    localStorage.setItem("sarjanaIsimDone", "true");
-    navigate("/anugerah-isim");
-    return;
+  useEffect(() => {
+    const bgMusic = new Audio("/sounds/boss.mp3");
+
+    bgMusic.loop = true;
+    bgMusic.volume = 0.18;
+
+    bgMusic.play().catch(() => {
+      // Audio akan bermula selepas interaksi pengguna.
+    });
+
+    return () => {
+      bgMusic.pause();
+      bgMusic.currentTime = 0;
+
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  function kembaliKeJejak() {
+    if (timeoutRef.current) {
+      window.clearTimeout(timeoutRef.current);
+    }
+
+    navigate("/jejak-isim");
   }
 
-  alert(`❌ Skor ${newScore}/20. Sila ulang Boss Battle.`);
-  navigate("/jejak-isim");
-}
+  function resetUjian({ reshuffle = false } = {}) {
+    if (timeoutRef.current) {
+      window.clearTimeout(timeoutRef.current);
+    }
+
+    if (reshuffle) {
+      setQuestions(
+        prepareQuestions(questionBank)
+      );
+    }
+
+    setCurrentIndex(0);
+    setCorrectCount(0);
+    setWrongCount(0);
+    setSelectedAnswer(null);
+    setFeedback(null);
   }
+
+  function mulaUjian() {
+    playSound("click.mp3", 0.35);
+
+    resetUjian({
+      reshuffle: true,
+    });
+
+    setStarted(true);
+  }
+
+  function ulangUjian() {
+    playSound("click.mp3", 0.35);
+
+    resetUjian({
+      reshuffle: true,
+    });
+
+    setStarted(true);
+  }
+
+  function tamatUjian(
+    finalCorrectCount,
+    finalWrongCount
+  ) {
+    const passed =
+      finalCorrectCount === questions.length &&
+      finalWrongCount === 0;
+
+    if (passed) {
+      localStorage.setItem(
+        "sarjanaIsimDone",
+        "true"
+      );
+
+      playSound("reward.mp3", 0.7);
+
+      setFeedback({
+        type: "complete",
+        title: "Tahniah, Sarjana Isim!",
+        message:
+          "Anda berjaya menjawab semua 20 soalan dengan tepat dan menamatkan Jejak Isim.",
+      });
+
+      return;
+    }
+
+    setFeedback({
+      type: "failed",
+      title: "Belum Berjaya",
+      message:
+        `Skor anda ialah ${finalCorrectCount}/${questions.length}. ` +
+        "Semua soalan perlu dijawab dengan betul untuk menguasai Jejak Isim.",
+    });
+  }
+
+  function jawab(answer) {
+    if (
+      selectedAnswer !== null ||
+      !currentQuestion
+    ) {
+      return;
+    }
+
+    const isCorrect =
+      answer === currentQuestion.answer;
+
+    const updatedCorrectCount = isCorrect
+      ? correctCount + 1
+      : correctCount;
+
+    const updatedWrongCount = isCorrect
+      ? wrongCount
+      : wrongCount + 1;
+
+    setSelectedAnswer(answer);
+    setCorrectCount(updatedCorrectCount);
+    setWrongCount(updatedWrongCount);
+
+    if (isCorrect) {
+      playSound("correct.mp3");
+
+      setFeedback({
+        type: "correct",
+        title: "Betul!",
+        message:
+          "Bagus! Anda semakin hampir menjadi Sarjana Isim.",
+      });
+    } else {
+      playSound("wrong.mp3");
+
+      setFeedback({
+        type: "wrong",
+        title: "Belum Tepat",
+        message:
+          "Ingat kembali ilmu yang telah dipelajari dan teruskan dengan tenang.",
+      });
+    }
+
+    const isLastQuestion =
+      currentIndex === questions.length - 1;
+
+    timeoutRef.current = window.setTimeout(
+      () => {
+        if (isLastQuestion) {
+          tamatUjian(
+            updatedCorrectCount,
+            updatedWrongCount
+          );
+
+          return;
+        }
+
+        setCurrentIndex(
+          (previousIndex) =>
+            previousIndex + 1
+        );
+
+        setSelectedAnswer(null);
+        setFeedback(null);
+      },
+      isCorrect
+        ? CORRECT_DELAY
+        : WRONG_DELAY
+    );
+  }
+
+  function getAnswerClass(answer) {
+    if (selectedAnswer === null) {
+      return "";
+    }
+
+    if (answer === currentQuestion.answer) {
+      return "sarjana-answer-correct";
+    }
+
+    if (answer === selectedAnswer) {
+      return "sarjana-answer-wrong";
+    }
+
+    return "sarjana-answer-dimmed";
+  }
+
+  function getQuestionNumberClass(index) {
+    const classes = [
+      "sarjana-question-number",
+    ];
+
+    if (index < currentIndex) {
+      classes.push(
+        "sarjana-question-number-completed"
+      );
+    }
+
+    if (index === currentIndex) {
+      classes.push(
+        "sarjana-question-number-current"
+      );
+    }
+
+    return classes.join(" ");
+  }
+
+  if (!currentQuestion) {
+    return (
+      <main className="sarjana-screen">
+        <div className="sarjana-empty-state">
+          Soalan Sarjana Isim tidak ditemui.
+        </div>
+      </main>
+    );
+  }
+
+  const progressPercentage =
+    ((currentIndex + 1) /
+      questions.length) *
+    100;
+
+  const masteryPercentage = Math.round(
+    (correctCount / questions.length) *
+      100
+  );
+
+  const isFinalResult =
+    feedback?.type === "complete" ||
+    feedback?.type === "failed";
 
   return (
-    <div style={styles.page}>
-      <div style={styles.overlay}></div>
+    <main className="sarjana-screen">
+      <section className="sarjana-frame">
+        <img
+          src="/images/sarjana-bg.webp"
+          alt="Dewan Sarjana Isim"
+          className="sarjana-bg"
+          draggable="false"
+        />
 
-      <button style={styles.backBtn} onClick={() => navigate("/jejak-isim")}>
-        ⬅ Kembali
-      </button>
+        {/* Hotspot kembali pada papan imej */}
+        <button
+          type="button"
+          className="sarjana-back-hotspot"
+          aria-label="Kembali ke Jejak Isim"
+          onClick={kembaliKeJejak}
+        />
 
-      <div style={styles.card}>
         {!started ? (
-          <>
-            <div style={styles.badge}>👑 BOSS FINAL</div>
-            <h1 style={styles.title}>SARJANA ISIM</h1>
-
-            <div style={styles.ruleBox}>
-              📚 20 Soalan Campuran
-              <br />
-              ❌ Tiada Penjelasan
-              <br />
-              ⚡ Jawab Terus
-              <br />
-              🏆 Mesti Betul Semua
+          <section className="sarjana-intro-card">
+            <div className="sarjana-intro-badge">
+              👑 UJIAN AKHIR
             </div>
 
-            <button style={styles.startBtn} onClick={() => setStarted(true)}>
-              ⚔️ MULAKAN BOSS BATTLE
+            <h1 className="sarjana-intro-title">
+              SARJANA ISIM
+            </h1>
+
+            <p className="sarjana-intro-subtitle">
+              Gunakan semua ilmu yang telah
+              dipelajari sepanjang Jejak Isim.
+            </p>
+
+            <div className="sarjana-rule-grid">
+              <div className="sarjana-rule-item">
+                <span aria-hidden="true">
+                  📚
+                </span>
+
+                <strong>20 Soalan</strong>
+                <small>
+                  Soalan campuran
+                </small>
+              </div>
+
+              <div className="sarjana-rule-item">
+                <span aria-hidden="true">
+                  🎯
+                </span>
+
+                <strong>20/20 Betul</strong>
+                <small>
+                  Syarat penguasaan
+                </small>
+              </div>
+
+              <div className="sarjana-rule-item">
+                <span aria-hidden="true">
+                  🧠
+                </span>
+
+                <strong>Tanpa Bantuan</strong>
+                <small>
+                  Uji kefahaman sebenar
+                </small>
+              </div>
+
+              <div className="sarjana-rule-item">
+                <span aria-hidden="true">
+                  👑
+                </span>
+
+                <strong>Sarjana Isim</strong>
+                <small>
+                  Tamatkan Jejak Isim
+                </small>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              className="sarjana-start-button"
+              onClick={mulaUjian}
+            >
+              MULAKAN UJIAN SARJANA
             </button>
-          </>
+          </section>
         ) : (
-          <>
-            <div style={styles.badge}>👑 Sarjana Isim</div>
+          <section className="sarjana-quiz-card">
+            <header className="sarjana-status-header">
+              <div className="sarjana-question-status">
+                <span aria-hidden="true">
+                  📗
+                </span>
 
-            <div style={styles.status}>
-              Soalan {current + 1} / {questions.length} | Skor {score}
+                <strong>
+                  Soalan {currentIndex + 1}
+                  {" / "}
+                  {questions.length}
+                </strong>
+              </div>
+
+              <div className="sarjana-score-status">
+                ⭐ Skor: {correctCount}
+              </div>
+
+              <div className="sarjana-mastery-status">
+                <small>Penguasaan</small>
+                <strong>
+                  {masteryPercentage}%
+                </strong>
+              </div>
+            </header>
+
+            <div className="sarjana-progress-track">
+              <div
+                className="sarjana-progress-fill"
+                style={{
+                  width: `${progressPercentage}%`,
+                }}
+              />
             </div>
 
-            <div style={styles.questionBox}>
-              <h2>{q.question}</h2>
-            </div>
+            <section className="sarjana-question-box">
+              <div className="sarjana-question-label">
+                📖 SOALAN
+              </div>
 
-            <div style={styles.answers}>
-              {options.map((pilihan, index) => (
-                <button
+              <h2>
+                {currentQuestion.question}
+              </h2>
+            </section>
+
+            <div className="sarjana-answer-list">
+              {currentQuestion.options.map(
+                (answer, index) => (
+                  <button
+  type="button"
+  key={`${currentIndex}-${index}-${answer}`}
+  className={[
+    "sarjana-answer-button",
+    getAnswerClass(answer),
+  ]
+    .filter(Boolean)
+    .join(" ")}
+  lang="ar"
+  disabled={selectedAnswer !== null}
+  onClick={() => {
+    playSound("click.mp3", 0.3);
+    jawab(answer);
+  }}
+>
+  <span className="sarjana-answer-letter">
+    {String.fromCharCode(65 + index)}
+  </span>
+
+  <span
+    className="sarjana-answer-text"
+    dir="rtl"
+  >
+    {answer}
+  </span>
+
+  <span
+    className="sarjana-answer-decoration"
+    aria-hidden="true"
+  >
+    ✦
+  </span>
+</button>
+                )
+              )}
+            </div>
+          </section>
+        )}
+
+        {started && (
+          <footer className="sarjana-footer">
+            <div className="sarjana-question-numbers">
+              {questions.map((_, index) => (
+                <span
                   key={index}
-                  style={styles.answerBtn}
-                  onClick={() => jawab(pilihan)}
+                  className={getQuestionNumberClass(
+                    index
+                  )}
                 >
-                  {pilihan}
-                </button>
+                  {index + 1}
+
+                  {index < currentIndex && (
+                    <small
+                      className="sarjana-question-check"
+                      aria-hidden="true"
+                    >
+                      ✓
+                    </small>
+                  )}
+                </span>
               ))}
             </div>
-          </>
+          </footer>
         )}
-      </div>
-    </div>
+
+        {/* Popup mesti berada dalam sarjana-frame */}
+        {feedback && (
+          <div
+            className={[
+              "sarjana-feedback-overlay",
+              isFinalResult
+                ? "sarjana-feedback-overlay-final"
+                : "",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+          >
+            <section
+              className={[
+                "sarjana-feedback-card",
+                `sarjana-feedback-card-${feedback.type}`,
+              ].join(" ")}
+              role="status"
+              aria-live="polite"
+            >
+              <div
+                className="sarjana-feedback-icon"
+                aria-hidden="true"
+              >
+                {feedback.type ===
+                  "correct" && "✓"}
+
+                {feedback.type ===
+                  "wrong" && "!"}
+
+                {feedback.type ===
+                  "complete" && "👑"}
+
+                {feedback.type ===
+                  "failed" && "↻"}
+              </div>
+
+              <h2 className="sarjana-feedback-title">
+                {feedback.title}
+              </h2>
+
+              <p className="sarjana-feedback-message">
+                {feedback.message}
+              </p>
+
+              {feedback.type ===
+                "complete" && (
+                <button
+                  type="button"
+                  className="sarjana-result-button"
+                  onClick={() =>
+                    navigate(
+                      "/anugerah-isim"
+                    )
+                  }
+                >
+                  TERUSKAN
+                </button>
+              )}
+
+              {feedback.type ===
+                "failed" && (
+                <button
+                  type="button"
+                  className="sarjana-result-button"
+                  onClick={ulangUjian}
+                >
+                  ULANG UJIAN
+                </button>
+              )}
+            </section>
+          </div>
+        )}
+      </section>
+    </main>
   );
 }
-
-const styles = {
-  page: {
-  width: "100vw",
-  height: "100vh",
-  overflow: "hidden",
-
-  backgroundImage: "url('/images/sarjana-bg.webp')",
-  backgroundSize: "contain",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-  backgroundColor: "black",
-
-  position: "fixed",
-  inset: 0,
-
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-
-  fontFamily: "Arial",
-},
-  
-  overlay: {
-  display: "none",
-},
-
-  backBtn: {
-    position: "absolute",
-    top: "20px",
-    left: "20px",
-    zIndex: 10,
-    background: "#082f6b",
-    color: "#ffd700",
-    border: "2px solid #ffd700",
-    borderRadius: "14px",
-    padding: "10px 18px",
-    fontWeight: "bold",
-    cursor: "pointer",
-  },
-
-  card: {
-  position: "relative",
-  zIndex: 2,
-  width: "min(700px, 90vw)",
-  maxHeight: "88vh",
-
-  background: "transparent",
-  border: "4px solid #ffd700",
-  borderRadius: "30px",
-  padding: "20px",
-  textAlign: "center",
-  boxShadow: "0 0 40px rgba(255,215,0,.8)",
-},
-
-  badge: {
-    display: "inline-block",
-    background: "#021630",
-    color: "#ffd700",
-    padding: "10px 20px",
-    borderRadius: "20px",
-    border: "2px solid #ffd700",
-    fontWeight: "bold",
-  },
-
-  title: {
-  color: "#ffd700",
-  fontSize: "clamp(24px, 4vw, 48px)",
-  margin: "10px 0",
-  lineHeight: "1.1",
-},
-
-  ruleBox: {
-  marginTop: "15px",
-  padding: "10px",
-
-  width: "80%",
-  maxWidth: "400px",
-  marginLeft: "auto",
-  marginRight: "auto",
-
-  background: "#088a3a",
-  color: "#ffd700",
-
-  borderRadius: "18px",
-  border: "2px solid #ffd700",
-
-  fontWeight: "bold",
-  fontSize: "16px",
-  lineHeight: "1.4",
-},
-  startBtn: {
-  marginTop: "25px",
-  width: "70%",
-  maxWidth: "320px",
-  background: "linear-gradient(to bottom,#ffd700,#c89f00)",
-  color: "#001133",
-  border: "none",
-  borderRadius: "20px",
-  padding: "16px",
-  fontSize: "clamp(18px, 3vw, 26px)",
-  fontWeight: "bold",
-  cursor: "pointer",
-  boxShadow: "0 0 25px gold",
-},
-
-  status: {
-    margin: "20px auto",
-    background: "#ffd700",
-    color: "#001133",
-    borderRadius: "18px",
-    padding: "10px",
-    fontWeight: "bold",
-  },
-
-  questionBox: {
-    background: "white",
-    border: "4px solid #d4af37",
-    borderRadius: "22px",
-    padding: "20px",
-    margin: "20px 0",
-    color: "#111",
-  },
-
-  answers: {
-    display: "grid",
-    gap: "14px",
-    justifyItems: "center",
-  },
-
-  answerBtn: {
-  width: "70%",
-  minHeight: "55px",
-  borderRadius: "20px",
-  border: "3px solid #c5ec14",
-  background: "linear-gradient(to bottom, #078a42, #48581a)",
-  color: "#d5f3b4",
-  fontSize: "30px",
-  fontWeight: "bold",
-  cursor: "pointer",
-},
-};

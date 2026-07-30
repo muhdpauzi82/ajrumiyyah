@@ -35,10 +35,12 @@ const styles = {
   overflow: "hidden",
 },
 
-  mapWrapper: {
+mapWrapper: {
   position: "relative",
-  width: "70vw",
-  maxWidth: "1400px",
+
+  width: "min(100vw, calc(100vh * 16 / 9))",
+  height: "min(100vh, calc(100vw * 9 / 16))",
+
   margin: "0 auto",
 },
 

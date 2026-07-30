@@ -1,0 +1,716 @@
+.fiil-matan-screen,
+.fiil-matan-screen * {
+  box-sizing: border-box;
+}
+
+.fiil-matan-screen {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100dvh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(255, 244, 188, 0.42),
+      transparent 38%
+    ),
+    linear-gradient(
+      180deg,
+      #f2d29c 0%,
+      #d9915e 48%,
+      #9f4d36 100%
+    );
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+.fiil-matan-frame {
+  position: relative;
+
+  width: min(100vw, calc(100dvh * 16 / 9));
+  height: min(100dvh, calc(100vw * 9 / 16));
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+  isolation: isolate;
+
+  container-type: inline-size;
+}
+
+.fiil-matan-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 13% 18%,
+      rgba(255, 255, 255, 0.28),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 88% 80%,
+      rgba(255, 220, 141, 0.2),
+      transparent 30%
+    );
+
+  pointer-events: none;
+}
+
+/* =====================================================
+   BUTANG KEMBALI
+===================================================== */
+
+.fiil-matan-back {
+  position: absolute;
+
+  top: 3%;
+  left: 2.2%;
+
+  min-width: 10%;
+  height: 6.5%;
+
+  padding: 0 1.4%;
+
+  border: 2px solid #f0c36d;
+  border-radius: 0.9cqw;
+
+  background:
+    linear-gradient(
+      180deg,
+      #874728,
+      #572714
+    );
+
+  color: #fff5d2;
+
+  font-size: clamp(10px, 1cqw, 18px);
+  font-weight: 900;
+
+  box-shadow:
+    0 0.35cqw 0 #37170c,
+    0 0.7cqw 1.3cqw rgba(0, 0, 0, 0.2);
+
+  cursor: pointer;
+  z-index: 20;
+
+  transition:
+    transform 160ms ease,
+    filter 160ms ease;
+}
+
+.fiil-matan-back:hover,
+.fiil-matan-back:focus-visible {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.fiil-matan-back:active {
+  transform: translateY(2px);
+}
+
+/* =====================================================
+   KAD UTAMA
+===================================================== */
+
+.fiil-matan-card {
+  position: relative;
+  z-index: 5;
+
+  width: 90%;
+  height: 86%;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 1.5% 2.2%;
+
+  border: clamp(3px, 0.35cqw, 6px)
+    solid #8d4728;
+
+  border-radius: 2cqw;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 250, 226, 0.99),
+      rgba(248, 224, 178, 0.99)
+    );
+
+  box-shadow:
+    0 1.2cqw 2.8cqw rgba(71, 31, 18, 0.34),
+    inset 0 0 0 0.28cqw
+      rgba(255, 245, 201, 0.55);
+
+  overflow: hidden;
+
+  animation:
+    fiilMatanEnter
+    420ms ease both;
+}
+
+.fiil-matan-card::before {
+  content: "";
+  position: absolute;
+  inset: 1.1%;
+
+  border: 1px solid rgba(140, 74, 39, 0.34);
+  border-radius: 1.5cqw;
+
+  pointer-events: none;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.fiil-matan-header {
+  position: relative;
+  z-index: 2;
+
+  flex: 0 0 14%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2%;
+
+  text-align: center;
+}
+
+.fiil-matan-header-icon {
+  width: 4cqw;
+  height: 4cqw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 0.2cqw solid #d79b48;
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff2b2,
+      #e8b95b
+    );
+
+  font-size: clamp(25px, 2.5cqw, 44px);
+
+  box-shadow:
+    0 0.45cqw 1cqw rgba(135, 76, 28, 0.18);
+}
+
+.fiil-matan-eyebrow {
+  margin: 0 0 1%;
+
+  color: #9b5d2d;
+
+  font-size: clamp(8px, 0.72cqw, 12px);
+  font-weight: 900;
+  letter-spacing: 0.15em;
+}
+
+.fiil-matan-header h1 {
+  margin: 0;
+
+  color: #542a15;
+
+  font-family: Georgia, serif;
+  font-size: clamp(28px, 3.25cqw, 56px);
+  line-height: 1;
+}
+
+.fiil-matan-subtitle {
+  margin: 1.2% 0 0;
+
+  color: #77533a;
+
+  font-size: clamp(9px, 0.9cqw, 15px);
+  font-weight: 700;
+}
+
+/* =====================================================
+   KANDUNGAN DUA KOLUM
+===================================================== */
+
+.fiil-matan-content {
+  position: relative;
+  z-index: 2;
+
+  flex: 1;
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: 1.02fr 0.98fr;
+  gap: 2%;
+
+  overflow: hidden;
+}
+
+.fiil-matan-left,
+.fiil-matan-right {
+  min-width: 0;
+  min-height: 0;
+}
+
+.fiil-matan-left {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 2%;
+}
+
+.fiil-matan-right {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 2%;
+}
+
+.fiil-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 1.5%;
+}
+
+.fiil-section-heading span {
+  font-size: clamp(17px, 1.5cqw, 26px);
+}
+
+.fiil-section-heading h2 {
+  margin: 0;
+
+  color: #69371e;
+
+  font-family: Georgia, serif;
+  font-size: clamp(15px, 1.4cqw, 24px);
+}
+
+/* =====================================================
+   PANEL MATAN
+===================================================== */
+
+.fiil-arabic-panel {
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 2% 5%;
+
+  border: 2px solid #d69a49;
+  border-radius: 1.35cqw;
+
+  background:
+    radial-gradient(
+      circle at 50% 15%,
+      rgba(255, 255, 255, 0.32),
+      transparent 38%
+    ),
+    linear-gradient(
+      180deg,
+      #f8e4a8,
+      #edc474
+    );
+
+  color: #5c2e0f;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size: clamp(28px, 2.75cqw, 48px);
+  font-weight: 700;
+  line-height: 1.55;
+
+  text-align: center;
+
+  box-shadow:
+    inset 0 0 1.2cqw rgba(127, 65, 17, 0.12);
+}
+
+.fiil-arabic-panel p {
+  margin: 0.08em 0;
+}
+
+/* =====================================================
+   MAKSUD RINGKAS
+===================================================== */
+
+.fiil-meaning-box {
+  padding: 2.5% 3.5%;
+
+  border: 2px solid #c98248;
+  border-radius: 1.1cqw;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff8e7,
+      #f4dfbd
+    );
+}
+
+.fiil-meaning-box h2 {
+  margin: 0 0 1.5%;
+
+  color: #703a1e;
+
+  font-family: Georgia, serif;
+  font-size: clamp(14px, 1.25cqw, 21px);
+}
+
+.fiil-meaning-box p {
+  margin: 0;
+
+  color: #66503d;
+
+  font-size: clamp(10px, 0.96cqw, 16px);
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+/* =====================================================
+   GRID TANDA FI‘IL
+===================================================== */
+
+.fiil-sign-grid {
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 3%;
+}
+
+.fiil-sign-card {
+  min-width: 0;
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: 26% 1fr;
+  align-items: center;
+  gap: 4%;
+
+  padding: 4%;
+
+  border: 2px solid #c58448;
+  border-radius: 1.15cqw;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fffaf0,
+      #f5e3c4
+    );
+
+  box-shadow:
+    0 0.35cqw 0.8cqw rgba(97, 52, 25, 0.1);
+
+  overflow: hidden;
+}
+
+.fiil-sign-symbol {
+  width: 4cqw;
+  height: 4cqw;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 0.18cqw solid #e2b05d;
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      180deg,
+      #9d4c2b,
+      #6c2c19
+    );
+
+  color: #fff0b1;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size: clamp(22px, 2.2cqw, 38px);
+  font-weight: 700;
+}
+
+.fiil-sign-copy {
+  min-width: 0;
+}
+
+.fiil-sign-copy h3 {
+  margin: 0 0 3%;
+
+  color: #6a351d;
+
+  font-family: Georgia, serif;
+  font-size: clamp(11px, 1.02cqw, 17px);
+}
+
+.fiil-sign-copy p {
+  margin: 0;
+
+  color: #67523f;
+
+  font-size: clamp(8px, 0.75cqw, 13px);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.fiil-sign-example {
+  width: fit-content;
+
+  margin-top: 5%;
+  padding: 2% 8%;
+
+  border-radius: 999px;
+
+  background: #f2d999;
+  color: #5d2b12;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size: clamp(18px, 1.65cqw, 28px);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.fiil-matan-footer {
+  position: relative;
+  z-index: 2;
+
+  flex: 0 0 13%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4%;
+}
+
+.fiil-matan-footer p {
+  max-width: 46%;
+
+  margin: 0;
+
+  color: #765439;
+
+  font-size: clamp(9px, 0.87cqw, 15px);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.fiil-matan-footer button {
+  min-width: 28%;
+  height: 56%;
+
+  padding: 0 2.2%;
+
+  border: 2px solid #f0c975;
+  border-radius: 0.95cqw;
+
+  background:
+    linear-gradient(
+      180deg,
+      #d96b3e,
+      #9e3e25
+    );
+
+  color: #ffffff;
+
+  font-size: clamp(10px, 1.02cqw, 17px);
+  font-weight: 900;
+
+  box-shadow:
+    0 0.4cqw 0 #6d2818,
+    0 0.7cqw 1.2cqw rgba(94, 39, 23, 0.2);
+
+  cursor: pointer;
+
+  transition:
+    transform 160ms ease,
+    filter 160ms ease;
+}
+
+.fiil-matan-footer button:hover,
+.fiil-matan-footer button:focus-visible {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.fiil-matan-footer button:active {
+  transform: translateY(2px);
+}
+
+/* =====================================================
+   ANIMASI
+===================================================== */
+
+@keyframes fiilMatanEnter {
+  from {
+    opacity: 0;
+    transform:
+      translateY(2%)
+      scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+/* =====================================================
+   TELEFON LANDSCAPE
+===================================================== */
+
+@media
+  (max-width: 950px)
+  and (max-height: 520px)
+  and (orientation: landscape) {
+
+  .fiil-matan-frame {
+    width: 100vw;
+    height: 100dvh;
+  }
+
+  .fiil-matan-card {
+    width: 94%;
+    height: 92%;
+
+    padding: 1% 1.8%;
+
+    border-width: 3px;
+    border-radius: 16px;
+  }
+
+  .fiil-matan-back {
+    top: 1.5%;
+    left: 1%;
+
+    min-width: 14%;
+    height: 7%;
+
+    font-size: clamp(9px, 2.3vh, 14px);
+  }
+
+  .fiil-matan-header {
+    flex-basis: 12%;
+  }
+
+  .fiil-matan-header-icon {
+    width: 8vh;
+    height: 8vh;
+
+    font-size: clamp(20px, 4.8vh, 31px);
+  }
+
+  .fiil-matan-header h1 {
+    font-size: clamp(24px, 6.4vh, 40px);
+  }
+
+  .fiil-matan-eyebrow,
+  .fiil-matan-subtitle {
+    display: none;
+  }
+
+  .fiil-matan-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5%;
+  }
+
+  .fiil-arabic-panel {
+    padding: 1% 4%;
+
+    font-size: clamp(25px, 6.2vh, 39px);
+    line-height: 1.38;
+  }
+
+  .fiil-meaning-box {
+    padding: 1.7% 3%;
+  }
+
+  .fiil-meaning-box h2 {
+    font-size: clamp(12px, 2.8vh, 18px);
+  }
+
+  .fiil-meaning-box p {
+    font-size: clamp(8px, 2vh, 12px);
+  }
+
+  .fiil-sign-grid {
+    gap: 2%;
+  }
+
+  .fiil-sign-card {
+    grid-template-columns: 24% 1fr;
+
+    padding: 2.5%;
+  }
+
+  .fiil-sign-symbol {
+    width: 8vh;
+    height: 8vh;
+
+    font-size: clamp(19px, 4.8vh, 30px);
+  }
+
+  .fiil-sign-copy h3 {
+    font-size: clamp(9px, 2.2vh, 14px);
+  }
+
+  .fiil-sign-copy p {
+    font-size: clamp(7px, 1.65vh, 10px);
+  }
+
+  .fiil-sign-example {
+    margin-top: 3%;
+
+    font-size: clamp(15px, 3.8vh, 24px);
+  }
+
+  .fiil-matan-footer {
+    flex-basis: 11%;
+  }
+
+  .fiil-matan-footer p {
+    font-size: clamp(8px, 1.9vh, 11px);
+  }
+
+  .fiil-matan-footer button {
+    min-width: 32%;
+    height: 62%;
+
+    font-size: clamp(9px, 2.2vh, 14px);
+  }
+}

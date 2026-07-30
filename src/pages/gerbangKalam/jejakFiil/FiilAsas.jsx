@@ -1,21 +1,85 @@
-import { useState, useEffect } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
+
+import "./FiilAsas.css";
 import { fiilAsas } from "../../../data/fiilQuestions";
-  function playSound(file) {
-  const audio = new Audio(`/sounds/${file}`);
-  audio.volume = 0.5;
-  audio.play();
+
+const TOTAL_QUESTIONS = 10;
+const CORRECT_DELAY = 850;
+const WRONG_DELAY = 2200;
+
+function playSound(fileName, volume = 0.5) {
+  const audio = new Audio(`/sounds/${fileName}`);
+
+  audio.volume = volume;
+
+  audio.play().catch(() => {});
 }
- function shuffle(array) {
-  return [...array].sort(() => Math.random() - 0.5);
+
+function shuffleArray(items) {
+  const result = [...items];
+
+  for (
+    let index = result.length - 1;
+    index > 0;
+    index -= 1
+  ) {
+    const randomIndex = Math.floor(
+      Math.random() * (index + 1)
+    );
+
+    [result[index], result[randomIndex]] = [
+      result[randomIndex],
+      result[index],
+    ];
+  }
+
+  return result;
 }
+
+function prepareQuestions(questionBank) {
+  return shuffleArray(questionBank)
+    .slice(
+      0,
+      Math.min(
+        TOTAL_QUESTIONS,
+        questionBank.length
+      )
+    )
+    .map((question) => ({
+      ...question,
+      options: shuffleArray(question.options),
+    }));
+}
+
 export default function FiilAsas() {
- 
- const [questions] = useState(() => shuffle(fiilAsas).slice(0, 10));
-  const [wrongCount, setWrongCount] = useState(0);
-  const [current, setCurrent] = useState(0);
-  const [popup, setPopup] = useState("");
   const navigate = useNavigate();
+  const timeoutRef = useRef(null);
+
+  const questions = useMemo(
+    () => prepareQuestions(fiilAsas),
+    []
+  );
+
+  const [currentIndex, setCurrentIndex] =
+    useState(0);
+
+  const [wrongCount, setWrongCount] =
+    useState(0);
+
+  const [selectedAnswer, setSelectedAnswer] =
+    useState(null);
+
+  const [feedback, setFeedback] =
+    useState(null);
+
+  const currentQuestion =
+    questions[currentIndex];
 
   useEffect(() => {
     const bgMusic = new Audio("/sounds/quiz.mp3");
@@ -28,221 +92,337 @@ export default function FiilAsas() {
     return () => {
       bgMusic.pause();
       bgMusic.currentTime = 0;
+
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current);
+      }
     };
   }, []);
 
-  const q = questions[current];
-  const options = shuffle(q.options);
-
-  function jawab(pilihan) {
-  const betul = pilihan === q.answer;
-
- if (betul) {
-  playSound("correct.mp3");
-  setPopup("🌸 Betul! Teruskan 🌸");
-} else {
-  playSound("wrong.mp3");
-  setWrongCount(wrongCount + 1);
-  setPopup(`❌ Salah\n\n${q.explain}`);
-}
-
-  setTimeout(() => {
-    setPopup("");
-
-    if (current < questions.length - 1) {
-      setCurrent(current + 1);
-    } else {
-      if (wrongCount === 0 && betul) {
-        localStorage.setItem("fiilAsasDone", "true");
-        alert("🏡 Tahap Asas selesai! Akademi Fiil terbuka.");
-        navigate("/jejak-fiil");
-      } else {
-        alert("❌ Anda belum menjawab semua soalan dengan betul. Sila ulang.");
-        setCurrent(0);
-        setWrongCount(0);
-      }
+  function kembaliKeJejak() {
+    if (timeoutRef.current) {
+      window.clearTimeout(timeoutRef.current);
     }
-  }, betul ? 900 : 2500);
-}
+
+    navigate("/jejak-fiil");
+  }
+
+  function ulangKuiz() {
+    setCurrentIndex(0);
+    setWrongCount(0);
+    setSelectedAnswer(null);
+    setFeedback(null);
+  }
+
+  function tamatKuiz(finalWrongCount) {
+    if (finalWrongCount === 0) {
+      localStorage.setItem(
+        "fiilAsasDone",
+        "true"
+      );
+
+      playSound("reward.mp3", 0.65);
+
+      setFeedback({
+        type: "complete",
+        title: "Tahap Asas Selesai!",
+        message:
+          "Tahniah! Akademi Fi‘il kini telah dibuka.",
+      });
+
+      return;
+    }
+
+    setFeedback({
+      type: "failed",
+      title: "Belum Berjaya",
+      message:
+        `Terdapat ${finalWrongCount} jawapan yang belum tepat. ` +
+        "Ulang latihan untuk membuka Akademi Fi‘il.",
+    });
+  }
+
+  function jawab(answer) {
+    if (
+      selectedAnswer !== null ||
+      !currentQuestion
+    ) {
+      return;
+    }
+
+    const isCorrect =
+      answer === currentQuestion.answer;
+
+    const updatedWrongCount = isCorrect
+      ? wrongCount
+      : wrongCount + 1;
+
+    setSelectedAnswer(answer);
+
+    if (isCorrect) {
+      playSound("correct.mp3");
+
+      setFeedback({
+        type: "correct",
+        title: "Betul!",
+        message:
+          "Bagus. Teruskan ke soalan berikutnya.",
+      });
+    } else {
+      setWrongCount(updatedWrongCount);
+
+      playSound("wrong.mp3");
+
+      setFeedback({
+        type: "wrong",
+        title: "Belum Tepat",
+        message:
+          currentQuestion.explain ||
+          "Teliti semula tanda dan ciri fi‘il.",
+      });
+    }
+
+    const isLastQuestion =
+      currentIndex === questions.length - 1;
+
+    timeoutRef.current = window.setTimeout(
+      () => {
+        if (isLastQuestion) {
+          tamatKuiz(updatedWrongCount);
+          return;
+        }
+
+        setCurrentIndex(
+          (previousIndex) =>
+            previousIndex + 1
+        );
+
+        setSelectedAnswer(null);
+        setFeedback(null);
+      },
+      isCorrect
+        ? CORRECT_DELAY
+        : WRONG_DELAY
+    );
+  }
+
+  function getAnswerClass(answer) {
+    if (selectedAnswer === null) {
+      return "";
+    }
+
+    if (answer === currentQuestion.answer) {
+      return "fiil-answer--correct";
+    }
+
+    if (answer === selectedAnswer) {
+      return "fiil-answer--wrong";
+    }
+
+    return "fiil-answer--dimmed";
+  }
+
+  if (!currentQuestion) {
+    return (
+      <main className="fiil-quiz-screen">
+        <div className="fiil-empty-state">
+          Soalan Fi‘il Asas tidak ditemui.
+        </div>
+      </main>
+    );
+  }
+
+  const progressPercentage =
+    ((currentIndex + 1) /
+      questions.length) *
+    100;
+
+  const isFinalResult =
+    feedback?.type === "complete" ||
+    feedback?.type === "failed";
+
   return (
-    <div style={styles.page}>
-      <button style={styles.backBtn} onClick={() => navigate("/jejak-fiil")}>
-        ⬅ Kembali
-      </button>
+    <main className="fiil-quiz-screen">
+      <div className="fiil-quiz-frame">
+        <div
+          className="fiil-quiz-background"
+          aria-hidden="true"
+        />
 
-      {popup && <div style={styles.popup}>{popup}</div>}
+        <button
+          type="button"
+          className="fiil-back-button"
+          onClick={kembaliKeJejak}
+        >
+          ← Kembali
+        </button>
 
-      <div style={styles.card}>
-        <div style={styles.badge}>🏡 Kampung Fi'il</div>
+        <section className="fiil-quiz-card">
+          <header className="fiil-quiz-header">
+            <div className="fiil-location-badge">
+              <span aria-hidden="true">🏡</span>
+              <span>Kampung Fi‘il</span>
+            </div>
 
-        <h1 style={styles.title}>📖 Tahap Asas Fi'il</h1>
+            <h1 className="fiil-quiz-title">
+              Tahap Asas Fi‘il
+            </h1>
 
-        <div style={styles.progress}>
-         Soalan {current + 1} / {questions.length}
-        </div>
+            <p className="fiil-quiz-subtitle">
+              Kenali fi‘il dan tanda-tandanya.
+            </p>
+          </header>
 
-        <div style={styles.questionBox}>
-          <h2>{q.question}</h2>
-        </div>
+          <div className="fiil-progress-area">
+            <div className="fiil-progress-text">
+              <span>
+                Soalan {currentIndex + 1}
+              </span>
 
-        <div style={styles.answers}>
-          
-{options.map((pilihan, index) => (
-  <button
-    key={index}
-    style={{
-      ...styles.answerBtn,
-      animationDelay: `${index * 0.25}s`,
-    }}
-    onMouseEnter={(e) => {
-      e.currentTarget.style.transform = "scale(1.05)";
-      e.currentTarget.style.boxShadow =
-       "0 0 35px #22c55e, 0 8px 0 #0f7a2c";
-    }}
-    onMouseLeave={(e) => {
-      playSound("hover.mp3");
-      e.currentTarget.style.transform = "scale(1)";
-      e.currentTarget.style.boxShadow =
-        "0 6px 0 #4e3218, 0 0 18px rgba(255,215,0,.7)"
-    }}
-    onClick={() => { playSound("click.mp3"); jawab(pilihan); }}
-  >
-{pilihan}
-</button>
-          ))}
-        </div>
+              <span>
+                daripada {questions.length}
+              </span>
+            </div>
+
+            <div className="fiil-progress-track">
+              <div
+                className="fiil-progress-fill"
+                style={{
+                  width: `${progressPercentage}%`,
+                }}
+              />
+            </div>
+          </div>
+
+          <section className="fiil-question-box">
+            <span className="fiil-question-label">
+              SOALAN
+            </span>
+
+            <h2>{currentQuestion.question}</h2>
+          </section>
+
+          <div className="fiil-answer-list">
+            {currentQuestion.options.map(
+              (answer, index) => (
+                <button
+                  type="button"
+                  key={`${currentIndex}-${index}-${answer}`}
+                  className={[
+                    "fiil-answer-button",
+                    getAnswerClass(answer),
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                  lang="ar"
+                  disabled={
+                    selectedAnswer !== null
+                  }
+                  onClick={() => {
+                    playSound(
+                      "click.mp3",
+                      0.3
+                    );
+
+                    jawab(answer);
+                  }}
+                >
+                  <span
+                    className="fiil-answer-text"
+                    dir="rtl"
+                  >
+                    {answer}
+                  </span>
+                </button>
+              )
+            )}
+          </div>
+
+          <footer className="fiil-question-navigation">
+            {questions.map((_, index) => {
+              const classes = [
+                "fiil-question-dot",
+              ];
+
+              if (index < currentIndex) {
+                classes.push(
+                  "fiil-question-dot--completed"
+                );
+              }
+
+              if (index === currentIndex) {
+                classes.push(
+                  "fiil-question-dot--current"
+                );
+              }
+
+              return (
+                <span
+                  key={index}
+                  className={classes.join(" ")}
+                >
+                  {index + 1}
+                </span>
+              );
+            })}
+          </footer>
+        </section>
+
+        {feedback && (
+          <div
+            className={[
+              "fiil-feedback-overlay",
+              isFinalResult
+                ? "fiil-feedback-overlay--result"
+                : "",
+            ]
+              .filter(Boolean)
+              .join(" ")}
+          >
+            <section
+              className={[
+                "fiil-feedback-card",
+                `fiil-feedback-card--${feedback.type}`,
+              ].join(" ")}
+              role="status"
+              aria-live="polite"
+            >
+              <div
+                className="fiil-feedback-icon"
+                aria-hidden="true"
+              >
+                {feedback.type === "correct" && "✓"}
+                {feedback.type === "wrong" && "!"}
+                {feedback.type === "complete" && "★"}
+                {feedback.type === "failed" && "↻"}
+              </div>
+
+              <h2>{feedback.title}</h2>
+              <p>{feedback.message}</p>
+
+              {feedback.type === "complete" && (
+                <button
+                  type="button"
+                  className="fiil-result-button"
+                  onClick={kembaliKeJejak}
+                >
+                  Kembali ke Jejak Fi‘il
+                </button>
+              )}
+
+              {feedback.type === "failed" && (
+                <button
+                  type="button"
+                  className="fiil-result-button"
+                  onClick={ulangKuiz}
+                >
+                  Ulang Latihan
+                </button>
+              )}
+            </section>
+          </div>
+        )}
       </div>
-    </div>
+    </main>
   );
 }
-
-const styles = {
-  page: {
-    minHeight: "100vh",
-    background:
-      "linear-gradient(to bottom, rgba(126,195,90,.9), rgba(67,124,48,.95)), url('/images/jejak-fiil.webp')",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    fontFamily: "Arial",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "20px",
-  },
-
-  backBtn: {
-    position: "absolute",
-    top: "15px",
-    left: "15px",
-    background: "#5b3b1d",
-    color: "white",
-    border: "none",
-    borderRadius: "14px",
-    padding: "10px 18px",
-    fontWeight: "bold",
-    cursor: "pointer",
-  },
-
-  popup: {
-    position: "fixed",
-    top: "35%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    zIndex: 50,
-    background: "#fff3b0",
-    color: "#3b260c",
-    padding: "25px 40px",
-    borderRadius: "25px",
-    border: "5px solid #d49a1f",
-    fontSize: "28px",
-    fontWeight: "bold",
-    boxShadow: "0 0 40px gold",
-    whiteSpace: "pre-line",
-    maxWidth: "520px",
-    lineHeight: "1.4",
-  },
-
-  card: {
-    width: "620px",
-    maxWidth: "95%",
-    background: "rgba(255, 248, 220, 0.95)",
-    border: "6px solid #046d1b",
-    borderRadius: "30px",
-    padding: "30px",
-    textAlign: "center",
-    boxShadow: "0 12px 0 #73971e, 0 0 35px rgba(96, 158, 45, 0.6)",
-  },
-
-  badge: {
-    display: "inline-block",
-    background: "#084d16",
-    color: "white",
-    padding: "10px 22px",
-    borderRadius: "20px",
-    fontWeight: "bold",
-    marginBottom: "10px",
-  },
-
-  title: {
-    fontSize: "38px",
-    margin: "10px 0",
-    color: "#2d1a08",
-  },
-
-  progress: {
-    background: "#ecfa71",
-    border: "3px solid #055e23",
-    borderRadius: "16px",
-    padding: "8px",
-    fontWeight: "bold",
-    margin: "15px auto",
-    width: "180px",
-  },
-
-  questionBox: {
-    background: "#fff",
-    border: "4px solid #0a3b05",
-    borderRadius: "22px",
-    padding: "20px",
-    margin: "20px 0",
-    color: "#111",
-  },
-
-  answers: {
-    display: "grid",
-    gap: "14px",
-    justifyItems: "center",
-  },
-
- answerBtn: {
-  width: "65%",
-  maxWidth: "380px",
-  minHeight: "80px",
-
-  padding: "10px",
-
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-
-  textAlign: "center",
-  direction: "rtl",
-
-  fontFamily: "Amiri, serif",
-  fontSize: "42px",
-  lineHeight: "1",
-
-  borderRadius: "20px",
-  border: "3px solid #16a34a",
-
-  background: "linear-gradient(to bottom, #d9ffb3, #7be33d)",
-
-  cursor: "pointer",
-  fontWeight: "bold",
-
-  boxShadow: "0 6px 0 #0f7a2c, 0 0 20px rgba(34,197,94,.8)",
-
-  transition: "all 0.25s ease",
-  animation: "floatBtn 2s ease-in-out infinite",
-},
-};

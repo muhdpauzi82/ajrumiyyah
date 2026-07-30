@@ -1,7 +1,18 @@
 import "../styles/WorldMap.css";
+
 import { useNavigate } from "react-router-dom";
+
 import worldMap from "../assets/maps/worldmap.webp";
 import homeIcon from "../assets/icons/home/home.webp";
+
+/* Gambar penanda dunia */
+import petaKalam from "../assets/icons/worldmap/petakalam.webp";
+import petaIrab from "../assets/icons/worldmap/petairab.webp";
+import petaMarfuat from "../assets/icons/worldmap/petamarfuat.webp";
+import petaMansubat from "../assets/icons/worldmap/petamansubat.webp";
+import petaMajrurat from "../assets/icons/worldmap/petamajrurat.webp";
+import petaTawabi from "../assets/icons/worldmap/petatawabi.webp";
+import petaIstana from "../assets/icons/worldmap/petaistana.webp";
 
 import {
   isKotaIrabUnlocked,
@@ -11,35 +22,82 @@ import {
 export default function WorldMap() {
   const navigate = useNavigate();
 
-  const kotaIrabUnlocked =
-    isKotaIrabUnlocked();
+  const worlds = [
+    {
+      id: "gerbang",
+      name: "Gerbang Kalam",
+      className: "gerbang",
+      image: petaKalam,
+      path: "/gerbang-kalam",
+      unlocked: true,
+    },
+    {
+      id: "irab",
+      name: "Kota I'rab",
+      className: "irab",
+      image: petaIrab,
+      path: "/kota-irab",
+      unlocked: isKotaIrabUnlocked(),
+    },
+    {
+      id: "marfuat",
+      name: "Kota Marfu'at",
+      className: "marfuat",
+      image: petaMarfuat,
+      path: "/kota-marfuat",
+      unlocked: isWorldUnlocked("marfuat"),
+    },
+    {
+      id: "mansubat",
+      name: "Kota Mansubat",
+      className: "mansubat",
+      image: petaMansubat,
+      path: "/kota-mansubat",
+      unlocked: isWorldUnlocked("mansubat"),
+    },
+    {
+      id: "majrurat",
+      name: "Kota Majrurat",
+      className: "majrurat",
+      image: petaMajrurat,
+      path: "/kota-majrurat",
+      unlocked: isWorldUnlocked("majrurat"),
+    },
+    {
+      id: "tawabi",
+      name: "Kota Tawabi'",
+      className: "tawabi",
+      image: petaTawabi,
+      path: "/kota-tawabi",
+      unlocked: isWorldUnlocked("tawabi"),
+    },
+    {
+      id: "istana",
+      name: "Istana Ajrumiyyah",
+      className: "istana",
+      image: petaIstana,
+      path: "/istana-rahsia",
+      unlocked: isWorldUnlocked("istana"),
+    },
+  ];
 
-  const marfuatUnlocked =
-    isWorldUnlocked("marfuat");
+  function openWorld(world) {
+    if (!world.unlocked) {
+      alert(
+        `${world.name} masih belum dibuka. ` +
+        "Selesaikan dunia sebelumnya dahulu."
+      );
 
-  const mansubatUnlocked =
-    isWorldUnlocked("mansubat");
+      return;
+    }
 
-  const majruratUnlocked =
-    isWorldUnlocked("majrurat");
-
-  const tawabiUnlocked =
-    isWorldUnlocked("tawabi");
-
-  const istanaUnlocked =
-    isWorldUnlocked("istana");
-
-  const handleLockedWorld = (worldName) => {
-    alert(
-      `${worldName} masih berkunci. Selesaikan dunia sebelumnya dahulu.`
-    );
-  };
+    navigate(world.path);
+  }
 
   return (
-
-    
-    <div className="world-wrap">
-      <div className="world-frame">
+    <main className="world-wrap">
+      <section className="world-frame">
+        {/* BACKGROUND PETA */}
         <img
           src={worldMap}
           className="world-img"
@@ -47,155 +105,49 @@ export default function WorldMap() {
           draggable="false"
         />
 
-        {/* Gerbang Kalam */}
-        <button
-          type="button"
-          className="world-zone gerbang open"
-          aria-label="Masuk ke Gerbang Kalam"
-          onClick={() =>
-            navigate("/gerbang-kalam")
-          }
-        />
-
-        {/* Kota I'rab */}
-        <button
-          type="button"
-          className={`world-zone irab ${
-            kotaIrabUnlocked
-              ? "open"
-              : "locked"
-          }`}
-          aria-label={
-            kotaIrabUnlocked
-              ? "Masuk ke Kota I'rab"
-              : "Kota I'rab masih berkunci"
-          }
-          onClick={() => {
-            if (kotaIrabUnlocked) {
-              navigate("/kota-irab");
-              return;
+        {/* PENANDA TUJUH DUNIA */}
+        {worlds.map((world) => (
+          <button
+            key={world.id}
+            type="button"
+            className={[
+              "world-zone",
+              world.className,
+              world.unlocked ? "open" : "locked",
+              world.id === "irab" ? "current" : "",
+            ].join(" ")}
+            aria-label={
+              world.unlocked
+                ? `Masuk ke ${world.name}`
+                : `${world.name} belum dibuka`
             }
+            onClick={() => openWorld(world)}
+          >
+            <img
+              src={world.image}
+              className="world-zone-image"
+              alt={world.name}
+              draggable="false"
+            />
+          </button>
+        ))}
 
-            handleLockedWorld("Kota I'rab");
-          }}
-        />
-        {/* Kota Marfu'at */}
+        {/* BUTTON HOME */}
         <button
           type="button"
-          className={`world-zone marfuat ${
-            marfuatUnlocked
-              ? "open"
-              : "locked"
-          }`}
-          aria-label="Kota Marfu'at"
-          onClick={() => {
-            if (marfuatUnlocked) {
-              navigate("/kota-marfuat");
-              return;
-            }
+          className="world-home-button"
+          onClick={() => navigate("/home")}
+          aria-label="Kembali ke halaman utama"
+        >
+          <img
+            src={homeIcon}
+            alt=""
+            draggable="false"
+          />
 
-            handleLockedWorld("Kota Marfu'at");
-          }}
-        />
-
-        {/* Kota Mansubat */}
-        <button
-          type="button"
-          className={`world-zone mansubat ${
-            mansubatUnlocked
-              ? "open"
-              : "locked"
-          }`}
-          aria-label="Kota Mansubat"
-          onClick={() => {
-            if (mansubatUnlocked) {
-              navigate("/kota-mansubat");
-              return;
-            }
-
-            handleLockedWorld("Kota Mansubat");
-          }}
-        />
-
-        {/* Kota Majrurat */}
-        <button
-          type="button"
-          className={`world-zone majrurat ${
-            majruratUnlocked
-              ? "open"
-              : "locked"
-          }`}
-          aria-label="Kota Majrurat"
-          onClick={() => {
-            if (majruratUnlocked) {
-              navigate("/kota-majrurat");
-              return;
-            }
-
-            handleLockedWorld("Kota Majrurat");
-          }}
-        />
-
-        {/* Kota Tawabi' */}
-        <button
-          type="button"
-          className={`world-zone tawabi ${
-            tawabiUnlocked
-              ? "open"
-              : "locked"
-          }`}
-          aria-label="Kota Tawabi'"
-          onClick={() => {
-            if (tawabiUnlocked) {
-              navigate("/kota-tawabi");
-              return;
-            }
-
-            handleLockedWorld("Kota Tawabi'");
-          }}
-        />
-
-        {/* Istana Rahsia */}
-        <button
-          type="button"
-          className={`world-zone istana ${
-            istanaUnlocked
-              ? "open"
-              : "locked"
-          }`}
-          aria-label="Istana Rahsia Ajrumiyyah"
-          onClick={() => {
-            if (istanaUnlocked) {
-              navigate("/istana-rahsia");
-              return;
-            }
-
-            handleLockedWorld(
-              "Istana Rahsia Ajrumiyyah"
-            );
-          }}
-        />
-       <button
-  type="button"
-  className="world-home-button"
-  onClick={() => navigate("/")}
->
-  <img
-    src={homeIcon}
-    alt="Home"
-    draggable="false"
-  />
-
-  <span>HOME</span>
-</button>
-      </div>
-      <button
-        type="button"
-        className="back-world"
-        aria-label="Kembali ke halaman utama"
-        onClick={() => navigate("/")}
-      />
-    </div>
-    
+          <span>HOME</span>
+        </button>
+      </section>
+    </main>
   );
 }

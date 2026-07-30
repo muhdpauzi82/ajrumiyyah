@@ -1,0 +1,522 @@
+.nota-huruf-screen {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  overflow: hidden;
+  background: #062f31;
+
+  display: grid;
+  place-items: center;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+.nota-huruf-frame {
+  position: relative;
+
+  width: min(100vw, calc(100vh * 16 / 9));
+  height: min(100vh, calc(100vw * 9 / 16));
+
+  overflow: hidden;
+  container-type: inline-size;
+
+  background: #0b5052;
+}
+
+.nota-huruf-background {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 75, 75, 0.32),
+      rgba(255, 255, 255, 0.08),
+      rgba(8, 75, 75, 0.32)
+    ),
+    url("/images/jejak-huruf.webp")
+      center / cover no-repeat;
+
+  filter:
+    brightness(1.08)
+    saturate(1.05);
+
+  transform: scale(1.01);
+}
+.nota-huruf-back {
+  position: absolute;
+  top: 3%;
+  left: 2.4%;
+  z-index: 20;
+
+  padding: 0.7cqw 1.45cqw;
+
+  border: 0.12cqw solid #f8d77b;
+  border-radius: 0.8cqw;
+
+  background:
+    linear-gradient(
+      180deg,
+      #385f54,
+      #173c3a
+    );
+
+  color: #fff4ce;
+  font-size: clamp(10px, 1cqw, 17px);
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0.35cqw 0 #082725,
+    0 0 1cqw rgba(72, 218, 195, 0.35);
+}
+
+.nota-huruf-panel {
+  position: absolute;
+  top: 3%;
+  left: 8%;
+  z-index: 5;
+
+  width: 84%;
+  height: 94%;
+
+  padding: 1.7% 2.2%;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 0.22cqw solid #d3a84f;
+  border-radius: 1.8cqw;
+
+  background:
+  linear-gradient(
+    145deg,
+    rgba(255, 255, 246, 0.99),
+    rgba(255, 244, 199, 0.99)
+  );
+
+  box-shadow:
+  0 0.65cqw 0 rgba(72, 92, 57, 0.65),
+  0 0 2.2cqw rgba(255, 230, 136, 0.5);
+}
+
+.nota-huruf-header {
+  flex: 0 0 auto;
+  text-align: center;
+}
+
+.nota-huruf-badge {
+  display: inline-block;
+
+  padding: 0.35cqw 1.3cqw;
+
+  border: 0.1cqw solid #d5ad50;
+  border-radius: 999px;
+
+  background: #166a66;
+  color: #fff1b4;
+
+  font-size: clamp(7px, 0.72cqw, 12px);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+
+.nota-huruf-header h1 {
+  margin: 0.55cqw 0 0.25cqw;
+
+  color: #145450;
+  font-family: Georgia, serif;
+  font-size: clamp(24px, 2.65cqw, 45px);
+  line-height: 1;
+}
+
+.nota-huruf-header > p {
+  margin: 0;
+
+  color: #5c553d;
+  font-size: clamp(9px, 0.9cqw, 15px);
+  font-weight: 600;
+}
+
+.nota-huruf-content {
+  flex: 1;
+  min-height: 0;
+
+  margin-top: 0.8cqw;
+
+  display: grid;
+  grid-template-columns: 34% 66%;
+  gap: 0.8cqw;
+}
+
+.nota-huruf-left {
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.75cqw;
+}
+
+.nota-huruf-matan,
+.nota-huruf-meaning,
+.nota-huruf-summary {
+  border: 0.13cqw solid #af8334;
+  border-radius: 1cqw;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff9de,
+      #eedca7
+    );
+
+  box-shadow: 0 0.25cqw 0 #92723c;
+}
+
+.nota-huruf-matan {
+  flex: 1;
+
+   padding: 0.7cqw 0.9cqw;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.nota-huruf-label {
+  color: #89702d;
+  font-size: clamp(7px, 0.7cqw, 12px);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.nota-huruf-matan p {
+  margin: 0.45cqw 0 0;
+
+  color: #253d34;
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size: clamp(20px, 2.05cqw, 35px);
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.nota-huruf-meaning,
+.nota-huruf-summary {
+  flex: 0.75;
+  padding: 0.75cqw 1cqw;
+}
+
+.nota-huruf-meaning h2,
+.nota-huruf-summary h2 {
+  margin: 0 0 0.35cqw;
+
+  color: #155e59;
+  font-size: clamp(11px, 1.05cqw, 18px);
+}
+
+.nota-huruf-meaning p,
+.nota-huruf-summary p {
+  margin: 0;
+
+  color: #4d4937;
+  font-size: clamp(8px, 0.82cqw, 14px);
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.nota-huruf-types {
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 0.75cqw;
+}
+
+.nota-huruf-card {
+  position: relative;
+  min-height: 0;
+
+  padding: 0.8cqw 0.8cqw 0.7cqw 3cqw;
+
+  border: 0.13cqw solid #b48235;
+  border-radius: 1cqw;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffdf0,
+      #f1e4bb
+    );
+
+  box-shadow:
+    0 0.25cqw 0 #9e7a41,
+    0 0 0.8cqw rgba(31, 126, 111, 0.14);
+}
+
+.nota-huruf-card-number {
+  position: absolute;
+  top: 0.75cqw;
+  left: 0.65cqw;
+
+  width: 1.85cqw;
+  height: 1.85cqw;
+
+  display: grid;
+  place-items: center;
+
+  border: 0.1cqw solid #ffdf83;
+  border-radius: 50%;
+
+  background: #176962;
+  color: #fff0ae;
+
+  font-size: clamp(10px, 0.95cqw, 16px);
+  font-weight: 900;
+}
+
+.nota-huruf-card-content {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.nota-huruf-card h2 {
+  margin: 0;
+
+  color: #075f5b;
+  font-size: clamp(14px, 1.25cqw, 21px);
+}
+
+.nota-huruf-card-content > p:not(
+  .nota-huruf-arabic-list
+) {
+  margin: 0.3cqw 0 0;
+
+  color: #3f412f;
+  font-size: clamp(9px, 0.82cqw, 14px);
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.nota-huruf-arabic-list {
+  margin: 0.25cqw 0;
+
+  color: #132f2a;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size: clamp(17px, 1.6cqw, 27px);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.nota-huruf-example {
+  margin-top: auto;
+  padding: 0.35cqw 0.55cqw;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5cqw;
+
+  border-radius: 0.55cqw;
+  background: rgba(22, 106, 99, 0.11);
+}
+
+.nota-huruf-example span {
+  color: #7a6231;
+  font-size: clamp(6px, 0.58cqw, 10px);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.nota-huruf-example p {
+  margin: 0;
+
+  color: #173e37;
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size: clamp(14px, 1.35cqw, 23px);
+  font-weight: 700;
+}
+
+.nota-huruf-footer {
+  flex: 0 0 auto;
+
+  margin-top: 0.95cqw;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-top: 0.75cqw;
+  border-top: 0.1cqw solid rgba(125, 93, 41, 0.45);
+}
+
+.nota-huruf-footer p {
+  margin: 0;
+
+  color: #655a3f;
+  font-size: clamp(8px, 0.78cqw, 13px);
+  font-weight: 700;
+}
+
+.nota-huruf-finish {
+  min-width: 25%;
+  padding: 0.7cqw 1.2cqw;
+
+  border: 0.12cqw solid #ffe59c;
+  border-radius: 0.8cqw;
+
+  background:
+    linear-gradient(
+      180deg,
+      #2da999,
+      #14645e
+    );
+
+  color: #fff7d1;
+  font-size: clamp(9px, 0.95cqw, 16px);
+  font-weight: 900;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0.3cqw 0 #0b413d,
+    0 0 0.9cqw rgba(36, 176, 155, 0.38);
+
+  transition:
+    transform 0.18s ease,
+    filter 0.18s ease;
+}
+
+.nota-huruf-finish:hover {
+  transform: translateY(-0.12cqw);
+  filter: brightness(1.08);
+}
+
+.nota-huruf-back:active,
+.nota-huruf-finish:active {
+  transform: translateY(0.15cqw);
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+  .nota-huruf-panel {
+    top: 2%;
+    left: 5%;
+
+    width: 90%;
+    height: 96%;
+
+    padding: 1% 1.5%;
+  }
+
+  .nota-huruf-back {
+    top: 2%;
+    left: 1%;
+
+    padding: 0.45cqw 0.8cqw;
+  }
+
+  .nota-huruf-header h1 {
+    margin-top: 0.25cqw;
+    font-size: clamp(19px, 2.2cqw, 32px);
+  }
+
+  .nota-huruf-header > p {
+    display: none;
+  }
+
+  .nota-huruf-content {
+    margin-top: 0.45cqw;
+    grid-template-columns: 32% 68%;
+    gap: 0.55cqw;
+  }
+
+  .nota-huruf-left {
+    gap: 0.45cqw;
+  }
+
+  .nota-huruf-types {
+    gap: 0.45cqw;
+  }
+
+  .nota-huruf-card {
+    padding:
+      0.5cqw
+      0.55cqw
+      0.45cqw
+      2.5cqw;
+  }
+
+  .nota-huruf-card-number {
+    top: 0.45cqw;
+    left: 0.4cqw;
+
+    width: 1.65cqw;
+    height: 1.65cqw;
+  }
+
+  .nota-huruf-footer {
+    margin-top: 0.4cqw;
+    padding-top: 0.35cqw;
+  }
+
+  .nota-huruf-footer p {
+    display: none;
+  }
+
+  .nota-huruf-finish {
+    margin-left: auto;
+    padding: 0.55cqw 1cqw;
+  }
+}
+@media (orientation: portrait) and (max-width: 768px) {
+  .nota-huruf-screen::before {
+    content:
+      "Sila pusingkan telefon ke mod landskap untuk membaca nota.";
+
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+
+    display: grid;
+    place-items: center;
+
+    padding: 40px;
+
+    background: #075b5c;
+    color: #fff6c9;
+
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .nota-huruf-frame {
+    visibility: hidden;
+  }
+}

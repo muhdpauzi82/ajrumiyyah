@@ -36,7 +36,7 @@ useEffect(() => {
 
   return (
     <div className="gerbang-wrap">
-      <div className="map-frame">
+      <div className="gerbang-map-frame">
 
         <img
           src={gerbangMap}

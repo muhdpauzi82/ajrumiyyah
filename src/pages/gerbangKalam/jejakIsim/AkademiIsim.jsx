@@ -1,249 +1,378 @@
-
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { isimPertengahan } from "../../../data/isimQuestions";
+import "./AkademiIsim.css";
 
-  function playSound(file) {
-  const audio = new Audio(`/sounds/${file}`);
-  audio.volume = 0.5;
-  audio.play();
+const TOTAL_QUESTIONS = 10;
+const CORRECT_DELAY = 900;
+const WRONG_DELAY = 2300;
+
+function playSound(fileName, volume = 0.5) {
+  const audio = new Audio(`/sounds/${fileName}`);
+  audio.volume = volume;
+
+  audio.play().catch(() => {
+    // Audio mungkin menunggu interaksi pengguna.
+  });
 }
- function shuffle(array) {
-  return [...array].sort(() => Math.random() - 0.5);
+
+function shuffleArray(items) {
+  const result = [...items];
+
+  for (let index = result.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(
+      Math.random() * (index + 1)
+    );
+
+    [result[index], result[randomIndex]] = [
+      result[randomIndex],
+      result[index],
+    ];
+  }
+
+  return result;
 }
+
+function prepareQuestions(questionBank) {
+  return shuffleArray(questionBank)
+    .slice(
+      0,
+      Math.min(TOTAL_QUESTIONS, questionBank.length)
+    )
+    .map((question) => ({
+      ...question,
+      options: shuffleArray(question.options),
+    }));
+}
+
 export default function AkademiIsim() {
-  const isimPertengahanDone =  localStorage.getItem("isimPertengahanDone") === "true";
-  const [questions] = useState(() => shuffle(isimPertengahan).slice(0, 10));
-  const [wrongCount, setWrongCount] = useState(0);
-  const [current, setCurrent] = useState(0);
-  const [popup, setPopup] = useState("");
   const navigate = useNavigate();
-  
+
+  const questions = useMemo(
+    () => prepareQuestions(isimPertengahan),
+    []
+  );
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [wrongCount, setWrongCount] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] =
+    useState(null);
+  const [feedback, setFeedback] = useState(null);
+
+  const currentQuestion = questions[currentIndex];
+
   useEffect(() => {
-  const bgMusic = new Audio("/sounds/quiz.mp3");
+    const bgMusic = new Audio("/sounds/quiz.mp3");
 
-  bgMusic.loop = true;
-  bgMusic.volume = 0.2;
+    bgMusic.loop = true;
+    bgMusic.volume = 0.2;
 
-  bgMusic.play().catch(() => {});
+    bgMusic.play().catch(() => {});
 
-  return () => {
-    bgMusic.pause();
-    bgMusic.currentTime = 0;
-  };
-}, []);
-  const q = questions[current];
-  const options = shuffle(q.options);
+    return () => {
+      bgMusic.pause();
+      bgMusic.currentTime = 0;
+    };
+  }, []);
 
-  function jawab(pilihan) {
-  const betul = pilihan === q.answer;
+  function kembaliKeJejak() {
+    navigate("/jejak-isim");
+  }
 
- if (betul) {
-  playSound("correct.mp3");
-  setPopup("🌸 Betul! Teruskan 🌸");
-} else {
-  playSound("wrong.mp3");
-  setWrongCount(wrongCount + 1);
-  setPopup(`❌ Salah\n\n${q.explain}`);
-}
+  function ulangKuiz() {
+    setCurrentIndex(0);
+    setWrongCount(0);
+    setSelectedAnswer(null);
+    setFeedback(null);
+  }
 
-  setTimeout(() => {
-    setPopup("");
+  function tamatKuiz(finalWrongCount) {
+    if (finalWrongCount === 0) {
+      localStorage.setItem(
+        "isimPertengahanDone",
+        "true"
+      );
 
-    if (current < questions.length - 1) {
-      setCurrent(current + 1);
-    } else {
-      if (wrongCount === 0 && betul) {
-        localStorage.setItem("isimPertengahanDone", "true");
-         alert("📚 Akademi Isim selesai! Menara Isim terbuka.");
-         navigate("/jejak-isim");
-      } else {
-        alert("❌ Anda belum menjawab semua soalan dengan betul. Sila ulang.");
-        setCurrent(0);
-        setWrongCount(0);
-      }
+      setFeedback({
+        type: "complete",
+        title: "Akademi Selesai!",
+        message:
+          "Tahap Pertengahan Isim berjaya dikuasai. Menara Isim kini terbuka.",
+      });
+
+      return;
     }
-  }, betul ? 900 : 2500);
-}
+
+    setFeedback({
+      type: "failed",
+      title: "Belum Berjaya",
+      message:
+        `Terdapat ${finalWrongCount} jawapan yang belum tepat. ` +
+        "Ulang latihan untuk membuka Menara Isim.",
+    });
+  }
+
+  function jawab(answer) {
+    if (selectedAnswer !== null || !currentQuestion) {
+      return;
+    }
+
+    const isCorrect =
+      answer === currentQuestion.answer;
+
+    const updatedWrongCount = isCorrect
+      ? wrongCount
+      : wrongCount + 1;
+
+    setSelectedAnswer(answer);
+
+    if (isCorrect) {
+      playSound("correct.mp3");
+
+      setFeedback({
+        type: "correct",
+        title: "Betul!",
+        message:
+          "Bagus. Teruskan pembelajaran di Akademi Isim.",
+      });
+    } else {
+      playSound("wrong.mp3");
+      setWrongCount(updatedWrongCount);
+
+      setFeedback({
+        type: "wrong",
+        title: "Belum Tepat",
+        message:
+          currentQuestion.explain ||
+          "Teliti semula fungsi dan tanda isim.",
+      });
+    }
+
+    const isLastQuestion =
+      currentIndex === questions.length - 1;
+
+    window.setTimeout(
+      () => {
+        if (isLastQuestion) {
+          tamatKuiz(updatedWrongCount);
+          return;
+        }
+
+        setCurrentIndex((previous) => previous + 1);
+        setSelectedAnswer(null);
+        setFeedback(null);
+      },
+      isCorrect ? CORRECT_DELAY : WRONG_DELAY
+    );
+  }
+
+  function getAnswerClass(answer) {
+    if (selectedAnswer === null) {
+      return "";
+    }
+
+    if (answer === currentQuestion.answer) {
+      return " akademi-answer--correct";
+    }
+
+    if (answer === selectedAnswer) {
+      return " akademi-answer--wrong";
+    }
+
+    return " akademi-answer--dimmed";
+  }
+
+  if (!currentQuestion) {
+    return (
+      <main className="akademi-quiz-screen">
+        <div className="akademi-empty-state">
+          Soalan Akademi Isim tidak ditemui.
+        </div>
+      </main>
+    );
+  }
+
+  const progressPercentage =
+    ((currentIndex + 1) / questions.length) * 100;
+
+  const isResultPopup =
+    feedback?.type === "complete" ||
+    feedback?.type === "failed";
+
   return (
-    <div style={styles.page}>
-      <button style={styles.backBtn} onClick={() => navigate("/jejak-isim")}>
-        ⬅ Kembali
-      </button>
+    <main className="akademi-quiz-screen">
+      <div className="akademi-quiz-frame">
+        <div
+          className="akademi-quiz-background"
+          aria-hidden="true"
+        />
 
-      {popup && <div style={styles.popup}>{popup}</div>}
+        <button
+          type="button"
+          className="akademi-back-button"
+          onClick={kembaliKeJejak}
+        >
+          <span aria-hidden="true">←</span>
+          <span>Kembali</span>
+        </button>
 
-      <div style={styles.card}>
-        <div style={styles.badge}>🏡 Kampung Isim</div>
+        <section className="akademi-quiz-card">
+          <header className="akademi-quiz-header">
+            <div className="akademi-location-badge">
+              <span aria-hidden="true">🏫</span>
+              <span>Akademi Isim</span>
+            </div>
 
-        <h1 style={styles.title}>📖 Tahap Pertengahan Isim</h1>
+            <h1 className="akademi-quiz-title">
+              Tahap Pertengahan Isim
+            </h1>
 
-        <div style={styles.progress}>
-         Soalan {current + 1} / {questions.length}
-        </div>
+            <p className="akademi-quiz-subtitle">
+              Fahami tanda, jenis dan fungsi isim.
+            </p>
+          </header>
 
-        <div style={styles.questionBox}>
-          <h2>{q.question}</h2>
-        </div>
+          <div className="akademi-progress-area">
+            <div className="akademi-progress-text">
+              <span>
+                Soalan {currentIndex + 1}
+              </span>
 
-        <div style={styles.answers}>
-          
-{options.map((pilihan, index) => (
-  <button
-    key={index}
-    style={{
-      ...styles.answerBtn,
-      animationDelay: `${index * 0.25}s`,
-    }}
-    onMouseEnter={(e) => {
-      e.currentTarget.style.transform = "scale(1.05)";
-      e.currentTarget.style.boxShadow =
-       "0 0 35px #22c55e, 0 8px 0 #0f7a2c";
-    }}
-    onMouseLeave={(e) => {
-      playSound("hover.mp3");
-      e.currentTarget.style.transform = "scale(1)";
-      e.currentTarget.style.boxShadow =
-        "0 6px 0 #4e3218, 0 0 18px rgba(255,215,0,.7)"
-    }}
-    onClick={() => { playSound("click.mp3"); jawab(pilihan); }}
-  >
-{pilihan}
-</button>
-          ))}
-        </div>
+              <span>
+                daripada {questions.length}
+              </span>
+            </div>
+
+            <div className="akademi-progress-track">
+              <div
+                className="akademi-progress-fill"
+                style={{
+                  width: `${progressPercentage}%`,
+                }}
+              />
+            </div>
+          </div>
+
+          <section className="akademi-question-box">
+            <span className="akademi-question-label">
+              SOALAN
+            </span>
+
+            <h2>{currentQuestion.question}</h2>
+          </section>
+
+          <div className="akademi-answer-list">
+            {currentQuestion.options.map(
+              (answer, index) => (
+                <button
+                  type="button"
+                  key={`${currentIndex}-${answer}`}
+                  className={
+                    "akademi-answer-button" +
+                    getAnswerClass(answer)
+                  }
+                  dir="rtl"
+                  lang="ar"
+                  disabled={selectedAnswer !== null}
+                  style={{
+                    "--answer-index": index,
+                  }}
+                  onClick={() => {
+                    playSound("click.mp3", 0.35);
+                    jawab(answer);
+                  }}
+                  onMouseEnter={() => {
+                    if (selectedAnswer === null) {
+                      playSound("hover.mp3", 0.18);
+                    }
+                  }}
+                >
+                  <span>{answer}</span>
+                </button>
+              )
+            )}
+          </div>
+
+          <footer className="akademi-question-navigation">
+            {questions.map((_, index) => {
+              const isCurrent =
+                index === currentIndex;
+
+              const isCompleted =
+                index < currentIndex;
+
+              return (
+                <span
+                  key={index}
+                  className={[
+                    "akademi-question-dot",
+                    isCurrent
+                      ? "akademi-question-dot--current"
+                      : "",
+                    isCompleted
+                      ? "akademi-question-dot--completed"
+                      : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                >
+                  {index + 1}
+                </span>
+              );
+            })}
+          </footer>
+        </section>
+
+        {feedback && (
+          <div
+            className={`akademi-feedback-overlay ${
+              isResultPopup
+                ? "akademi-feedback-overlay--result"
+                : ""
+            }`}
+          >
+            <section
+              className={`akademi-feedback-card akademi-feedback-card--${feedback.type}`}
+              role="status"
+              aria-live="polite"
+            >
+              <div
+                className="akademi-feedback-icon"
+                aria-hidden="true"
+              >
+                {feedback.type === "correct" && "✓"}
+                {feedback.type === "wrong" && "!"}
+                {feedback.type === "complete" && "★"}
+                {feedback.type === "failed" && "↻"}
+              </div>
+
+              <h2>{feedback.title}</h2>
+              <p>{feedback.message}</p>
+
+              {feedback.type === "complete" && (
+                <button
+                  type="button"
+                  className="akademi-result-button"
+                  onClick={kembaliKeJejak}
+                >
+                  Kembali ke Jejak Isim
+                </button>
+              )}
+
+              {feedback.type === "failed" && (
+                <button
+                  type="button"
+                  className="akademi-result-button"
+                  onClick={ulangKuiz}
+                >
+                  Ulang Latihan
+                </button>
+              )}
+            </section>
+          </div>
+        )}
       </div>
-    </div>
+    </main>
   );
 }
-
-const styles = {
-  page: {
-    minHeight: "100vh",
-    background:
-      "linear-gradient(to bottom, rgba(126,195,90,.9), rgba(67,124,48,.95)), url('/images/jejak-isim.webp')",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    fontFamily: "Arial",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "20px",
-  },
-
-  backBtn: {
-    position: "absolute",
-    top: "15px",
-    left: "15px",
-    background: "#5b3b1d",
-    color: "white",
-    border: "none",
-    borderRadius: "14px",
-    padding: "10px 18px",
-    fontWeight: "bold",
-    cursor: "pointer",
-  },
-
-  popup: {
-    position: "fixed",
-    top: "35%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    zIndex: 50,
-    background: "#fff3b0",
-    color: "#3b260c",
-    padding: "25px 40px",
-    borderRadius: "25px",
-    border: "5px solid #d49a1f",
-    fontSize: "28px",
-    fontWeight: "bold",
-    boxShadow: "0 0 40px gold",
-    whiteSpace: "pre-line",
-    maxWidth: "520px",
-    lineHeight: "1.4",
-  },
-
-  card: {
-    width: "620px",
-    maxWidth: "95%",
-    background: "rgba(255, 248, 220, 0.95)",
-    border: "6px solid #046d1b",
-    borderRadius: "30px",
-    padding: "30px",
-    textAlign: "center",
-    boxShadow: "0 12px 0 #73971e, 0 0 35px rgba(96, 158, 45, 0.6)",
-  },
-
-  badge: {
-    display: "inline-block",
-    background: "#084d16",
-    color: "white",
-    padding: "10px 22px",
-    borderRadius: "20px",
-    fontWeight: "bold",
-    marginBottom: "10px",
-  },
-
-  title: {
-    fontSize: "38px",
-    margin: "10px 0",
-    color: "#2d1a08",
-  },
-
-  progress: {
-    background: "#ecfa71",
-    border: "3px solid #055e23",
-    borderRadius: "16px",
-    padding: "8px",
-    fontWeight: "bold",
-    margin: "15px auto",
-    width: "180px",
-  },
-
-  questionBox: {
-    background: "#fff",
-    border: "4px solid #0a3b05",
-    borderRadius: "22px",
-    padding: "20px",
-    margin: "20px 0",
-    color: "#111",
-  },
-
-  answers: {
-    display: "grid",
-    gap: "14px",
-    justifyItems: "center",
-  },
-
- answerBtn: {
-  width: "65%",
-  maxWidth: "380px",
-  minHeight: "80px",
-
-  padding: "10px",
-
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-
-  textAlign: "center",
-  direction: "rtl",
-
-  fontFamily: "Amiri, serif",
-  fontSize: "42px",
-  lineHeight: "1",
-
-  borderRadius: "20px",
-  border: "3px solid #16a34a",
-
-  background: "linear-gradient(to bottom, #d9ffb3, #7be33d)",
-
-  cursor: "pointer",
-  fontWeight: "bold",
-
-  boxShadow: "0 6px 0 #0f7a2c, 0 0 20px rgba(34,197,94,.8)",
-
-  transition: "all 0.25s ease",
-  animation: "floatBtn 2s ease-in-out infinite",
-},
-};

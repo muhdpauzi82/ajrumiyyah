@@ -1,131 +1,231 @@
 import { useNavigate } from "react-router-dom";
 
+import "./NotaHuruf.css";
+
 export default function NotaHuruf() {
   const navigate = useNavigate();
 
+  function kembaliKeJejak() {
+    navigate("/jejak-huruf");
+  }
+
   function selesaiNota() {
     localStorage.setItem("notaHurufDone", "true");
-    localStorage.setItem("gulunganMatanHuruf", "true");
-    alert("📜 Gulungan Matan Huruf diperoleh!");
     navigate("/jejak-huruf");
   }
 
   return (
-    <div style={styles.page}>
-      <button style={styles.backBtn} onClick={() => navigate("/jejak-huruf")}>
-        ⬅ Kembali
-      </button>
+    <main className="nota-huruf-screen">
+      <div className="nota-huruf-frame">
+        <div
+          className="nota-huruf-background"
+          aria-hidden="true"
+        />
 
-      <div style={styles.card}>
-        <h1>📜 Lembah Matan Huruf</h1>
+        <button
+          type="button"
+          className="nota-huruf-back"
+          onClick={kembaliKeJejak}
+        >
+          ← Kembali
+        </button>
 
-        <div style={styles.matan}>
-          وَالْحَرْفُ مَا لاَ يَصْلُحُ مَعَهُ
-          <br />
-          دَلِيلُ الاِسْمِ
-          <br />
-          وَلاَ دَلِيلُ الْفِعْلِ
-        </div>
+        <section className="nota-huruf-panel">
+          <header className="nota-huruf-header">
+            <span className="nota-huruf-badge">
+              NOTA PENGENALAN
+            </span>
 
-        <h2>📖 Maksud Ringkas</h2>
-        <p>
-          Huruf ialah perkataan yang tidak menerima tanda isim dan tidak
-          menerima tanda fi'il.
-        </p>
+            <h1>📜 Matan Huruf</h1>
 
-        <h2>🏷 Contoh Huruf</h2>
+            <p>
+              Kenali maksud huruf dan beberapa
+              fungsi asasnya dalam ayat.
+            </p>
+          </header>
 
-        <div style={styles.noteBox}>
-          <h3>1. Huruf Jar</h3>
-          <p>Huruf yang menyebabkan isim selepasnya menjadi majrur.</p>
-           <p>مِنْ، إِلَى، عَنْ، عَلَى، فِي، البَاء، الكَاف، اللام</p>
-          <b>Contoh:</b>
-          <p> ذَهَبَ الطَالِبُ اِلَي المَسْجِدِ</p>
-        </div>
+          <div className="nota-huruf-content">
+            <section className="nota-huruf-left">
+              <div className="nota-huruf-matan">
+                <span className="nota-huruf-label">
+                  مَتْنُ الْآجُرُّومِيَّةِ
+                </span>
 
-        <div style={styles.noteBox}>
-          <h3>2. Huruf Athaf</h3>
-          <p>Huruf yang menghubungkan perkataan atau ayat.</p>
-            <p>وَ ، فَ ، حَتَّى، ثُمَّ ، أَوْ، بَلْ ، اللام ، </p>
-          <b>Contoh:</b>
-          <p> جَاءَ زيْدُُ وَ عُمَرُُ</p>
+                <p dir="rtl" lang="ar">
+                  وَالْحَرْفُ مَا لَا يَصْلُحُ مَعَهُ
+                  دَلِيلُ الِاسْمِ وَلَا دَلِيلُ
+                  الْفِعْلِ
+                </p>
+              </div>
+
+              <div className="nota-huruf-meaning">
+                <h2>📖 Maksud Ringkas</h2>
+
+                <p>
+                  Huruf ialah kalimah yang tidak
+                  menerima tanda isim dan tidak
+                  menerima tanda fi‘il.
+                </p>
+              </div>
+
+              <div className="nota-huruf-summary">
+                <h2>🎯 Rumusan</h2>
+
+                <p>
+                  Huruf memberi makna tertentu
+                  apabila digunakan bersama kalimah
+                  lain dalam sesuatu ayat.
+                </p>
+              </div>
+            </section>
+
+            <section className="nota-huruf-types">
+              <article className="nota-huruf-card">
+                <div className="nota-huruf-card-number">
+                  1
                 </div>
 
-        <div style={styles.noteBox}>
-          <h3>3. Huruf Nida'</h3>
-          <p>Huruf yang digunakan untuk menyeru atau memanggil.</p>
-          <p>يَا ، أَيَا ، هَيَا  ، أَيْ </p>
-          <b>Contoh:</b>
-          <p>يَا مُحَمَّدُ</p>
-        </div>
+                <div className="nota-huruf-card-content">
+                  <h2>Huruf Jar</h2>
 
-        <button style={styles.finishBtn} onClick={selesaiNota}>
-          ✅ Saya Faham, Buka Kem Huruf
-        </button>
+                  <p>
+                    Menyebabkan isim selepasnya
+                    berada dalam keadaan majrur.
+                  </p>
+
+                  <p
+                    className="nota-huruf-arabic-list"
+                    dir="rtl"
+                    lang="ar"
+                  >
+                    مِنْ، إِلَى، عَنْ، عَلَى، فِي،
+                    البَاءُ، الكَافُ، اللَّامُ
+                  </p>
+
+                  <div className="nota-huruf-example">
+                    <span>Contoh</span>
+
+                    <p dir="rtl" lang="ar">
+                      ذَهَبَ الطَّالِبُ إِلَى
+                      الْمَسْجِدِ
+                    </p>
+                  </div>
+                </div>
+              </article>
+
+              <article className="nota-huruf-card">
+                <div className="nota-huruf-card-number">
+                  2
+                </div>
+
+                <div className="nota-huruf-card-content">
+                  <h2>Huruf ‘Aṭaf</h2>
+
+                  <p>
+                    Menghubungkan satu perkataan
+                    atau ayat dengan perkataan atau
+                    ayat yang lain.
+                  </p>
+
+                  <p
+                    className="nota-huruf-arabic-list"
+                    dir="rtl"
+                    lang="ar"
+                  >
+                    وَ، فَ، ثُمَّ، أَوْ، بَلْ،
+                    لَكِنْ، حَتَّى
+                  </p>
+
+                  <div className="nota-huruf-example">
+                    <span>Contoh</span>
+
+                    <p dir="rtl" lang="ar">
+                      جَاءَ زَيْدٌ وَعُمَرٌو
+                    </p>
+                  </div>
+                </div>
+              </article>
+
+              <article className="nota-huruf-card">
+                <div className="nota-huruf-card-number">
+                  3
+                </div>
+
+                <div className="nota-huruf-card-content">
+                  <h2>Huruf Nidā’</h2>
+
+                  <p>
+                    Digunakan untuk menyeru atau
+                    memanggil seseorang.
+                  </p>
+
+                  <p
+                    className="nota-huruf-arabic-list"
+                    dir="rtl"
+                    lang="ar"
+                  >
+                    يَا، أَيَا، هَيَا، أَيْ
+                  </p>
+
+                  <div className="nota-huruf-example">
+                    <span>Contoh</span>
+
+                    <p dir="rtl" lang="ar">
+                      يَا مُحَمَّدُ
+                    </p>
+                  </div>
+                </div>
+              </article>
+
+              <article className="nota-huruf-card">
+                <div className="nota-huruf-card-number">
+                  4
+                </div>
+
+                <div className="nota-huruf-card-content">
+                  <h2>Huruf Qasam</h2>
+
+                  <p>
+                    Digunakan untuk bersumpah bagi
+                    menguatkan sesuatu pernyataan.
+                  </p>
+
+                  <p
+                    className="nota-huruf-arabic-list"
+                    dir="rtl"
+                    lang="ar"
+                  >
+                    الْوَاوُ، الْبَاءُ، التَّاءُ
+                  </p>
+
+                  <div className="nota-huruf-example">
+                    <span>Contoh</span>
+
+                    <p dir="rtl" lang="ar">
+                      وَاللّٰهِ لَأَجْتَهِدَنَّ
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </section>
+          </div>
+
+          <footer className="nota-huruf-footer">
+            <p>
+              Selesai membaca nota ini untuk membuka
+              Kampung Huruf.
+            </p>
+
+            <button
+              type="button"
+              className="nota-huruf-finish"
+              onClick={selesaiNota}
+            >
+              ✓ Saya Faham, Teruskan
+            </button>
+          </footer>
+        </section>
       </div>
-    </div>
+    </main>
   );
 }
-
-const styles = {
- page: {
-  width: "100%",
-  height: "100vh",
-  overflowY: "auto",
-  overflowX: "hidden",
-
-  boxSizing: "border-box",
-  padding: "30px",
-
-  background: "linear-gradient(to bottom, #dff5c9, #96c96b)",
-  fontFamily: "Arial",
-},
-  backBtn: {
-    padding: "10px 18px",
-    borderRadius: "12px",
-    border: "none",
-    background: "#5b3b1d",
-    color: "white",
-    fontWeight: "bold",
-    cursor: "pointer",
-  },
-  card: {
-    maxWidth: "850px",
-    margin: "30px auto",
-    background: "#fff8dc",
-    border: "5px solid #7a4d22",
-    borderRadius: "25px",
-    padding: "30px",
-    textAlign: "center",
-    boxShadow: "0 10px 0 #4e3218",
-  },
-  matan: {
-    direction: "rtl",
-    fontSize: "34px",
-    lineHeight: "1.9",
-    background: "#f4e2a1",
-    borderRadius: "20px",
-    padding: "25px",
-    margin: "25px 0",
-    color: "#3b260c",
-    fontWeight: "bold",
-  },
-  noteBox: {
-    background: "#ffffff",
-    border: "3px solid #b8893b",
-    borderRadius: "18px",
-    padding: "15px",
-    margin: "15px 0",
-  },
-  finishBtn: {
-    marginTop: "25px",
-    padding: "15px 30px",
-    borderRadius: "18px",
-    border: "none",
-    background: "#d49a1f",
-    color: "white",
-    fontSize: "18px",
-    fontWeight: "bold",
-    cursor: "pointer",
-  },
-};

@@ -1,146 +1,176 @@
 import { useNavigate } from "react-router-dom";
 
+import "./NotaFiil.css";
+
+const tandaFiil = [
+  {
+    id: "qad",
+    label: "قَدْ",
+    title: "Qad",
+    description:
+      "Fi‘il boleh menerima perkataan قَدْ.",
+    example: "قَدْ كَتَبَ",
+  },
+  {
+    id: "sin",
+    label: "سَـ",
+    title: "Sin",
+    description:
+      "Fi‘il mudhari‘ boleh menerima huruf سَـ.",
+    example: "سَيَكْتُبُ",
+  },
+  {
+    id: "saufa",
+    label: "سَوْفَ",
+    title: "Saufa",
+    description:
+      "Fi‘il mudhari‘ boleh menerima perkataan سَوْفَ.",
+    example: "سَوْفَ يَكْتُبُ",
+  },
+  {
+    id: "ta-tanith",
+    label: "تْ",
+    title: "Ta’ Ta’nith Sakinah",
+    description:
+      "Fi‘il madhi boleh menerima Ta’ Ta’nith Sakinah.",
+    example: "كَتَبَتْ",
+  },
+];
+
 export default function NotaFiil() {
   const navigate = useNavigate();
 
+  function kembaliKeJejak() {
+    navigate("/jejak-fiil");
+  }
+
   function selesaiNota() {
     localStorage.setItem("notaFiilDone", "true");
-    localStorage.setItem("gulunganMatanFiil", "true");
-
-    alert("📜 Gulungan Matan Fi'il diperoleh!");
-
-    navigate("../../../jejak-fiil");
+    navigate("/jejak-fiil");
   }
 
   return (
-    <div style={styles.page}>
-      <button
-        style={styles.backBtn}
-        onClick={() => navigate("../../../jejak-fiil")}
-      >
-        ⬅ Kembali
-      </button>
-
-      <div style={styles.card}>
-        <h1>📜 Lembah Matan Fi'il</h1>
-
-        <div style={styles.matan}>
-          وَالْفِعْلُ يُعْرَفُ بِقَدْ
-          <br />
-          وَالسِّينِ
-          <br />
-          وَسَوْفَ
-          <br />
-          وَتَاءِ التَّأْنِيثِ السَّاكِنَةِ
-        </div>
-
-        <h2>📖 Maksud Ringkas</h2>
-
-        <p>
-          Fi'il ialah perkataan yang menunjukkan perbuatan
-          atau kejadian yang berlaku pada masa tertentu.
-        </p>
-
-        <h2>🏷 Tanda-tanda Fi'il</h2>
-
-        <div style={styles.noteBox}>
-          <h3>1. Qad (قَدْ)</h3>
-          <p>Fi'il boleh menerima perkataan قَدْ.</p>
-          <b>Contoh:</b>
-          <p>قَدْ كَتَبَ</p>
-        </div>
-
-        <div style={styles.noteBox}>
-          <h3>2. Sa (سَ)</h3>
-          <p>Fi'il Mudhari' boleh menerima huruf سَ.</p>
-          <b>Contoh:</b>
-          <p>سَيَكْتُبُ</p>
-        </div>
-
-        <div style={styles.noteBox}>
-          <h3>3. Saufa (سَوْفَ)</h3>
-          <p>Fi'il Mudhari' boleh menerima perkataan سَوْفَ.</p>
-          <b>Contoh:</b>
-          <p>سَوْفَ يَكْتُبُ</p>
-        </div>
-
-        <div style={styles.noteBox}>
-          <h3>4. Ta' Ta'nith Sakinah</h3>
-          <p>Fi'il Madhi boleh menerima Ta' Ta'nith Sakinah.</p>
-          <b>Contoh:</b>
-          <p>كَتَبَتْ</p>
-        </div>
-
+    <main className="fiil-matan-screen">
+      <div className="fiil-matan-frame">
         <button
-          style={styles.finishBtn}
-          onClick={selesaiNota}
+          type="button"
+          className="fiil-matan-back"
+          onClick={kembaliKeJejak}
         >
-          ✅ Saya Faham, Buka Tahap Asas
+          ← Kembali
         </button>
+
+        <section className="fiil-matan-card">
+          <header className="fiil-matan-header">
+            <div
+              className="fiil-matan-header-icon"
+              aria-hidden="true"
+            >
+              📜
+            </div>
+
+            <div>
+              <p className="fiil-matan-eyebrow">
+                LEMBAH MATAN
+              </p>
+
+              <h1>Lembah Matan Fi‘il</h1>
+
+              <p className="fiil-matan-subtitle">
+                Kenali fi‘il melalui tanda-tandanya.
+              </p>
+            </div>
+          </header>
+
+          <div className="fiil-matan-content">
+            <section className="fiil-matan-left">
+              <div className="fiil-section-heading">
+                <span aria-hidden="true">📖</span>
+                <h2>Matan Ajrumiyyah</h2>
+              </div>
+
+              <div
+                className="fiil-arabic-panel"
+                dir="rtl"
+                lang="ar"
+              >
+                <p>وَالْفِعْلُ يُعْرَفُ بِقَدْ</p>
+                <p>وَالسِّينِ</p>
+                <p>وَسَوْفَ</p>
+                <p>
+                  وَتَاءِ التَّأْنِيثِ
+                  السَّاكِنَةِ
+                </p>
+              </div>
+
+              <div className="fiil-meaning-box">
+                <h2>
+                  <span aria-hidden="true">💡</span>
+                  Maksud Ringkas
+                </h2>
+
+                <p>
+                  Fi‘il ialah perkataan yang menunjukkan
+                  perbuatan atau kejadian yang berkaitan
+                  dengan masa tertentu.
+                </p>
+              </div>
+            </section>
+
+            <section className="fiil-matan-right">
+              <div className="fiil-section-heading">
+                <span aria-hidden="true">🔎</span>
+                <h2>Tanda-tanda Fi‘il</h2>
+              </div>
+
+              <div className="fiil-sign-grid">
+                {tandaFiil.map((item) => (
+                  <article
+                    key={item.id}
+                    className="fiil-sign-card"
+                  >
+                    <div
+                      className="fiil-sign-symbol"
+                      dir="rtl"
+                      lang="ar"
+                    >
+                      {item.label}
+                    </div>
+
+                    <div className="fiil-sign-copy">
+                      <h3>{item.title}</h3>
+
+                      <p>{item.description}</p>
+
+                      <div
+                        className="fiil-sign-example"
+                        dir="rtl"
+                        lang="ar"
+                      >
+                        {item.example}
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          </div>
+
+          <footer className="fiil-matan-footer">
+            <p>
+              Baca matan, fahami maksud dan ingat empat
+              tanda utama fi‘il.
+            </p>
+
+            <button
+              type="button"
+              onClick={selesaiNota}
+            >
+              SAYA FAHAM — BUKA TAHAP ASAS
+            </button>
+          </footer>
+        </section>
       </div>
-    </div>
+    </main>
   );
 }
-
-const styles = {
-  page: {
-  width: "100%",
-  height: "100vh",
-  overflowY: "auto",
-  overflowX: "hidden",
-
-  boxSizing: "border-box",
-  padding: "30px",
-
-  background: "linear-gradient(to bottom, #dff5c9, #96c96b)",
-  fontFamily: "Arial",
-},
-  backBtn: {
-    padding: "10px 18px",
-    borderRadius: "12px",
-    border: "none",
-    background: "#5b3b1d",
-    color: "white",
-    fontWeight: "bold",
-    cursor: "pointer",
-  },
-  card: {
-    maxWidth: "850px",
-    margin: "30px auto",
-    background: "#fff8dc",
-    border: "5px solid #7a4d22",
-    borderRadius: "25px",
-    padding: "30px",
-    textAlign: "center",
-    boxShadow: "0 10px 0 #4e3218",
-  },
-  matan: {
-    direction: "rtl",
-    fontSize: "34px",
-    lineHeight: "1.9",
-    background: "#f4e2a1",
-    borderRadius: "20px",
-    padding: "25px",
-    margin: "25px 0",
-    color: "#3b260c",
-    fontWeight: "bold",
-  },
-  noteBox: {
-    background: "#ffffff",
-    border: "3px solid #b8893b",
-    borderRadius: "18px",
-    padding: "15px",
-    margin: "15px 0",
-  },
-  finishBtn: {
-    marginTop: "25px",
-    padding: "15px 30px",
-    borderRadius: "18px",
-    border: "none",
-    background: "#d49a1f",
-    color: "white",
-    fontSize: "18px",
-    fontWeight: "bold",
-    cursor: "pointer",
-  },
-};
