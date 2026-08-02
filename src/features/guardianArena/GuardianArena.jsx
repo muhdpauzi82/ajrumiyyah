@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect,useLayoutEffect,useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Confetti from "react-confetti";
 import {  completeGerbangKalam,} from "../../utils/gameProgress";
@@ -30,7 +30,7 @@ const GUARDIAN_IMAGES = {
 
 export default function GuardianArena() {
   const navigate = useNavigate();
-
+  const [arenaScale, setArenaScale] = useState(1);
   const [typedText, setTypedText] = useState("");
   const [typingComplete, setTypingComplete] = useState(false);
 
@@ -83,11 +83,12 @@ export default function GuardianArena() {
     };
   }, []);
 
+
   /*
    * Muzik latar arena.
    */
   useEffect(() => {
-    const bgAudio = new Audio("/sounds/boss.mp3");
+    const bgAudio = new Audio("/sounds/bossfinall.mp3");
 
     bgAudio.loop = true;
     bgAudio.volume = 0.22;
@@ -203,6 +204,61 @@ export default function GuardianArena() {
     }
   }, [phase, questionStage]);
 
+  useLayoutEffect(() => {
+  const BASE_WIDTH = 1600;
+  const BASE_HEIGHT = 900;
+
+  function updateArenaScale() {
+    const viewportWidth =
+      window.visualViewport?.width ??
+      window.innerWidth;
+
+    const viewportHeight =
+      window.visualViewport?.height ??
+      window.innerHeight;
+
+    const nextScale = Math.min(
+      viewportWidth / BASE_WIDTH,
+      viewportHeight / BASE_HEIGHT
+    );
+
+    setArenaScale(nextScale);
+  }
+
+  updateArenaScale();
+
+  window.addEventListener(
+    "resize",
+    updateArenaScale
+  );
+
+  window.addEventListener(
+    "orientationchange",
+    updateArenaScale
+  );
+
+  window.visualViewport?.addEventListener(
+    "resize",
+    updateArenaScale
+  );
+
+  return () => {
+    window.removeEventListener(
+      "resize",
+      updateArenaScale
+    );
+
+    window.removeEventListener(
+      "orientationchange",
+      updateArenaScale
+    );
+
+    window.visualViewport?.removeEventListener(
+      "resize",
+      updateArenaScale
+    );
+  };
+}, []);
   /*
    * Bersihkan semua timeout apabila keluar daripada halaman.
    */
@@ -344,240 +400,279 @@ if (passedAllQuestions) {
   }
 
   return (
-    <main className="guardian-screen">
-      <section className="guardian-stage">
-        <img
-          className="guardian-background"
-          src="/images/guardian/kalam/arena.webp"
-          alt="Arena Penjaga Kalam"
-          draggable="false"
+  <main className="guardian-screen">
+    <section className="guardian-stage">
+     
+      {phase === "result" && isPassed && (
+        <Confetti
+          recycle={false}
+          numberOfPieces={250}
+          gravity={0.18}
+          colors={[
+            "#FFD700",
+            "#F5C542",
+            "#22C55E",
+            "#FFFFFF",
+          ]}
         />
+      )}
 
-        {phase === "result" && isPassed && (
-          <Confetti
-            recycle={false}
-            numberOfPieces={250}
-            gravity={0.18}
-            colors={[
-              "#FFD700",
-              "#F5C542",
-              "#22C55E",
-              "#FFFFFF",
-            ]}
-          />
-        )}
+      {/* Butang klik di atas butang yang sudah berada dalam background */}
+      <button
+        type="button"
+        className="guardian-back-button"
+        aria-label="Kembali ke Gerbang Kalam"
+        onClick={handleBack}
+      >
+        <span aria-hidden="true">←</span>
+      </button>
 
-        <img
-          src={GUARDIAN_IMAGES[guardianEmotion]}
-          className="guardian-character"
-          alt="Penjaga Kalam"
-          draggable="false"
-        />
+      {/* Tajuk utama */}
+      <header className="guardian-title">
+        <span>PENJAGA UTAMA</span>
+        <strong>KALAM</strong>
+      </header>
 
-        <div
-          className={`guardian-book-glow ${
-            questionStage === "bookGlow"
-              ? "is-active"
-              : ""
-          }`}
-        />
+      {/* Markah kanan atas */}
+      <section className="guardian-score-hud">
+        <div className="guardian-score-heading">
+          <span>Betul</span>
 
-        {phase === "questionIntro" && (
+          <strong>
+            {correctCount} / {questions.length}
+          </strong>
+        </div>
+
+        <div className="guardian-score-progress">
           <div
-            className={`guardian-question-rising ${
-              questionStage === "questionRising"
-                ? "is-rising"
-                : ""
-            }`}
-          >
-            {currentQuestion?.question}
-          </div>
-        )}
+            className="guardian-score-progress-fill"
+            style={{
+              width: `${
+                questions.length > 0
+                  ? (correctCount / questions.length) * 100
+                  : 0
+              }%`,
+            }}
+          />
+        </div>
+      </section>
 
-        <button
-          type="button"
-          className="guardian-back-button"
-          aria-label="Kembali"
-          onClick={handleBack}
+      {/* Cahaya pada kitab background */}
+      <div
+  className={[
+    "guardian-book-glow",
+    questionStage === "bookGlow"
+      ? "is-active"
+      : "",
+    answerState === "correct"
+      ? "is-correct"
+      : "",
+    answerState === "wrong"
+      ? "is-wrong"
+      : "",
+  ]
+    .filter(Boolean)
+    .join(" ")}
+/>
+
+      {/* Soalan naik dari kitab */}
+      {phase === "questionIntro" && (
+        <div
+          className={[
+            "guardian-question-rising",
+            questionStage === "questionRising"
+              ? "is-rising"
+              : "",
+          ]
+            .filter(Boolean)
+            .join(" ")}
         >
-          ←
-        </button>
+          {currentQuestion?.question}
+        </div>
+      )}
 
-        <header className="guardian-title">
-          <span>PENJAGA UTAMA</span>
-          <strong>KALAM</strong>
-        </header>
+      {/* Penjaga berubah ekspresi */}
+      <img
+        src={GUARDIAN_IMAGES[guardianEmotion]}
+        className={[
+          "guardian-character",
+          `guardian-character--${guardianEmotion}`,
+        ].join(" ")}
+        alt="Penjaga Kalam"
+        draggable="false"
+      />
 
-        {phase === "intro" && (
-          <section className="guardian-question-panel">
-            <span className="guardian-question-number">
-              Fasa Sambutan
-            </span>
+      {/* Intro */}
+      {phase === "intro" && (
+        <section className="guardian-question-panel guardian-question-panel--intro">
+          <span className="guardian-question-number">
+            Fasa Sambutan
+          </span>
 
-            <div className="guardian-typing-text">
-              {typedText
-                .split("\n")
-                .map((line, index) => (
-                  <p key={index}>
-                    {line || "\u00A0"}
-                  </p>
-                ))}
-            </div>
+          <div className="guardian-typing-text">
+            {typedText.split("\n").map((line, index) => (
+              <p key={index}>
+                {line || "\u00A0"}
+              </p>
+            ))}
+          </div>
 
-            {typingComplete && (
-              <button
-                type="button"
-                className="guardian-start-button"
-                onClick={handleStartTest}
-              >
-                MULAKAN UJIAN
-              </button>
-            )}
-          </section>
-        )}
-
-        {phase === "countdown" &&
-          showCountdown && (
-            <section className="guardian-question-panel">
-              <div
-                key={countdown}
-                className="guardian-countdown-text"
-              >
-                {countdown === 0
-                  ? "MULA"
-                  : countdown}
-              </div>
-            </section>
-          )}
-
-        {phase === "playing" && currentQuestion && (
-          <section className="guardian-question-panel">
-            <span className="guardian-question-number">
-              Soalan {questionIndex + 1} /{" "}
-              {questions.length}
-            </span>
-
-            <p className="guardian-playing-question">
-              {currentQuestion.question}
-            </p>
-          </section>
-        )}
-
-        {phase === "result" && (
-          <section className="guardian-question-panel">
-            <span className="guardian-question-number">
-              Ujian Tamat
-            </span>
-
-            <p className="guardian-playing-question">
-              Teruskan Usaha
-            </p>
-
-            <p>
-              Anda belum berjaya menjawab semua
-              soalan dengan betul.
-            </p>
-
-            <h2>
-              {correctCount} / {questions.length}
-            </h2>
-
-            <p>
-              Anda perlu mendapat markah penuh untuk
-              membuka Kota I&apos;rab.
-            </p>
-
+          {typingComplete && (
             <button
               type="button"
               className="guardian-start-button"
-              onClick={handleRetry}
+              onClick={handleStartTest}
             >
-              CUBA LAGI
+              MULAKAN UJIAN
             </button>
-          </section>
-        )}
+          )}
+        </section>
+      )}
 
-        <section className="guardian-progress">
-          <div className="guardian-progress-frame">
-            <div
-              className="guardian-progress-fill"
-              style={{
-                width: `${
-                  questions.length > 0
-                    ? (correctCount /
-                        questions.length) *
-                      100
-                    : 0
-                }%`,
-              }}
-            />
+      {/* Countdown */}
+      {phase === "countdown" && showCountdown && (
+        <section className="guardian-countdown">
+          <div
+            key={countdown}
+            className="guardian-countdown-text"
+          >
+            {countdown === 0 ? "MULA" : countdown}
           </div>
+        </section>
+      )}
 
-          <div className="guardian-progress-text">
+      {/* Soalan */}
+      {phase === "playing" && currentQuestion && (
+        <section className="guardian-question-panel guardian-question-panel--playing">
+          <span className="guardian-question-number">
+            Soalan {questionIndex + 1} /{" "}
+            {questions.length}
+          </span>
+
+          <p
+            className="guardian-playing-question"
+            dir="auto"
+          >
+            {currentQuestion.question}
+          </p>
+        </section>
+      )}
+
+      {/* Keputusan gagal */}
+      {phase === "result" && (
+        <section className="guardian-question-panel guardian-question-panel--result">
+          <span className="guardian-question-number">
+            Ujian Tamat
+          </span>
+
+          <h2 className="guardian-result-heading">
+            Teruskan Usaha
+          </h2>
+
+          <p>
+            Anda belum berjaya menjawab semua
+            soalan dengan betul.
+          </p>
+
+          <strong className="guardian-result-score">
             {correctCount} / {questions.length}
-          </div>
+          </strong>
+
+          <p>
+            Anda perlu mendapat markah penuh untuk
+            membuka Kota I&apos;rab.
+          </p>
+
+          <button
+            type="button"
+            className="guardian-start-button"
+            onClick={handleRetry}
+          >
+            CUBA LAGI
+          </button>
         </section>
+      )}
 
-        <section className="guardian-hud">
-          <div>
-            <span>Betul</span>
+      {/* Jawapan petak */}
+     {phase === "playing" && currentQuestion && (
+  <section className="guardian-answer-area">
+    {currentQuestion.options.map((option, index) => {
+      const isSelected = selectedAnswer === index;
+      const hasSelected = selectedAnswer !== null;
 
-            <strong>
-              {correctCount} / {questions.length}
-            </strong>
-          </div>
-        </section>
+      const stateClass =
+        isSelected && answerState === "correct"
+          ? "correct"
+          : isSelected && answerState === "wrong"
+            ? "wrong"
+            : "";
 
-        <section className="guardian-crystal-status">
-          <div className="crystal-value crystal-green" />
-          <div className="crystal-value crystal-red" />
-          <div className="crystal-value crystal-purple" />
-        </section>
+      const dismissedClass =
+        hasSelected && !isSelected
+          ? "dismissed"
+          : "";
 
-        {phase === "playing" && currentQuestion && (
-          <section className="guardian-answer-area">
-            {currentQuestion.options.map(
-              (option, index) => {
-                const isSelected =
-                  selectedAnswer === index;
+      return (
+        <button
+          key={`${option}-${index}`}
+          type="button"
+          onClick={() => handleAnswerClick(index)}
+          disabled={answerState !== "idle"}
+          className={[
+            "answer-stone",
+            isSelected ? "selected" : "",
+            stateClass,
+            dismissedClass,
+          ]
+            .filter(Boolean)
+            .join(" ")}
+        >
+          <span className="answer-stone-number">
+            {index + 1}
+          </span>
 
-                const stateClass =
-                  isSelected &&
-                  answerState === "correct"
-                    ? "correct"
-                    : isSelected &&
-                        answerState === "wrong"
-                      ? "wrong"
-                      : "";
+          <span
+            className="answer-stone-text"
+            dir="auto"
+          >
+            {option}
+          </span>
 
-                return (
-                  <button
-                    key={`${option}-${index}`}
-                    type="button"
-                    onClick={() =>
-                      handleAnswerClick(index)
-                    }
-                    disabled={
-                      answerState !== "idle"
-                    }
-                    className={[
-                      "answer-stone",
-                      isSelected
-                        ? "selected"
-                        : "",
-                      stateClass,
-                    ]
-                      .filter(Boolean)
-                      .join(" ")}
-                  >
-                    <span>{option}</span>
-                  </button>
-                );
-              }
-            )}
-          </section>
-        )}
+          <span
+            className="answer-stone-shine"
+            aria-hidden="true"
+          />
+
+          <span
+            className="answer-stone-spark"
+            aria-hidden="true"
+          />
+        </button>
+      );
+    })}
+  </section>
+)}
+
+      {/* Progress bawah */}
+      <section className="guardian-progress">
+        <div className="guardian-progress-frame">
+          <div
+            className="guardian-progress-fill"
+            style={{
+              width: `${
+                questions.length > 0
+                  ? (correctCount / questions.length) * 100
+                  : 0
+              }%`,
+            }}
+          />
+        </div>
+
+        <div className="guardian-progress-text">
+          {correctCount} / {questions.length}
+        </div>
       </section>
-    </main>
-  );
+    </section>
+  </main>
+);
 }

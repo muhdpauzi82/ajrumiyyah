@@ -13,7 +13,11 @@ const ANSWER_DELAY = 700;
 function shuffleArray(items) {
   const result = [...items];
 
-  for (let index = result.length - 1; index > 0; index -= 1) {
+  for (
+    let index = result.length - 1;
+    index > 0;
+    index -= 1
+  ) {
     const randomIndex = Math.floor(
       Math.random() * (index + 1)
     );
@@ -31,11 +35,16 @@ function prepareQuestions(questionBank) {
   return shuffleArray(questionBank)
     .slice(
       0,
-      Math.min(TOTAL_QUESTIONS, questionBank.length)
+      Math.min(
+        TOTAL_QUESTIONS,
+        questionBank.length
+      )
     )
     .map((question) => ({
       ...question,
-      options: shuffleArray(question.options),
+      options: shuffleArray(
+        question.options
+      ),
     }));
 }
 
@@ -47,20 +56,25 @@ export default function BabIrabQuiz() {
     []
   );
 
-  const [questionIndex, setQuestionIndex] = useState(0);
+  const [questionIndex, setQuestionIndex] =
+    useState(0);
+
   const [selectedAnswer, setSelectedAnswer] =
     useState("");
-  const [correctCount, setCorrectCount] = useState(0);
-  const [wrongCount, setWrongCount] = useState(0);
-  const [finalResult, setFinalResult] = useState(null);
 
-  const currentQuestion = questions[questionIndex];
+  const [correctCount, setCorrectCount] =
+    useState(0);
+
+  const [wrongCount, setWrongCount] =
+    useState(0);
+
+  const [finalResult, setFinalResult] =
+    useState(null);
+
+  const currentQuestion =
+    questions[questionIndex];
+
   const totalQuestions = questions.length;
-
-  const progress =
-    totalQuestions > 0
-      ? ((questionIndex + 1) / totalQuestions) * 100
-      : 0;
 
   function handleAnswer(option) {
     if (
@@ -89,11 +103,13 @@ export default function BabIrabQuiz() {
 
     window.setTimeout(() => {
       const isLastQuestion =
-        questionIndex === totalQuestions - 1;
+        questionIndex ===
+        totalQuestions - 1;
 
       if (isLastQuestion) {
         const passed =
-          updatedCorrectCount === totalQuestions;
+          updatedCorrectCount ===
+          totalQuestions;
 
         if (passed) {
           localStorage.setItem(
@@ -115,7 +131,8 @@ export default function BabIrabQuiz() {
       }
 
       setQuestionIndex(
-        (previousIndex) => previousIndex + 1
+        (previousIndex) =>
+          previousIndex + 1
       );
 
       setSelectedAnswer("");
@@ -128,7 +145,8 @@ export default function BabIrabQuiz() {
         correctCount,
         wrongCount,
         totalQuestions,
-        passed: finalResult === "passed",
+        passed:
+          finalResult === "passed",
       },
     });
   }
@@ -142,7 +160,9 @@ export default function BabIrabQuiz() {
       return "";
     }
 
-    if (option === currentQuestion.answer) {
+    if (
+      option === currentQuestion.answer
+    ) {
       return "correct";
     }
 
@@ -156,14 +176,21 @@ export default function BabIrabQuiz() {
   if (!currentQuestion) {
     return (
       <main className="bab-irab-screen">
-        <p>Bank soalan Bab I‘rab belum tersedia.</p>
+        <section className="bab-irab-empty">
+          <p>
+            Bank soalan Bab I‘rab belum
+            tersedia.
+          </p>
 
-        <button
-          type="button"
-          onClick={() => navigate("/kota-irab")}
-        >
-          Kembali
-        </button>
+          <button
+            type="button"
+            onClick={() =>
+              navigate("/kota-irab")
+            }
+          >
+            Kembali
+          </button>
+        </section>
       </main>
     );
   }
@@ -178,70 +205,63 @@ export default function BabIrabQuiz() {
           draggable="false"
         />
 
-        <button
-          type="button"
-          className="bab-irab-back-hotspot"
-          onClick={() => navigate("/kota-irab")}
-          aria-label="Kembali ke Kota I'rab"
-          title="Kembali ke Kota I'rab"
+        <div
+          className="bab-irab-background-shade"
+          aria-hidden="true"
         />
 
-        <aside className="bab-irab-progress-content">
-          <span className="bab-irab-progress-label">
-            KEMAJUAN
+        <button
+          type="button"
+          className="bab-irab-back"
+          onClick={() =>
+            navigate("/kota-irab")
+          }
+        >
+          <span aria-hidden="true">
+            ←
           </span>
 
-          <strong>
-            Soalan {questionIndex + 1}
-          </strong>
+          Kembali
+        </button>
 
-          <p>daripada {totalQuestions}</p>
+        <section
+          key={currentQuestion.id}
+          className="bab-irab-question-card"
+        >
+          <div className="bab-irab-card-title">
+            <span aria-hidden="true">
+              ◆
+            </span>
 
-          <div className="bab-irab-progress-track">
-            <div
-              className="bab-irab-progress-fill"
-              style={{
-                width: `${progress}%`,
-              }}
-            />
+          
+
+            <span aria-hidden="true">
+              ◆
+            </span>
           </div>
-        </aside>
 
-        <aside className="bab-irab-status-content">
-          <span className="bab-irab-status-label">
-            STATUS LATIHAN
-          </span>
-
-          <div className="bab-irab-status-row">
-    <span>✔ Betul</span>
-    <strong>{correctCount}</strong>
-</div>
-
-<div className="bab-irab-status-row">
-    <span>✖ Belum Tepat</span>
-    <strong>{wrongCount}</strong>
-</div>
-        </aside>
-
-        <section className="bab-irab-question-area">
-          {currentQuestion.vocabulary?.arabic && (
+             {currentQuestion
+            .vocabulary?.arabic && (
             <div className="bab-irab-vocabulary">
-              <div className="bab-irab-arabic-line">
-                <h2 dir="rtl" lang="ar">
-                  {
-                    currentQuestion.vocabulary
-                      .arabic
-                  }
-                </h2>
-
-                </div>
-
-              <p>
+              <h2
+                dir="rtl"
+                lang="ar"
+              >
                 {
-                  currentQuestion.vocabulary
-                    .meaning
+                  currentQuestion
+                    .vocabulary.arabic
                 }
-              </p>
+              </h2>
+
+              {currentQuestion
+                .vocabulary.meaning && (
+                <p>
+                  {
+                    currentQuestion
+                      .vocabulary.meaning
+                  }
+                </p>
+              )}
             </div>
           )}
 
@@ -259,15 +279,27 @@ export default function BabIrabQuiz() {
             {currentQuestion.question}
           </p>
 
+          <div
+            className="bab-irab-question-divider"
+            aria-hidden="true"
+          >
+            <span />
+            <b>◆</b>
+            <span />
+          </div>
+
           <div className="bab-irab-options">
             {currentQuestion.options.map(
               (option, index) => (
                 <button
                   key={`${currentQuestion.id}-${index}`}
                   type="button"
-                  className={`bab-irab-option ${getOptionClass(
-                    option
-                  )}`}
+                  className={[
+                    "bab-irab-option",
+                    getOptionClass(option),
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
                   onClick={() =>
                     handleAnswer(option)
                   }
@@ -275,7 +307,29 @@ export default function BabIrabQuiz() {
                     selectedAnswer
                   )}
                 >
-                  {option}
+                  <span className="bab-irab-option-letter">
+                    {String.fromCharCode(
+                      65 + index
+                    )}
+                  </span>
+
+                  <span className="bab-irab-option-text">
+                    {option}
+                  </span>
+
+                  <span
+                    className="bab-irab-option-feedback"
+                    aria-hidden="true"
+                  >
+                    {selectedAnswer &&
+                    option ===
+                      currentQuestion.answer
+                      ? "✓"
+                      : selectedAnswer ===
+                          option
+                        ? "✕"
+                        : ""}
+                  </span>
                 </button>
               )
             )}
@@ -286,108 +340,138 @@ export default function BabIrabQuiz() {
           className="bab-irab-question-navigation"
           aria-label="Kemajuan latihan"
         >
-          {questions.map((question, index) => {
-            const isCurrent =
-              index === questionIndex;
+          {questions.map(
+            (question, index) => {
+              const isCurrent =
+                index === questionIndex;
 
-            const isCompleted =
-              index < questionIndex;
+              const isCompleted =
+                index < questionIndex;
 
-            return (
-              <span
-                key={question.id ?? index}
-                className={[
-                  "bab-irab-number",
-                  isCurrent ? "current" : "",
-                  isCompleted
-                    ? "completed"
-                    : "",
-                ]
-                  .filter(Boolean)
-                  .join(" ")}
-              >
-                {index + 1}
-              </span>
-            );
-          })}
+              return (
+                <span
+                  key={
+                    question.id ?? index
+                  }
+                  className={[
+                    "bab-irab-number",
+                    isCurrent
+                      ? "current"
+                      : "",
+                    isCompleted
+                      ? "completed"
+                      : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                >
+                  {index + 1}
+                </span>
+              );
+            }
+          )}
         </nav>
 
         {finalResult && (
-  <div className="bab-irab-result-overlay">
-    <section
-      className={`bab-irab-result-card ${finalResult}`}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="bab-irab-result-title"
-    >
-      {finalResult === "passed" ? (
-        <>
-          <span className="bab-irab-result-arabic">
-            تهنئة      </span>
+          <div className="bab-irab-result-overlay">
+            <section
+              className={[
+                "bab-irab-result-card",
+                finalResult,
+              ].join(" ")}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="bab-irab-result-title"
+            >
+              {finalResult ===
+              "passed" ? (
+                <>
+                  <span className="bab-irab-result-arabic">
+                    تَهْنِئَةٌ
+                  </span>
 
-          <h2 id="bab-irab-result-title">
-            TAHNIAH!
-          </h2>
+                  <h2 id="bab-irab-result-title">
+                    TAHNIAH!
+                  </h2>
 
-          <p className="bab-irab-result-message">
-            Anda berjaya menamatkan latihan Bab I‘rab.
-          </p>
+                  <p className="bab-irab-result-message">
+                    Anda berjaya
+                    menamatkan latihan
+                    Bab I‘rab.
+                  </p>
 
-          <div className="bab-irab-result-score">
-            <span>Markah Anda</span>
-            <strong>
-              {correctCount} / {totalQuestions}
-            </strong>
+                  <div className="bab-irab-result-score">
+                    <span>
+                      Markah Anda
+                    </span>
+
+                    <strong>
+                      {correctCount} /{" "}
+                      {totalQuestions}
+                    </strong>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="bab-irab-result-button passed"
+                    onClick={
+                      handleFinishQuiz
+                    }
+                  >
+                    TERUSKAN
+                  </button>
+                </>
+              ) : (
+                <>
+                  <span className="bab-irab-result-icon">
+                    📖
+                  </span>
+
+                  <h2 id="bab-irab-result-title">
+                    BELUM BERJAYA
+                  </h2>
+
+                  <p className="bab-irab-result-message">
+                    Anda belum menguasai
+                    latihan ini. Sila
+                    ulangi.
+                  </p>
+
+                  <div className="bab-irab-result-score">
+                    <span>
+                      Markah Anda
+                    </span>
+
+                    <strong>
+                      {correctCount} /{" "}
+                      {totalQuestions}
+                    </strong>
+                  </div>
+
+                  <p className="bab-irab-result-detail">
+                    Betul: {correctCount}
+                    <span aria-hidden="true">
+                      {" "}
+                      •{" "}
+                    </span>
+                    Belum tepat:{" "}
+                    {wrongCount}
+                  </p>
+
+                  <button
+                    type="button"
+                    className="bab-irab-result-button failed"
+                    onClick={
+                      handleRepeatQuiz
+                    }
+                  >
+                    ULANGI LATIHAN
+                  </button>
+                </>
+              )}
+            </section>
           </div>
-
-          <button
-            type="button"
-            className="bab-irab-result-button passed"
-            onClick={handleFinishQuiz}
-          >
-            TERUSKAN
-          </button>
-        </>
-      ) : (
-        <>
-          <span className="bab-irab-result-icon">
-            📖
-          </span>
-
-          <h2 id="bab-irab-result-title">
-            BELUM BERJAYA
-          </h2>
-
-          <p className="bab-irab-result-message">
-            Anda belum menguasai latihan ini.
-            Sila ulangi.
-          </p>
-
-          <div className="bab-irab-result-score">
-            <span>Markah Anda</span>
-            <strong>
-              {correctCount} / {totalQuestions}
-            </strong>
-          </div>
-
-          <p className="bab-irab-result-detail">
-            Betul: {correctCount}
-            <span aria-hidden="true"> • </span>
-            Belum tepat: {wrongCount}
-          </p>
-
-          <button
-            type="button"
-            className="bab-irab-result-button failed"
-            onClick={handleRepeatQuiz}
-          >
-            ULANGI LATIHAN
-          </button>
-        </>
-      )}
-    </section>
-  </div>
-)}
+        )}
       </section>
     </main>
   );

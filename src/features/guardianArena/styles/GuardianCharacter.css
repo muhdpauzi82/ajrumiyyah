@@ -1,101 +1,88 @@
 .guardian-character {
   position: absolute;
+  right: 1.6%;
+  bottom: 2.5%;
+  z-index: 15;
 
-  right: 4%;
-  bottom: 15%;
-
-  width: 27%;
-  height: auto;
+  width: 29%;
+  height: 76%;
 
   object-fit: contain;
-
-  z-index: 7;
+  object-position: bottom center;
 
   pointer-events: none;
   user-select: none;
+
+  filter:
+    drop-shadow(
+      0 13px 13px rgba(0, 0, 0, 0.5)
+    );
+
+  transform-origin: bottom center;
+
+  animation:
+    guardian-idle
+    3.6s ease-in-out infinite;
 }
 
-.guardian-character{
-    transition:
-        opacity .25s ease,
-        transform .25s ease;
+.guardian-character--smile {
+  animation:
+    guardian-correct-reaction
+    620ms ease-out,
+    guardian-idle
+    3.6s 620ms ease-in-out infinite;
 }
 
-.guardian-book-glow {
-  position: absolute;
-  left: 32%;
-  top: 48%;
-
-  width: 25%;
-  height: 20%;
-
-  border-radius: 50%;
-
-  opacity: 0;
-  pointer-events: none;
-  z-index: 6;
+.guardian-character--serious {
+  animation:
+    guardian-wrong-reaction
+    560ms ease-out,
+    guardian-idle
+    3.6s 560ms ease-in-out infinite;
 }
 
-.guardian-book-glow.is-active {
-  animation: guardian-book-glow 500ms ease;
+@keyframes guardian-idle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
-.guardian-question-rising {
-  position: absolute;
-  left: 43%;
-  top: 58%;
-
-  width: 34%;
-
-  transform: translateX(-50%);
-
-  color: #fff4cc;
-  font-size: clamp(16px, 1.7vw, 30px);
-  font-weight: 800;
-  text-align: center;
-
-  opacity: 0;
-  z-index: 12;
-}
-
-.guardian-question-rising.is-rising {
-  animation: guardian-question-rise 900ms ease forwards;
-}
-
-
-@keyframes guardian-book-glow {
+@keyframes guardian-correct-reaction {
   0% {
-    opacity: 0;
-    box-shadow: 0 0 0 rgba(255, 210, 80, 0);
+    transform: translateY(0) scale(1);
   }
 
   45% {
-    opacity: 1;
-    box-shadow:
-      0 0 35px rgba(255, 222, 112, 0.9),
-      0 0 75px rgba(255, 167, 28, 0.65);
+    transform:
+      translateY(-8px)
+      scale(1.035);
   }
 
   100% {
-    opacity: 0;
-    box-shadow: 0 0 0 rgba(255, 210, 80, 0);
+    transform: translateY(0) scale(1);
   }
 }
 
-@keyframes guardian-question-rise {
-  0% {
-    top: 58%;
-    opacity: 0;
-    transform: translateX(-50%) scale(0.9);
+@keyframes guardian-wrong-reaction {
+  0%,
+  100% {
+    transform: translateX(0);
   }
 
   25% {
-    opacity: 1;
+    transform: translateX(-5px);
   }
 
-  100% {
-    top: 26%;
-    opacity: 1;
-    transform: translateX(-50%) scale(1);
+  50% {
+    transform: translateX(5px);
+  }
+
+  75% {
+    transform: translateX(-3px);
   }
 }

@@ -1,188 +1,653 @@
-
 .guardian-answer-area {
   position: absolute;
-  left: 20%;
-  bottom: 14.5%;
+  left: 52%;
+  bottom: 7%;
+  z-index: 18;
 
-  width: 50%;
-  height: 19%;
+  width: 47%;
 
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  align-items: center;
-  justify-items: center;
-  gap: 2%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(7px, 1.15vh, 13px);
 
-  z-index: 20;
+  transform: translateX(-50%);
 }
 
 .answer-stone {
   position: relative;
+  overflow: hidden;
 
-  width: 72%;
-  max-width: 155px;
+  width: 90%;
+  min-height: clamp(22px, 7.2vh, 70px);
+
+  padding:
+    clamp(5px, 1.2vh, 14px)
+    clamp(20px, 2vw, 32px)
+    clamp(9px, 1.2vh, 14px)
+    clamp(68px, 5vw, 86px);
+
+  border: 2.5px solid #dcb347;
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #2e855c,
+      #146342 52%,
+      #07422f
+    );
+
+  color: #fffbe4;
+
+  cursor: pointer;
+
+  box-shadow:
+    inset 0 0 0 2px
+      rgba(255, 239, 177, 0.12),
+    inset 0 -8px 14px
+      rgba(0, 0, 0, 0.2),
+    0 6px 13px
+      rgba(0, 0, 0, 0.38);
+
+  transform-origin: center;
+
+  transition:
+    transform 180ms ease,
+    filter 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.answer-stone:hover:not(:disabled) {
+  transform:
+    translateY(-3px)
+    scale(1.012);
+
+  filter: brightness(1.14);
+
+  box-shadow:
+    inset 0 0 0 2px
+      rgba(255, 239, 177, 0.22),
+    0 0 21px
+      rgba(255, 206, 68, 0.4),
+    0 8px 17px
+      rgba(0, 0, 0, 0.42);
+}
+
+.answer-stone:disabled {
+  cursor: default;
+}
+
+.answer-stone-number {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+
+  width: clamp(20px, 3.5vw, 56px);
   aspect-ratio: 1;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  padding: 0;
+  transform: translateY(-50%);
 
-  border: 4px solid #b98232;
+  border: 2px solid #ffe893;
   border-radius: 50%;
 
-  color: #fff4cf;
   background:
-    radial-gradient(
-      circle at 32% 24%,
-      #9a9b8e 0%,
-      #6d7169 30%,
-      #454a45 63%,
-      #252a27 100%
+    linear-gradient(
+      180deg,
+      #286c4d,
+      #0c402e
     );
 
-  font-family: "Amiri", serif;
-  font-size: clamp(22px, 2.2vw, 38px);
-  font-weight: 800;
-  line-height: 1;
+  color: #fff1a9;
 
-  cursor: pointer;
-
-  box-shadow:
-    inset 0 10px 14px rgba(255, 255, 255, 0.18),
-    inset 0 -14px 18px rgba(0, 0, 0, 0.48),
-    0 8px 0 #5a371a,
-    0 13px 18px rgba(0, 0, 0, 0.55);
-
-  text-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.95),
-    0 0 7px rgba(255, 230, 177, 0.25);
-
-  transition:
-    transform 170ms ease,
-    filter 170ms ease,
-    box-shadow 170ms ease;
+  font-size: clamp(12px, 1.6vw, 27px);
+  font-weight: 900;
 }
 
-.answer-stone::before {
-  content: "";
+.answer-stone-text {
+  display: block;
 
+  font-family:
+    "Amiri",
+    Georgia,
+    serif;
+
+  font-size: clamp(14px, 1.55vw, 27px);
+  font-weight: 900;
+  line-height: 1.3;
+  text-align: center;
+
+  text-shadow:
+    0 2px 3px rgba(0, 0, 0, 0.62);
+}
+
+.answer-stone-spark {
   position: absolute;
-  inset: 8%;
+  top: 50%;
+  left: 50%;
 
-  border: 2px solid rgba(255, 226, 155, 0.28);
+  width: 10px;
+  height: 10px;
+
   border-radius: 50%;
 
-  box-shadow:
-    inset 0 0 12px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Betul */
+.answer-stone.correct {
+  border-color: #fff18b;
+
+  background:
+    linear-gradient(
+      180deg,
+      #56c16c,
+      #18864a,
+      #07512d
+    );
+
+  animation:
+    answer-correct-glow
+      260ms ease-out,
+    answer-fly-to-book
+      720ms 260ms ease-in forwards;
+}
+
+.answer-stone.correct
+  .answer-stone-spark {
+  animation:
+    answer-spark-burst
+    650ms ease-out forwards;
+}
+
+/* Salah */
+.answer-stone.wrong {
+  border-color: #ff9f7d;
+
+  background:
+    linear-gradient(
+      180deg,
+      #bd4d43,
+      #7a2925,
+      #481512
+    );
+
+  animation:
+    answer-wrong-shake
+      330ms ease,
+    answer-wrong-away
+      600ms 330ms ease-in forwards;
+}
+
+/* Pilihan lain */
+.answer-stone.dismissed {
+  animation:
+    answer-dismiss
+    390ms ease forwards;
+}
+
+@keyframes answer-correct-glow {
+  50% {
+    transform:
+      translateY(-5px)
+      scale(1.045);
+
+    filter: brightness(1.55);
+
+    box-shadow:
+      0 0 18px #fff2a5,
+      0 0 42px
+        rgba(255, 205, 60, 0.82);
+  }
+}
+
+@keyframes answer-fly-to-book {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  45% {
+    transform:
+      translate3d(60px, -95px, 0)
+      scale(0.65)
+      rotate(-2deg);
+
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      translate3d(110px, -275px, 0)
+      scale(0.05)
+      rotate(8deg);
+
+    opacity: 0;
+
+    filter:
+      brightness(2)
+      blur(2px);
+  }
+}
+
+@keyframes answer-wrong-shake {
+  20% {
+    transform: translateX(-12px);
+  }
+
+  40% {
+    transform: translateX(11px);
+  }
+
+  60% {
+    transform: translateX(-8px);
+  }
+
+  80% {
+    transform: translateX(6px);
+  }
+}
+
+@keyframes answer-wrong-away {
+  100% {
+    transform:
+      translate3d(-220px, 90px, 0)
+      rotate(-18deg)
+      scale(0.45);
+
+    opacity: 0;
+  }
+}
+
+@keyframes answer-dismiss {
+  100% {
+    transform: scale(0.9);
+    opacity: 0;
+    filter: blur(3px);
+  }
+}
+
+@keyframes answer-spark-burst {
+  0% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0);
+  }
+
+  25% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(6);
+
+    box-shadow:
+      0 -35px 0 #fff3a0,
+      30px -19px 0 #ffd34f,
+      35px 12px 0 #fff6be,
+      18px 33px 0 #ffc62f,
+      -20px 33px 0 #fff3a0,
+      -37px 8px 0 #ffce45;
+  }
+}
+/* =========================================
+   KESAN CAHAYA BERGERAK PADA BUTANG
+========================================= */
+
+.answer-stone-shine {
+  position: absolute;
+  top: -40%;
+  left: -30%;
+
+  width: 22%;
+  height: 180%;
+
+  opacity: 0;
+
+  transform:
+    rotate(20deg)
+    translateX(-200%);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 220, 0.55),
+      transparent
+    );
 
   pointer-events: none;
 }
 
-.answer-stone::after{
-    content:"";
+.answer-stone:hover:not(:disabled)
+.answer-stone-shine {
+  opacity: 1;
 
-    position:absolute;
-
-    width:75%;
-    height:12%;
-
-    bottom:-12%;
-
-    border-radius:50%;
-
-    background:rgba(0,0,0,.45);
-
-    filter:blur(8px);
-
-    z-index:-1;
+  animation:
+    guardian-answer-shine
+    650ms ease-out;
 }
 
-.answer-stone span {
-  position: relative;
-  z-index: 2;
-}
-
-.answer-stone.selected{
-
+@keyframes guardian-answer-shine {
+  from {
     transform:
-        translateY(5px)
-        scale(.96);
+      rotate(20deg)
+      translateX(-220%);
+  }
 
-    filter:brightness(1.15);
-
+  to {
+    transform:
+      rotate(20deg)
+      translateX(650%);
+  }
 }
 
-.answer-stone.correct{
 
-    background:
-        radial-gradient(
-            circle,
-            #7cff7c 0%,
-            #33b64a 40%,
-            #0d6a2b 100%
-        );
+/* =========================================
+   TITIK CAHAYA UNTUK JAWAPAN BETUL
+========================================= */
 
-    box-shadow:
-        0 0 35px rgba(90,255,120,.85);
+.answer-stone-spark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
 
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  opacity: 0;
+  pointer-events: none;
 }
-.answer-stone.wrong {
+
+
+/* =========================================
+   JAWAPAN BETUL
+   1. Menyala
+   2. Naik
+   3. Terbang ke arah kitab
+========================================= */
+
+.answer-stone.correct {
+  z-index: 30;
+
+  border-color: #fff19a;
+
   background:
-    radial-gradient(
-      circle at 32% 24%,
-      #ff9c8d 0%,
-      #c84c43 38%,
-      #7a2428 70%,
-      #3f1217 100%
+    linear-gradient(
+      180deg,
+      #59c976 0%,
+      #16884b 52%,
+      #07542f 100%
     );
 
-  box-shadow:
-    inset 0 10px 14px rgba(255, 255, 255, 0.18),
-    inset 0 -14px 18px rgba(0, 0, 0, 0.45),
-    0 0 30px rgba(255, 75, 75, 0.8);
-
-  animation: answer-wrong-shake 380ms ease;
+  animation:
+    guardian-answer-correct-glow
+      260ms ease-out,
+    guardian-answer-fly-book
+      720ms 260ms
+      cubic-bezier(
+        0.52,
+        0.03,
+        0.72,
+        0.42
+      )
+      forwards;
 }
 
+.answer-stone.correct
+.answer-stone-spark {
+  animation:
+    guardian-answer-spark-burst
+    650ms ease-out forwards;
+}
 
-@keyframes answer-wrong-shake {
-  0%,
+@keyframes guardian-answer-correct-glow {
+  0% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform:
+      translateY(-7px)
+      scale(1.045);
+
+    filter: brightness(1.55);
+
+    box-shadow:
+      0 0 18px #fff4a9,
+      0 0 42px rgba(255, 211, 65, 0.85),
+      0 9px 18px rgba(0, 0, 0, 0.4);
+  }
+
   100% {
-    transform: translateX(0) scale(0.98);
+    transform:
+      translateY(-4px)
+      scale(1.025);
+  }
+}
+
+@keyframes guardian-answer-fly-book {
+  0% {
+    transform:
+      translate3d(0, -4px, 0)
+      scale(1.025)
+      rotate(0deg);
+
+    opacity: 1;
   }
 
-  25% {
-    transform: translateX(-6%) scale(0.98);
-  }
+  40% {
+    transform:
+      translate3d(70px, -80px, 0)
+      scale(0.68)
+      rotate(-2deg);
 
-  50% {
-    transform: translateX(6%) scale(0.98);
+    opacity: 1;
   }
 
   75% {
-    transform: translateX(-3%) scale(0.98);
+    transform:
+      translate3d(120px, -175px, 0)
+      scale(0.3)
+      rotate(3deg);
+
+    opacity: 0.8;
+  }
+
+  100% {
+    transform:
+      translate3d(150px, -245px, 0)
+      scale(0.05)
+      rotate(8deg);
+
+    opacity: 0;
+
+    filter:
+      brightness(2.3)
+      blur(2px);
   }
 }
 
-.answer-stone:hover {
-  transform: translateY(-7%) scale(1.06);
-  filter: brightness(1.15);
 
-  box-shadow:
-    inset 0 10px 14px rgba(255, 255, 255, 0.2),
-    inset 0 -14px 18px rgba(0, 0, 0, 0.45),
-    0 8px 0 #5a371a,
-    0 0 28px rgba(255, 205, 92, 0.55),
-    0 15px 22px rgba(0, 0, 0, 0.55);
+/* =========================================
+   LETUPAN CAHAYA
+========================================= */
+
+@keyframes guardian-answer-spark-burst {
+  0% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0);
+  }
+
+  25% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(6);
+
+    box-shadow:
+      0 -34px 0 #fff5ae,
+      28px -20px 0 #ffd64e,
+      36px 8px 0 #fff8d1,
+      20px 33px 0 #ffc72e,
+      -18px 34px 0 #fff0a0,
+      -36px 10px 0 #ffd342,
+      -28px -22px 0 #fff8d1;
+  }
 }
 
-.answer-stone:active {
-  transform: translateY(3%) scale(0.96);
 
-  box-shadow:
-    inset 0 8px 14px rgba(0, 0, 0, 0.38),
-    0 3px 0 #5a371a,
-    0 7px 12px rgba(0, 0, 0, 0.5);
+/* =========================================
+   JAWAPAN SALAH
+   1. Bertukar merah
+   2. Bergetar
+   3. Berpusing keluar
+========================================= */
+
+.answer-stone.wrong {
+  z-index: 30;
+
+  border-color: #ffac87;
+
+  background:
+    linear-gradient(
+      180deg,
+      #c85449 0%,
+      #842d28 54%,
+      #4c1714 100%
+    );
+
+  animation:
+    guardian-answer-wrong-shake
+      340ms ease,
+    guardian-answer-wrong-away
+      600ms 340ms ease-in forwards;
+}
+
+@keyframes guardian-answer-wrong-shake {
+  0%,
+  100% {
+    transform:
+      translateX(0)
+      rotate(0deg);
+  }
+
+  18% {
+    transform:
+      translateX(-13px)
+      rotate(-1.5deg);
+  }
+
+  36% {
+    transform:
+      translateX(12px)
+      rotate(1.5deg);
+  }
+
+  54% {
+    transform:
+      translateX(-9px)
+      rotate(-1deg);
+  }
+
+  72% {
+    transform:
+      translateX(7px)
+      rotate(1deg);
+  }
+
+  88% {
+    transform:
+      translateX(-3px)
+      rotate(-0.5deg);
+  }
+}
+
+@keyframes guardian-answer-wrong-away {
+  0% {
+    transform:
+      translate3d(0, 0, 0)
+      rotate(0deg)
+      scale(1);
+
+    opacity: 1;
+  }
+
+  55% {
+    transform:
+      translate3d(-90px, 30px, 0)
+      rotate(-7deg)
+      scale(0.78);
+
+    opacity: 0.9;
+  }
+
+  100% {
+    transform:
+      translate3d(-260px, 110px, 0)
+      rotate(-22deg)
+      scale(0.38);
+
+    opacity: 0;
+
+    filter: blur(2px);
+  }
+}
+
+
+/* =========================================
+   JAWAPAN LAIN YANG TIDAK DIPILIH
+========================================= */
+
+.answer-stone.dismissed {
+  pointer-events: none;
+
+  animation:
+    guardian-answer-dismiss
+    380ms ease forwards;
+}
+
+@keyframes guardian-answer-dismiss {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+
+    transform:
+      translateY(8px)
+      scale(0.9);
+
+    filter: blur(3px);
+  }
 }

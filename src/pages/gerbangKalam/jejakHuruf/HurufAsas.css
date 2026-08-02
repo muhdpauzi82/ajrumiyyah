@@ -211,7 +211,11 @@
   margin: 0.45cqw 0 0;
 
   color: #173d38;
-  font-size: clamp(11px, 1.6cqw, 27px);
+  font-size: clamp(11px, 1.6cqw, 37px);
+   font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
   line-height: 1.35;
 }
 
@@ -333,7 +337,7 @@
   background: #d6d9af;
   color: #315d54;
 
-  font-size: clamp(6px, 0.58cqw, 10px);
+  font-size: clamp(10px, 0.58cqw, 20px);
   font-weight: 800;
 }
 
@@ -490,7 +494,7 @@
 
   .huruf-quiz-title {
     margin: 0.3cqw 0 0;
-    font-size: clamp(13px, 2cqw, 29px);
+    font-size: clamp(23px, 2cqw, 29px);
   }
 
   .huruf-quiz-subtitle {
@@ -509,17 +513,28 @@
     height: 0.45cqw;
   }
 
-  .huruf-question-box {
-    min-height: 18%;
-    margin-top: 0.4cqw;
-    padding: 0.4cqw 0.8cqw;
-  }
+  .huruf-question-box{
+    background:linear-gradient(#fffef2,#f8edd2);
+    border:2px solid #c89b3c;
+    border-radius:18px;
+    box-shadow:0 8px 18px rgba(0,0,0,.18);
+}
 
   .huruf-question-box h2 {
-    margin-top: 0.25cqw;
-    font-size: clamp(13px, 1.3cqw, 19px);
-    line-height: 1.2;
-  }
+  margin: 0;
+
+  color: #173d38;
+
+  font-family: "Amiri", "Traditional Arabic", serif;
+
+  font-size: clamp(16px, 2.2cqw, 42px);
+
+  font-weight: 700;      /* atau 800 */
+
+  line-height: 1.45;
+
+  letter-spacing: 0.01em;
+}
 
   .huruf-question-label {
     font-size: clamp(5px, 0.52cqw, 8px);
@@ -550,7 +565,7 @@
   .huruf-question-dot {
     width: 1.25cqw;
     height: 1.25cqw;
-    font-size: clamp(4px, 0.48cqw, 7px);
+    font-size: clamp(12px, 0.48cqw, 25px);
   }
 
   .huruf-feedback-card {
@@ -570,7 +585,7 @@
     padding: 40px;
     background: #075b5c;
     color: #fff4bd;
-    font-size: 20px;
+    font-size: 29px;
     font-weight: 800;
     line-height: 1.5;
     text-align: center;

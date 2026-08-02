@@ -5,9 +5,3 @@
   }
 }
 
-@media (min-aspect-ratio: 3 / 2) {
-  .guardian-stage {
-    width: auto;
-    height: 100dvh;
-  }
-}

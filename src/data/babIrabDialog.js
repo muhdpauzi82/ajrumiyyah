@@ -6,133 +6,134 @@ const babIrabDialog = [
     type: "dialog",
     speaker: "guru",
     name: "Syeikh Abdul I'rab",
-    guruImage: guruIrab,
-    playerImage: pelajar,
     progress: 5,
     text: "السلام عليكم ورحمة الله وبركاته",
   },
+
   {
     type: "dialog",
     speaker: "guru",
     name: "Syeikh Abdul I'rab",
-    guruImage: guruIrab,
-    playerImage: pelajar,
     progress: 12,
     text:
-      "Selamat datang, {player}. Hari ini kita akan mempelajari Bab I'rab.",
+      "Selamat datang, {player}. Hari ini kita akan mempelajari satu bab yang sangat penting dalam ilmu Nahu, iaitu Bab I'rab.",
   },
+
   {
     type: "dialog",
     speaker: "player",
     name: "{player}",
-    guruImage: guruIrab,
-    playerImage: pelajar,
-    progress: 20,
+    progress: 18,
     text:
-      "Waalaikumussalam guru. Saya sudah bersedia.",
+      "Waalaikumussalam guru. Saya sudah bersedia untuk belajar.",
   },
+
   {
     type: "dialog",
     speaker: "guru",
     name: "Syeikh Abdul I'rab",
-    guruImage: guruIrab,
-    playerImage: pelajar,
-    progress: 28,
+    progress: 26,
     text:
-      "I'rab ialah rahsia perubahan akhir kalimah.",
+      "Bagus. I'rab ialah perubahan yang berlaku pada akhir sesuatu kalimah kerana perbezaan kedudukannya di dalam ayat.",
   },
+
   {
     type: "dialog",
     speaker: "player",
     name: "{player}",
-    guruImage: guruIrab,
-    playerImage: pelajar,
-    progress: 36,
+    progress: 34,
     text:
-      "Maksudnya, hanya hujung perkataan yang berubah?",
+      "Maksudnya, yang berubah hanyalah bahagian akhir kalimah?",
   },
+
   {
     type: "dialog",
     speaker: "guru",
     name: "Syeikh Abdul I'rab",
-    guruImage: guruIrab,
-    playerImage: pelajar,
-    progress: 44,
+    progress: 42,
     text:
-      "Benar. Sekarang mari kita lihat beberapa contoh.",
+      "Benar. Kalimah yang sama boleh mempunyai baris yang berbeza apabila kedudukannya dalam ayat berubah.",
+  },
+
+  {
+    type: "dialog",
+    speaker: "guru",
+    name: "Syeikh Abdul I'rab",
+    progress: 50,
+    text:
+      "Sekarang mari kita lihat tiga contoh yang menggunakan kalimah yang sama.",
   },
 
   {
     type: "arabic",
     speaker: "guru",
-    guruImage: guruIrab,
-    playerImage: pelajar,
-    progress: 56,
-    title: "Perhatikan Ayat Pertama",
+    progress: 58,
+    title: "Contoh Pertama",
     before: "جَاءَ",
     word: "مُحَمَّد",
     ending: "ٌ",
     text:
-      "Perhatikan akhir kalimah مُحَمَّدٌ. Ia berakhir dengan dhammah.",
+      "Perhatikan kalimah مُحَمَّدٌ. Akhir kalimah mempunyai tanda dhammah.",
   },
+
   {
     type: "dialog",
     speaker: "player",
     name: "{player}",
-    guruImage: guruIrab,
-    playerImage: pelajar,
     progress: 64,
     text:
-      "Saya melihat kalimah مُحَمَّدٌ berakhir dengan dhammah.",
+      "Saya nampak hujung kalimah itu berakhir dengan dhammah.",
   },
 
   {
     type: "arabic",
     speaker: "guru",
-    guruImage: guruIrab,
-    playerImage: pelajar,
     progress: 72,
-    title: "Perhatikan Ayat Kedua",
+    title: "Contoh Kedua",
     before: "رَأَيْتُ",
     word: "مُحَمَّد",
     ending: "ًا",
     text:
-      "Sekarang kalimah yang sama berubah menjadi مُحَمَّدًا.",
+      "Sekarang perhatikan. Kalimah yang sama berubah menjadi مُحَمَّدًا dan akhirnya mempunyai fathah.",
   },
+
   {
     type: "dialog",
     speaker: "player",
     name: "{player}",
-    guruImage: guruIrab,
-    playerImage: pelajar,
-    progress: 80,
+    progress: 78,
     text:
-      "Akhirnya berubah menjadi fathah.",
+      "Oh... kalimahnya masih sama, tetapi hujungnya berubah menjadi fathah.",
   },
 
   {
     type: "arabic",
     speaker: "guru",
-    guruImage: guruIrab,
-    playerImage: pelajar,
-    progress: 88,
-    title: "Perhatikan Ayat Ketiga",
+    progress: 86,
+    title: "Contoh Ketiga",
     before: "مَرَرْتُ بِـ",
     word: "مُحَمَّد",
     ending: "ٍ",
     text:
-      "Dalam ayat ini, kalimah مُحَمَّدٍ berakhir dengan kasrah.",
+      "Dalam ayat ini pula, kalimah مُحَمَّدٍ berakhir dengan kasrah.",
+  },
+
+  {
+    type: "dialog",
+    speaker: "player",
+    name: "{player}",
+    progress: 94,
+    text:
+      "Alhamdulillah, sekarang saya faham. Kalimah مُحَمَّد masih sama, tetapi yang berubah hanyalah bahagian akhirnya mengikut kedudukannya dalam ayat.",
   },
 
   {
     type: "summary",
     speaker: "guru",
-    guruImage: guruIrab,
-    playerImage: pelajar,
     progress: 100,
-    title: "Rahsia Perubahan Akhir Kalimah",
+    title: "Tahniah!",
     text:
-      "Perubahan pada akhir kalimah inilah yang dinamakan I'rab.",
+      "Bagus, {player}. Kamu telah memahami asas I'rab. Selepas ini kita akan melihat perubahan tersebut melalui animasi supaya lebih mudah difahami.",
   },
 ];
 

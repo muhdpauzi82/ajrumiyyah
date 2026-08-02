@@ -1,382 +1,748 @@
-/* =========================
-   SKRIN UTAMA
-========================= */
-html,
-body,
-#root {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-}
+/* =====================================================
+   BAB I'RAB — ANIMASI PERUBAHAN
+   Saiz asas 1600 × 900
+===================================================== */
 
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.irab-animation-screen {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: grid;
+  place-items: center;
 
   overflow: hidden;
 
-  background: #050706;
+  background: #14342d;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
 }
-.irab-animasi-page {
+
+.irab-animation-frame {
   position: relative;
 
-  width: min(100vw, calc(100dvh * 1.5));
-  aspect-ratio: 3 / 2;
-
-  flex: 0 0 auto;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: min(100vw, calc(100vh * 16 / 9));
+  height: min(100vh, calc(100vw * 9 / 16));
 
   overflow: hidden;
+
+  container-type: inline-size;
+  container-name: irab-animation;
+
+  background: #d8c38f;
+}
+
+.irab-animation-background {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+
+  z-index: 0;
+}
+
+.irab-animation-shade {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
 
   background:
     linear-gradient(
-      rgba(0, 0, 0, 0.28),
-      rgba(0, 0, 0, 0.7)
-    ),
-    url("../assets/backgrounds/bg-madrasah-irab.webp");
-
-  background-size: 100% 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-/* =========================
-   KAD ANIMASI
-========================= */
-.irab-animasi-screen {
-  width: 100vw;
-  height: 100dvh;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  overflow: hidden;
-
-  background: #050706;
-}
-.animasi-card {
-  position: absolute;
-
-  left: 17%;
-  top: 8%;
-
-  width: 66%;
-  height: 84%;
-
-  padding: 2.2% 3%;
-  box-sizing: border-box;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  overflow: hidden;
-
-  text-align: center;
-  color: white;
-
-  background: rgba(2, 35, 30, 0.9);
-
-  border: clamp(1px, 0.18vw, 3px) solid #facc15;
-  border-radius: clamp(10px, 1.8vw, 30px);
-
-  box-shadow:
-    0 0 2.2vw rgba(250, 204, 21, 0.45),
-    inset 0 0 2vw rgba(255, 232, 111, 0.04);
-}
-
-.animasi-card h1 {
-  margin: 0 0 1%;
-
-  color: #fde68a;
-
-  font-size: clamp(12px, 2.15vw, 36px);
-  line-height: 1.2;
-}
-
-
-/* =========================
-   PERKATAAN UTAMA
-========================= */
-
-.focus-word {
-  min-height: 18%;
-
-  display: inline-flex;
-  align-items: flex-start;
-  justify-content: center;
-
-  margin: 0.5% 0;
-  margin-top: 28px; 
-  margin-bottom: 5px;
-
-  direction: rtl;
-
-  color: #ffffff;
-
-  font-family: "Amiri", serif;
-  font-size: clamp(28px, 5.5vw, 88px);
-  line-height: 1.1;
-}
-
-.word-base {
-  color: #ffffff;
-}
-
-/* Tanda akhir yang berkelip */
-
-.ending {
-  position: relative;
-
-  display: inline-block;
-
-  color: #ff8a1f;
-
-  transform-origin: center;
-
-  animation: endingBlink 850ms ease-in-out infinite;
-}
-
-.ending::after {
-  content: "";
-
-  position: absolute;
-  left: 50%;
-  top: 50%;
-
-  width: 145%;
-  height: 145%;
-
-  border-radius: 50%;
-
-  background: radial-gradient(
-    circle,
-    rgba(255, 48, 20, 0.34),
-    rgba(255, 136, 24, 0.16) 45%,
-    transparent 72%
-  );
-
-  transform: translate(-50%, -50%);
-  filter: blur(4px);
+      180deg,
+      rgba(3, 35, 29, 0.22),
+      rgba(3, 35, 29, 0.03) 35%,
+      rgba(3, 35, 29, 0.4)
+    );
 
   pointer-events: none;
-
-  animation: endingAura 850ms ease-in-out infinite;
 }
 
-@keyframes endingBlink {
-  0%,
-  100% {
-    color: #ff9d22;
+/* =====================================================
+   TAJUK
+===================================================== */
 
-    transform: scale(1);
+.irab-animation-header {
+  position: absolute;
 
-    text-shadow:
-      0 0 4px rgba(255, 145, 25, 0.55),
-      0 0 9px rgba(255, 145, 25, 0.35);
-  }
+  top: 3%;
+  left: 50%;
 
-  50% {
-    color: #ff321a;
+  width: 70%;
 
-    transform: scale(1.4);
+  transform: translateX(-50%);
 
-    text-shadow:
-      0 0 8px #ff321a,
-      0 0 16px #ff681a,
-      0 0 28px #ff9b24,
-      0 0 40px rgba(255, 144, 25, 0.85);
-  }
+  z-index: 10;
+
+  text-align: center;
 }
 
-@keyframes endingAura {
-  0%,
-  100% {
-    opacity: 0.25;
-    transform: translate(-50%, -50%) scale(0.75);
-  }
+.irab-animation-kicker {
+  display: inline-block;
 
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.45);
-  }
+  color: #ffe58a;
+
+  font-size: clamp(9px, 0.9cqw, 15px);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  text-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.65);
 }
 
-/* =========================
-   LABEL RAF, NASB, JAR
-========================= */
+.irab-animation-header h1 {
+  margin:
+    clamp(4px, 0.45cqw, 8px)
+    0
+    clamp(9px, 0.9cqw, 15px);
 
+  color: #fff8d4;
 
-.label {
-  min-width: 12%;
+  font-family: Georgia, serif;
+  font-size: clamp(20px, 2.25cqw, 38px);
 
-  margin: 0.5% 0;
-  padding: 0.5% 2%;
-
-  font-size: clamp(8px, 1vw, 17px);
+  text-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.72);
 }
 
-/* =========================
-   PENERANGAN
-========================= */
+/* =====================================================
+   KAD ANIMASI
+===================================================== */
 
-.animasi-card > p {
-  width: 92%;
+.irab-animation-card {
+  position: absolute;
 
-  margin: 0.8% auto;
+  left: 50%;
+  top: 54%;
 
-  font-size: clamp(8px, 1.25vw, 21px);
-  line-height: 1.45;
+  width: min(820px, 68%);
+  height: 53%;
+  min-height: 0;
+  box-sizing: border-box;
+
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+
+  transform: translate(-50%, -50%);
+
+  z-index: 8;
+
+  padding:
+    clamp(32px, 3.4cqw, 55px)
+    clamp(38px, 4cqw, 68px)
+    clamp(25px, 2.7cqw, 44px);
+
+  text-align: center;
+
+  color: #183d32;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 254, 239, 0.97),
+      rgba(246, 231, 190, 0.97)
+    );
+
+  border:
+    clamp(2px, 0.22cqw, 4px)
+    solid #d9b53e;
+
+  border-radius:
+    clamp(20px, 2.2cqw, 35px);
+
+  box-shadow:
+    0 22px 48px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 3px rgba(23, 90, 67, 0.16);
+
+  animation:
+    irabCardEnter
+    420ms ease-out both;
 }
 
-/* =========================
-   ALIRAN MENEGAK
-========================= */
+.irab-stage-label {
+  position: absolute;
 
-.flow-vertical {
+  left: 50%;
+  top: 0;
+
+  transform: translate(-50%, -50%);
+
+  min-width: 27%;
+
+  padding:
+    clamp(7px, 0.75cqw, 12px)
+    clamp(22px, 2.3cqw, 38px);
+
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 0.7cqw, 12px);
+
+  border:
+    clamp(2px, 0.15cqw, 3px)
+    solid #e8c84b;
+
+  border-radius: 999px;
+
+  color: #fff1ad;
+  background:
+    linear-gradient(
+      180deg,
+      #157154,
+      #074838
+    );
+
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.3);
+}
+
+.irab-stage-label span {
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size: clamp(17px, 1.6cqw, 27px);
+}
+
+.irab-stage-label strong {
+  font-size: clamp(12px, 1.05cqw, 18px);
+}
+
+/* =====================================================
+   AYAT UTAMA
+===================================================== */
+
+.irab-full-sentence {
+  margin:
+    clamp(10px, 1cqw, 17px)
+    0
+    clamp(10px, 1.1cqw, 18px);
+
+  color: #174a3a;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size: clamp(42px, 5.2cqw, 86px);
+  line-height: 1.4;
+
+  white-space: nowrap;
+}
+
+.irab-before {
+  color: #234c40;
+}
+
+.irab-focus-word {
+  display: inline-flex;
+  align-items: baseline;
+
+  margin-right: clamp(8px, 0.8cqw, 14px);
+}
+
+.irab-word-base {
+  color: #168859;
+}
+
+.irab-changing-ending {
+  display: inline-block;
+
+  color: #e94e46;
+
+  font-size: 1.3em;
+
+  text-shadow:
+    0 0 17px rgba(232, 71, 63, 0.42);
+
+  animation:
+    irabEndingChange
+    950ms ease-in-out infinite;
+}
+
+/* =====================================================
+   MAKLUMAT TANDA
+===================================================== */
+
+.irab-sign-information {
+  display: inline-flex;
   align-items: center;
 
-  gap: clamp(1px, 0.2vw, 4px);
+  overflow: hidden;
 
-  margin: clamp(5px, 0.8vw, 14px) 0;
+  margin-bottom:
+    clamp(11px, 1.2cqw, 20px);
 
-  direction: rtl;
+  border:
+    clamp(1px, 0.12cqw, 2px)
+    solid #c69c24;
 
-  color: #86efac;
+  border-radius: 999px;
 
-  font-family: "Amiri", serif;
-  font-size: clamp(17px, 1.7vw, 28px);
-  line-height: 1.05;
+  font-size: clamp(11px, 1cqw, 17px);
 }
 
-.flow-vertical b {
-  font-size: clamp(9px, 1.3vw, 22px);
+.irab-sign-information span,
+.irab-sign-information strong {
+  padding:
+    clamp(6px, 0.55cqw, 10px)
+    clamp(14px, 1.4cqw, 24px);
 }
 
-@keyframes arrowMove {
-  0%,
-  100% {
-    transform: translateY(-2px);
-    opacity: 0.65;
-  }
-
-  50% {
-    transform: translateY(3px);
-    opacity: 1;
-  }
+.irab-sign-information span {
+  color: #fff2bc;
+  background: #176047;
 }
 
-/* =========================
+.irab-sign-information strong {
+  color: #75470c;
+  background: #f5d675;
+}
+
+.irab-stage-note {
+  max-width: 88%;
+
+  margin:
+    0 auto
+    clamp(14px, 1.4cqw, 23px);
+
+  color: #24433a;
+
+  font-size: clamp(14px, 1.35cqw, 23px);
+  font-weight: 650;
+  line-height: 1.55;
+}
+
+/* =====================================================
+   PERBANDINGAN TIGA BENTUK
+===================================================== */
+
+.irab-comparison-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: clamp(8px, 1cqw, 17px);
+
+  padding:
+    clamp(9px, 0.85cqw, 14px)
+    clamp(12px, 1.2cqw, 20px);
+
+  border-radius:
+    clamp(12px, 1.2cqw, 20px);
+
+  color: #645a39;
+  background: rgba(24, 92, 69, 0.09);
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size: clamp(22px, 2.45cqw, 40px);
+}
+
+.irab-comparison-flow span {
+  padding:
+    clamp(2px, 0.25cqw, 4px)
+    clamp(8px, 0.65cqw, 12px);
+
+  border-radius: 12px;
+
+  transition:
+    transform 240ms ease,
+    color 240ms ease,
+    background 240ms ease;
+}
+
+.irab-comparison-flow span.current {
+  color: #fff6c5;
+  background: #157050;
+
+  transform: scale(1.1);
+
+  box-shadow:
+    0 5px 13px rgba(0, 0, 0, 0.2);
+}
+
+.irab-comparison-flow b {
+  color: #bc901c;
+
+  font-family: Arial, sans-serif;
+  font-size: clamp(13px, 1.2cqw, 20px);
+}
+
+/* =====================================================
    BUTANG
-========================= */
+===================================================== */
 
-.animasi-next,
-.animasi-back {
-  border: 2px solid #facc15;
-  border-radius: clamp(9px, 1vw, 16px);
+.irab-animation-actions {
+  position: absolute;
 
-  color: #fff7cc;
-  background: linear-gradient(
-    135deg,
-    #15803d,
-    #064e3b
-  );
+  left: 50%;
+  bottom: 2.5%;
 
-  font-weight: 800;
+  width: min(820px, 68%);
+
+  transform: translateX(-50%);
+
+  z-index: 12;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.irab-animation-button {
+  min-width: clamp(120px, 13cqw, 210px);
+
+  padding:
+    clamp(9px, 0.85cqw, 14px)
+    clamp(16px, 1.7cqw, 28px);
+
+  border:
+    clamp(2px, 0.15cqw, 3px)
+    solid #e7c344;
+
+  border-radius: 999px;
 
   cursor: pointer;
 
+  font-size: clamp(11px, 1cqw, 17px);
+  font-weight: 850;
+
   transition:
-    transform 160ms ease,
-    filter 160ms ease;
+    transform 170ms ease,
+    filter 170ms ease;
 }
 
-.animasi-back {
-  position: absolute;
-
-  left: 2.5%;
-  top: 3%;
-
-  width: 13%;
-  height: 7%;
-
-  z-index: 20;
-
-  padding: 0;
-
-  font-size: clamp(6px, 0.85vw, 14px);
+.irab-animation-button.primary {
+  color: #fff2b5;
+  background:
+    linear-gradient(
+      180deg,
+      #16805a,
+      #07513e
+    );
 }
 
-.animasi-next {
-  width: 25%;
-  min-height: 8%;
-
-  margin-top: 0.8%;
-  padding: 0;
-
-  font-size: clamp(7px, 1vw, 17px);
+.irab-animation-button.secondary {
+  color: #174838;
+  background:
+    linear-gradient(
+      180deg,
+      #fff9dc,
+      #e9d59d
+    );
 }
 
-.animasi-next:hover,
-.animasi-back:hover {
-  transform: translateY(-2px) scale(1.03);
-  filter: brightness(1.14);
+.irab-animation-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
 }
 
-/* =========================
-   KELAS LAMA JIKA MASIH DIGUNA
-========================= */
-
-.arabic-example {
-  margin: clamp(12px, 1.6vw, 28px) 0;
-
-  direction: rtl;
-
-  color: #fff7cc;
-
-  font-family: "Amiri", serif;
-  font-size: clamp(42px, 7vw, 90px);
-
-  text-shadow: 0 0 18px rgba(250, 204, 21, 0.7);
+.irab-animation-button:active {
+  transform: scale(0.98);
 }
 
-.ending-glow {
-  color: #d1fae5;
+.irab-animation-counter {
+  color: #fff1b7;
 
-  font-size: clamp(14px, 1.7vw, 26px);
-}
-
-.ending-glow span {
-  direction: rtl;
-
-  color: #f97316;
-
-  font-family: "Amiri", serif;
-  font-size: 1.6em;
+  font-size: clamp(10px, 0.9cqw, 15px);
+  font-weight: 800;
 
   text-shadow:
-    0 0 10px #f97316,
-    0 0 20px #ef4444;
-
-  animation: glowEnd 1.2s infinite;
+    0 2px 5px rgba(0, 0, 0, 0.65);
 }
 
-@keyframes glowEnd {
+/* =====================================================
+   ANIMASI
+===================================================== */
+
+@keyframes irabCardEnter {
+  from {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -46%)
+      scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+}
+
+@keyframes irabEndingChange {
   0%,
   100% {
-    filter: brightness(1);
+    transform: scale(1);
   }
 
   50% {
-    filter: brightness(1.8);
+    transform:
+      translateY(-3px)
+      scale(1.24);
   }
 }
 
+@media (hover: none) {
+  .irab-animation-button:hover {
+    transform: none;
+    filter: none;
+  }
+}
 
+@media (prefers-reduced-motion: reduce) {
+  .irab-animation-card,
+  .irab-changing-ending {
+    animation: none;
+  }
+}
+/* =====================================================
+   FRAME KECIL — LAPTOP KECIL / TELEFON MELINTANG
+===================================================== */
+
+@container irab-animation (max-width: 760px) {
+  .irab-animation-header {
+    top: 2%;
+
+    width: 76%;
+  }
+
+  .irab-animation-kicker {
+    display: none;
+  }
+
+  .irab-animation-header h1 {
+    margin: 0 0 0.8cqw;
+
+    font-size: 2.7cqw;
+    line-height: 1.1;
+  }
+
+  .irab-animation-progress {
+    gap: 0.7cqw;
+  }
+
+  .irab-animation-progress-dot {
+    width: 3.5cqw;
+
+    font-size: 1.5cqw;
+  }
+
+  /* Kad utama dikecilkan bersama frame */
+  .irab-animation-card {
+    top: 52%;
+
+    width: 76%;
+    min-height: 0;
+    height: 53%;
+
+    padding:
+      4.8cqw
+      4.5cqw
+      2.4cqw;
+
+    border-width: 0.35cqw;
+    border-radius: 2.8cqw;
+  }
+
+  .irab-stage-label {
+    min-width: 28%;
+
+    padding:
+      0.8cqw
+      2.5cqw;
+
+    border-width: 0.3cqw;
+  }
+
+  .irab-stage-label span {
+    font-size: 2.4cqw;
+  }
+
+  .irab-stage-label strong {
+    font-size: 1.5cqw;
+  }
+
+  .irab-full-sentence {
+    margin:
+      0.8cqw
+      0
+      1cqw;
+
+    font-size: 6.5cqw;
+    line-height: 1.15;
+  }
+
+  .irab-focus-word {
+    margin-right: 1cqw;
+  }
+
+  .irab-sign-information {
+    margin-bottom: 1.2cqw;
+
+    font-size: 1.5cqw;
+  }
+
+  .irab-sign-information span,
+  .irab-sign-information strong {
+    padding:
+      0.7cqw
+      1.7cqw;
+  }
+
+  .irab-stage-note {
+    max-width: 94%;
+
+    margin:
+      0 auto
+      1.3cqw;
+
+    font-size: 1.75cqw;
+    line-height: 1.35;
+  }
+
+  .irab-comparison-flow {
+    gap: 0.8cqw;
+
+    padding:
+      0.8cqw
+      1.2cqw;
+
+    font-size: 3.2cqw;
+  }
+
+  .irab-comparison-flow span {
+    padding:
+      0.2cqw
+      0.7cqw;
+
+    border-radius: 1cqw;
+  }
+
+  .irab-comparison-flow b {
+    font-size: 1.5cqw;
+  }
+
+  /* Footer diletakkan di dalam kawasan selamat */
+  .irab-animation-actions {
+    bottom: 1.8%;
+
+    width: 76%;
+  }
+
+  .irab-animation-button {
+    min-width: 20%;
+
+    padding:
+      0.8cqw
+      1.8cqw;
+
+    border-width: 0.3cqw;
+
+    font-size: 1.5cqw;
+  }
+
+  .irab-animation-counter {
+    font-size: 1.4cqw;
+  }
+}
+
+/* =====================================================
+   FRAME SANGAT KECIL
+===================================================== */
+@container irab-animation (max-width: 560px) {
+  .irab-animation-header {
+    top: 1.5%;
+  }
+
+  .irab-animation-header h1 {
+    font-size: 2.5cqw;
+  }
+
+  .irab-animation-progress-dot {
+    width: 3.2cqw;
+  }
+
+  .irab-animation-card {
+    top: 52%;
+
+    width: 80%;
+    height: 62%;
+
+    padding:
+      4.5cqw
+      4cqw
+      2cqw;
+  }
+
+  .irab-full-sentence {
+    font-size: 6.2cqw;
+  }
+
+  .irab-stage-note {
+    font-size: 1.65cqw;
+  }
+
+  .irab-comparison-flow {
+    font-size: 3cqw;
+  }
+
+  .irab-animation-actions {
+    bottom: 1.5%;
+    width: 80%;
+  }
+
+  .irab-animation-button {
+    min-width: 22%;
+    font-size: 1.4cqw;
+  }
+}
+.irab-stage-indicator{
+    display:flex;
+    align-items:center;
+    gap:24px;
+}
+
+.stage-book{
+    font-size:34px;
+    opacity:.35;
+    transition:.3s;
+}
+
+.stage-book.active{
+    opacity:1;
+    transform:scale(1.18);
+
+    filter:
+        drop-shadow(0 0 10px gold);
+}
+
+.stage-book.done{
+    opacity:1;
+    color:#1d9b58;
+}

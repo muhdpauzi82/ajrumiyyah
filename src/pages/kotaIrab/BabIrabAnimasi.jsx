@@ -1,96 +1,221 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import "../../styles/BabIrabAnimasi.css";
+
+import madrasahIrabBg from
+  "../../assets/backgrounds/madrasah-irab-learning.webp";
 
 const stages = [
   {
-    sentence: "جَاءَ مُحَمَّدٌ",
+    before: "جَاءَ",
     word: "مُحَمَّد",
-    end: "ٌ",
+    ending: "ٌ",
     label: "Raf‘",
-    note: "Muhammad marfu‘ kerana datang selepas fi‘il sebagai pelaku.",
+    arabicLabel: "الرَّفْعُ",
+    sign: "Dhammah",
+    note:
+      "مُحَمَّدٌ berada dalam keadaan marfu‘ kerana menjadi pelaku dalam ayat.",
   },
   {
-    sentence: "رَأَيْتُ مُحَمَّدًا",
+    before: "رَأَيْتُ",
     word: "مُحَمَّد",
-    end: "ًا",
+    ending: "ًا",
     label: "Nasb",
-    note: "Muhammad mansub kerana menjadi maf‘ul bih.",
+    arabicLabel: "النَّصْبُ",
+    sign: "Fathah",
+    note:
+      "مُحَمَّدًا berada dalam keadaan mansub kerana menjadi maf‘ul bih.",
   },
   {
-    sentence: "مَرَرْتُ بِمُحَمَّدٍ",
+    before: "مَرَرْتُ بِـ",
     word: "مُحَمَّد",
-    end: "ٍ",
+    ending: "ٍ",
     label: "Jar",
-    note: "Muhammad majrur kerana didahului huruf jar.",
+    arabicLabel: "الْجَرُّ",
+    sign: "Kasrah",
+    note:
+      "مُحَمَّدٍ berada dalam keadaan majrur kerana didahului huruf jar.",
   },
 ];
 
 export default function BabIrabAnimasi() {
   const navigate = useNavigate();
+
   const [step, setStep] = useState(0);
 
   const current = stages[step];
 
+  const isLastStage =
+    step === stages.length - 1;
+
   function next() {
-    if (step < stages.length - 1) {
-      setStep(step + 1);
-    } else {
-      navigate("/bab-irab-quiz");
+    if (!isLastStage) {
+      setStep((currentStep) => currentStep + 1);
+      return;
     }
+
+    localStorage.setItem(
+      "babIrabAnimasiDone",
+      "true"
+    );
+
+    navigate("/bab-irab-quiz");
+  }
+
+  function previous() {
+    if (step > 0) {
+      setStep((currentStep) => currentStep - 1);
+      return;
+    }
+
+    navigate("/bab-irab-learning");
   }
 
   return (
-  <main className="irab-animasi-screen">
-    <div className="irab-animasi-page">
-      <button
-        className="animasi-back"
-        onClick={() => navigate("/bab-irab-learning")}
-      >
-        ← Kembali
-      </button>
+    <main className="irab-animation-screen">
+      <section className="irab-animation-frame">
+        <img
+          src={madrasahIrabBg}
+          className="irab-animation-background"
+          alt=""
+          draggable="false"
+        />
 
-      <div className="animasi-card">
-        <h1>Perhatikan Perubahan I&apos;rab</h1>
+        <div className="irab-animation-shade" />
 
-        <div
-          className="focus-word"
-          dir="rtl"
-          lang="ar"
+        <header className="irab-animation-header">
+          <span className="irab-animation-kicker">
+            Bab I‘rab
+          </span>
+
+          <h1>
+            Perhatikan Perubahan Akhir Kalimah
+          </h1>
+
+          </header>
+
+        <article
+          key={step}
+          className="irab-animation-card"
         >
-          <span className="word-base">
-            {current.word}
-          </span>
+          <div className="irab-stage-label">
+            <span>{current.arabicLabel}</span>
+            <strong>{current.label}</strong>
+          </div>
 
-          <span
-            key={`${step}-${current.end}`}
-            className="ending"
+          <div
+            className="irab-full-sentence"
+            dir="rtl"
+            lang="ar"
           >
-            {current.end}
-          </span>
-        </div>
+            <span className="irab-before">
+              {current.before}
+            </span>
 
-        <div className="label">
-          {current.label}
-        </div>
+            <span className="irab-focus-word">
+              <span className="irab-word-base">
+                {current.word}
+              </span>
 
-        <p>{current.note}</p>
+              <span
+                key={`${step}-${current.ending}`}
+                className="irab-changing-ending"
+              >
+                {current.ending}
+              </span>
+            </span>
+          </div>
 
-        <div className="flow-vertical">
-          <span>مُحَمَّدٌ</span>
-          <b>↓</b>
-          <span>مُحَمَّدًا</span>
-          <b>↓</b>
-          <span>مُحَمَّدٍ</span>
-        </div>
+          <div className="irab-sign-information">
+            <span>Tanda akhir</span>
+            <strong>{current.sign}</strong>
+          </div>
 
-       <button className="animasi-next" onClick={next}>
-  {step < stages.length - 1
-    ? "Seterusnya"
-    : "📝 Mulakan Kuiz"}
-</button>
-      </div>
+          <p className="irab-stage-note">
+            {current.note}
+          </p>
+
+          <div
+            className="irab-comparison-flow"
+            dir="rtl"
+            lang="ar"
+          >
+            <span
+              className={
+                step === 0 ? "current" : ""
+              }
+            >
+              مُحَمَّدٌ
+            </span>
+
+            <b>←</b>
+
+            <span
+              className={
+                step === 1 ? "current" : ""
+              }
+            >
+              مُحَمَّدًا
+            </span>
+
+            <b>←</b>
+
+            <span
+              className={
+                step === 2 ? "current" : ""
+              }
+            >
+              مُحَمَّدٍ
+            </span>
+          </div>
+        </article>
+
+        <footer className="irab-animation-actions">
+          <button
+            type="button"
+            className="irab-animation-button secondary"
+            onClick={(event) => {
+              event.stopPropagation();
+              previous();
+            }}
+          >
+            ← {step === 0 ? "Kembali" : "Sebelumnya"}
+          </button>
+
+          <div className="irab-stage-indicator">
+  {stages.map((item, index) => (
+    <div
+      key={item.label}
+      className={`stage-book
+      ${
+        index < step
+          ? "done"
+          : index === step
+          ? "active"
+          : ""
+      }`}
+    >
+      📖
     </div>
-  </main>
-);
+  ))}
+</div>
+
+          <button
+            type="button"
+            className="irab-animation-button primary"
+            onClick={(event) => {
+              event.stopPropagation();
+              next();
+            }}
+          >
+            {isLastStage
+              ? "Mulakan Kuiz"
+              : "Seterusnya"}{" "}
+            →
+          </button>
+        </footer>
+      </section>
+    </main>
+  );
 }
