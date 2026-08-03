@@ -313,9 +313,17 @@ export default function BabIrabQuiz() {
                     )}
                   </span>
 
-                  <span className="bab-irab-option-text">
-                    {option}
-                  </span>
+                  <span
+  className="bab-irab-option-text"
+  dir="auto"
+  lang={
+    /[\u0600-\u06FF]/.test(option)
+      ? "ar"
+      : "ms"
+  }
+>
+  {option}
+</span>
 
                   <span
                     className="bab-irab-option-feedback"

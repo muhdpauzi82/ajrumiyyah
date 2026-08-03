@@ -1,1014 +1,1291 @@
-/* =========================================
-   ASAS
-========================================= */
+/* =====================================================
+   KITAB MARFU‘AT — CLASSROOM UI 16:9
+   Background + React overlay
+===================================================== */
 
-.kitab-viewport,
-.kitab-viewport *,
-.kitab-viewport *::before,
-.kitab-viewport *::after {
+* {
   box-sizing: border-box;
 }
 
-.kitab-viewport {
-  width: 100vw;
-  height: 100vh;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  overflow: hidden;
-
-  background:
-    radial-gradient(
-      circle at top,
-      #174a37 0%,
-      #0c3023 55%,
-      #061b14 100%
-    );
-}
-
-/*
-  Kanvas tetap.
-  Keseluruhan kanvas ini akan dikecilkan
-  melalui transform: scale() dalam JSX.
-*/
-
-.kitab-marfu-screen {
-  width: 1200px;
-  height: 700px;
-
-  flex: 0 0 auto;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  overflow: hidden;
-
-  transform-origin: center center;
-}
-
-/* =========================================
-   FRAME UTAMA
-========================================= */
-
-.kitab-marfu-book {
-  position: relative;
-
-  width: 1100px;
-  height: 620px;
-
-  display: grid;
-  grid-template-rows: 150px minmax(0, 1fr) 72px;
-
-  overflow: hidden;
-
-  background:
-    linear-gradient(
-      180deg,
-      #fffdf4 0%,
-      #f7f0dc 100%
-    );
-
-  border: 8px solid #c7a755;
-  border-radius: 24px;
-
-  box-shadow:
-    0 28px 60px rgba(0, 0, 0, 0.48),
-    inset 0 0 0 3px #1f5d42;
-}
-
-.kitab-marfu-book::before {
-  content: "";
-
-  position: absolute;
-  inset: 11px;
-
-  z-index: 5;
-
-  pointer-events: none;
-
-  border: 1px solid rgba(199, 167, 85, 0.68);
-  border-radius: 14px;
-}
-
-/* =========================================
-   BADGE KITAB
-========================================= */
-
-.kitab-identity {
-  position: absolute;
-  top: -3px;
-  left: 50%;
-
-  z-index: 20;
-
-  min-width: 230px;
-  height: 42px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  padding: 5px 24px;
-
-  color: #f8df83;
-
-  background:
-    linear-gradient(
-      180deg,
-      #176344,
-      #0c442f
-    );
-
-  border: 2px solid #d4af4f;
-  border-radius: 0 0 16px 16px;
-
-  transform: translateX(-50%);
-
-  box-shadow:
-    0 5px 12px rgba(0, 0, 0, 0.25);
-}
-
-.kitab-identity-icon {
-  font-size: 20px;
-  line-height: 1;
-}
-
-.kitab-identity-small,
-.kitab-identity strong {
-  font-family:
-    var(--font-title, "Cormorant Garamond", serif);
-
-  font-size: 17px;
-  font-weight: 800;
-  letter-spacing: 0.03em;
-}
-
-.kitab-identity-small {
-  display: inline;
-}
-
-/* =========================================
-   HEADER
-========================================= */
-
-.kitab-header {
-  position: relative;
-  z-index: 2;
-  margin-top: 20px;
-  min-height: 0;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  padding: 26px 40px 10px;
-
-  text-align: center;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(236, 245, 225, 0.96),
-      rgba(255, 253, 244, 0.94)
-    );
-
-  border-bottom: 2px solid #d4bc78;
-}
-
-.kitab-header::after {
-  content: "◆";
-
-  width: 390px;
-
-  margin-top: 6px;
-
-  color: #b58b2d;
-
-  font-size: 11px;
-  line-height: 1px;
-
-  border-bottom: 1px solid #c9a857;
-}
-
-.kitab-arabic-title {
-  max-width: 900px;
-
-  margin: 0;
-
-  font-family:
-    var(--font-arabic, "Amiri", serif);
-
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 0.98;
-
-  color: #124a35;
-}
-
-.kitab-header h1 {
-  margin: 6px 0 0;
-
-  font-family:
-    var(--font-title, "Cormorant Garamond", serif);
-
-  font-size: 30px;
-  font-weight: 800;
-  line-height: 1;
-
-  color: #7a5620;
-}
-
-.kitab-header p {
-  max-width: 720px;
-
-  margin: 8px auto 0;
-
-  font-family:
-    var(--font-body, "Merriweather", serif);
-
-  font-size: 17px;
-  line-height: 1.4;
-
-  color: #526858;
-}
-
-/* =========================================
-   KANDUNGAN
-========================================= */
-
-.kitab-content {
-  position: relative;
-  z-index: 2;
-
-  min-width: 0;
-  min-height: 0;
-
-  display: flex;
-  flex-direction: column;
-
-  overflow: hidden;
-
-  padding: 14px 36px;
-
-  font-family:
-    var(--font-body, "Merriweather", serif);
-}
-
-.kitab-explanation {
-  flex: 0 0 auto;
-
-  margin: 0 auto 12px;
-
-  text-align: center;
-
-  font-size: 19px;
-  line-height: 1.35;
-
-  color: #334c3d;
-}
-
-/* =========================================
-   SUSUN ATUR PELAJARAN
-========================================= */
-
-.lesson-layout {
-  flex: 1;
-  min-width: 0;
-  min-height: 0;
-
-  display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
-  gap: 20px;
-
-  overflow: hidden;
-}
-
-/* =========================================
-   MENU KIRI
-========================================= */
-
-.lesson-sidebar {
-  min-width: 0;
-  min-height: 0;
-
-  display: flex;
-  flex-direction: column;
-
-  overflow: hidden;
-
-  padding: 14px;
-
-  background:
-    linear-gradient(
-      160deg,
-      #e5f0df,
-      #d3e5cd
-    );
-
-  border: 2px solid #b89a49;
-  border-radius: 16px;
-
-  box-shadow:
-    inset 0 0 0 3px rgba(255, 255, 255, 0.42);
-}
-
-.lesson-sidebar h3 {
-  margin: 0;
-
-  text-align: center;
-
-  font-family:
-    var(--font-title, "Cormorant Garamond", serif);
-
-  font-size: 25px;
-  line-height: 1.1;
-
-  color: #174c37;
-}
-
-.lesson-sidebar-divider {
-  margin: 4px 0 8px;
-
-  text-align: center;
-
-  color: #a47d30;
-
-  font-size: 10px;
-}
-
-.lesson-options {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.lesson-item {
-  position: relative;
-
+html,
+body,
+#root {
   width: 100%;
-  min-height: 48px;
-
-  display: grid;
-  grid-template-columns: 30px minmax(0, 1fr) 16px;
-  align-items: center;
-  gap: 8px;
-
-  padding: 7px 10px;
-
-  text-align: left;
-
-  font-family:
-    var(--font-body, "Merriweather", serif);
-
-  font-size: 13px;
-  font-weight: 700;
-
-  color: #315744;
-
-  background: rgba(255, 255, 255, 0.76);
-
-  border: 1px solid #b8cdbb;
-  border-radius: 11px;
-
-  cursor: pointer;
-
-  transition:
-    transform 180ms ease,
-    background 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
 }
 
-.lesson-item:hover {
-  transform: translateX(3px);
-
-  border-color: #b69239;
-
-  box-shadow:
-    0 5px 12px rgba(25, 76, 55, 0.15);
+button {
+  font: inherit;
 }
 
-.lesson-item.active {
-  color: #fff9df;
+/* =====================================================
+   VIEWPORT UTAMA
+===================================================== */
 
-  background:
-    linear-gradient(
-      135deg,
-      #166344,
-      #0f4933
-    );
+.marfu-classroom-page {
+  position: fixed;
+  inset: 0;
 
-  border-color: #d3b45a;
-
-  box-shadow:
-    0 7px 15px rgba(17, 78, 54, 0.28),
-    inset 0 0 0 1px rgba(255, 238, 170, 0.38);
-}
-
-.lesson-item-number {
-  width: 28px;
-  height: 28px;
+  width: 100vw;
+  height: 100dvh;
 
   display: grid;
   place-items: center;
 
-  color: #315744;
-
-  background: #edf5e9;
-
-  border: 1px solid #a8bea9;
-  border-radius: 50%;
-
-  font-size: 13px;
-}
-
-.lesson-item.active .lesson-item-number {
-  color: #143f2f;
-
-  background: #f4d66d;
-
-  border-color: #ffe6a0;
-}
-
-.lesson-item-label {
-  min-width: 0;
-
-  line-height: 1.2;
-}
-
-.lesson-item-arrow {
-  justify-self: end;
-
-  font-size: 22px;
-  line-height: 1;
-}
-
-.lesson-tip {
-  margin-top: auto;
-
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  padding: 9px 10px;
-
-  color: #365444;
-
-  background: rgba(255, 253, 233, 0.52);
-
-  border: 1px solid rgba(169, 145, 79, 0.38);
-  border-radius: 10px;
-}
-
-.lesson-tip-icon {
-  flex: 0 0 auto;
-
-  font-size: 20px;
-}
-
-.lesson-tip p {
-  margin: 0;
-
-  font-size: 11px;
-  line-height: 1.35;
-}
-
-/* =========================================
-   PANEL CONTOH
-========================================= */
-
-.lesson-example {
-  min-width: 0;
-  min-height: 0;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
   overflow: hidden;
-
-  padding: 13px 22px;
-
-  text-align: center;
 
   background:
     radial-gradient(
       circle at center,
-      #fffef8,
-      #f7efd8
+      #194f3c,
+      #082b20 70%
     );
-
-  border: 2px solid #c5a552;
-  border-radius: 16px;
-
-  box-shadow:
-    inset 0 0 28px rgba(178, 145, 65, 0.1);
-
-  animation: exampleFade 260ms ease;
 }
 
-@keyframes exampleFade {
-  from {
-    opacity: 0;
-    transform: translateY(5px);
-  }
+.marfu-classroom-frame {
+  position: relative;
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  width: min(100vw, calc(100dvh * 16 / 9));
+  height: min(100dvh, calc(100vw * 9 / 16));
+
+  flex: 0 0 auto;
+
+  overflow: hidden;
+  isolation: isolate;
+
+  container-type: inline-size;
+  container-name: marfu-classroom;
 }
 
-.example-header {
-  margin-bottom: 4px;
+/* =====================================================
+   BACKGROUND
+===================================================== */
 
-  font-family:
-    var(--font-title, "Cormorant Garamond", serif);
+.marfu-classroom-bg {
+  position: absolute;
+  inset: 0;
 
-  font-size: 21px;
-  font-weight: 800;
-  line-height: 1.15;
+  width: 100%;
+  height: 100%;
 
-  color: #15513a;
+  display: block;
+
+  object-fit: fill;
+
+  user-select: none;
+  pointer-events: none;
+
+  z-index: 0;
 }
 
-.arabic-sentence {
-  margin: 0;
+/* Semua UI React berada di atas background */
 
-  font-family:
-    var(--font-arabic, "Amiri", serif);
-
-  font-size: 66px;
-  font-weight: 700;
-  line-height: 1.95;
-
-  color: #183829;
-
-  white-space: nowrap;
+.marfu-city-back,
+.marfu-top-header,
+.marfu-page-status,
+.marfu-objective-panel,
+.marfu-main-panel,
+.marfu-note-panel,
+.marfu-bottom-tip,
+.marfu-bottom-progress,
+.marfu-previous-button,
+.marfu-next-button {
+  position: absolute;
+  z-index: 5;
 }
 
-.arabic-highlight {
-  display: inline;
+/* =====================================================
+   BUTANG KEMBALI
+===================================================== */
 
-  color: #f20b3c;
+.marfu-city-back {
+  left: 1.3%;
+  top: 2.2%;
 
-  text-shadow:
-    0 0 5px rgba(242, 11, 60, 0.35),
-    0 0 12px rgba(255, 204, 88, 0.28);
-
-  animation: irabBlink 1.25s ease-in-out infinite;
-}
-
-@keyframes irabBlink {
-  0%,
-  100% {
-    color: #f20b3c;
-
-    text-shadow:
-      0 0 4px rgba(242, 11, 60, 0.32);
-  }
-
-  50% {
-    color: #ff6b86;
-
-    text-shadow:
-      0 0 10px rgba(242, 11, 60, 0.8),
-      0 0 18px rgba(255, 205, 74, 0.5);
-  }
-}
-
-/* Penunjuk kecil ayat kepada kategori */
-
-.example-pointer {
-  width: 2px;
-  height: 15px;
-
-  margin: -2px 0 1px;
-
-  background: #6e9a70;
-}
-
-.pointer-line,
-.pointer-dot {
-  display: none;
-}
-
-.example-category {
-  min-width: 230px;
-  max-width: 90%;
-
-  padding: 5px 18px;
+  width: 15.5%;
+  height: 7.2%;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
 
-  color: #fff8d9;
+  padding: 0 1.4%;
+
+  border:
+    clamp(1px, 0.13cqw, 2px)
+    solid #ddb94f;
+
+  border-radius:
+    clamp(10px, 1cqw, 16px);
+
+  color: #fff1ad;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(9px, 1.05cqw, 18px);
+
+  font-weight: 900;
+
+  cursor: pointer;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(13, 91, 62, 0.97),
+      rgba(5, 53, 37, 0.98)
+    );
+
+  box-shadow:
+    0 0.45cqw 0.9cqw
+      rgba(0, 0, 0, 0.24),
+    inset 0 0 0.45cqw
+      rgba(255, 224, 117, 0.12);
+
+  transition:
+    transform 160ms ease,
+    filter 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.marfu-city-back:hover {
+  transform: translateY(-0.15cqw);
+
+  filter: brightness(1.1);
+
+  box-shadow:
+    0 0 1.2cqw
+      rgba(255, 205, 72, 0.5);
+}
+
+/* =====================================================
+   HEADER KITAB
+===================================================== */
+
+.marfu-top-header {
+  left: 31.8%;
+  top: 1.7%;
+
+  width: 36.5%;
+  height: 9%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 1.1cqw;
+
+  padding: 0.7cqw 1.8cqw;
+
+  color: #f9df81;
+
+  text-align: center;
+
+  border:
+    clamp(1px, 0.13cqw, 2px)
+    solid rgba(229, 187, 69, 0.95);
+
+  border-radius:
+    clamp(10px, 1.05cqw, 17px);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(10, 89, 60, 0.98),
+      rgba(4, 52, 36, 0.98)
+    );
+
+  box-shadow:
+    0 0.55cqw 1.25cqw
+      rgba(0, 0, 0, 0.27),
+    inset 0 0 0.65cqw
+      rgba(255, 230, 135, 0.13);
+}
+
+.marfu-header-icon {
+  flex: 0 0 auto;
+
+  font-size:
+    clamp(20px, 2.7cqw, 43px);
+
+  line-height: 1;
+}
+
+.marfu-top-header > div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.marfu-top-header strong {
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(14px, 1.9cqw, 31px);
+
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.025em;
+}
+
+.marfu-top-header small {
+  margin-top: 0.3cqw;
+
+  color: #e6d59e;
+
+  font-size:
+    clamp(7px, 0.82cqw, 13px);
+
+  font-weight: 700;
+}
+
+/* =====================================================
+   STATUS HALAMAN KANAN ATAS
+===================================================== */
+
+.marfu-page-status {
+  right: 1.4%;
+  top: 2.2%;
+
+  width: 16.7%;
+  height: 7.5%;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+
+  grid-template-rows:
+    auto
+    auto;
+
+  align-items: center;
+
+  column-gap: 0.8cqw;
+  row-gap: 0.35cqw;
+
+  padding:
+    0.65cqw
+    1.15cqw;
+
+  color: #f7dc83;
+
+  border:
+    clamp(1px, 0.13cqw, 2px)
+    solid #d9b64c;
+
+  border-radius:
+    clamp(9px, 0.95cqw, 15px);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(11, 89, 60, 0.96),
+      rgba(5, 54, 38, 0.98)
+    );
+
+  box-shadow:
+    0 0.45cqw 1cqw
+      rgba(0, 0, 0, 0.22);
+}
+
+.marfu-page-status > span {
+  font-size:
+    clamp(7px, 0.75cqw, 12px);
+
+  font-weight: 800;
+}
+
+.marfu-page-status > strong {
+  grid-row: 1 / 3;
+  grid-column: 2;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(15px, 1.8cqw, 29px);
+}
+
+.marfu-status-track {
+  grid-column: 1;
+
+  width: 100%;
+  height: clamp(5px, 0.48cqw, 8px);
+
+  overflow: hidden;
+
+  border: 1px solid
+    rgba(244, 213, 111, 0.65);
+
+  border-radius: 999px;
+
+  background:
+    rgba(0, 0, 0, 0.45);
+}
+
+.marfu-status-track span {
+  display: block;
+
+  width: 0;
+  height: 100%;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #58a746,
+      #9ecf4b,
+      #eed45d
+    );
+
+  box-shadow:
+    0 0 0.75cqw
+      rgba(177, 229, 93, 0.75);
+
+  transition: width 350ms ease;
+}
+
+/* =====================================================
+   PANEL OBJEKTIF KIRI
+===================================================== */
+
+.marfu-objective-panel {
+  left: 2.6%;
+  top: 27%;
+
+  width: 19.5%;
+  height: 46%;
+
+  display: flex;
+  flex-direction: column;
+
+  padding:
+    1cqw
+    1.05cqw;
+
+  overflow: hidden;
+
+  color: #315341;
+
+  border:
+    clamp(1px, 0.14cqw, 2px)
+    solid rgba(188, 143, 53, 0.88);
+
+  border-radius:
+    clamp(10px, 1.1cqw, 18px);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 250, 226, 0.94),
+      rgba(242, 229, 189, 0.93)
+    );
+
+  box-shadow:
+    0 0.65cqw 1.5cqw
+      rgba(74, 45, 12, 0.18),
+    inset 0 0 1.2cqw
+      rgba(255, 255, 255, 0.42);
+}
+
+.marfu-objective-panel h2 {
+  flex: 0 0 auto;
+
+  margin: 0 0 0.85cqw;
+
+  padding:
+    0.5cqw
+    0.8cqw;
+
+  color: #f7dc80;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      180deg,
+      #176446,
+      #0c4833
+    );
+
+  border:
+    1px solid #d2ad4d;
+
+  border-radius:
+    clamp(7px, 0.75cqw, 12px);
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(9px, 1.05cqw, 17px);
+
+  letter-spacing: 0.04em;
+}
+
+.marfu-objective-list {
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.45cqw;
+
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.marfu-objective-list::-webkit-scrollbar {
+  display: none;
+}
+
+.marfu-objective-item {
+  width: 100%;
+  min-height: 3.15cqw;
+
+  display: grid;
+
+  grid-template-columns:
+    2.2cqw
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  gap: 0.65cqw;
+
+  padding:
+    0.48cqw
+    0.65cqw;
+
+  border:
+    1px solid
+    rgba(130, 151, 122, 0.48);
+
+  border-radius:
+    clamp(7px, 0.75cqw, 12px);
+
+  color: #42604e;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  background:
+    rgba(255, 255, 255, 0.62);
+
+  font-size:
+    clamp(7px, 0.78cqw, 13px);
+
+  font-weight: 800;
+
+  transition:
+    transform 150ms ease,
+    background 150ms ease,
+    border-color 150ms ease;
+}
+
+.marfu-objective-item:hover {
+  transform: translateX(0.2cqw);
+
+  border-color: #c49b3d;
+}
+
+.marfu-objective-item.active {
+  color: #fff9df;
+
+  border-color: #d8b64f;
 
   background:
     linear-gradient(
       135deg,
-      #1a6848,
-      #0f4732
+      #176446,
+      #0c4632
     );
 
-  border: 2px solid #d0af50;
-  border-radius: 999px;
-
   box-shadow:
-    0 5px 12px rgba(17, 73, 50, 0.22);
+    0 0.35cqw 0.8cqw
+      rgba(14, 70, 48, 0.24);
 }
 
-.example-category-arabic {
-  font-family:
-    var(--font-arabic, "Amiri", serif);
+.marfu-objective-item.completed {
+  border-color:
+    rgba(63, 151, 79, 0.65);
 
-  font-size: 18px;
-  line-height: 1.2;
+  background:
+    rgba(214, 240, 208, 0.75);
 }
 
-.example-category-malay {
-  font-family:
-    var(--font-body, "Merriweather", serif);
-
-  font-size: 14px;
-  font-weight: 700;
+.marfu-objective-item.active.completed {
+  background:
+    linear-gradient(
+      135deg,
+      #20734d,
+      #115137
+    );
 }
 
-.example-description {
-  max-width: 620px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-
-  margin: 9px auto 0;
-  padding: 7px 14px;
-
-  color: #385344;
-
-  background: rgba(228, 239, 215, 0.65);
-
-  border: 1px solid rgba(131, 161, 119, 0.48);
-  border-radius: 10px;
-}
-
-.example-description p {
-  margin: 0;
-
-  font-size: 13px;
-  line-height: 1.35;
-}
-
-.description-check {
-  flex: 0 0 auto;
-
-  width: 25px;
-  height: 25px;
+.objective-marker {
+  width: 2cqw;
+  aspect-ratio: 1;
 
   display: grid;
   place-items: center;
 
-  color: #fff7bd;
-  background: #327b42;
+  border:
+    1px solid
+    rgba(109, 140, 112, 0.65);
 
   border-radius: 50%;
+
+  color: #365746;
+
+  background:
+    rgba(255, 255, 255, 0.74);
+
+  font-size:
+    clamp(7px, 0.75cqw, 12px);
 
   font-weight: 900;
 }
 
-/* =========================================
-   HALAMAN MATAN
-========================================= */
+.marfu-objective-item.active
+.objective-marker {
+  color: #174731;
 
-.kitab-matan-signs {
-  flex: 1;
+  border-color: #ffe48b;
 
-  width: min(760px, 100%);
-
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  align-items: center;
-  gap: 14px;
-
-  margin: 2px auto 0;
-  padding: 0;
-
-  list-style: none;
+  background: #f3d267;
 }
 
-.kitab-matan-signs li {
-  min-height: 115px;
+.marfu-objective-item.completed
+.objective-marker {
+  color: #ffffff;
 
-  display: grid;
-  place-items: center;
+  border-color: #5eb268;
 
-  padding: 10px;
-
-  font-family:
-    var(--font-arabic, "Amiri", serif);
-
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 1;
-
-  color: #15513a;
-
-  background:
-    linear-gradient(
-      180deg,
-      #f7fbef,
-      #e5efdb
-    );
-
-  border: 2px solid #c5a552;
-  border-radius: 16px;
-
-  box-shadow:
-    0 7px 14px rgba(37, 73, 52, 0.11);
+  background: #3b9c53;
 }
 
-/* =========================================
-   HALAMAN RINGKASAN
-========================================= */
+/* =====================================================
+   PANEL UTAMA TENGAH
+===================================================== */
 
-.kitab-summary {
-  flex: 1;
+.marfu-main-panel {
+  left: 24%;
+  top: 16%;
 
-  width: min(760px, 100%);
-
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-content: center;
-  gap: 14px;
-
-  margin: auto;
-  padding: 0;
-
-  list-style: none;
-}
-
-.kitab-summary li {
-  min-height: 105px;
+  width: 53%;
+  height: 57%;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 
-  padding: 12px;
+  overflow: hidden;
 
-  color: #174f39;
+  padding:
+    1.2cqw
+    1.7cqw;
 
-  background: #e5f0df;
-
-  border: 1px solid #bd9e4d;
-  border-radius: 14px;
-}
-
-.kitab-summary li > span {
-  font-family:
-    var(--font-arabic, "Amiri", serif);
-
-  font-size: 39px;
-  line-height: 1.1;
-}
-
-.kitab-summary li small {
-  margin-top: 5px;
-
-  font-family:
-    var(--font-body, "Merriweather", serif);
-
-  font-size: 14px;
-}
-
-/* =========================================
-   HALAMAN TAMAT
-========================================= */
-
-.kitab-message {
-  margin: auto;
+  color: #315143;
 
   text-align: center;
 
-  font-family:
-    var(--font-title, "Cormorant Garamond", serif);
+  border:
+    clamp(1px, 0.13cqw, 2px)
+    solid rgba(206, 161, 64, 0.72);
 
-  font-size: 34px;
-  line-height: 1.4;
+  border-radius:
+    clamp(14px, 1.5cqw, 24px);
 
-  color: #174d38;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 253, 239, 0.89),
+      rgba(248, 240, 210, 0.88)
+    );
+
+  box-shadow:
+    0 0.9cqw 2cqw
+      rgba(74, 44, 9, 0.17),
+    inset 0 0 1.6cqw
+      rgba(255, 255, 255, 0.52);
+
+  backdrop-filter: blur(3px);
+
+  animation:
+    marfu-panel-enter
+    260ms ease;
 }
 
-/* =========================================
-   FOOTER
-========================================= */
+/* =====================================================
+   TAJUK PELAJARAN
+===================================================== */
 
-.kitab-footer {
-  position: relative;
-  z-index: 2;
+.marfu-lesson-heading {
+  flex: 0 0 auto;
 
+  width: 100%;
+
+  text-align: center;
+}
+
+.marfu-arabic-heading {
+  color: #114f38;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size:
+    clamp(22px, 3cqw, 48px);
+
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.marfu-lesson-heading h1 {
+  margin: 0.25cqw 0 0;
+
+  color: #7c561d;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(16px, 2cqw, 32px);
+
+  line-height: 1;
+}
+
+.marfu-lesson-heading p {
+  max-width: 82%;
+
+  margin:
+    0.55cqw auto
+    0;
+
+  color: #4b6556;
+
+  font-size:
+    clamp(8px, 0.95cqw, 15px);
+
+  line-height: 1.35;
+}
+
+.marfu-explanation {
+  flex: 0 0 auto;
+
+  max-width: 88%;
+
+  margin:
+    0.65cqw auto
+    0.5cqw;
+
+  padding:
+    0.4cqw
+    0.9cqw;
+
+  color: #395647;
+
+  border:
+    1px solid
+    rgba(190, 154, 74, 0.44);
+
+  border-radius:
+    clamp(7px, 0.75cqw, 12px);
+
+  background:
+    rgba(255, 251, 230, 0.68);
+
+  font-size:
+    clamp(8px, 0.88cqw, 14px);
+
+  line-height: 1.35;
+}
+
+/* =====================================================
+   LAYOUT CONTOH
+===================================================== */
+
+.marfu-example-layout {
+  flex: 1;
+
+  width: 100%;
   min-height: 0;
 
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
 
-  padding: 8px 28px;
+  grid-template-columns:
+    25%
+    minmax(0, 1fr);
 
-  background:
-    linear-gradient(
-      180deg,
-      #e8f0df,
-      #d5e5d0
-    );
+  gap: 1cqw;
 
-  border-top: 2px solid #c8a957;
+  overflow: hidden;
 }
 
-.kitab-footer button {
-  min-width: 150px;
+.marfu-example-menu {
+  min-height: 0;
 
-  padding: 9px 18px;
+  display: flex;
+  flex-direction: column;
 
-  font-family:
-    var(--font-title, "Cormorant Garamond", serif);
+  gap: 0.42cqw;
 
-  font-size: 17px;
-  font-weight: 800;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
 
-  color: #fff8dc;
+.marfu-example-menu::-webkit-scrollbar {
+  display: none;
+}
+
+.marfu-example-menu button {
+  width: 100%;
+  min-height: 3.1cqw;
+
+  display: grid;
+
+  grid-template-columns:
+    1.9cqw
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  gap: 0.55cqw;
+
+  padding:
+    0.45cqw
+    0.55cqw;
+
+  color: #3c5d49;
+
+  text-align: left;
+
+  border:
+    1px solid
+    rgba(121, 154, 126, 0.55);
+
+  border-radius:
+    clamp(7px, 0.75cqw, 12px);
+
+  cursor: pointer;
+
+  background:
+    rgba(255, 255, 255, 0.67);
+
+  transition:
+    transform 150ms ease,
+    background 150ms ease,
+    border-color 150ms ease;
+}
+
+.marfu-example-menu button:hover {
+  transform: translateX(0.18cqw);
+
+  border-color: #c29b42;
+}
+
+.marfu-example-menu button.active {
+  color: #fff9de;
+
+  border-color: #d6b14d;
 
   background:
     linear-gradient(
       135deg,
-      #176246,
-      #0e432f
+      #176448,
+      #0c4834
     );
-
-  border: 2px solid #c9a64e;
-  border-radius: 11px;
-
-  cursor: pointer;
-
-  transition:
-    transform 180ms ease,
-    box-shadow 180ms ease,
-    filter 180ms ease;
 }
 
-.kitab-footer button:first-child {
-  justify-self: start;
-}
+.marfu-example-menu button > span {
+  width: 1.85cqw;
+  aspect-ratio: 1;
 
-.kitab-footer button:last-child {
-  justify-self: end;
-}
-
-.kitab-footer button:hover {
-  transform: translateY(-2px);
-
-  filter: brightness(1.08);
-
-  box-shadow:
-    0 7px 15px rgba(11, 55, 38, 0.28);
-}
-
-.kitab-page-progress {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-}
-
-.kitab-page-progress > span {
-  font-family:
-    var(--font-body, "Merriweather", serif);
-
-  font-size: 12px;
-  font-weight: 700;
-
-  color: #466453;
-}
-
-.page-dots {
-  display: flex;
-  gap: 6px;
-}
-
-.page-dot {
-  width: 7px;
-  height: 7px;
-
-  display: block;
-
-  background: #adc1ae;
+  display: grid;
+  place-items: center;
 
   border-radius: 50%;
+
+  color: #355847;
+
+  background: #eaf1df;
+
+  font-size:
+    clamp(7px, 0.75cqw, 12px);
+
+  font-weight: 900;
 }
 
-.page-dot.completed {
-  background: #648d6c;
+.marfu-example-menu button.active > span {
+  color: #174831;
+
+  background: #f4d46d;
 }
 
-.page-dot.active {
-  background: #e1b735;
+.marfu-example-menu button strong {
+  min-width: 0;
 
-  box-shadow:
-    0 0 7px rgba(225, 183, 53, 0.8);
+  font-size:
+    clamp(7px, 0.78cqw, 13px);
+
+  line-height: 1.2;
 }
-/* =========================================
-   HALAMAN TAMAT + HOTSPOT LATIHAN
-========================================= */
 
-.kitab-complete-content {
-  flex: 1;
+/* =====================================================
+   KAD AYAT CONTOH
+===================================================== */
+
+.marfu-example-card {
+  min-width: 0;
+  min-height: 0;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  gap: 28px;
+  overflow: hidden;
+
+  padding:
+    0.75cqw
+    1.15cqw;
+
+  border:
+    1px solid
+    rgba(199, 157, 66, 0.78);
+
+  border-radius:
+    clamp(10px, 1.05cqw, 17px);
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255, 254, 246, 0.97),
+      rgba(247, 236, 204, 0.96)
+    );
+
+  box-shadow:
+    inset 0 0 1.3cqw
+      rgba(173, 129, 47, 0.1);
+
+  animation:
+    marfu-example-enter
+    240ms ease;
 }
 
-.kitab-complete-content .kitab-message {
-  margin: 0;
+.marfu-example-label {
+  padding:
+    0.3cqw
+    1.2cqw;
 
-  text-align: center;
+  color: #f6d878;
+
+  border:
+    1px solid #d0a946;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #176446,
+      #0d4833
+    );
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(8px, 0.9cqw, 15px);
+
+  font-weight: 900;
 }
 
-.kitab-training-hotspot {
-  width: 500px;
-  min-height: 96px;
+.marfu-arabic-sentence {
+  margin:
+    0.65cqw
+    0
+    0.25cqw;
 
-  display: grid;
-  grid-template-columns: 58px minmax(0, 1fr) 34px;
+  color: #153f2f;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size:
+    clamp(38px, 5.1cqw, 82px);
+
+  font-weight: 700;
+  line-height: 1.2;
+
+  white-space: nowrap;
+}
+
+.marfu-arabic-sentence .highlight {
+  color: #ea2449;
+
+  text-shadow:
+    0 0 0.45cqw
+      rgba(234, 36, 73, 0.42),
+    0 0 0.9cqw
+      rgba(255, 194, 61, 0.34);
+
+  animation:
+    marfu-highlight-pulse
+    1.3s ease-in-out infinite;
+}
+
+.marfu-example-category {
+  display: flex;
   align-items: center;
-  gap: 15px;
+  justify-content: center;
 
-  padding: 14px 20px;
+  gap: 0.55cqw;
 
-  color: #fff7d6;
+  padding:
+    0.32cqw
+    1.1cqw;
+
+  color: #fff8d5;
+
+  border:
+    1px solid #cfa84d;
+
+  border-radius: 999px;
 
   background:
     linear-gradient(
       135deg,
-      #176344,
-      #0c432f
+      #1c6b4b,
+      #0e4934
     );
-
-  border: 3px solid #d0ad4e;
-  border-radius: 18px;
-
-  cursor: pointer;
-
-  box-shadow:
-    0 12px 24px rgba(10, 60, 42, 0.28),
-    inset 0 0 0 2px rgba(255, 239, 166, 0.16);
-
-  transition:
-    transform 180ms ease,
-    filter 180ms ease,
-    box-shadow 180ms ease;
 }
 
-.kitab-training-hotspot:hover {
-  transform: translateY(-4px) scale(1.02);
+.marfu-example-category > span {
+  font-family:
+    "Amiri",
+    serif;
 
-  filter: brightness(1.08);
-
-  box-shadow:
-    0 16px 30px rgba(10, 60, 42, 0.36),
-    inset 0 0 0 2px rgba(255, 239, 166, 0.24);
+  font-size:
+    clamp(11px, 1.3cqw, 21px);
 }
 
-.training-hotspot-icon {
-  width: 52px;
-  height: 52px;
+.marfu-example-category > strong {
+  font-size:
+    clamp(7px, 0.78cqw, 13px);
+}
+
+.marfu-example-description {
+  max-width: 88%;
+
+  margin:
+    0.55cqw
+    auto
+    0;
+
+  padding:
+    0.4cqw
+    0.8cqw;
+
+  color: #3c5748;
+
+  border:
+    1px solid
+    rgba(121, 160, 119, 0.44);
+
+  border-radius:
+    clamp(7px, 0.75cqw, 12px);
+
+  background:
+    rgba(222, 238, 207, 0.68);
+
+  font-size:
+    clamp(8px, 0.86cqw, 14px);
+
+  line-height: 1.35;
+}
+
+/* =====================================================
+   MATAN
+===================================================== */
+
+.marfu-matan-grid {
+  flex: 1;
+
+  width: min(90%, 100%);
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  align-items: center;
+
+  gap: 0.8cqw;
+
+  margin:
+    0.65cqw auto
+    0;
+
+  padding: 0;
+
+  list-style: none;
+}
+
+.marfu-matan-grid li {
+  min-height: 8.7cqw;
 
   display: grid;
   place-items: center;
 
-  color: #164733;
-  background: #f2d268;
+  padding: 0.7cqw;
 
-  border: 2px solid #ffe59a;
-  border-radius: 50%;
+  color: #11503a;
 
-  font-size: 24px;
+  border:
+    1px solid #c5a24c;
+
+  border-radius:
+    clamp(10px, 1.05cqw, 17px);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 254, 241, 0.94),
+      rgba(229, 240, 217, 0.94)
+    );
+
+  box-shadow:
+    0 0.45cqw 1cqw
+      rgba(38, 75, 52, 0.1);
+
+  font-family:
+    "Amiri",
+    serif;
+
+  font-size:
+    clamp(25px, 3.3cqw, 53px);
+
+  font-weight: 700;
 }
 
-.training-hotspot-text {
+/* =====================================================
+   RINGKASAN
+===================================================== */
+
+.marfu-summary-grid {
+  flex: 1;
+
+  width: min(90%, 100%);
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  align-content: center;
+
+  gap: 0.75cqw;
+
+  margin:
+    0.55cqw auto
+    0;
+
+  padding: 0;
+
+  list-style: none;
+}
+
+.marfu-summary-grid li {
+  min-height: 7.2cqw;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.8cqw;
+
+  color: #174d39;
+
+  border:
+    1px solid #c3a04d;
+
+  border-radius:
+    clamp(9px, 0.95cqw, 15px);
+
+  background:
+    rgba(231, 241, 220, 0.9);
+}
+
+.marfu-summary-grid li > span {
+  font-family:
+    "Amiri",
+    serif;
+
+  font-size:
+    clamp(22px, 2.7cqw, 43px);
+}
+
+.marfu-summary-grid li small {
+  margin-top: 0.25cqw;
+
+  font-size:
+    clamp(7px, 0.82cqw, 13px);
+
+  font-weight: 800;
+}
+
+/* =====================================================
+   HALAMAN TAMAT
+===================================================== */
+
+.marfu-complete-panel {
+  flex: 1;
+
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 1cqw;
+}
+
+.marfu-complete-icon {
+  width: 5.2cqw;
+  aspect-ratio: 1;
+
+  display: grid;
+  place-items: center;
+
+  color: #ffffff;
+
+  border:
+    clamp(2px, 0.18cqw, 3px)
+    solid #e8c85f;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #5fd474,
+      #168542 72%
+    );
+
+  box-shadow:
+    0 0 1.4cqw
+      rgba(72, 208, 99, 0.55);
+
+  font-size:
+    clamp(19px, 2.3cqw, 37px);
+
+  font-weight: 900;
+}
+
+.marfu-complete-panel h2 {
+  max-width: 86%;
+
+  margin: 0;
+
+  color: #175039;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(16px, 2cqw, 32px);
+
+  line-height: 1.3;
+}
+
+.marfu-training-button {
+  width: 56%;
+  min-height: 6.2cqw;
+
+  display: grid;
+
+  grid-template-columns:
+    3.7cqw
+    minmax(0, 1fr)
+    2cqw;
+
+  align-items: center;
+
+  gap: 0.8cqw;
+
+  padding:
+    0.75cqw
+    1.1cqw;
+
+  color: #fff8d8;
+
+  border:
+    clamp(1px, 0.16cqw, 3px)
+    solid #d4af4e;
+
+  border-radius:
+    clamp(11px, 1.2cqw, 19px);
+
+  cursor: pointer;
+
+  background:
+    linear-gradient(
+      135deg,
+      #176448,
+      #0c4833
+    );
+
+  box-shadow:
+    0 0.65cqw 1.4cqw
+      rgba(10, 69, 47, 0.28);
+
+  transition:
+    transform 170ms ease,
+    filter 170ms ease;
+}
+
+.marfu-training-button:hover {
+  transform:
+    translateY(-0.2cqw)
+    scale(1.015);
+
+  filter: brightness(1.08);
+}
+
+.marfu-training-button > span:first-child {
+  font-size:
+    clamp(16px, 2cqw, 32px);
+}
+
+.marfu-training-button > span:nth-child(2) {
   min-width: 0;
 
   display: flex;
@@ -1018,28 +1295,692 @@
   text-align: left;
 }
 
-.training-hotspot-text strong {
+.marfu-training-button strong {
   font-family:
-    var(--font-title, "Cormorant Garamond", serif);
+    Georgia,
+    serif;
 
-  font-size: 24px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
+  font-size:
+    clamp(12px, 1.4cqw, 22px);
 }
 
-.training-hotspot-text small {
-  margin-top: 4px;
+.marfu-training-button small {
+  margin-top: 0.2cqw;
 
-  color: #e6dab5;
+  color: #e8ddb9;
 
-  font-family:
-    var(--font-body, "Merriweather", serif);
-
-  font-size: 12px;
-  line-height: 1.4;
+  font-size:
+    clamp(7px, 0.77cqw, 12px);
 }
 
-.training-hotspot-arrow {
-  font-size: 30px;
+/* =====================================================
+   NOTA PINTAR KANAN
+===================================================== */
+
+.marfu-note-panel {
+  right: 2.2%;
+  top: 28%;
+
+  width: 18.5%;
+  height: 43%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.48cqw;
+
+  padding:
+    1cqw
+    1.2cqw;
+
+  overflow: hidden;
+
+  color: #3f5546;
+
+  text-align: center;
+
+  border:
+    clamp(1px, 0.14cqw, 2px)
+    solid rgba(189, 145, 53, 0.88);
+
+  border-radius:
+    clamp(10px, 1.1cqw, 18px);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 250, 226, 0.94),
+      rgba(242, 228, 189, 0.93)
+    );
+
+  box-shadow:
+    0 0.65cqw 1.5cqw
+      rgba(74, 45, 12, 0.18),
+    inset 0 0 1.1cqw
+      rgba(255, 255, 255, 0.4);
+}
+
+.marfu-note-panel h2 {
+  width: 100%;
+
+  margin:
+    0
+    0
+    0.4cqw;
+
+  padding:
+    0.45cqw
+    0.7cqw;
+
+  color: #f6d976;
+
+  border:
+    1px solid #d0ab4d;
+
+  border-radius:
+    clamp(7px, 0.75cqw, 12px);
+
+  background:
+    linear-gradient(
+      180deg,
+      #176446,
+      #0d4833
+    );
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(9px, 1cqw, 16px);
+}
+
+.marfu-note-label {
+  color: #7c5a21;
+
+  font-size:
+    clamp(8px, 0.85cqw, 14px);
+
   font-weight: 900;
+}
+
+.marfu-note-panel > strong {
+  color: #164f39;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(14px, 1.55cqw, 25px);
+}
+
+.marfu-note-arrow {
+  color: #1b6b4a;
+
+  font-size:
+    clamp(16px, 1.8cqw, 29px);
+
+  font-weight: 900;
+}
+
+.marfu-note-sign {
+  color: #c9363c !important;
+}
+
+.marfu-note-arabic {
+  width: 4.8cqw;
+  aspect-ratio: 1;
+
+  display: grid;
+  place-items: center;
+
+  color: #cf303a;
+
+  border:
+    1px solid #d1ad55;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 252, 234, 0.85);
+
+  box-shadow:
+    0 0.35cqw 0.9cqw
+      rgba(151, 87, 29, 0.12);
+
+  font-family:
+    "Amiri",
+    serif;
+
+  font-size:
+    clamp(24px, 3.2cqw, 51px);
+
+  font-weight: 700;
+}
+
+.marfu-note-panel p {
+  max-width: 95%;
+
+  margin:
+    0.35cqw
+    auto
+    0;
+
+  padding:
+    0.45cqw
+    0.55cqw;
+
+  color: #4c5d4f;
+
+  border:
+    1px solid
+    rgba(119, 154, 113, 0.42);
+
+  border-radius:
+    clamp(7px, 0.7cqw, 11px);
+
+  background:
+    rgba(219, 236, 204, 0.6);
+
+  font-size:
+    clamp(7px, 0.77cqw, 12px);
+
+  line-height: 1.35;
+}
+
+/* =====================================================
+   TIP BAWAH
+===================================================== */
+
+.marfu-bottom-tip {
+  left: 27.5%;
+  bottom: 3.7%;
+
+  width: 45%;
+  height: 5.8%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.65cqw;
+
+  padding:
+    0.45cqw
+    1.1cqw;
+
+  color: #485a4c;
+
+  border:
+    1px solid
+    rgba(191, 153, 67, 0.72);
+
+  border-radius:
+    clamp(8px, 0.8cqw, 13px);
+
+  background:
+    rgba(255, 247, 214, 0.9);
+
+  box-shadow:
+    0 0.35cqw 0.85cqw
+      rgba(94, 58, 12, 0.12);
+}
+
+.marfu-bottom-tip > span {
+  flex: 0 0 auto;
+
+  font-size:
+    clamp(12px, 1.4cqw, 23px);
+}
+
+.marfu-bottom-tip p {
+  margin: 0;
+
+  font-size:
+    clamp(7px, 0.78cqw, 13px);
+
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/* =====================================================
+   PROGRESS BAWAH
+===================================================== */
+
+.marfu-bottom-progress {
+  left: 30.5%;
+  bottom: 10.7%;
+
+  width: 39%;
+  height: 4.8%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.8cqw;
+
+  padding:
+    0.35cqw
+    0.8cqw;
+
+  color: #f2d675;
+
+  border:
+    1px solid
+    rgba(218, 175, 66, 0.82);
+
+  border-radius: 999px;
+
+  background:
+    rgba(5, 61, 42, 0.92);
+
+  box-shadow:
+    0 0.35cqw 0.85cqw
+      rgba(0, 0, 0, 0.2);
+}
+
+.marfu-bottom-progress > span {
+  flex: 0 0 auto;
+
+  font-size:
+    clamp(7px, 0.73cqw, 12px);
+
+  font-weight: 900;
+}
+
+.marfu-page-dots {
+  display: flex;
+  align-items: center;
+
+  gap: 0.42cqw;
+}
+
+.marfu-page-dot {
+  width:
+    clamp(7px, 0.72cqw, 12px);
+
+  aspect-ratio: 1;
+
+  padding: 0;
+
+  border:
+    1px solid
+    rgba(226, 190, 87, 0.68);
+
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  background:
+    rgba(7, 45, 32, 0.75);
+
+  transition:
+    transform 140ms ease,
+    background 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.marfu-page-dot:hover {
+  transform: scale(1.15);
+}
+
+.marfu-page-dot.completed {
+  background: #57a35c;
+}
+
+.marfu-page-dot.active {
+  background: #f1ca51;
+
+  box-shadow:
+    0 0 0.65cqw
+      rgba(242, 201, 72, 0.78);
+
+  transform: scale(1.2);
+}
+
+/* =====================================================
+   BUTANG NAVIGASI BAWAH
+===================================================== */
+
+.marfu-previous-button,
+.marfu-next-button {
+  bottom: 2.8%;
+
+  width: 15.5%;
+  height: 7.5%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 1.2%;
+
+  color: #fff1ad;
+
+  border:
+    clamp(1px, 0.14cqw, 2px)
+    solid #d8b34e;
+
+  border-radius:
+    clamp(10px, 1cqw, 16px);
+
+  cursor: pointer;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(12, 94, 63, 0.97),
+      rgba(5, 55, 38, 0.98)
+    );
+
+  box-shadow:
+    0 0.5cqw 1.1cqw
+      rgba(0, 0, 0, 0.22),
+    inset 0 0 0.55cqw
+      rgba(255, 221, 105, 0.12);
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(9px, 1.05cqw, 17px);
+
+  font-weight: 900;
+
+  transition:
+    transform 160ms ease,
+    filter 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.marfu-previous-button {
+  left: 2.2%;
+}
+
+.marfu-next-button {
+  right: 2.2%;
+}
+
+.marfu-next-button.complete {
+  background:
+    linear-gradient(
+      180deg,
+      #4c963f,
+      #196538
+    );
+
+  animation:
+    marfu-complete-glow
+    1.65s ease-in-out infinite;
+}
+
+.marfu-previous-button:hover,
+.marfu-next-button:hover {
+  transform: translateY(-0.15cqw);
+
+  filter: brightness(1.1);
+
+  box-shadow:
+    0 0 1.25cqw
+      rgba(255, 204, 67, 0.48);
+}
+
+/* =====================================================
+   FOCUS
+===================================================== */
+
+.marfu-city-back:focus-visible,
+.marfu-objective-item:focus-visible,
+.marfu-example-menu button:focus-visible,
+.marfu-training-button:focus-visible,
+.marfu-page-dot:focus-visible,
+.marfu-previous-button:focus-visible,
+.marfu-next-button:focus-visible {
+  outline:
+    clamp(2px, 0.18cqw, 3px)
+    solid #ffe17c;
+
+  outline-offset:
+    clamp(1px, 0.12cqw, 2px);
+}
+
+/* =====================================================
+   ANIMASI
+===================================================== */
+
+@keyframes marfu-panel-enter {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(0.4cqw)
+      scale(0.992);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+@keyframes marfu-example-enter {
+  from {
+    opacity: 0;
+
+    transform:
+      translateX(0.45cqw);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateX(0);
+  }
+}
+
+@keyframes marfu-highlight-pulse {
+  0%,
+  100% {
+    color: #e72448;
+
+    text-shadow:
+      0 0 0.35cqw
+        rgba(231, 36, 72, 0.35);
+  }
+
+  50% {
+    color: #ff607c;
+
+    text-shadow:
+      0 0 0.75cqw
+        rgba(231, 36, 72, 0.78),
+      0 0 1.25cqw
+        rgba(255, 197, 59, 0.5);
+  }
+}
+
+@keyframes marfu-complete-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0.65cqw
+        rgba(255, 196, 48, 0.25);
+  }
+
+  50% {
+    box-shadow:
+      0 0 1.55cqw
+        rgba(255, 202, 55, 0.72);
+  }
+}
+
+/* =====================================================
+   FRAME KECIL
+===================================================== */
+
+@container marfu-classroom (max-width: 850px) {
+  .marfu-objective-panel {
+    left: 2.3%;
+    width: 20%;
+  }
+
+  .marfu-main-panel {
+    left: 23.5%;
+    width: 54%;
+  }
+
+  .marfu-note-panel {
+    right: 1.8%;
+    width: 19%;
+  }
+
+  .marfu-example-layout {
+    grid-template-columns:
+      26%
+      minmax(0, 1fr);
+  }
+
+  .marfu-training-button {
+    width: 62%;
+  }
+}
+
+@container marfu-classroom (max-width: 620px) {
+  .marfu-top-header {
+    width: 38%;
+    left: 31%;
+  }
+
+  .marfu-objective-panel {
+    height: 44%;
+  }
+
+  .marfu-main-panel {
+    top: 15.5%;
+    height: 58%;
+  }
+
+  .marfu-note-panel {
+    height: 41%;
+  }
+
+  .marfu-objective-item {
+    min-height: 3cqw;
+  }
+
+  .marfu-example-menu button {
+    min-height: 2.9cqw;
+  }
+
+  .marfu-arabic-sentence {
+    font-size: 5cqw;
+  }
+
+  .marfu-bottom-tip {
+    width: 48%;
+    left: 26%;
+  }
+
+  .marfu-training-button {
+    width: 68%;
+  }
+}
+
+/* =====================================================
+   TELEFON MENEGAK
+===================================================== */
+
+@media (orientation: portrait) {
+  .marfu-classroom-page::after {
+    content:
+      "Sila pusingkan telefon kepada paparan melintang";
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 9999;
+
+    display: grid;
+    place-items: center;
+
+    padding: 32px;
+
+    color: #fff0aa;
+
+    text-align: center;
+
+    background:
+      radial-gradient(
+        circle at center,
+        #176044,
+        #082a21
+      );
+
+    font-size:
+      clamp(18px, 5vw, 28px);
+
+    font-weight: 900;
+    line-height: 1.5;
+  }
+
+  .marfu-classroom-frame {
+    visibility: hidden;
+  }
+}
+
+/* =====================================================
+   PERANTI SENTUH
+===================================================== */
+
+@media (hover: none) {
+  .marfu-city-back:hover,
+  .marfu-objective-item:hover,
+  .marfu-example-menu button:hover,
+  .marfu-training-button:hover,
+  .marfu-page-dot:hover,
+  .marfu-previous-button:hover,
+  .marfu-next-button:hover {
+    transform: none;
+    filter: none;
+  }
+
+  .marfu-city-back:active,
+  .marfu-objective-item:active,
+  .marfu-example-menu button:active,
+  .marfu-training-button:active,
+  .marfu-page-dot:active,
+  .marfu-previous-button:active,
+  .marfu-next-button:active {
+    transform: scale(0.985);
+  }
+}
+
+/* =====================================================
+   KURANGKAN ANIMASI
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .marfu-main-panel,
+  .marfu-example-card,
+  .marfu-arabic-sentence .highlight,
+  .marfu-next-button.complete,
+  .marfu-city-back,
+  .marfu-objective-item,
+  .marfu-example-menu button,
+  .marfu-training-button,
+  .marfu-page-dot,
+  .marfu-previous-button,
+  .marfu-next-button {
+    animation: none;
+    transition: none;
+  }
 }
