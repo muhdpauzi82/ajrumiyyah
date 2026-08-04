@@ -1,4 +1,6 @@
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import "./LorongLatihan.css";
 
 const LATIHAN = [
@@ -11,6 +13,7 @@ const LATIHAN = [
       "Kenal pasti Marfu‘, Mansub, Majrur dan Majzum.",
     route: "/latihan-irab-keadaan",
     storageKey: "latihanIrabKeadaanDone",
+    icon: "/images/lorongLatihan/keadaan.webp",
   },
   {
     id: "tanda",
@@ -21,6 +24,7 @@ const LATIHAN = [
       "Kenal pasti dhammah, fathah, kasrah dan sukun.",
     route: "/latihan-irab-tanda",
     storageKey: "latihanIrabTandaDone",
+    icon: "/images/lorongLatihan/tanda.webp",
   },
   {
     id: "ayat",
@@ -31,6 +35,7 @@ const LATIHAN = [
       "Tentukan keadaan I‘rab berdasarkan kedudukan kalimah.",
     route: "/latihan-irab-ayat",
     storageKey: "latihanIrabAyatDone",
+    icon: "/images/lorongLatihan/ayat.webp",
   },
   {
     id: "campuran",
@@ -41,25 +46,68 @@ const LATIHAN = [
       "Gabungan soalan keadaan, tanda dan penggunaan dalam ayat.",
     route: "/latihan-irab-campuran",
     storageKey: "latihanIrabCampuranDone",
+    icon: "/images/lorongLatihan/campuran.webp",
   },
 ];
 
-function isCompleted(storageKey) {
-  return localStorage.getItem(storageKey) === "true";
+function bacaStatusLatihan() {
+  return LATIHAN.reduce((status, latihan) => {
+    status[latihan.id] =
+      localStorage.getItem(latihan.storageKey) === "true";
+
+    return status;
+  }, {});
 }
 
 export default function LorongLatihan() {
   const navigate = useNavigate();
 
-  const completedCount = LATIHAN.filter((latihan) =>
-    isCompleted(latihan.storageKey)
-  ).length;
+  const [completedStatus, setCompletedStatus] =
+    useState(bacaStatusLatihan);
+
+  useEffect(() => {
+    function kemasKiniStatus() {
+      setCompletedStatus(bacaStatusLatihan());
+    }
+
+    kemasKiniStatus();
+
+    window.addEventListener("focus", kemasKiniStatus);
+    window.addEventListener("storage", kemasKiniStatus);
+
+    return () => {
+      window.removeEventListener(
+        "focus",
+        kemasKiniStatus
+      );
+
+      window.removeEventListener(
+        "storage",
+        kemasKiniStatus
+      );
+    };
+  }, []);
+
+  const completedCount = useMemo(
+    () =>
+      LATIHAN.filter(
+        (latihan) => completedStatus[latihan.id]
+      ).length,
+    [completedStatus]
+  );
+
+  const semuaLatihanSelesai =
+    completedCount === LATIHAN.length;
 
   function isUnlocked(index) {
-    if (index === 0) return true;
+    if (index === 0) {
+      return true;
+    }
 
-    return isCompleted(
-      LATIHAN[index - 1].storageKey
+    const latihanSebelumnya = LATIHAN[index - 1];
+
+    return Boolean(
+      completedStatus[latihanSebelumnya.id]
     );
   }
 
@@ -68,6 +116,7 @@ export default function LorongLatihan() {
       alert(
         `Selesaikan latihan ${index} terlebih dahulu.`
       );
+
       return;
     }
 
@@ -75,10 +124,11 @@ export default function LorongLatihan() {
   }
 
   function tamatLorong() {
-    if (completedCount !== LATIHAN.length) {
+    if (!semuaLatihanSelesai) {
       alert(
         "Selesaikan keempat-empat latihan terlebih dahulu."
       );
+
       return;
     }
 
@@ -88,53 +138,52 @@ export default function LorongLatihan() {
   }
 
   return (
-    <main className="lorong-latihan-page">
-      <section className="lorong-latihan-stage">
-        <div className="lorong-background" />
+    <main className="lorong-page">
+      <section className="lorong-frame">
+        {/* Background penuh */}
 
-        <button
-          type="button"
-          className="lorong-back-button"
-          onClick={() => navigate("/kota-irab")}
+        <img
+          src="/images/lorongLatihan/lorong-latihan-bg.webp"
+          alt=""
+          className="lorong-bg"
+          draggable="false"
+        />
+
+        {/* Kemajuan kanan atas */}
+
+        <section
+          className="lorong-progress-overlay"
+          aria-label={`Kemajuan ${completedCount} daripada ${LATIHAN.length}`}
         >
-          ← KOTA I‘RAB
-        </button>
+          <strong>
+            {completedCount} / {LATIHAN.length}
+          </strong>
 
-        <header className="lorong-header">
-          <span>LOKASI 3</span>
-
-          <h1>LORONG LATIHAN I‘RAB</h1>
-
-          <p>
-            Uji kefahaman melalui empat tahap latihan.
-          </p>
-        </header>
-
-        <section className="lorong-progress">
-          <div className="lorong-progress-heading">
-            <span>KEMAJUAN LATIHAN</span>
-
-            <strong>
-              {completedCount} / {LATIHAN.length}
-            </strong>
-          </div>
-
-          <div className="lorong-progress-track">
-            <span
-              style={{
-                width: `${
-                  (completedCount / LATIHAN.length) *
-                  100
-                }%`,
-              }}
-            />
+          <div className="lorong-progress-dots">
+            {LATIHAN.map((latihan, index) => (
+              <span
+                key={latihan.id}
+                className={[
+                  completedStatus[latihan.id]
+                    ? "completed"
+                    : "",
+                  index === completedCount
+                    ? "current"
+                    : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+              />
+            ))}
           </div>
         </section>
 
-        <section className="lorong-training-grid">
+        {/* Empat kad latihan */}
+
+        <section className="lorong-card-grid">
           {LATIHAN.map((latihan, index) => {
-            const completed = isCompleted(
-              latihan.storageKey
+            const completed = Boolean(
+              completedStatus[latihan.id]
             );
 
             const unlocked = isUnlocked(index);
@@ -144,7 +193,8 @@ export default function LorongLatihan() {
                 type="button"
                 key={latihan.id}
                 className={[
-                  "lorong-training-card",
+                  "lorong-card",
+                  `lorong-card-${latihan.id}`,
                   completed ? "completed" : "",
                   unlocked ? "unlocked" : "locked",
                 ]
@@ -153,59 +203,78 @@ export default function LorongLatihan() {
                 onClick={() =>
                   bukaLatihan(latihan, index)
                 }
+                aria-label={`${latihan.title}${
+                  completed
+                    ? ", selesai"
+                    : unlocked
+                      ? ", boleh dimulakan"
+                      : ", belum terbuka"
+                }`}
               >
-                <span className="training-number">
+                <span className="lorong-card-number">
                   {latihan.number}
                 </span>
 
+                <span className="lorong-card-icon-wrap">
+                  <img
+                    src={latihan.icon}
+                    alt=""
+                    className="lorong-card-icon"
+                    draggable="false"
+                  />
+                </span>
+
                 <span
-                  className="training-arabic"
-                  lang="ar"
+                  className="lorong-card-arabic"
                   dir="rtl"
+                  lang="ar"
                 >
                   {latihan.arabic}
                 </span>
 
-                <strong>{latihan.title}</strong>
+                <strong className="lorong-card-title">
+                  {latihan.title}
+                </strong>
 
-                <p>{latihan.description}</p>
+                <span className="lorong-card-divider" />
 
-                <span className="training-status">
-                  {completed
-                    ? "✓ SELESAI"
-                    : unlocked
-                      ? "MULAKAN"
-                      : "TERKUNCI"}
-                </span>
+                <p className="lorong-card-description">
+                  {latihan.description}
+                </p>
+
+                {completed && (
+                  <span className="lorong-completed-badge">
+                    ✓
+                  </span>
+                )}
               </button>
             );
           })}
         </section>
 
-        <section className="lorong-guide">
-          <span>ARAHAN</span>
-
-          <h2>Selesaikan latihan mengikut urutan</h2>
-
-          <p>
-            Setiap tahap akan terbuka selepas tahap
-            sebelumnya diselesaikan.
-          </p>
-        </section>
+        {/* Hotspot telus pada butang bawah background */}
 
         <button
           type="button"
-          className={`lorong-complete-button ${
-            completedCount === LATIHAN.length
+          className={[
+            "lorong-complete-hotspot",
+            semuaLatihanSelesai
               ? "ready"
-              : "locked"
-          }`}
+              : "locked",
+          ].join(" ")}
           onClick={tamatLorong}
-        >
-          {completedCount === LATIHAN.length
-            ? "SELESAIKAN LORONG LATIHAN"
-            : `SELESAIKAN SEMUA LATIHAN (${completedCount}/${LATIHAN.length})`}
-        </button>
+          aria-label={
+            semuaLatihanSelesai
+              ? "Selesaikan Lorong Latihan"
+              : `Selesaikan semua latihan. ${completedCount} daripada ${LATIHAN.length} selesai`
+          }
+        />
+
+        {/* Nombor dinamik pada butang bawah */}
+
+        <span className="lorong-complete-count">
+          ({completedCount}/{LATIHAN.length})
+        </span>
       </section>
     </main>
   );

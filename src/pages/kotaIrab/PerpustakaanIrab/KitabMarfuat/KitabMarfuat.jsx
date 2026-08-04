@@ -1,15 +1,20 @@
-import { useState } from "react";
+import {  useEffect,  useRef,  useState,} from "react";
 import { useNavigate } from "react-router-dom";
 
 import { marfuPages } from "./marfuPages";
+
 import "./KitabMarfuat.css";
 
 export default function KitabMarfuat() {
   const navigate = useNavigate();
+const viewportRef = useRef(null);
+const [scale, setScale] = useState(1);
+
+const BASE_WIDTH = 1200;
+const BASE_HEIGHT = 700;
 
   const [pageIndex, setPageIndex] = useState(0);
-  const [selectedExample, setSelectedExample] =
-    useState(0);
+  const [selectedExample, setSelectedExample] = useState(0);
 
   const page = marfuPages[pageIndex];
 
@@ -19,9 +24,6 @@ export default function KitabMarfuat() {
   const isFirstPage = pageIndex === 0;
   const isLastPage =
     pageIndex === marfuPages.length - 1;
-
-  const progressPercentage =
-    ((pageIndex + 1) / marfuPages.length) * 100;
 
   function nextPage() {
     if (isLastPage) return;
@@ -44,169 +46,161 @@ export default function KitabMarfuat() {
     navigate("/perpustakaan-irab");
   }
 
+
+useEffect(() => {
+  function updateScale() {
+    const viewport = viewportRef.current;
+
+    if (!viewport) return;
+
+    const widthScale =
+      viewport.clientWidth / BASE_WIDTH;
+
+    const heightScale =
+      viewport.clientHeight / BASE_HEIGHT;
+
+    setScale(
+      Math.min(widthScale, heightScale)
+    );
+  }
+
+  updateScale();
+
+  window.addEventListener(
+    "resize",
+    updateScale
+  );
+
+  return () => {
+    window.removeEventListener(
+      "resize",
+      updateScale
+    );
+  };
+}, []);
+
   return (
-    <main className="marfu-classroom-page">
-      <section className="marfu-classroom-frame">
-        {/* BACKGROUND UTAMA */}
+  <div
+    ref={viewportRef}
+    className="kitab-viewport"
+  >
+    <main
+      className="kitab-marfu-screen"
+      style={{
+        transform: `scale(${scale})`,
+      }}
+    >
+      <section className="kitab-marfu-book">
 
-        <img
-          src="/images/kotaIrab/kitab-classroom-bg.webp"
-          alt=""
-          className="marfu-classroom-bg"
-          draggable="false"
-        />
+        {/* BADGE KITAB */}
 
-        {/* KEMBALI KE KOTA I'RAB */}
-
-        <button
-          type="button"
-          className="marfu-city-back"
-          onClick={() => navigate("/kota-irab")}
-          aria-label="Kembali ke Kota I'rab"
-        >
-          ← KOTA I‘RAB
-        </button>
-
-        {/* HEADER */}
-
-        <header className="marfu-top-header">
-          <span className="marfu-header-icon">
+        <aside className="kitab-identity">
+          <span className="kitab-identity-icon">
             📖
           </span>
 
-          <div>
-            <strong>KITAB 1 MARFU‘AT</strong>
+          <span className="kitab-identity-small">
+            KITAB 1
+          </span>
 
-            <small>
-              Bab {pageIndex + 1} daripada{" "}
-              {marfuPages.length}
-            </small>
-          </div>
-        </header>
-
-        {/* STATUS HALAMAN */}
-
-        <section className="marfu-page-status">
-          <span>Halaman</span>
-
-          <strong>
-            {pageIndex + 1} / {marfuPages.length}
-          </strong>
-
-          <div className="marfu-status-track">
-            <span
-              style={{
-                width: `${progressPercentage}%`,
-              }}
-            />
-          </div>
-        </section>
-
-        {/* PANEL OBJEKTIF KIRI */}
-
-        <aside className="marfu-objective-panel">
-          <h2>OBJEKTIF HARI INI</h2>
-
-          <div className="marfu-objective-list">
-            {marfuPages.map((item, index) => {
-              const active = index === pageIndex;
-              const completed = index < pageIndex;
-
-              return (
-                <button
-                  type="button"
-                  key={item.id}
-                  className={[
-                    "marfu-objective-item",
-                    active ? "active" : "",
-                    completed ? "completed" : "",
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
-                  onClick={() => {
-                    setPageIndex(index);
-                    setSelectedExample(0);
-                  }}
-                >
-                  <span className="objective-marker">
-                    {completed
-                      ? "✓"
-                      : index + 1}
-                  </span>
-
-                  <span>
-                    {item.menuTitle ??
-                      item.title ??
-                      `Halaman ${index + 1}`}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+          <strong>MARFU‘AT</strong>
         </aside>
 
-        {/* KAWASAN UTAMA */}
+        {/* HEADER */}
 
-        <section className="marfu-main-panel">
-          <header className="marfu-lesson-heading">
-            <div
-              className="marfu-arabic-heading"
-              dir="rtl"
-              lang="ar"
-            >
-              {page.arabic}
-            </div>
+        <header className="kitab-header">
+          <div
+            className="kitab-arabic-title"
+            dir="rtl"
+            lang="ar"
+          >
+            {page.arabic}
+          </div>
 
-            <h1>{page.title}</h1>
+          <h1>{page.title}</h1>
 
-            {page.subtitle && (
-              <p>{page.subtitle}</p>
-            )}
-          </header>
+          {page.subtitle && (
+            <p>{page.subtitle}</p>
+          )}
+        </header>
+
+        {/* KANDUNGAN */}
+
+        <section className="kitab-content">
 
           {page.explanation && (
-            <p className="marfu-explanation">
+            <p className="kitab-explanation">
               {page.explanation}
             </p>
           )}
 
-          {/* HALAMAN CONTOH */}
-
           {page.examples && currentExample && (
-            <div className="marfu-example-layout">
-              <nav className="marfu-example-menu">
-                {page.examples.map(
-                  (item, index) => (
-                    <button
-                      type="button"
-                      key={item.id}
-                      className={
-                        selectedExample === index
-                          ? "active"
-                          : ""
-                      }
-                      onClick={() =>
-                        setSelectedExample(index)
-                      }
-                    >
-                      <span>{index + 1}</span>
+            <div className="lesson-layout">
 
-                      <strong>{item.label}</strong>
-                    </button>
-                  )
-                )}
-              </nav>
+              {/* PILIHAN KIRI */}
+
+              <aside className="lesson-sidebar">
+                <h3>Digunakan pada</h3>
+
+                <div className="lesson-sidebar-divider">
+                  ◆
+                </div>
+
+                <div className="lesson-options">
+                  {page.examples.map(
+                    (item, index) => (
+                      <button
+                        key={item.id}
+                        type="button"
+                        className={
+                          index === selectedExample
+                            ? "lesson-item active"
+                            : "lesson-item"
+                        }
+                        onClick={() =>
+                          setSelectedExample(index)
+                        }
+                      >
+                        <span className="lesson-item-number">
+                          {index + 1}
+                        </span>
+
+                        <span className="lesson-item-label">
+                          {item.label}
+                        </span>
+
+                        <span className="lesson-item-arrow">
+                          ›
+                        </span>
+                      </button>
+                    )
+                  )}
+                </div>
+
+                <div className="lesson-tip">
+                  <span className="lesson-tip-icon">
+                    💡
+                  </span>
+
+                  <p>
+                    Tekan pada pilihan untuk melihat
+                    contoh bagi setiap keadaan.
+                  </p>
+                </div>
+              </aside>
+
+              {/* CONTOH KANAN */}
 
               <section
                 key={currentExample.id}
-                className="marfu-example-card"
+                className="lesson-example"
               >
-                <span className="marfu-example-label">
-                  AYAT CONTOH
-                </span>
+                <div className="example-header">
+                  Contoh: {currentExample.label}
+                </div>
 
                 <div
-                  className="marfu-arabic-sentence"
+                  className="arabic-sentence"
                   dir="rtl"
                   lang="ar"
                 >
@@ -216,7 +210,7 @@ export default function KitabMarfuat() {
                         key={`${currentExample.id}-${index}`}
                         className={
                           part.highlight
-                            ? "highlight"
+                            ? "arabic-highlight"
                             : ""
                         }
                       >
@@ -226,208 +220,161 @@ export default function KitabMarfuat() {
                   )}
                 </div>
 
-                <div className="marfu-example-category">
+                <div className="example-pointer">
+                  <span className="pointer-line" />
+                  <span className="pointer-dot" />
+                </div>
+
+                <div className="example-category">
+                  <span
+                    className="example-category-arabic"
+                    dir="rtl"
+                    lang="ar"
+                  >
+                    {currentExample.categoryArabic}
+                  </span>
+
+                  <span className="example-category-malay">
+                    {currentExample.label}
+                  </span>
+                </div>
+
+                <div className="example-description">
+                  <span className="description-check">
+                    ✓
+                  </span>
+
+                  <p>
+                    {currentExample.description}
+                  </p>
+                </div>
+              </section>
+
+            </div>
+          )}
+
+          {/* RINGKASAN */}
+
+          {page.signs && page.type === "summary" && (
+            <ul className="kitab-summary">
+              {page.signs.map((item) => (
+                <li key={item.arabic}>
                   <span
                     dir="rtl"
                     lang="ar"
                   >
-                    {
-                      currentExample.categoryArabic
-                    }
+                    {item.arabic}
                   </span>
 
-                  <strong>
-                    {currentExample.label}
-                  </strong>
-                </div>
-
-                <p className="marfu-example-description">
-                  {currentExample.description}
-                </p>
-              </section>
-            </div>
+                  <small>{item.malay}</small>
+                </li>
+              ))}
+            </ul>
           )}
 
           {/* HALAMAN MATAN */}
 
-          {page.signs &&
-            page.type === "matan" && (
-              <ul className="marfu-matan-grid">
-                {page.signs.map((item) => (
-                  <li
-                    key={item}
-                    dir="rtl"
-                    lang="ar"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            )}
-
-          {/* HALAMAN RINGKASAN */}
-
-          {page.signs &&
-            page.type === "summary" && (
-              <ul className="marfu-summary-grid">
-                {page.signs.map((item) => (
-                  <li key={item.arabic}>
-                    <span
-                      dir="rtl"
-                      lang="ar"
-                    >
-                      {item.arabic}
-                    </span>
-
-                    <small>{item.malay}</small>
-                  </li>
-                ))}
-              </ul>
-            )}
+          {page.signs && page.type === "matan" && (
+            <ul className="kitab-matan-signs">
+              {page.signs.map((item) => (
+                <li
+                  key={item}
+                  dir="rtl"
+                  lang="ar"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          )}
 
           {/* HALAMAN TAMAT */}
 
           {page.message && (
-            <section className="marfu-complete-panel">
-              <span className="marfu-complete-icon">
-                ✓
-              </span>
+  <div className="kitab-complete-content">
+    <p className="kitab-message">
+      {page.message}
+    </p>
 
-              <h2>{page.message}</h2>
+    <button
+      type="button"
+      className="kitab-training-hotspot"
+      onClick={() => navigate("/latihan-marfuat")}
+    >
+      <span className="training-hotspot-icon">
+        ⚔️
+      </span>
 
-              <button
-                type="button"
-                className="marfu-training-button"
-                onClick={() =>
-                  navigate("/latihan-marfuat")
-                }
-              >
-                <span>⚔️</span>
+      <span className="training-hotspot-text">
+        <strong>LATIHAN MARFU‘</strong>
 
-                <span>
-                  <strong>
-                    LATIHAN MARFU‘
-                  </strong>
+        <small>
+          Uji kefahaman tentang dhammah, waw, alif dan nun.
+        </small>
+      </span>
 
-                  <small>
-                    Uji kefahaman tentang
-                    dhammah, wau, alif dan nun.
-                  </small>
-                </span>
+      <span className="training-hotspot-arrow">
+        →
+      </span>
+    </button>
+  </div>
+)}
 
-                <span>→</span>
-              </button>
-            </section>
-          )}
         </section>
 
-        {/* NOTA PINTAR KANAN */}
+        {/* FOOTER */}
 
-        <aside className="marfu-note-panel">
-          <h2>NOTA PINTAR</h2>
-
-          <span className="marfu-note-label">
-            INGAT!
-          </span>
-
-          <strong>Marfu‘</strong>
-
-          <span className="marfu-note-arrow">
-            ↓
-          </span>
-
-          <strong className="marfu-note-sign">
-            Dhammah
-          </strong>
-
-          <span
-            className="marfu-note-arabic"
-            dir="rtl"
-            lang="ar"
+        <footer className="kitab-footer">
+          <button
+            type="button"
+            onClick={previousPage}
           >
-            ـُ
-          </span>
+            {isFirstPage
+              ? "← Kembali"
+              : "← Sebelumnya"}
+          </button>
 
-          <p>
-            Tanda asas bagi keadaan Rafa‘ ialah
-            dhammah.
-          </p>
-        </aside>
+          <div className="kitab-page-progress">
+            <span>
+              Halaman {pageIndex + 1} daripada{" "}
+              {marfuPages.length}
+            </span>
 
-        {/* TIP BAWAH */}
-
-        <section className="marfu-bottom-tip">
-          <span>💡</span>
-
-          <p>
-            Perhatikan tanda pada hujung kalimah.
-            Di situlah perubahan I‘rab berlaku.
-          </p>
-        </section>
-
-        {/* PROGRESS BAWAH */}
-
-        <section className="marfu-bottom-progress">
-          <span>KEMAJUAN BAB 1</span>
-
-          <div className="marfu-page-dots">
-            {marfuPages.map((item, index) => (
-              <button
-                type="button"
-                key={item.id}
-                aria-label={`Pergi ke halaman ${
-                  index + 1
-                }`}
-                className={[
-                  "marfu-page-dot",
-                  index === pageIndex
-                    ? "active"
-                    : "",
-                  index < pageIndex
-                    ? "completed"
-                    : "",
-                ]
-                  .filter(Boolean)
-                  .join(" ")}
-                onClick={() => {
-                  setPageIndex(index);
-                  setSelectedExample(0);
-                }}
-              />
-            ))}
+            <div className="page-dots">
+              {marfuPages.map((item, index) => (
+                <span
+                  key={item.id}
+                  className={
+                    index === pageIndex
+                      ? "page-dot active"
+                      : index < pageIndex
+                        ? "page-dot completed"
+                        : "page-dot"
+                  }
+                />
+              ))}
+            </div>
           </div>
-        </section>
 
-        {/* NAVIGASI BAWAH */}
+          {isLastPage ? (
+            <button
+              type="button"
+              onClick={finishBook}
+            >
+              Selesai
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={nextPage}
+            >
+              Seterusnya →
+            </button>
+          )}
+        </footer>
 
-        <button
-          type="button"
-          className="marfu-previous-button"
-          onClick={previousPage}
-        >
-          {isFirstPage
-            ? "← KEMBALI"
-            : "← SEBELUMNYA"}
-        </button>
-
-        {isLastPage ? (
-          <button
-            type="button"
-            className="marfu-next-button complete"
-            onClick={finishBook}
-          >
-            SELESAI ✓
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="marfu-next-button"
-            onClick={nextPage}
-          >
-            SETERUSNYA →
-          </button>
-        )}
       </section>
     </main>
+    </div>
   );
 }
