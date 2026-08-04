@@ -79,6 +79,9 @@ import LatihanMajrurat from "./pages/kotaIrab/PerpustakaanIrab/Latihan/LatihanMa
 import LatihanMajzumat from "./pages/kotaIrab/PerpustakaanIrab/Latihan/LatihanMajzumat/LatihanMajzumat";
 
 
+import LatihanKeadaan from  "./pages/kotaIrab/LorongLatihan/LatihanKeadaan/LatihanKeadaan";
+
+
 /* =========================
    HALAMAN SAMPINGAN
 ========================= */
@@ -162,6 +165,9 @@ export default function App() {
 <Route  path="/latihan-mansubat"  element={<LatihanMansubat />}/>
 <Route  path="/latihan-majrurat"  element={<LatihanMajrurat />}/>
 <Route  path="/latihan-majzumat"  element={<LatihanMajzumat />}/>
+
+
+<Route  path="/latihan-irab-keadaan"  element={<LatihanKeadaan />}/>
 
 
         {/* Halaman sampingan */}
