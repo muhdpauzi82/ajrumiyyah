@@ -1,0 +1,200 @@
+@import "../LatihanAyat/LatihanAyat.css";
+
+/* =====================================================
+   TEMA KHAS TAHAP 4 — LATIHAN CAMPURAN
+===================================================== */
+
+.campuran-theme {
+  background:
+    radial-gradient(
+      circle at center,
+      #76551d,
+      #2e220d 74%
+    );
+}
+
+.campuran-theme::before {
+  filter:
+    sepia(0.1)
+    saturate(1.08);
+}
+
+.campuran-theme .ayat-quiz-frame {
+  border-color: #e2b84e;
+
+  box-shadow:
+    0 1.5vw 3vw
+      rgba(48, 31, 6, 0.46),
+    0 0 1.4vw
+      rgba(224, 175, 50, 0.26),
+    inset 0 0 1.6vw
+      rgba(255, 255, 255, 0.52);
+}
+
+.campuran-theme .ayat-quiz-header {
+  background:
+    linear-gradient(
+      180deg,
+      #8c671f,
+      #5e4214
+    );
+}
+
+.campuran-theme
+  .ayat-quiz-header > button {
+  background:
+    linear-gradient(
+      180deg,
+      #9a762a,
+      #624714
+    );
+}
+
+.campuran-theme
+  .ayat-progress-track span {
+  background:
+    linear-gradient(
+      90deg,
+      #d38c27,
+      #efc04f,
+      #fff098
+    );
+
+  box-shadow:
+    0 0 0.8vw
+      rgba(242, 190, 67, 0.78);
+}
+
+.campuran-theme
+  .ayat-question-number {
+  background:
+    linear-gradient(
+      180deg,
+      #927029,
+      #5e4214
+    );
+}
+
+.campuran-theme
+  .ayat-target-word {
+  color: #5a3c0e;
+
+  border-color:
+    rgba(190, 129, 25, 0.82);
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff3a5,
+      #efc654
+    );
+
+  box-shadow:
+    0 0 1.1vw
+      rgba(231, 170, 45, 0.68);
+}
+
+/* Kategori soalan */
+
+.campuran-category {
+  margin-bottom: 0.5vw;
+
+  padding:
+    0.3vw
+    1.1vw;
+
+  border:
+    1px solid #d2a441;
+
+  border-radius: 999px;
+
+  color: #6d4b13;
+
+  background:
+    rgba(255, 236, 170, 0.82);
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(8px, 0.85vw, 14px);
+
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
+
+/* Jawapan panjang dalam soalan analisis lengkap */
+
+.campuran-theme .ayat-answer {
+  min-height: 4.4vw;
+}
+
+.campuran-theme
+  .ayat-answer > strong {
+  padding:
+    0.1vw
+    0;
+
+  font-size:
+    clamp(14px, 1.45vw, 24px);
+
+  line-height: 1.35;
+}
+
+/* Keputusan */
+
+.campuran-theme .ayat-result-icon {
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #f6d66b,
+      #a66e17 75%
+    );
+
+  box-shadow:
+    0 0 1.8vw
+      rgba(222, 171, 43, 0.58);
+}
+
+.campuran-theme
+  .ayat-result-card h1 {
+  color: #735015;
+}
+
+.campuran-theme
+  .ayat-result-actions
+  button.primary {
+  background:
+    linear-gradient(
+      180deg,
+      #c7942c,
+      #80591a
+    );
+
+  box-shadow:
+    0 0 1vw
+      rgba(210, 156, 42, 0.42);
+}
+
+/* Telefon melintang */
+
+@media
+  (orientation: landscape)
+  and (max-width: 950px),
+  (orientation: landscape)
+  and (max-height: 520px) {
+
+  .campuran-category {
+    margin-bottom: 0.2vw;
+
+    font-size:
+      clamp(6px, 1.15vw, 10px);
+  }
+
+  .campuran-theme
+    .ayat-answer > strong {
+    font-size:
+      clamp(10px, 1.75vw, 15px);
+  }
+}

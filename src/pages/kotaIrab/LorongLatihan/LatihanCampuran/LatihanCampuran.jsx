@@ -1,14 +1,13 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { dataranIrabQuestions } from
-  "./dataranIrabQuestions";
+import { latihanCampuranQuestions } from
+  "./latihanCampuranQuestions";
 
-import "./DataranIrab.css";
+import "./LatihanCampuran.css";
 
 const TOTAL_QUESTIONS = 10;
-const ANSWER_DELAY = 1000;
-const PASSING_SCORE = 8;
+const ANSWER_DELAY = 1100;
 
 function shuffleArray(items) {
   const result = [...items];
@@ -43,11 +42,14 @@ function prepareQuestions(questionBank) {
     }));
 }
 
-export default function DataranIrab() {
+export default function LatihanCampuran() {
   const navigate = useNavigate();
 
   const questions = useMemo(
-    () => prepareQuestions(dataranIrabQuestions),
+    () =>
+      prepareQuestions(
+        latihanCampuranQuestions
+      ),
     []
   );
 
@@ -89,31 +91,29 @@ export default function DataranIrab() {
     const isCorrect =
       option === currentQuestion.answer;
 
-    const nextCorrectCount =
-      correctCount + (isCorrect ? 1 : 0);
+    setCorrectCount(
+      (current) =>
+        current + (isCorrect ? 1 : 0)
+    );
 
-    const nextWrongCount =
-      wrongCount + (isCorrect ? 0 : 1);
-
-    setCorrectCount(nextCorrectCount);
-    setWrongCount(nextWrongCount);
+    setWrongCount(
+      (current) =>
+        current + (isCorrect ? 0 : 1)
+    );
 
     window.setTimeout(() => {
       if (isLastQuestion) {
-        const passed =
-          nextCorrectCount >= PASSING_SCORE;
-
-        if (passed) {
-          localStorage.setItem(
-            "dataranIrabDone",
-            "true"
-          );
-        }
-
-        setPhase(
-          passed ? "passed" : "failed"
+        localStorage.setItem(
+          "latihanIrabCampuranDone",
+          "true"
         );
 
+        localStorage.setItem(
+          "lorongIrabDone",
+          "true"
+        );
+
+        setPhase("result");
         return;
       }
 
@@ -127,141 +127,108 @@ export default function DataranIrab() {
 
   function getAnswerClass(option) {
     if (!selectedAnswer) {
-      return "dataran-answer";
+      return "ayat-answer";
     }
 
     if (option === currentQuestion.answer) {
-      return "dataran-answer correct";
+      return "ayat-answer correct";
     }
 
     if (option === selectedAnswer) {
-      return "dataran-answer wrong";
+      return "ayat-answer wrong";
     }
 
-    return "dataran-answer muted";
+    return "ayat-answer muted";
   }
 
-  function restartChallenge() {
+  function restartQuiz() {
     window.location.reload();
   }
 
-  if (phase !== "playing") {
-    const passed = phase === "passed";
-
+  if (phase === "result") {
     return (
-      <main className="dataran-page">
-        <section className="dataran-frame">
-          <img
-            src="/images/kotaIrab/kitab-classroom-bg.webp"
-            className="dataran-bg"
-            alt=""
-            draggable="false"
-          />
+      <main className="ayat-quiz-page campuran-theme">
+        <section className="ayat-result-card">
+          <span className="ayat-result-icon">
+            🏆
+          </span>
 
-          <section
-            className={`dataran-result ${
-              passed ? "passed" : "failed"
-            }`}
-          >
-            <span className="dataran-result-icon">
-              {passed ? "🏆" : "📖"}
-            </span>
+          <p className="ayat-result-kicker">
+            LORONG LATIHAN SELESAI
+          </p>
 
-            <span className="dataran-result-kicker">
-              {passed
-                ? "CABARAN SELESAI"
-                : "CUBA SEKALI LAGI"}
-            </span>
+          <h1>Latihan Campuran</h1>
 
-            <h1>
-              {passed
-                ? "Tahniah!"
-                : "Teruskan Berlatih"}
-            </h1>
+          <p>
+            Anda telah menyelesaikan keempat-empat
+            tahap Lorong Latihan I‘rab.
+          </p>
 
-            <p>
-              {passed
-                ? "Anda telah menguasai cabaran Dataran I‘rab."
-                : `Anda perlu memperoleh sekurang-kurangnya ${PASSING_SCORE} jawapan betul.`}
-            </p>
-
-            <div className="dataran-result-score">
-              <div>
-                <span>Betul</span>
-                <strong>{correctCount}</strong>
-              </div>
-
-              <div>
-                <span>Belum tepat</span>
-                <strong>{wrongCount}</strong>
-              </div>
-
-              <div>
-                <span>Jumlah</span>
-                <strong>{questions.length}</strong>
-              </div>
+          <div className="ayat-result-score">
+            <div>
+              <span>Betul</span>
+              <strong>{correctCount}</strong>
             </div>
 
-            <div className="dataran-result-actions">
-              <button
-                type="button"
-                onClick={restartChallenge}
-              >
-                Cuba Lagi
-              </button>
-
-              <button
-                type="button"
-                onClick={() =>
-                  navigate("/kota-irab")
-                }
-              >
-                Kembali ke Kota
-              </button>
-
-              {passed && (
-                <button
-                  type="button"
-                  className="primary"
-                  onClick={() =>
-                    navigate(
-                      "/dewan-pengijazahan-irab"
-                    )
-                  }
-                >
-                  Teruskan ke Dewan →
-                </button>
-              )}
+            <div>
+              <span>Belum tepat</span>
+              <strong>{wrongCount}</strong>
             </div>
-          </section>
+
+            <div>
+              <span>Jumlah</span>
+              <strong>{questions.length}</strong>
+            </div>
+          </div>
+
+          <div className="ayat-result-actions">
+            <button
+              type="button"
+              onClick={restartQuiz}
+            >
+              Cuba Lagi
+            </button>
+
+            <button
+              type="button"
+              onClick={() =>
+                navigate("/lorong-latihan-irab")
+              }
+            >
+              Kembali ke Lorong
+            </button>
+
+            <button
+              type="button"
+              className="primary"
+              onClick={() =>
+                navigate("/kota-irab")
+              }
+            >
+              Kembali ke Kota I‘rab →
+            </button>
+          </div>
         </section>
       </main>
     );
   }
 
   return (
-    <main className="dataran-page">
-      <section className="dataran-frame">
-        <img
-          src="/images/kotaIrab/kitab-classroom-bg.webp"
-          className="dataran-bg"
-          alt=""
-          draggable="false"
-        />
-
-        <header className="dataran-header">
+    <main className="ayat-quiz-page campuran-theme">
+      <section className="ayat-quiz-frame">
+        <header className="ayat-quiz-header">
           <button
             type="button"
             onClick={() =>
-              navigate("/kota-irab")
+              navigate("/lorong-latihan-irab")
             }
           >
-            ← Kota I‘rab
+            ← Lorong Latihan
           </button>
 
           <div>
-            <span>LOKASI 4</span>
-            <h1>DATARAN I‘RAB</h1>
+            <span>TAHAP 4 · CABARAN AKHIR</span>
+            <h1>LATIHAN CAMPURAN</h1>
           </div>
 
           <strong>
@@ -270,7 +237,7 @@ export default function DataranIrab() {
           </strong>
         </header>
 
-        <div className="dataran-progress-track">
+        <div className="ayat-progress-track">
           <span
             style={{
               width: `${progress}%`,
@@ -278,21 +245,23 @@ export default function DataranIrab() {
           />
         </div>
 
-        <section className="dataran-content">
+        <section className="ayat-question-area">
           <article
             key={currentQuestion.id}
-            className="dataran-question-panel"
+            className="ayat-question-card"
           >
-            <span className="dataran-question-number">
-              Cabaran {questionIndex + 1}
+            <span className="campuran-category">
+              {currentQuestion.category}
             </span>
 
-            <h2>
-              {currentQuestion.question}
-            </h2>
+            <span className="ayat-question-number">
+              Soalan {questionIndex + 1}
+            </span>
+
+            <h2>{currentQuestion.question}</h2>
 
             <div
-              className="dataran-arabic-sentence"
+              className="ayat-arabic-sentence"
               dir="rtl"
               lang="ar"
             >
@@ -302,7 +271,7 @@ export default function DataranIrab() {
                     key={`${currentQuestion.id}-${index}`}
                     className={
                       part.highlight
-                        ? "dataran-target-word"
+                        ? "ayat-target-word"
                         : ""
                     }
                   >
@@ -312,8 +281,8 @@ export default function DataranIrab() {
               )}
             </div>
 
-            <div className="dataran-target-label">
-              <span>Kalimah dikaji</span>
+            <div className="ayat-target-label">
+              <span>Perkataan dikaji</span>
 
               <strong
                 dir="rtl"
@@ -324,12 +293,12 @@ export default function DataranIrab() {
             </div>
           </article>
 
-          <section className="dataran-answer-grid">
+          <section className="ayat-answer-list">
             {currentQuestion.options.map(
               (option, index) => (
                 <button
                   type="button"
-                  key={option}
+                  key={`${currentQuestion.id}-${option}`}
                   className={getAnswerClass(
                     option
                   )}
@@ -357,10 +326,10 @@ export default function DataranIrab() {
             )}
           </section>
 
-          <aside className="dataran-feedback">
+          <aside className="ayat-feedback">
             {!selectedAnswer && (
               <strong>
-                Pilih jawapan yang tepat
+                Pilih jawapan paling tepat
               </strong>
             )}
 
@@ -397,7 +366,7 @@ export default function DataranIrab() {
           </aside>
         </section>
 
-        <footer className="dataran-footer">
+        <footer className="ayat-question-footer">
           {questions.map((question, index) => (
             <span
               key={question.id}

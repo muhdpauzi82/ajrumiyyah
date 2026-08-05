@@ -1,56 +1,113 @@
 /* =====================================================
-   LATIHAN MAJZUMAT
+   LATIHAN majzum‘AT — CLASSROOM QUIZ UI
+   Desktop, laptop, tablet dan telefon melintang
 ===================================================== */
 
-.majzum-training-screen {
-  min-height: 100vh;
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 24px;
-
+* {
   box-sizing: border-box;
+}
 
-  background:
-    linear-gradient(
-      rgba(8, 38, 29, 0.82),
-      rgba(5, 28, 22, 0.9)
-    ),
-    url("/images/kotaIrab/bg-latihan-irab.webp")
-      center / cover no-repeat;
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
 
-  color: #2c261d;
+button {
+  font: inherit;
 }
 
 /* =====================================================
-   KAD UTAMA
+   SKRIN UTAMA
 ===================================================== */
 
-.majzum-training-card {
-  width: min(1180px, 100%);
-  min-height: 650px;
+.majzum-training-screen {
+  position: fixed;
+  inset: 0;
 
-  display: flex;
-  flex-direction: column;
+  width: 100vw;
+  height: 100dvh;
+
+  display: grid;
+  place-items: center;
 
   overflow: hidden;
 
   background:
+    radial-gradient(
+      circle at center,
+      #1c5943,
+      #073025 75%
+    );
+}
+
+/* Background kelas */
+
+.majzum-training-screen::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  width: min(100vw, calc(100dvh * 16 / 9));
+  height: min(100dvh, calc(100vw * 9 / 16));
+
+  margin: auto;
+
+  background:
     linear-gradient(
-      145deg,
-      rgba(255, 250, 225, 0.98),
-      rgba(239, 226, 184, 0.98)
+      rgba(255, 255, 255, 0.04),
+      rgba(5, 35, 25, 0.12)
+    ),
+    url("/images/kotaIrab/kitab-classroom-bg.webp")
+      center / 100% 100% no-repeat;
+
+  pointer-events: none;
+}
+
+/* =====================================================
+   KAD LATIHAN UTAMA
+===================================================== */
+
+.majzum-training-card {
+  position: relative;
+
+  width: min(94vw, calc(94dvh * 16 / 9));
+  height: min(92dvh, calc(92vw * 9 / 16));
+
+  display: grid;
+  grid-template-rows:
+    13%
+    1.3%
+    minmax(0, 1fr)
+    9%;
+
+  overflow: hidden;
+
+  border:
+    clamp(2px, 0.18vw, 3px)
+    solid rgba(214, 175, 77, 0.95);
+
+  border-radius:
+    clamp(14px, 1.3vw, 23px);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 253, 239, 0.96),
+      rgba(245, 235, 201, 0.95)
     );
 
-  border: 4px solid #b7903f;
-  border-radius: 24px;
-
   box-shadow:
-    0 24px 60px rgba(0, 0, 0, 0.36),
-    inset 0 0 0 3px rgba(255, 245, 190, 0.45);
+    0 1.5vw 3vw
+      rgba(3, 28, 20, 0.42),
+    inset 0 0 1.5vw
+      rgba(255, 255, 255, 0.5);
+
+  z-index: 2;
 }
 
 /* =====================================================
@@ -58,90 +115,141 @@
 ===================================================== */
 
 .majzum-training-header {
-  min-height: 94px;
+  min-height: 0;
 
   display: grid;
-  grid-template-columns: 170px 1fr 100px;
+  grid-template-columns:
+    1fr
+    auto
+    1fr;
+
   align-items: center;
 
-  padding: 16px 28px;
+  padding:
+    0.75vw
+    1.6vw;
+
+  color: #f7dc82;
 
   background:
     linear-gradient(
-      135deg,
-      #195f45,
-      #0a3d2c
+      180deg,
+      #116245,
+      #074631
     );
 
-  border-bottom: 4px solid #c9a34d;
-
-  color: #fff4c9;
+  border-bottom:
+    1px solid rgba(224, 186, 85, 0.8);
 }
 
-.majzum-training-header button {
-  min-height: 44px;
+.majzum-training-header > button {
+  justify-self: start;
 
-  padding: 9px 16px;
+  min-width: 10vw;
+  height: 2.9vw;
 
-  color: #fff2c5;
-  background: rgba(255, 255, 255, 0.08);
+  padding:
+    0
+    1.2vw;
 
-  border: 1px solid rgba(255, 233, 160, 0.55);
-  border-radius: 10px;
+  border:
+    1px solid #dbb956;
 
-  font-size: 14px;
-  font-weight: 700;
+  border-radius: 0.7vw;
+
+  color: #fff2b5;
+
+  font-size:
+    clamp(9px, 0.9vw, 15px);
+
+  font-weight: 900;
 
   cursor: pointer;
 
+  background:
+    linear-gradient(
+      180deg,
+      #1b7553,
+      #0b5038
+    );
+
   transition:
     transform 160ms ease,
-    background 160ms ease;
+    filter 160ms ease,
+    box-shadow 160ms ease;
 }
 
-.majzum-training-header button:hover {
-  transform: translateX(-3px);
-  background: rgba(255, 255, 255, 0.15);
+.majzum-training-header > button:hover {
+  transform: translateY(-2px);
+
+  filter: brightness(1.1);
+
+  box-shadow:
+    0 0 0.9vw
+      rgba(255, 210, 79, 0.42);
 }
 
 .majzum-training-header > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   text-align: center;
 }
 
 .majzum-training-header span {
-  display: block;
+  color: #d9c88f;
 
-  color: #d8c894;
+  font-size:
+    clamp(7px, 0.7vw, 12px);
 
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
+  font-weight: 900;
+  letter-spacing: 0.14em;
 }
 
 .majzum-training-header h1 {
-  margin: 4px 0 0;
+  margin: 0.1vw 0 0;
 
-  font-family: Georgia, serif;
-  font-size: clamp(25px, 3vw, 38px);
-  letter-spacing: 0.08em;
+  color: #ffdf77;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(18px, 2.25vw, 38px);
+
+  line-height: 1;
 }
 
 .majzum-training-header > strong {
   justify-self: end;
 
-  min-width: 72px;
+  min-width: 6vw;
 
-  padding: 10px 12px;
+  padding:
+    0.55vw
+    0.9vw;
+
+  border:
+    1px solid rgba(233, 195, 90, 0.82);
+
+  border-radius: 999px;
+
+  color: #ffe47e;
 
   text-align: center;
 
-  color: #234835;
-  background: #f0d778;
+  background:
+    rgba(3, 43, 29, 0.72);
 
-  border: 2px solid #ffeaa2;
-  border-radius: 12px;
+  font-family:
+    Georgia,
+    serif;
 
-  font-size: 18px;
+  font-size:
+    clamp(12px, 1.45vw, 24px);
 }
 
 /* =====================================================
@@ -150,61 +258,62 @@
 
 .majzum-progress-track {
   width: 100%;
-  height: 8px;
+  height: 100%;
 
   overflow: hidden;
 
-  background: #c8b77e;
+  background:
+    rgba(5, 37, 25, 0.42);
 }
 
 .majzum-progress-track span {
   display: block;
+
+  width: 0;
   height: 100%;
 
   background:
     linear-gradient(
       90deg,
-      #318a5f,
-      #ddbe55
+      #4fa951,
+      #9ed451,
+      #f0ca50
     );
 
-  transition: width 350ms ease;
+  box-shadow:
+    0 0 0.7vw
+      rgba(157, 224, 87, 0.7);
+
+  transition:
+    width 350ms ease;
 }
 
 /* =====================================================
-   RUANG SOALAN
+   KAWASAN SOALAN
 ===================================================== */
-.majzum-question-title .arabic-term {
-  font-family: "Amiri", serif;
-  font-size: 1.22em;
-  font-weight: 700;
-  color: #9a5d12;
 
-  direction: rtl;
-  unicode-bidi: isolate;
-}
-
-.majzum-question-title .arabic-word {
-  font-family: "Amiri", serif;
-  font-size: 1.45em;
-  font-weight: 700;
-  color: #1477c9;
-
-  direction: rtl;
-  unicode-bidi: isolate;
-}
 .majzum-question-area {
-  flex: 1;
+  min-width: 0;
+  min-height: 0;
 
   display: grid;
   grid-template-columns:
-    minmax(260px, 0.9fr)
-    minmax(360px, 1.3fr)
-    minmax(220px, 0.7fr);
+    minmax(0, 1.05fr)
+    minmax(0, 0.9fr);
 
-  gap: 22px;
+  grid-template-rows:
+    minmax(0, 1fr)
+    auto;
 
-  padding: 28px;
+  gap:
+    1vw
+    1.2vw;
+
+  padding:
+    1.15vw
+    1.6vw;
+
+  overflow: hidden;
 }
 
 /* =====================================================
@@ -212,170 +321,300 @@
 ===================================================== */
 
 .majzum-question-panel {
+  min-width: 0;
+  min-height: 0;
+
+  grid-column: 1;
+  grid-row: 1 / 3;
+
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
 
-  padding: 26px;
+  padding:
+    1.4vw
+    1.8vw;
+
+  overflow: hidden;
+
+  text-align: center;
+
+  border:
+    1px solid rgba(194, 151, 58, 0.78);
+
+  border-radius:
+    clamp(12px, 1.15vw, 20px);
 
   background:
-    linear-gradient(
-      145deg,
-      #fffdf1,
-      #eee1b7
+    radial-gradient(
+      circle at center,
+      rgba(255, 255, 249, 0.98),
+      rgba(247, 237, 204, 0.97)
     );
 
-  border: 2px solid #b99a54;
-  border-radius: 18px;
-
   box-shadow:
-    inset 0 0 18px rgba(116, 81, 25, 0.1);
+    inset 0 0 1.4vw
+      rgba(175, 128, 35, 0.1),
+    0 0.6vw 1.2vw
+      rgba(85, 50, 10, 0.1);
+
+  animation:
+    majzum-question-enter
+    250ms ease;
 }
 
 .majzum-question-number {
-  width: fit-content;
+  padding:
+    0.36vw
+    1.25vw;
 
-  padding: 6px 12px;
-
-  color: #f7e9b1;
-  background: #1c6448;
+  border:
+    1px solid #d3ab4a;
 
   border-radius: 999px;
 
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.05em;
+  color: #f7dc80;
+
+  background:
+    linear-gradient(
+      180deg,
+      #1b6c4c,
+      #0c4a35
+    );
+
+  font-size:
+    clamp(8px, 0.85vw, 14px);
+
+  font-weight: 900;
 }
 
 .majzum-question-panel h2 {
-  margin: 20px 0 0;
+  max-width: 90%;
 
-  color: #30271b;
+  margin:
+    1vw
+    auto
+    0;
 
-  font-size: clamp(19px, 2vw, 27px);
-  line-height: 1.45;
+  color: #254d3b;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(16px, 2.2vw, 37px);
+
+  line-height: 1.3;
 }
 
 .majzum-question-arabic {
-  margin: 22px 0 0;
+  max-width: 96%;
 
-  color: #1c5c43;
+  margin:
+    0.8vw
+    auto
+    0;
 
-  font-family: "Amiri", serif;
-  font-size: clamp(27px, 3vw, 42px);
+  color: #123f2e;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size:
+    clamp(16px, 3.8vw, 44px);
+
   font-weight: 700;
-  line-height: 1.7;
+  line-height: 1.3;
 
-  text-align: center;
+  white-space: nowrap;
 }
 
 /* =====================================================
-   PILIHAN JAWAPAN
+   SENARAI JAWAPAN
 ===================================================== */
 
 .majzum-answer-list {
+  min-width: 0;
+  min-height: 0;
+
+  grid-column: 2;
+  grid-row: 1;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  gap: 13px;
+  gap: 0.72vw;
+
+  overflow: hidden;
 }
 
 .majzum-answer {
   width: 100%;
-  min-height: 72px;
+  min-height: 4.3vw;
 
   display: grid;
-  grid-template-columns: 48px 1fr;
+  grid-template-columns:
+    3.2vw
+    minmax(0, 1fr);
+
   align-items: center;
 
-  gap: 14px;
+  gap: 0.9vw;
 
-  padding: 10px 18px;
+  padding:
+    0.65vw
+    1vw;
 
-  color: #30291f;
-  background: rgba(255, 253, 238, 0.96);
+  border:
+    1px solid rgba(152, 166, 134, 0.72);
 
-  border: 2px solid #b9a46d;
-  border-radius: 14px;
+  border-radius:
+    clamp(10px, 0.95vw, 16px);
+
+  color: #315744;
 
   text-align: left;
 
   cursor: pointer;
 
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.95),
+      rgba(231, 240, 219, 0.95)
+    );
+
   box-shadow:
-    0 5px 12px rgba(63, 48, 19, 0.1);
+    0 0.35vw 0.75vw
+      rgba(53, 82, 60, 0.1);
 
   transition:
     transform 160ms ease,
+    filter 160ms ease,
     border-color 160ms ease,
-    background 160ms ease;
+    box-shadow 160ms ease;
 }
 
 .majzum-answer:hover:not(:disabled) {
-  transform: translateX(6px);
+  transform:
+    translateX(-0.2vw)
+    scale(1.012);
 
-  background: #fff8d5;
-  border-color: #8e702e;
+  border-color: #c59e3f;
+
+  filter: brightness(1.04);
+
+  box-shadow:
+    0 0.5vw 1.1vw
+      rgba(162, 115, 29, 0.18);
 }
 
 .majzum-answer > span {
-  width: 40px;
-  height: 40px;
+  width: 2.6vw;
+  aspect-ratio: 1;
 
   display: grid;
   place-items: center;
 
-  color: #fff3c5;
-  background: #255f47;
+  border:
+    1px solid rgba(95, 135, 104, 0.7);
 
-  border-radius: 10px;
+  border-radius: 50%;
 
-  font-size: 16px;
+  color: #275540;
+
+  background: #eef5e5;
+
+  font-size:
+    clamp(10px, 1.05vw, 17px);
+
   font-weight: 900;
 }
 
-.majzum-answer strong {
-  font-size: clamp(15px, 1.5vw, 20px);
-  line-height: 1.5;
-}
+.majzum-answer-text {
+  min-width: 0;
 
-.majzum-answer strong[lang="ar"] {
-  font-family: "Amiri", serif;
-  font-size: clamp(22px, 2.2vw, 31px);
-  text-align: right;
+  color: inherit;
+
+  font-family:
+    "Amiri",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(16px, 1.65vw, 28px);
+
+  line-height: 1.2;
 }
 
 /* Jawapan betul */
 
 .majzum-answer.correct {
-  color: #16472f;
-  background: #d9f0d9;
+  color: #ffffff;
 
-  border-color: #3a915b;
+  border-color: #6bc779;
+
+  background:
+    linear-gradient(
+      135deg,
+      #299852,
+      #13713b
+    );
+
+  box-shadow:
+    0 0 1.15vw
+      rgba(68, 202, 103, 0.48);
 }
 
 .majzum-answer.correct > span {
-  background: #27834e;
+  color: #174a30;
+
+  border-color: #dfffe4;
+
+  background: #c9f0c9;
 }
 
 /* Jawapan salah */
 
 .majzum-answer.wrong {
-  color: #6b2824;
-  background: #f5d7d2;
+  color: #ffffff;
 
-  border-color: #b9564e;
+  border-color: #e58178;
+
+  background:
+    linear-gradient(
+      135deg,
+      #c94d43,
+      #93332f
+    );
+
+  box-shadow:
+    0 0 1vw
+      rgba(215, 71, 62, 0.4);
 }
 
 .majzum-answer.wrong > span {
-  background: #a94841;
+  color: #6e211f;
+
+  border-color: #ffe3df;
+
+  background: #ffd2cd;
 }
 
-/* Pilihan lain selepas menjawab */
+/* Jawapan lain */
 
 .majzum-answer.muted {
-  opacity: 0.5;
+  opacity: 0.45;
+
+  filter:
+    grayscale(0.5)
+    brightness(0.92);
 }
 
 .majzum-answer:disabled {
@@ -383,553 +622,1966 @@
 }
 
 /* =====================================================
-   PANEL STATUS
+   STATUS JAWAPAN
 ===================================================== */
 
 .majzum-status-panel {
+  min-width: 0;
+
+  grid-column: 2;
+  grid-row: 2;
+
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
-  padding: 24px;
+  gap: 0.8vw;
 
-  text-align: center;
+  min-height: 4.4vw;
+
+  padding:
+    0.65vw
+    1vw;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(191, 153, 68, 0.7);
+
+  border-radius:
+    clamp(9px, 0.85vw, 14px);
+
+  color: #455e4e;
 
   background:
-    linear-gradient(
-      155deg,
-      #f5e8bd,
-      #dfca88
-    );
+    rgba(255, 249, 222, 0.93);
 
-  border: 2px solid #a98a43;
-  border-radius: 18px;
+  box-shadow:
+    inset 0 0 0.9vw
+      rgba(255, 255, 255, 0.45);
 }
 
 .majzum-status-panel > span {
-  color: #69572d;
+  flex: 0 0 auto;
 
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  padding-right: 0.8vw;
+
+  border-right:
+    1px solid
+    rgba(151, 126, 68, 0.35);
+
+  color: #796025;
+
+  font-size:
+    clamp(7px, 0.75vw, 12px);
+
+  font-weight: 900;
 }
 
 .majzum-status-panel > strong {
-  margin-top: 16px;
+  flex: 0 0 auto;
 
-  color: #41361f;
+  color: #315944;
 
-  font-size: 20px;
+  font-size:
+    clamp(9px, 1vw, 16px);
 }
 
 .majzum-status-panel p {
-  margin: 15px 0 0;
+  min-width: 0;
 
-  color: #51462e;
+  margin: 0;
 
-  font-size: 14px;
-  line-height: 1.65;
+  font-size:
+    clamp(7px, 0.78vw, 13px);
+
+  line-height: 1.3;
 }
 
-.majzum-status-panel .status-correct {
-  color: #247248;
+.status-correct {
+  color: #218548 !important;
 }
 
-.majzum-status-panel .status-wrong {
-  color: #a3423d;
+.status-wrong {
+  color: #bd403a !important;
 }
 
 /* =====================================================
-   NOMBOR SOALAN
+   NAVIGASI NOMBOR BAWAH
 ===================================================== */
 
 .majzum-training-footer {
-  min-height: 72px;
+  min-height: 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
 
-  gap: 10px;
+  gap: 0.65vw;
 
-  padding: 13px 20px;
+  padding:
+    0.6vw
+    1vw;
 
-  background: rgba(51, 45, 27, 0.08);
+  border-top:
+    1px solid rgba(202, 164, 75, 0.76);
 
-  border-top: 1px solid rgba(116, 90, 40, 0.3);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(226, 238, 216, 0.96),
+      rgba(207, 226, 199, 0.96)
+    );
 }
 
 .majzum-training-footer span {
-  width: 34px;
-  height: 34px;
-
-  display: grid;
-  place-items: center;
-
-  color: #6d6040;
-  background: #e8ddbb;
-
-  border: 1px solid #b8a36b;
-  border-radius: 50%;
-
-  font-size: 13px;
-  font-weight: 800;
-}
-
-.majzum-training-footer span.active {
-  color: #fff2bf;
-  background: #176044;
-
-  border-color: #d5b64f;
-
-  transform: scale(1.12);
-}
-
-.majzum-training-footer span.completed {
-  color: #245b40;
-  background: #cce4ce;
-
-  border-color: #59916d;
-}
-
-/* =====================================================
-   HALAMAN KEPUTUSAN
-===================================================== */
-
-.majzum-result-card {
-  width: min(720px, 100%);
-
-  padding: 46px 38px;
-
-  text-align: center;
-
-  background:
-    linear-gradient(
-      145deg,
-      #fffbed,
-      #eadcad
-    );
-
-  border: 4px solid #bd9848;
-  border-radius: 26px;
-
-  box-shadow:
-    0 24px 60px rgba(0, 0, 0, 0.38);
-}
-
-.majzum-result-icon {
-  width: 82px;
-  height: 82px;
-
-  display: grid;
-  place-items: center;
-
-  margin: 0 auto 18px;
-
-  background: #1b6548;
-
-  border: 4px solid #d8b952;
-  border-radius: 50%;
-
-  font-size: 38px;
-}
-
-.majzum-result-kicker {
-  margin: 0;
-
-  color: #78622d;
-
-  font-size: 13px;
-  font-weight: 900;
-  letter-spacing: 0.16em;
-}
-
-.majzum-result-card h1 {
-  margin: 10px 0;
-
-  color: #1d5942;
-
-  font-family: Georgia, serif;
-  font-size: clamp(30px, 4vw, 46px);
-}
-
-.majzum-result-card > p {
-  color: #554b35;
-  line-height: 1.6;
-}
-
-.majzum-result-score {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-
-  gap: 14px;
-
-  margin: 30px 0;
-}
-
-.majzum-result-score div {
-  padding: 18px 10px;
-
-  background: rgba(255, 252, 232, 0.8);
-
-  border: 2px solid #bca365;
-  border-radius: 14px;
-}
-
-.majzum-result-score span {
-  display: block;
-
-  color: #6d6249;
-
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.majzum-result-score strong {
-  display: block;
-
-  margin-top: 8px;
-
-  color: #175d42;
-
-  font-size: 32px;
-}
-
-.majzum-result-actions {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-
-  gap: 12px;
-}
-
-.majzum-result-actions button {
-  min-width: 150px;
-  min-height: 45px;
-
-  padding: 10px 17px;
-
-  color: #fff3c5;
-  background:
-    linear-gradient(
-      135deg,
-      #1f704f,
-      #114934
-    );
-
-  border: 2px solid #d1b252;
-  border-radius: 11px;
-
-  font-size: 14px;
-  font-weight: 800;
-
-  cursor: pointer;
-
-  transition:
-    transform 160ms ease,
-    filter 160ms ease;
-}
-
-.majzum-result-actions button:hover {
-  transform: translateY(-3px);
-  filter: brightness(1.1);
-}
-
-/* =====================================================
-   RESPONSIF
-===================================================== */
-
-@media (max-width: 950px) {
-  .majzum-training-screen {
-    align-items: flex-start;
-  }
-
-  .majzum-training-header {
-    grid-template-columns: 130px 1fr 75px;
-
-    padding-inline: 16px;
-  }
-
-  .majzum-question-area {
-    grid-template-columns: 1fr 1.2fr;
-  }
-
-  .majzum-status-panel {
-    grid-column: 1 / -1;
-
-    min-height: 130px;
-  }
-}
-
-@media (max-width: 680px) {
-  .majzum-training-screen {
-    padding: 10px;
-  }
-
-  .majzum-training-card {
-    min-height: auto;
-
-    border-radius: 16px;
-  }
-
-  .majzum-training-header {
-    grid-template-columns: 1fr auto;
-    gap: 10px;
-
-    min-height: auto;
-  }
-
-  .majzum-training-header button {
-    grid-column: 1 / -1;
-    grid-row: 2;
-
-    width: 100%;
-  }
-
-  .majzum-training-header > div {
-    text-align: left;
-  }
-
-  .majzum-question-area {
-    grid-template-columns: 1fr;
-
-    padding: 16px;
-  }
-
-  .majzum-question-panel,
-  .majzum-status-panel {
-    padding: 20px;
-  }
-
-  .majzum-answer {
-    min-height: 64px;
-  }
-
-  .majzum-result-card {
-    padding: 30px 18px;
-  }
-
-  .majzum-result-score {
-    grid-template-columns: 1fr;
-  }
-
-  .majzum-result-actions {
-    flex-direction: column;
-  }
-
-  .majzum-result-actions button {
-    width: 100%;
-  }
-}
-.majzum-answer-text {
-  width: 100%;
-
-  font-family: "Amiri", serif;
-  font-size: clamp(24px, 2.3vw, 34px);
-  font-weight: 700;
-  line-height: 1.6;
-
-  text-align: right;
-}
-.kitab-complete-content {
-  width: min(86%, 680px);
-  margin: 3% auto 0;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(18px, 2.2vw, 30px);
-}
-
-.kitab-message {
-  margin: 0;
-
-  color: #4b3a20;
-  font-size: clamp(15px, 1.25vw, 21px);
-  font-weight: 700;
-  line-height: 1.7;
-  text-align: center;
-}
-
-.kitab-training-hotspot {
-  width: min(92%, 470px);
-  min-height: clamp(72px, 7vw, 100px);
-
-  padding: clamp(12px, 1.4vw, 20px);
-
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: clamp(12px, 1.4vw, 20px);
-
-  border: 2px solid #c89b32;
-  border-radius: 18px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff9df,
-      #f3e2a3
-    );
-
-  color: #164b3a;
-  cursor: pointer;
-
-  box-shadow:
-    0 8px 18px rgba(80, 55, 12, 0.2);
-
-  transition:
-    transform 180ms ease,
-    box-shadow 180ms ease;
-}
-
-.kitab-training-hotspot:hover {
-  transform: translateY(-3px);
-
-  box-shadow:
-    0 12px 24px rgba(80, 55, 12, 0.28);
-}
-
-.kitab-training-icon {
-  width: clamp(42px, 4.2vw, 60px);
+  width: 2.3vw;
   aspect-ratio: 1;
 
   display: grid;
   place-items: center;
 
+  border:
+    1px solid rgba(110, 142, 112, 0.75);
+
   border-radius: 50%;
 
-  background: #07523e;
-  color: #f5d36c;
+  color: #46604e;
 
-  font-size: clamp(20px, 2vw, 30px);
-}
+  background: #edf4e7;
 
-.kitab-training-text {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  font-size:
+    clamp(8px, 0.85vw, 14px);
 
-  text-align: left;
-}
-
-.kitab-training-text strong {
-  font-size: clamp(15px, 1.3vw, 21px);
-}
-
-.kitab-training-text small {
-  color: #6c5a36;
-  font-size: clamp(11px, 0.9vw, 15px);
-}
-
-.kitab-training-arrow {
-  color: #936914;
-  font-size: clamp(22px, 2vw, 30px);
   font-weight: 900;
 }
-.majzum-question-content {
-  width: 100%;
-  margin-top: clamp(22px, 3vh, 40px);
+
+.majzum-training-footer span.completed {
+  color: #ffffff;
+
+  border-color: #4d9b5c;
+
+  background: #4d9b5c;
+}
+
+.majzum-training-footer span.active {
+  color: #153e2c;
+
+  border-color: #d7ae42;
+
+  background: #f4cf55;
+
+  box-shadow:
+    0 0 0.7vw
+      rgba(232, 190, 51, 0.72);
+
+  transform: scale(1.15);
+}
+
+/* =====================================================
+   KEPUTUSAN
+===================================================== */
+
+.majzum-result-card {
+  position: relative;
+
+  width: min(72vw, 950px);
+  min-height: min(76dvh, 620px);
 
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+  justify-content: center;
 
-.majzum-question-title {
-  width: 100%;
-  max-width: 360px;
+  gap: clamp(10px, 1.1vw, 18px);
 
-  margin: 0;
-  padding: 0 12px;
+  padding:
+    clamp(28px, 3vw, 50px);
 
-  color: #241708;
+  border:
+    clamp(2px, 0.18vw, 3px)
+    solid #d6b04d;
 
-  font-family: Arial, sans-serif;
-  font-size: clamp(19px, 1.65vw, 30px);
-  font-weight: 500;
-  line-height: 1.8;
+  border-radius:
+    clamp(18px, 1.6vw, 27px);
+
+  color: #365343;
   text-align: center;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 253, 235, 0.97),
+      rgba(237, 232, 198, 0.97)
+    );
+
+  box-shadow:
+    0 1.4vw 3vw
+      rgba(4, 36, 25, 0.4),
+    inset 0 0 2vw
+      rgba(255, 255, 255, 0.52);
+
+  z-index: 3;
+
+  animation:
+    majzum-result-enter
+    320ms ease;
 }
 
-.majzum-inline-arabic {
-  display: inline-block;
+.majzum-result-icon {
+  width: clamp(70px, 7vw, 115px);
+  aspect-ratio: 1;
 
-  margin-inline: 4px;
+  display: grid;
+  place-items: center;
 
-  color: #ee0e2c;
+  border:
+    2px solid #e0ba54;
 
-  font-family: "Amiri", serif;
-  font-size: 1.3em;
-  font-weight: 700;
-  line-height: 1.3;
+  border-radius: 50%;
 
-  direction: rtl;
-  unicode-bidi: isolate;
+  background:
+    linear-gradient(
+      145deg,
+      #207853,
+      #0c4a34
+    );
+
+  box-shadow:
+    0 0 1.6vw
+      rgba(23, 116, 76, 0.35);
+
+  font-size:
+    clamp(34px, 4vw, 65px);
 }
 
-.majzum-question-divider {
-  position: relative;
+.majzum-result-kicker {
+  margin: 0;
 
-  width: 82%;
-  height: 1px;
+  color: #8b6a20;
 
-  margin: clamp(20px, 3vh, 34px) auto;
+  font-size:
+    clamp(9px, 0.9vw, 15px);
 
-  background: #c79b43;
+  font-weight: 900;
+  letter-spacing: 0.17em;
 }
 
-.majzum-question-divider::after {
+.majzum-result-card h1 {
+  margin: 0;
+
+  color: #165239;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(27px, 3vw, 50px);
+}
+
+.majzum-result-card > p:not(.majzum-result-kicker) {
+  margin: 0;
+
+  font-size:
+    clamp(12px, 1.1vw, 18px);
+}
+
+.majzum-result-score {
+  width: min(80%, 650px);
+
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 1vw;
+
+  margin-top: 0.6vw;
+}
+
+.majzum-result-score > div {
+  min-height: 7vw;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid rgba(182, 145, 55, 0.7);
+
+  border-radius:
+    clamp(10px, 1vw, 16px);
+
+  background:
+    rgba(255, 255, 247, 0.7);
+}
+
+.majzum-result-score span {
+  color: #6b715e;
+
+  font-size:
+    clamp(8px, 0.85vw, 14px);
+
+  font-weight: 800;
+}
+
+.majzum-result-score strong {
+  margin-top: 0.25vw;
+
+  color: #18543c;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(25px, 3vw, 48px);
+}
+
+.majzum-result-actions {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 0.8vw;
+
+  margin-top: 0.8vw;
+}
+
+.majzum-result-actions button {
+  min-width: 11vw;
+  min-height: 3.2vw;
+
+  padding:
+    0.6vw
+    1.3vw;
+
+  border:
+    1px solid #d1aa4a;
+
+  border-radius:
+    clamp(8px, 0.75vw, 12px);
+
+  color: #fff3bb;
+
+  cursor: pointer;
+
+  background:
+    linear-gradient(
+      180deg,
+      #19704e,
+      #0c4c36
+    );
+
+  font-size:
+    clamp(9px, 0.9vw, 15px);
+
+  font-weight: 900;
+
+  transition:
+    transform 160ms ease,
+    filter 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.majzum-result-actions button:hover {
+  transform: translateY(-2px);
+
+  filter: brightness(1.1);
+
+  box-shadow:
+    0 0 0.9vw
+      rgba(255, 199, 63, 0.36);
+}
+
+/* =====================================================
+   ANIMASI
+===================================================== */
+
+@keyframes majzum-question-enter {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(8px)
+      scale(0.992);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+@keyframes majzum-result-enter {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(14px)
+      scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+/* =====================================================
+   TELEFON DAN TABLET MELINTANG
+===================================================== */
+
+@media
+  (orientation: landscape)
+  and (max-width: 950px),
+  (orientation: landscape)
+  and (max-height: 520px) {
+
+  .majzum-training-card {
+    width: 96vw;
+    height: 94dvh;
+
+    grid-template-rows:
+      13%
+      1.4%
+      minmax(0, 1fr)
+      10%;
+  }
+
+  .majzum-training-header {
+    padding:
+      0.45vw
+      1.2vw;
+  }
+
+  .majzum-training-header > button {
+    min-width: 12vw;
+    height: 4.4vw;
+
+    font-size:
+      clamp(7px, 1.3vw, 11px);
+  }
+
+  .majzum-training-header h1 {
+    font-size:
+      clamp(16px, 3vw, 25px);
+  }
+
+  .majzum-training-header span {
+    font-size:
+      clamp(6px, 1vw, 9px);
+  }
+
+  .majzum-training-header > strong {
+    font-size:
+      clamp(11px, 2vw, 18px);
+  }
+
+  .majzum-question-area {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 0.95fr);
+
+    gap: 1.2vw;
+
+    padding:
+      1vw
+      1.3vw;
+  }
+
+  .majzum-question-panel {
+    padding:
+      1vw
+      1.4vw;
+  }
+
+  .majzum-question-panel h2 {
+    font-size:
+      clamp(16px, 2.8vw, 24px);
+  }
+
+  .majzum-question-arabic {
+    font-size:
+      clamp(16px, 3.8vw, 44px);
+  }
+
+  .majzum-answer-list {
+    gap: 0.7vw;
+  }
+
+  .majzum-answer {
+    min-height: 6.8vw;
+
+    grid-template-columns:
+      4.6vw
+      minmax(0, 1fr);
+
+    gap: 1vw;
+
+    padding:
+      0.5vw
+      0.8vw;
+  }
+
+  .majzum-answer > span {
+    width: 4vw;
+
+    font-size:
+      clamp(8px, 1.5vw, 12px);
+  }
+
+  .majzum-answer-text {
+    font-size:
+      clamp(13px, 2.2vw, 19px);
+  }
+
+  .majzum-status-panel {
+    min-height: 6.2vw;
+
+    padding:
+      0.55vw
+      0.8vw;
+  }
+
+  .majzum-status-panel > span,
+  .majzum-status-panel p {
+    font-size:
+      clamp(6px, 1.15vw, 10px);
+  }
+
+  .majzum-status-panel > strong {
+    font-size:
+      clamp(8px, 1.4vw, 12px);
+  }
+
+  .majzum-training-footer {
+    gap: 0.8vw;
+  }
+
+  .majzum-training-footer span {
+    width: 3.6vw;
+
+    font-size:
+      clamp(7px, 1.3vw, 11px);
+  }
+
+  .majzum-result-card {
+    width: 88vw;
+    min-height: 86dvh;
+
+    padding:
+      2vw
+      3vw;
+
+    gap: 1vw;
+  }
+
+  .majzum-result-icon {
+    width: 8vw;
+
+    font-size:
+      clamp(24px, 4vw, 36px);
+  }
+
+  .majzum-result-card h1 {
+    font-size:
+      clamp(21px, 3.5vw, 32px);
+  }
+
+  .majzum-result-score > div {
+    min-height: 9vw;
+  }
+
+  .majzum-result-score strong {
+    font-size:
+      clamp(20px, 4vw, 34px);
+  }
+
+  .majzum-result-actions button {
+    min-width: 17vw;
+    min-height: 5vw;
+
+    font-size:
+      clamp(7px, 1.3vw, 11px);
+  }
+}
+
+/* =====================================================
+   TELEFON MENEGAK
+===================================================== */
+
+@media (orientation: portrait) {
+  .majzum-training-screen::after {
+    content:
+      "Sila pusingkan telefon kepada paparan melintang";
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 9999;
+
+    display: grid;
+    place-items: center;
+
+    padding: 32px;
+
+    color: #fff0ae;
+    text-align: center;
+
+    background:
+      radial-gradient(
+        circle at center,
+        #176044,
+        #082a21
+      );
+
+    font-size:
+      clamp(18px, 5vw, 28px);
+
+    font-weight: 900;
+    line-height: 1.5;
+  }
+
+  .majzum-training-card,
+  .majzum-result-card {
+    visibility: hidden;
+  }
+}
+
+/* =====================================================
+   PERANTI SENTUH
+===================================================== */
+
+@media (hover: none) {
+  .majzum-training-header > button:hover,
+  .majzum-answer:hover:not(:disabled),
+  .majzum-result-actions button:hover {
+    transform: none;
+    filter: none;
+  }
+
+  .majzum-training-header > button:active,
+  .majzum-answer:active:not(:disabled),
+  .majzum-result-actions button:active {
+    transform: scale(0.985);
+  }
+}
+
+/* =====================================================
+   KURANGKAN ANIMASI
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .majzum-question-panel,
+  .majzum-result-card,
+  .majzum-answer,
+  .majzum-training-header > button,
+  .majzum-result-actions button,
+  .majzum-progress-track span {
+    animation: none;
+    transition: none;
+  }
+}/* =====================================================
+   LATIHAN majzum‘AT — CLASSROOM QUIZ UI
+   Desktop, laptop, tablet dan telefon melintang
+===================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+button {
+  font: inherit;
+}
+
+/* =====================================================
+   SKRIN UTAMA
+===================================================== */
+
+.majzum-training-screen {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100dvh;
+
+  display: grid;
+  place-items: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at center,
+      #1c5943,
+      #073025 75%
+    );
+}
+
+/* Background kelas */
+
+.majzum-training-screen::before {
   content: "";
 
   position: absolute;
-  top: 50%;
-  left: 50%;
+  inset: 0;
 
-  width: 9px;
-  height: 9px;
+  width: min(100vw, calc(100dvh * 16 / 9));
+  height: min(100dvh, calc(100vw * 9 / 16));
 
-  background: #fff8df;
-  border: 2px solid #c79b43;
+  margin: auto;
 
-  transform:
-    translate(-50%, -50%)
-    rotate(45deg);
+  background:
+    linear-gradient(
+      rgba(255, 255, 255, 0.04),
+      rgba(5, 35, 25, 0.12)
+    ),
+    url("/images/kotaIrab/kitab-classroom-bg.webp")
+      center / 100% 100% no-repeat;
+
+  pointer-events: none;
+}
+
+/* =====================================================
+   KAD LATIHAN UTAMA
+===================================================== */
+
+.majzum-training-card {
+  position: relative;
+
+  width: min(94vw, calc(94dvh * 16 / 9));
+  height: min(92dvh, calc(92vw * 9 / 16));
+
+  display: grid;
+  grid-template-rows:
+    13%
+    1.3%
+    minmax(0, 1fr)
+    9%;
+
+  overflow: hidden;
+
+  border:
+    clamp(2px, 0.18vw, 3px)
+    solid rgba(214, 175, 77, 0.95);
+
+  border-radius:
+    clamp(14px, 1.3vw, 23px);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 253, 239, 0.96),
+      rgba(245, 235, 201, 0.95)
+    );
+
+  box-shadow:
+    0 1.5vw 3vw
+      rgba(3, 28, 20, 0.42),
+    inset 0 0 1.5vw
+      rgba(255, 255, 255, 0.5);
+
+  z-index: 2;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.majzum-training-header {
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns:
+    1fr
+    auto
+    1fr;
+
+  align-items: center;
+
+  padding:
+    0.75vw
+    1.6vw;
+
+  color: #f7dc82;
+
+  background:
+    linear-gradient(
+      180deg,
+      #116245,
+      #074631
+    );
+
+  border-bottom:
+    1px solid rgba(224, 186, 85, 0.8);
+}
+
+.majzum-training-header > button {
+  justify-self: start;
+
+  min-width: 10vw;
+  height: 2.9vw;
+
+  padding:
+    0
+    1.2vw;
+
+  border:
+    1px solid #dbb956;
+
+  border-radius: 0.7vw;
+
+  color: #fff2b5;
+
+  font-size:
+    clamp(9px, 0.9vw, 15px);
+
+  font-weight: 900;
+
+  cursor: pointer;
+
+  background:
+    linear-gradient(
+      180deg,
+      #1b7553,
+      #0b5038
+    );
+
+  transition:
+    transform 160ms ease,
+    filter 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.majzum-training-header > button:hover {
+  transform: translateY(-2px);
+
+  filter: brightness(1.1);
+
+  box-shadow:
+    0 0 0.9vw
+      rgba(255, 210, 79, 0.42);
+}
+
+.majzum-training-header > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+.majzum-training-header span {
+  color: #d9c88f;
+
+  font-size:
+    clamp(7px, 0.7vw, 12px);
+
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+.majzum-training-header h1 {
+  margin: 0.1vw 0 0;
+
+  color: #ffdf77;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(18px, 2.25vw, 38px);
+
+  line-height: 1;
+}
+
+.majzum-training-header > strong {
+  justify-self: end;
+
+  min-width: 6vw;
+
+  padding:
+    0.55vw
+    0.9vw;
+
+  border:
+    1px solid rgba(233, 195, 90, 0.82);
+
+  border-radius: 999px;
+
+  color: #ffe47e;
+
+  text-align: center;
+
+  background:
+    rgba(3, 43, 29, 0.72);
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(12px, 1.45vw, 24px);
+}
+
+/* =====================================================
+   PROGRESS BAR
+===================================================== */
+
+.majzum-progress-track {
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  background:
+    rgba(5, 37, 25, 0.42);
+}
+
+.majzum-progress-track span {
+  display: block;
+
+  width: 0;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      #4fa951,
+      #9ed451,
+      #f0ca50
+    );
+
+  box-shadow:
+    0 0 0.7vw
+      rgba(157, 224, 87, 0.7);
+
+  transition:
+    width 350ms ease;
+}
+
+/* =====================================================
+   KAWASAN SOALAN
+===================================================== */
+
+.majzum-question-area {
+  min-width: 0;
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.05fr)
+    minmax(0, 0.9fr);
+
+  grid-template-rows:
+    minmax(0, 1fr)
+    auto;
+
+  gap:
+    1vw
+    1.2vw;
+
+  padding:
+    1.15vw
+    1.6vw;
+
+  overflow: hidden;
+}
+
+/* =====================================================
+   PANEL SOALAN
+===================================================== */
+
+.majzum-question-panel {
+  min-width: 0;
+  min-height: 0;
+
+  grid-column: 1;
+  grid-row: 1 / 3;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    1.4vw
+    1.8vw;
+
+  overflow: hidden;
+
+  text-align: center;
+
+  border:
+    1px solid rgba(194, 151, 58, 0.78);
+
+  border-radius:
+    clamp(12px, 1.15vw, 20px);
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255, 255, 249, 0.98),
+      rgba(247, 237, 204, 0.97)
+    );
+
+  box-shadow:
+    inset 0 0 1.4vw
+      rgba(175, 128, 35, 0.1),
+    0 0.6vw 1.2vw
+      rgba(85, 50, 10, 0.1);
+
+  animation:
+    majzum-question-enter
+    250ms ease;
+}
+
+.majzum-question-number {
+  padding:
+    0.36vw
+    1.25vw;
+
+  border:
+    1px solid #d3ab4a;
+
+  border-radius: 999px;
+
+  color: #f7dc80;
+
+  background:
+    linear-gradient(
+      180deg,
+      #1b6c4c,
+      #0c4a35
+    );
+
+  font-size:
+    clamp(8px, 0.85vw, 14px);
+
+  font-weight: 900;
+}
+
+.majzum-question-panel h2 {
+  max-width: 90%;
+
+  margin:
+    1vw
+    auto
+    0;
+
+  color: #254d3b;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(16px, 2.2vw, 37px);
+
+  line-height: 1.3;
 }
 
 .majzum-question-arabic {
-  width: 92%;
+  max-width: 96%;
+
+  margin:
+    0.8vw
+    auto
+    0;
+
+  color: #123f2e;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size:
+    clamp(16px, 3.8vw, 44px);
+
+  font-weight: 700;
+  line-height: 1.3;
+
+  white-space: nowrap;
+}
+
+/* =====================================================
+   SENARAI JAWAPAN
+===================================================== */
+
+.majzum-answer-list {
+  min-width: 0;
+  min-height: 0;
+
+  grid-column: 2;
+  grid-row: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 0.72vw;
+
+  overflow: hidden;
+}
+
+.majzum-answer {
+  width: 100%;
+  min-height: 4.3vw;
+
+  display: grid;
+  grid-template-columns:
+    3.2vw
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  gap: 0.9vw;
+
+  padding:
+    0.65vw
+    1vw;
+
+  border:
+    1px solid rgba(152, 166, 134, 0.72);
+
+  border-radius:
+    clamp(10px, 0.95vw, 16px);
+
+  color: #315744;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.95),
+      rgba(231, 240, 219, 0.95)
+    );
+
+  box-shadow:
+    0 0.35vw 0.75vw
+      rgba(53, 82, 60, 0.1);
+
+  transition:
+    transform 160ms ease,
+    filter 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.majzum-answer:hover:not(:disabled) {
+  transform:
+    translateX(-0.2vw)
+    scale(1.012);
+
+  border-color: #c59e3f;
+
+  filter: brightness(1.04);
+
+  box-shadow:
+    0 0.5vw 1.1vw
+      rgba(162, 115, 29, 0.18);
+}
+
+.majzum-answer > span {
+  width: 2.6vw;
+  aspect-ratio: 1;
+
+  display: grid;
+  place-items: center;
+
+  border:
+    1px solid rgba(95, 135, 104, 0.7);
+
+  border-radius: 50%;
+
+  color: #275540;
+
+  background: #eef5e5;
+
+  font-size:
+    clamp(10px, 1.05vw, 17px);
+
+  font-weight: 900;
+}
+
+.majzum-answer-text {
+  min-width: 0;
+
+  color: inherit;
+
+  font-family:
+    "Amiri",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(16px, 1.65vw, 28px);
+
+  line-height: 1.2;
+}
+
+/* Jawapan betul */
+
+.majzum-answer.correct {
+  color: #ffffff;
+
+  border-color: #6bc779;
+
+  background:
+    linear-gradient(
+      135deg,
+      #299852,
+      #13713b
+    );
+
+  box-shadow:
+    0 0 1.15vw
+      rgba(68, 202, 103, 0.48);
+}
+
+.majzum-answer.correct > span {
+  color: #174a30;
+
+  border-color: #dfffe4;
+
+  background: #c9f0c9;
+}
+
+/* Jawapan salah */
+
+.majzum-answer.wrong {
+  color: #ffffff;
+
+  border-color: #e58178;
+
+  background:
+    linear-gradient(
+      135deg,
+      #c94d43,
+      #93332f
+    );
+
+  box-shadow:
+    0 0 1vw
+      rgba(215, 71, 62, 0.4);
+}
+
+.majzum-answer.wrong > span {
+  color: #6e211f;
+
+  border-color: #ffe3df;
+
+  background: #ffd2cd;
+}
+
+/* Jawapan lain */
+
+.majzum-answer.muted {
+  opacity: 0.45;
+
+  filter:
+    grayscale(0.5)
+    brightness(0.92);
+}
+
+.majzum-answer:disabled {
+  cursor: default;
+}
+
+/* =====================================================
+   STATUS JAWAPAN
+===================================================== */
+
+.majzum-status-panel {
+  min-width: 0;
+
+  grid-column: 2;
+  grid-row: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.8vw;
+
+  min-height: 4.4vw;
+
+  padding:
+    0.65vw
+    1vw;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(191, 153, 68, 0.7);
+
+  border-radius:
+    clamp(9px, 0.85vw, 14px);
+
+  color: #455e4e;
+
+  background:
+    rgba(255, 249, 222, 0.93);
+
+  box-shadow:
+    inset 0 0 0.9vw
+      rgba(255, 255, 255, 0.45);
+}
+
+.majzum-status-panel > span {
+  flex: 0 0 auto;
+
+  padding-right: 0.8vw;
+
+  border-right:
+    1px solid
+    rgba(151, 126, 68, 0.35);
+
+  color: #796025;
+
+  font-size:
+    clamp(7px, 0.75vw, 12px);
+
+  font-weight: 900;
+}
+
+.majzum-status-panel > strong {
+  flex: 0 0 auto;
+
+  color: #315944;
+
+  font-size:
+    clamp(9px, 1vw, 16px);
+}
+
+.majzum-status-panel p {
+  min-width: 0;
 
   margin: 0;
-  padding: 8px 12px;
 
-  color: #08634f;
+  font-size:
+    clamp(7px, 0.78vw, 13px);
 
-  font-family: "Amiri", serif;
-  font-size: clamp(30px, 3vw, 50px);
-  font-weight: 700;
-  line-height: 1.65;
-  text-align: center;
-
-  direction: rtl;
-  unicode-bidi: isolate;
+  line-height: 1.3;
 }
 
-.majzum-status-explanation {
-  margin: 18px 0 0;
-
-  color: #55401d;
-
-  font-size: clamp(12px, 1vw, 16px);
-  line-height: 1.7;
-  text-align: center;
+.status-correct {
+  color: #218548 !important;
 }
 
-.majzum-status-explanation
-  .majzum-inline-arabic {
-  color: #ee0f1a;
-  font-size: 1.15em;
+.status-wrong {
+  color: #bd403a !important;
+}
+
+/* =====================================================
+   NAVIGASI NOMBOR BAWAH
+===================================================== */
+
+.majzum-training-footer {
+  min-height: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.65vw;
+
+  padding:
+    0.6vw
+    1vw;
+
+  border-top:
+    1px solid rgba(202, 164, 75, 0.76);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(226, 238, 216, 0.96),
+      rgba(207, 226, 199, 0.96)
+    );
+}
+
+.majzum-training-footer span {
+  width: 2.3vw;
+  aspect-ratio: 1;
+
+  display: grid;
+  place-items: center;
+
+  border:
+    1px solid rgba(110, 142, 112, 0.75);
+
+  border-radius: 50%;
+
+  color: #46604e;
+
+  background: #edf4e7;
+
+  font-size:
+    clamp(8px, 0.85vw, 14px);
+
+  font-weight: 900;
+}
+
+.majzum-training-footer span.completed {
+  color: #ffffff;
+
+  border-color: #4d9b5c;
+
+  background: #4d9b5c;
+}
+
+.majzum-training-footer span.active {
+  color: #153e2c;
+
+  border-color: #d7ae42;
+
+  background: #f4cf55;
+
+  box-shadow:
+    0 0 0.7vw
+      rgba(232, 190, 51, 0.72);
+
+  transform: scale(1.15);
+}
+
+/* =====================================================
+   KEPUTUSAN
+===================================================== */
+
+.majzum-result-card {
+  position: relative;
+
+  width: min(72vw, 950px);
+  min-height: min(76dvh, 620px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: clamp(10px, 1.1vw, 18px);
+
+  padding:
+    clamp(28px, 3vw, 50px);
+
+  border:
+    clamp(2px, 0.18vw, 3px)
+    solid #d6b04d;
+
+  border-radius:
+    clamp(18px, 1.6vw, 27px);
+
+  color: #365343;
+  text-align: center;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 253, 235, 0.97),
+      rgba(237, 232, 198, 0.97)
+    );
+
+  box-shadow:
+    0 1.4vw 3vw
+      rgba(4, 36, 25, 0.4),
+    inset 0 0 2vw
+      rgba(255, 255, 255, 0.52);
+
+  z-index: 3;
+
+  animation:
+    majzum-result-enter
+    320ms ease;
+}
+
+.majzum-result-icon {
+  width: clamp(70px, 7vw, 115px);
+  aspect-ratio: 1;
+
+  display: grid;
+  place-items: center;
+
+  border:
+    2px solid #e0ba54;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #207853,
+      #0c4a34
+    );
+
+  box-shadow:
+    0 0 1.6vw
+      rgba(23, 116, 76, 0.35);
+
+  font-size:
+    clamp(34px, 4vw, 65px);
+}
+
+.majzum-result-kicker {
+  margin: 0;
+
+  color: #8b6a20;
+
+  font-size:
+    clamp(9px, 0.9vw, 15px);
+
+  font-weight: 900;
+  letter-spacing: 0.17em;
+}
+
+.majzum-result-card h1 {
+  margin: 0;
+
+  color: #165239;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(27px, 3vw, 50px);
+}
+
+.majzum-result-card > p:not(.majzum-result-kicker) {
+  margin: 0;
+
+  font-size:
+    clamp(12px, 1.1vw, 18px);
+}
+
+.majzum-result-score {
+  width: min(80%, 650px);
+
+  display: grid;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 1vw;
+
+  margin-top: 0.6vw;
+}
+
+.majzum-result-score > div {
+  min-height: 7vw;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid rgba(182, 145, 55, 0.7);
+
+  border-radius:
+    clamp(10px, 1vw, 16px);
+
+  background:
+    rgba(255, 255, 247, 0.7);
+}
+
+.majzum-result-score span {
+  color: #6b715e;
+
+  font-size:
+    clamp(8px, 0.85vw, 14px);
+
+  font-weight: 800;
+}
+
+.majzum-result-score strong {
+  margin-top: 0.25vw;
+
+  color: #18543c;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(25px, 3vw, 48px);
+}
+
+.majzum-result-actions {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 0.8vw;
+
+  margin-top: 0.8vw;
+}
+
+.majzum-result-actions button {
+  min-width: 11vw;
+  min-height: 3.2vw;
+
+  padding:
+    0.6vw
+    1.3vw;
+
+  border:
+    1px solid #d1aa4a;
+
+  border-radius:
+    clamp(8px, 0.75vw, 12px);
+
+  color: #fff3bb;
+
+  cursor: pointer;
+
+  background:
+    linear-gradient(
+      180deg,
+      #19704e,
+      #0c4c36
+    );
+
+  font-size:
+    clamp(9px, 0.9vw, 15px);
+
+  font-weight: 900;
+
+  transition:
+    transform 160ms ease,
+    filter 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.majzum-result-actions button:hover {
+  transform: translateY(-2px);
+
+  filter: brightness(1.1);
+
+  box-shadow:
+    0 0 0.9vw
+      rgba(255, 199, 63, 0.36);
+}
+
+/* =====================================================
+   ANIMASI
+===================================================== */
+
+@keyframes majzum-question-enter {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(8px)
+      scale(0.992);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+@keyframes majzum-result-enter {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(14px)
+      scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+/* =====================================================
+   TELEFON DAN TABLET MELINTANG
+===================================================== */
+
+@media
+  (orientation: landscape)
+  and (max-width: 950px),
+  (orientation: landscape)
+  and (max-height: 520px) {
+
+  .majzum-training-card {
+    width: 96vw;
+    height: 94dvh;
+
+    grid-template-rows:
+      13%
+      1.4%
+      minmax(0, 1fr)
+      10%;
+  }
+
+  .majzum-training-header {
+    padding:
+      0.45vw
+      1.2vw;
+  }
+
+  .majzum-training-header > button {
+    min-width: 12vw;
+    height: 4.4vw;
+
+    font-size:
+      clamp(7px, 1.3vw, 11px);
+  }
+
+  .majzum-training-header h1 {
+    font-size:
+      clamp(16px, 3vw, 25px);
+  }
+
+  .majzum-training-header span {
+    font-size:
+      clamp(6px, 1vw, 9px);
+  }
+
+  .majzum-training-header > strong {
+    font-size:
+      clamp(11px, 2vw, 18px);
+  }
+
+  .majzum-question-area {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 0.95fr);
+
+    gap: 1.2vw;
+
+    padding:
+      1vw
+      1.3vw;
+  }
+
+  .majzum-question-panel {
+    padding:
+      1vw
+      1.4vw;
+  }
+
+  .majzum-question-panel h2 {
+    font-size:
+      clamp(16px, 2.8vw, 24px);
+  }
+
+  .majzum-question-arabic {
+    font-size:
+      clamp(16px, 3.8vw, 44px);
+  }
+
+  .majzum-answer-list {
+    gap: 0.7vw;
+  }
+
+  .majzum-answer {
+    min-height: 6.8vw;
+
+    grid-template-columns:
+      4.6vw
+      minmax(0, 1fr);
+
+    gap: 1vw;
+
+    padding:
+      0.5vw
+      0.8vw;
+  }
+
+  .majzum-answer > span {
+    width: 4vw;
+
+    font-size:
+      clamp(8px, 1.5vw, 12px);
+  }
+
+  .majzum-answer-text {
+    font-size:
+      clamp(13px, 2.2vw, 19px);
+  }
+
+  .majzum-status-panel {
+    min-height: 6.2vw;
+
+    padding:
+      0.55vw
+      0.8vw;
+  }
+
+  .majzum-status-panel > span,
+  .majzum-status-panel p {
+    font-size:
+      clamp(6px, 1.15vw, 10px);
+  }
+
+  .majzum-status-panel > strong {
+    font-size:
+      clamp(8px, 1.4vw, 12px);
+  }
+
+  .majzum-training-footer {
+    gap: 0.8vw;
+  }
+
+  .majzum-training-footer span {
+    width: 3.6vw;
+
+    font-size:
+      clamp(7px, 1.3vw, 11px);
+  }
+
+  .majzum-result-card {
+    width: 88vw;
+    min-height: 86dvh;
+
+    padding:
+      2vw
+      3vw;
+
+    gap: 1vw;
+  }
+
+  .majzum-result-icon {
+    width: 8vw;
+
+    font-size:
+      clamp(24px, 4vw, 36px);
+  }
+
+  .majzum-result-card h1 {
+    font-size:
+      clamp(21px, 3.5vw, 32px);
+  }
+
+  .majzum-result-score > div {
+    min-height: 9vw;
+  }
+
+  .majzum-result-score strong {
+    font-size:
+      clamp(20px, 4vw, 34px);
+  }
+
+  .majzum-result-actions button {
+    min-width: 17vw;
+    min-height: 5vw;
+
+    font-size:
+      clamp(7px, 1.3vw, 11px);
+  }
+}
+
+/* =====================================================
+   TELEFON MENEGAK
+===================================================== */
+
+@media (orientation: portrait) {
+  .majzum-training-screen::after {
+    content:
+      "Sila pusingkan telefon kepada paparan melintang";
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 9999;
+
+    display: grid;
+    place-items: center;
+
+    padding: 32px;
+
+    color: #fff0ae;
+    text-align: center;
+
+    background:
+      radial-gradient(
+        circle at center,
+        #176044,
+        #082a21
+      );
+
+    font-size:
+      clamp(18px, 5vw, 28px);
+
+    font-weight: 900;
+    line-height: 1.5;
+  }
+
+  .majzum-training-card,
+  .majzum-result-card {
+    visibility: hidden;
+  }
+}
+
+/* =====================================================
+   PERANTI SENTUH
+===================================================== */
+
+@media (hover: none) {
+  .majzum-training-header > button:hover,
+  .majzum-answer:hover:not(:disabled),
+  .majzum-result-actions button:hover {
+    transform: none;
+    filter: none;
+  }
+
+  .majzum-training-header > button:active,
+  .majzum-answer:active:not(:disabled),
+  .majzum-result-actions button:active {
+    transform: scale(0.985);
+  }
+}
+
+/* =====================================================
+   KURANGKAN ANIMASI
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .majzum-question-panel,
+  .majzum-result-card,
+  .majzum-answer,
+  .majzum-training-header > button,
+  .majzum-result-actions button,
+  .majzum-progress-track span {
+    animation: none;
+    transition: none;
+  }
 }

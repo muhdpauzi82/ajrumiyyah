@@ -1,6 +1,5 @@
 /* =====================================================
-   LATIHAN majrur‘AT — CLASSROOM QUIZ UI
-   Desktop, laptop, tablet dan telefon melintang
+   LATIHAN 3 — ANALISIS AYAT
 ===================================================== */
 
 * {
@@ -20,11 +19,7 @@ button {
   font: inherit;
 }
 
-/* =====================================================
-   SKRIN UTAMA
-===================================================== */
-
-.majrur-training-screen {
+.ayat-quiz-page {
   position: fixed;
   inset: 0;
 
@@ -39,28 +34,33 @@ button {
   background:
     radial-gradient(
       circle at center,
-      #1c5943,
-      #073025 75%
+      #306b5b,
+      #092f26 75%
     );
 }
 
-/* Background kelas */
-
-.majrur-training-screen::before {
+.ayat-quiz-page::before {
   content: "";
 
   position: absolute;
   inset: 0;
 
-  width: min(100vw, calc(100dvh * 16 / 9));
-  height: min(100dvh, calc(100vw * 9 / 16));
+  width: min(
+    100vw,
+    calc(100dvh * 16 / 9)
+  );
+
+  height: min(
+    100dvh,
+    calc(100vw * 9 / 16)
+  );
 
   margin: auto;
 
   background:
     linear-gradient(
       rgba(255, 255, 255, 0.04),
-      rgba(5, 35, 25, 0.12)
+      rgba(6, 41, 31, 0.12)
     ),
     url("/images/kotaIrab/kitab-classroom-bg.webp")
       center / 100% 100% no-repeat;
@@ -68,20 +68,24 @@ button {
   pointer-events: none;
 }
 
-/* =====================================================
-   KAD LATIHAN UTAMA
-===================================================== */
-
-.majrur-training-card {
+.ayat-quiz-frame {
   position: relative;
 
-  width: min(94vw, calc(94dvh * 16 / 9));
-  height: min(92dvh, calc(92vw * 9 / 16));
+  width: min(
+    94vw,
+    calc(94dvh * 16 / 9)
+  );
+
+  height: min(
+    91dvh,
+    calc(91vw * 9 / 16)
+  );
 
   display: grid;
+
   grid-template-rows:
     13%
-    1.3%
+    1.4%
     minmax(0, 1fr)
     9%;
 
@@ -89,23 +93,23 @@ button {
 
   border:
     clamp(2px, 0.18vw, 3px)
-    solid rgba(214, 175, 77, 0.95);
+    solid #d2ac4b;
 
   border-radius:
-    clamp(14px, 1.3vw, 23px);
+    clamp(14px, 1.3vw, 22px);
 
   background:
     linear-gradient(
       180deg,
-      rgba(255, 253, 239, 0.96),
-      rgba(245, 235, 201, 0.95)
+      rgba(255, 253, 239, 0.97),
+      rgba(241, 233, 205, 0.97)
     );
 
   box-shadow:
     0 1.5vw 3vw
-      rgba(3, 28, 20, 0.42),
-    inset 0 0 1.5vw
-      rgba(255, 255, 255, 0.5);
+      rgba(3, 31, 22, 0.42),
+    inset 0 0 1.6vw
+      rgba(255, 255, 255, 0.52);
 
   z-index: 2;
 }
@@ -114,10 +118,9 @@ button {
    HEADER
 ===================================================== */
 
-.majrur-training-header {
-  min-height: 0;
-
+.ayat-quiz-header {
   display: grid;
+
   grid-template-columns:
     1fr
     auto
@@ -126,41 +129,41 @@ button {
   align-items: center;
 
   padding:
-    0.75vw
-    1.6vw;
+    0.7vw
+    1.5vw;
 
-  color: #f7dc82;
+  color: #f8dd7f;
 
   background:
     linear-gradient(
       180deg,
-      #116245,
-      #074631
+      #166c58,
+      #084a3d
     );
 
   border-bottom:
-    1px solid rgba(224, 186, 85, 0.8);
+    1px solid rgba(224, 185, 80, 0.8);
 }
 
-.majrur-training-header > button {
+.ayat-quiz-header > button {
   justify-self: start;
 
-  min-width: 10vw;
+  min-width: 11vw;
   height: 2.9vw;
 
   padding:
     0
-    1.2vw;
+    1.1vw;
 
   border:
-    1px solid #dbb956;
+    1px solid #d9b553;
 
   border-radius: 0.7vw;
 
-  color: #fff2b5;
+  color: #fff1af;
 
   font-size:
-    clamp(9px, 0.9vw, 15px);
+    clamp(8px, 0.9vw, 15px);
 
   font-weight: 900;
 
@@ -169,8 +172,8 @@ button {
   background:
     linear-gradient(
       180deg,
-      #1b7553,
-      #0b5038
+      #247d68,
+      #0c5546
     );
 
   transition:
@@ -179,17 +182,17 @@ button {
     box-shadow 160ms ease;
 }
 
-.majrur-training-header > button:hover {
+.ayat-quiz-header > button:hover {
   transform: translateY(-2px);
 
   filter: brightness(1.1);
 
   box-shadow:
     0 0 0.9vw
-      rgba(255, 210, 79, 0.42);
+      rgba(255, 204, 69, 0.38);
 }
 
-.majrur-training-header > div {
+.ayat-quiz-header > div {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -197,76 +200,75 @@ button {
   text-align: center;
 }
 
-.majrur-training-header span {
-  color: #d9c88f;
+.ayat-quiz-header span {
+  color: #ddd09d;
 
   font-size:
-    clamp(7px, 0.7vw, 12px);
+    clamp(7px, 0.72vw, 12px);
 
   font-weight: 900;
   letter-spacing: 0.14em;
 }
 
-.majrur-training-header h1 {
-  margin: 0.1vw 0 0;
+.ayat-quiz-header h1 {
+  margin: 0.15vw 0 0;
 
-  color: #ffdf77;
+  color: #ffdf76;
 
   font-family:
     Georgia,
-    "Times New Roman",
     serif;
 
   font-size:
-    clamp(18px, 2.25vw, 38px);
+    clamp(17px, 2.1vw, 35px);
 
   line-height: 1;
 }
 
-.majrur-training-header > strong {
+.ayat-quiz-header > strong {
   justify-self: end;
 
   min-width: 6vw;
 
   padding:
-    0.55vw
-    0.9vw;
+    0.5vw
+    0.8vw;
 
   border:
-    1px solid rgba(233, 195, 90, 0.82);
+    1px solid rgba(232, 195, 88, 0.82);
 
   border-radius: 999px;
 
-  color: #ffe47e;
+  color: #ffe47d;
 
   text-align: center;
 
   background:
-    rgba(3, 43, 29, 0.72);
+    rgba(3, 43, 33, 0.75);
 
   font-family:
     Georgia,
     serif;
 
   font-size:
-    clamp(12px, 1.45vw, 24px);
+    clamp(12px, 1.4vw, 23px);
 }
 
 /* =====================================================
-   PROGRESS BAR
+   PROGRESS
 ===================================================== */
 
-.majrur-progress-track {
+.ayat-progress-track {
   width: 100%;
   height: 100%;
 
   overflow: hidden;
 
   background:
-    rgba(5, 37, 25, 0.42);
+    rgba(3, 38, 27, 0.4);
 }
 
-.majrur-progress-track span {
+.ayat-progress-track span {
   display: block;
 
   width: 0;
@@ -275,30 +277,30 @@ button {
   background:
     linear-gradient(
       90deg,
-      #4fa951,
-      #9ed451,
-      #f0ca50
+      #35a47d,
+      #77d09a,
+      #efca50
     );
 
   box-shadow:
-    0 0 0.7vw
-      rgba(157, 224, 87, 0.7);
+    0 0 0.75vw
+      rgba(105, 214, 148, 0.72);
 
-  transition:
-    width 350ms ease;
+  transition: width 350ms ease;
 }
 
 /* =====================================================
    KAWASAN SOALAN
 ===================================================== */
 
-.majrur-question-area {
+.ayat-question-area {
   min-width: 0;
   min-height: 0;
 
   display: grid;
+
   grid-template-columns:
-    minmax(0, 1.05fr)
+    minmax(0, 1.08fr)
     minmax(0, 0.9fr);
 
   grid-template-rows:
@@ -310,22 +312,22 @@ button {
     1.2vw;
 
   padding:
-    1.15vw
-    1.6vw;
+    1.1vw
+    1.5vw;
 
   overflow: hidden;
 }
 
 /* =====================================================
-   PANEL SOALAN
+   KAD AYAT
 ===================================================== */
 
-.majrur-question-panel {
-  min-width: 0;
-  min-height: 0;
-
+.ayat-question-card {
   grid-column: 1;
   grid-row: 1 / 3;
+
+  min-width: 0;
+  min-height: 0;
 
   display: flex;
   flex-direction: column;
@@ -333,92 +335,94 @@ button {
   justify-content: center;
 
   padding:
-    1.4vw
-    1.8vw;
+    1.25vw
+    1.6vw;
 
   overflow: hidden;
 
   text-align: center;
 
   border:
-    1px solid rgba(194, 151, 58, 0.78);
+    1px solid rgba(190, 146, 54, 0.8);
 
   border-radius:
-    clamp(12px, 1.15vw, 20px);
+    clamp(12px, 1.1vw, 19px);
 
   background:
     radial-gradient(
       circle at center,
       rgba(255, 255, 249, 0.98),
-      rgba(247, 237, 204, 0.97)
+      rgba(246, 237, 205, 0.97)
     );
 
   box-shadow:
     inset 0 0 1.4vw
-      rgba(175, 128, 35, 0.1),
-    0 0.6vw 1.2vw
-      rgba(85, 50, 10, 0.1);
+      rgba(177, 130, 37, 0.1),
+    0 0.55vw 1.2vw
+      rgba(78, 46, 10, 0.1);
 
   animation:
-    majrur-question-enter
-    250ms ease;
+    ayat-card-enter
+    260ms ease;
 }
 
-.majrur-question-number {
+.ayat-question-number {
   padding:
-    0.36vw
-    1.25vw;
+    0.34vw
+    1.15vw;
 
   border:
-    1px solid #d3ab4a;
+    1px solid #d2aa49;
 
   border-radius: 999px;
 
-  color: #f7dc80;
+  color: #f7dc7c;
 
   background:
     linear-gradient(
       180deg,
-      #1b6c4c,
-      #0c4a35
+      #217a64,
+      #0c5143
     );
 
   font-size:
-    clamp(8px, 0.85vw, 14px);
+    clamp(8px, 0.82vw, 14px);
 
   font-weight: 900;
 }
 
-.majrur-question-panel h2 {
-  max-width: 90%;
-
-  margin:
-    1vw
-    auto
-    0;
-
-  color: #254d3b;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:
-    clamp(16px, 2.2vw, 37px);
-
-  line-height: 1.3;
-}
-
-.majrur-question-arabic {
-  max-width: 96%;
+.ayat-question-card h2 {
+  max-width: 92%;
 
   margin:
     0.8vw
     auto
     0;
 
-  color: #123f2e;
+  color: #294e40;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(16px, 1.9vw, 32px);
+
+  line-height: 1.3;
+}
+
+.ayat-arabic-sentence {
+  width: 100%;
+  max-width: 100%;
+
+  margin:
+    1vw
+    auto
+    0.7vw;
+
+  color: #123e31;
+
+  text-align: center;
 
   font-family:
     "Amiri",
@@ -426,41 +430,122 @@ button {
     serif;
 
   font-size:
-    clamp(16px, 3.8vw, 44px);
+    clamp(37px, 4.8vw, 78px);
 
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.65;
 
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.ayat-target-word {
+  display: inline-block;
+
+  margin:
+    0
+    0.08em;
+
+  padding:
+    0.02em
+    0.2em;
+
+  color: #134936;
+
+  border:
+    2px solid
+    rgba(206, 161, 45, 0.72);
+
+  border-radius:
+    clamp(8px, 0.75vw, 13px);
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffef9d,
+      #f6d968
+    );
+
+  box-shadow:
+    0 0 1vw
+      rgba(240, 197, 63, 0.6);
+
+  animation:
+    ayat-target-glow
+    1.4s ease-in-out infinite;
+}
+
+.ayat-target-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.8vw;
+
+  padding:
+    0.35vw
+    1vw;
+
+  border:
+    1px solid
+    rgba(163, 128, 53, 0.56);
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 249, 221, 0.88);
+}
+
+.ayat-target-label > span {
+  color: #776124;
+
+  font-size:
+    clamp(7px, 0.78vw, 13px);
+
+  font-weight: 900;
+}
+
+.ayat-target-label > strong {
+  color: #bd3142;
+
+  font-family:
+    "Amiri",
+    serif;
+
+  font-size:
+    clamp(16px, 1.9vw, 31px);
+
+  line-height: 1;
 }
 
 /* =====================================================
-   SENARAI JAWAPAN
+   JAWAPAN
 ===================================================== */
 
-.majrur-answer-list {
-  min-width: 0;
-  min-height: 0;
-
+.ayat-answer-list {
   grid-column: 2;
   grid-row: 1;
+
+  min-width: 0;
+  min-height: 0;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  gap: 0.72vw;
+  gap: 0.7vw;
 
   overflow: hidden;
 }
 
-.majrur-answer {
+.ayat-answer {
   width: 100%;
-  min-height: 4.3vw;
+  min-height: 4.2vw;
 
   display: grid;
+
   grid-template-columns:
-    3.2vw
+    3.1vw
     minmax(0, 1fr);
 
   align-items: center;
@@ -472,12 +557,13 @@ button {
     1vw;
 
   border:
-    1px solid rgba(152, 166, 134, 0.72);
+    1px solid
+    rgba(149, 165, 133, 0.74);
 
   border-radius:
     clamp(10px, 0.95vw, 16px);
 
-  color: #315744;
+  color: #315747;
 
   text-align: left;
 
@@ -486,58 +572,56 @@ button {
   background:
     linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.95),
-      rgba(231, 240, 219, 0.95)
+      rgba(255, 255, 255, 0.96),
+      rgba(230, 240, 220, 0.96)
     );
 
   box-shadow:
     0 0.35vw 0.75vw
-      rgba(53, 82, 60, 0.1);
+      rgba(51, 81, 59, 0.1);
 
   transition:
     transform 160ms ease,
-    filter 160ms ease,
     border-color 160ms ease,
     box-shadow 160ms ease;
 }
 
-.majrur-answer:hover:not(:disabled) {
+.ayat-answer:hover:not(:disabled) {
   transform:
     translateX(-0.2vw)
     scale(1.012);
 
   border-color: #c59e3f;
 
-  filter: brightness(1.04);
-
   box-shadow:
     0 0.5vw 1.1vw
-      rgba(162, 115, 29, 0.18);
+      rgba(163, 116, 29, 0.18);
 }
 
-.majrur-answer > span {
-  width: 2.6vw;
+.ayat-answer > span {
+  width: 2.55vw;
   aspect-ratio: 1;
 
   display: grid;
   place-items: center;
 
   border:
-    1px solid rgba(95, 135, 104, 0.7);
+    1px solid
+    rgba(93, 133, 102, 0.7);
 
   border-radius: 50%;
 
-  color: #275540;
+  color: #265341;
 
-  background: #eef5e5;
+  background: #eef5e6;
 
   font-size:
-    clamp(10px, 1.05vw, 17px);
+    clamp(9px, 1vw, 17px);
 
   font-weight: 900;
 }
 
-.majrur-answer-text {
+.ayat-answer > strong {
   min-width: 0;
 
   color: inherit;
@@ -548,68 +632,46 @@ button {
     serif;
 
   font-size:
-    clamp(16px, 1.65vw, 28px);
+    clamp(18px, 1.9vw, 31px);
 
   line-height: 1.2;
 }
 
-/* Jawapan betul */
-
-.majrur-answer.correct {
+.ayat-answer.correct {
   color: #ffffff;
 
-  border-color: #6bc779;
+  border-color: #68c579;
 
   background:
     linear-gradient(
       135deg,
-      #299852,
-      #13713b
+      #299753,
+      #13713c
     );
 
   box-shadow:
-    0 0 1.15vw
-      rgba(68, 202, 103, 0.48);
+    0 0 1.1vw
+      rgba(67, 199, 102, 0.48);
 }
 
-.majrur-answer.correct > span {
-  color: #174a30;
-
-  border-color: #dfffe4;
-
-  background: #c9f0c9;
-}
-
-/* Jawapan salah */
-
-.majrur-answer.wrong {
+.ayat-answer.wrong {
   color: #ffffff;
 
-  border-color: #e58178;
+  border-color: #e5837a;
 
   background:
     linear-gradient(
       135deg,
-      #c94d43,
-      #93332f
+      #c94e44,
+      #92332f
     );
 
   box-shadow:
     0 0 1vw
-      rgba(215, 71, 62, 0.4);
+      rgba(214, 72, 62, 0.42);
 }
 
-.majrur-answer.wrong > span {
-  color: #6e211f;
-
-  border-color: #ffe3df;
-
-  background: #ffd2cd;
-}
-
-/* Jawapan lain */
-
-.majrur-answer.muted {
+.ayat-answer.muted {
   opacity: 0.45;
 
   filter:
@@ -617,27 +679,26 @@ button {
     brightness(0.92);
 }
 
-.majrur-answer:disabled {
+.ayat-answer:disabled {
   cursor: default;
 }
 
 /* =====================================================
-   STATUS JAWAPAN
+   MAKLUM BALAS
 ===================================================== */
 
-.majrur-status-panel {
-  min-width: 0;
-
+.ayat-feedback {
   grid-column: 2;
   grid-row: 2;
+
+  min-width: 0;
+  min-height: 4.3vw;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   gap: 0.8vw;
-
-  min-height: 4.4vw;
 
   padding:
     0.65vw
@@ -646,48 +707,37 @@ button {
   overflow: hidden;
 
   border:
-    1px solid rgba(191, 153, 68, 0.7);
+    1px solid rgba(191, 153, 68, 0.72);
 
   border-radius:
     clamp(9px, 0.85vw, 14px);
 
-  color: #455e4e;
+  color: #455e50;
+
+  text-align: center;
 
   background:
-    rgba(255, 249, 222, 0.93);
-
-  box-shadow:
-    inset 0 0 0.9vw
-      rgba(255, 255, 255, 0.45);
+    rgba(255, 249, 222, 0.94);
 }
 
-.majrur-status-panel > span {
+.ayat-feedback > strong {
   flex: 0 0 auto;
 
-  padding-right: 0.8vw;
-
-  border-right:
-    1px solid
-    rgba(151, 126, 68, 0.35);
-
-  color: #796025;
-
-  font-size:
-    clamp(7px, 0.75vw, 12px);
-
-  font-weight: 900;
-}
-
-.majrur-status-panel > strong {
-  flex: 0 0 auto;
-
-  color: #315944;
+  color: #315846;
 
   font-size:
     clamp(9px, 1vw, 16px);
 }
 
-.majrur-status-panel p {
+.ayat-feedback > strong.correct {
+  color: #218548;
+}
+
+.ayat-feedback > strong.wrong {
+  color: #bd403a;
+}
+
+.ayat-feedback p {
   min-width: 0;
 
   margin: 0;
@@ -698,82 +748,72 @@ button {
   line-height: 1.3;
 }
 
-.status-correct {
-  color: #218548 !important;
-}
-
-.status-wrong {
-  color: #bd403a !important;
-}
-
 /* =====================================================
-   NAVIGASI NOMBOR BAWAH
+   FOOTER
 ===================================================== */
 
-.majrur-training-footer {
-  min-height: 0;
-
+.ayat-question-footer {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  gap: 0.65vw;
+  gap: 0.62vw;
 
   padding:
-    0.6vw
+    0.55vw
     1vw;
 
   border-top:
-    1px solid rgba(202, 164, 75, 0.76);
+    1px solid rgba(201, 164, 74, 0.76);
 
   background:
     linear-gradient(
       180deg,
-      rgba(226, 238, 216, 0.96),
-      rgba(207, 226, 199, 0.96)
+      rgba(225, 237, 215, 0.97),
+      rgba(206, 225, 198, 0.97)
     );
 }
 
-.majrur-training-footer span {
-  width: 2.3vw;
+.ayat-question-footer span {
+  width: 2.25vw;
   aspect-ratio: 1;
 
   display: grid;
   place-items: center;
 
   border:
-    1px solid rgba(110, 142, 112, 0.75);
+    1px solid rgba(108, 140, 111, 0.76);
 
   border-radius: 50%;
 
-  color: #46604e;
+  color: #465f50;
 
   background: #edf4e7;
 
   font-size:
-    clamp(8px, 0.85vw, 14px);
+    clamp(8px, 0.84vw, 14px);
 
   font-weight: 900;
 }
 
-.majrur-training-footer span.completed {
+.ayat-question-footer span.completed {
   color: #ffffff;
 
-  border-color: #4d9b5c;
+  border-color: #4c995c;
 
-  background: #4d9b5c;
+  background: #4c995c;
 }
 
-.majrur-training-footer span.active {
+.ayat-question-footer span.active {
   color: #153e2c;
 
-  border-color: #d7ae42;
+  border-color: #d6ad42;
 
   background: #f4cf55;
 
   box-shadow:
     0 0 0.7vw
-      rgba(232, 190, 51, 0.72);
+      rgba(231, 189, 51, 0.72);
 
   transform: scale(1.15);
 }
@@ -782,7 +822,7 @@ button {
    KEPUTUSAN
 ===================================================== */
 
-.majrur-result-card {
+.ayat-result-card {
   position: relative;
 
   width: min(72vw, 950px);
@@ -793,25 +833,26 @@ button {
   align-items: center;
   justify-content: center;
 
-  gap: clamp(10px, 1.1vw, 18px);
+  gap:
+    clamp(10px, 1.1vw, 18px);
 
   padding:
     clamp(28px, 3vw, 50px);
 
   border:
     clamp(2px, 0.18vw, 3px)
-    solid #d6b04d;
+    solid #d5af4c;
 
   border-radius:
     clamp(18px, 1.6vw, 27px);
 
-  color: #365343;
+  color: #365345;
   text-align: center;
 
   background:
     linear-gradient(
       180deg,
-      rgba(255, 253, 235, 0.97),
+      rgba(255, 253, 235, 0.98),
       rgba(237, 232, 198, 0.97)
     );
 
@@ -822,14 +863,12 @@ button {
       rgba(255, 255, 255, 0.52);
 
   z-index: 3;
-
-  animation:
-    majrur-result-enter
-    320ms ease;
 }
 
-.majrur-result-icon {
-  width: clamp(70px, 7vw, 115px);
+.ayat-result-icon {
+  width:
+    clamp(70px, 7vw, 115px);
+
   aspect-ratio: 1;
 
   display: grid;
@@ -840,37 +879,41 @@ button {
 
   border-radius: 50%;
 
+  color: #ffffff;
+
   background:
     linear-gradient(
       145deg,
-      #207853,
-      #0c4a34
+      #39a16b,
+      #16754d
     );
 
   box-shadow:
     0 0 1.6vw
-      rgba(23, 116, 76, 0.35);
+      rgba(39, 158, 99, 0.38);
 
   font-size:
     clamp(34px, 4vw, 65px);
+
+  font-weight: 900;
 }
 
-.majrur-result-kicker {
+.ayat-result-kicker {
   margin: 0;
 
-  color: #8b6a20;
+  color: #8a6920;
 
   font-size:
     clamp(9px, 0.9vw, 15px);
 
   font-weight: 900;
-  letter-spacing: 0.17em;
+  letter-spacing: 0.16em;
 }
 
-.majrur-result-card h1 {
+.ayat-result-card h1 {
   margin: 0;
 
-  color: #165239;
+  color: #16513e;
 
   font-family:
     Georgia,
@@ -880,17 +923,20 @@ button {
     clamp(27px, 3vw, 50px);
 }
 
-.majrur-result-card > p:not(.majrur-result-kicker) {
+.ayat-result-card > p:not(
+  .ayat-result-kicker
+) {
   margin: 0;
 
   font-size:
     clamp(12px, 1.1vw, 18px);
 }
 
-.majrur-result-score {
+.ayat-result-score {
   width: min(80%, 650px);
 
   display: grid;
+
   grid-template-columns:
     repeat(3, minmax(0, 1fr));
 
@@ -899,7 +945,7 @@ button {
   margin-top: 0.6vw;
 }
 
-.majrur-result-score > div {
+.ayat-result-score > div {
   min-height: 7vw;
 
   display: flex;
@@ -914,22 +960,13 @@ button {
     clamp(10px, 1vw, 16px);
 
   background:
-    rgba(255, 255, 247, 0.7);
+    rgba(255, 255, 247, 0.72);
 }
 
-.majrur-result-score span {
-  color: #6b715e;
-
-  font-size:
-    clamp(8px, 0.85vw, 14px);
-
-  font-weight: 800;
-}
-
-.majrur-result-score strong {
+.ayat-result-score strong {
   margin-top: 0.25vw;
 
-  color: #18543c;
+  color: #18543f;
 
   font-family:
     Georgia,
@@ -939,7 +976,7 @@ button {
     clamp(25px, 3vw, 48px);
 }
 
-.majrur-result-actions {
+.ayat-result-actions {
   width: 100%;
 
   display: flex;
@@ -951,8 +988,8 @@ button {
   margin-top: 0.8vw;
 }
 
-.majrur-result-actions button {
-  min-width: 11vw;
+.ayat-result-actions button {
+  min-width: 12vw;
   min-height: 3.2vw;
 
   padding:
@@ -972,36 +1009,34 @@ button {
   background:
     linear-gradient(
       180deg,
-      #19704e,
-      #0c4c36
+      #19705a,
+      #0c4c3e
     );
 
   font-size:
     clamp(9px, 0.9vw, 15px);
 
   font-weight: 900;
-
-  transition:
-    transform 160ms ease,
-    filter 160ms ease,
-    box-shadow 160ms ease;
 }
 
-.majrur-result-actions button:hover {
-  transform: translateY(-2px);
-
-  filter: brightness(1.1);
+.ayat-result-actions button.primary {
+  background:
+    linear-gradient(
+      180deg,
+      #4b983f,
+      #1b6938
+    );
 
   box-shadow:
-    0 0 0.9vw
-      rgba(255, 199, 63, 0.36);
+    0 0 1vw
+      rgba(75, 179, 78, 0.38);
 }
 
 /* =====================================================
    ANIMASI
 ===================================================== */
 
-@keyframes majrur-question-enter {
+@keyframes ayat-card-enter {
   from {
     opacity: 0;
 
@@ -1019,26 +1054,23 @@ button {
   }
 }
 
-@keyframes majrur-result-enter {
-  from {
-    opacity: 0;
-
-    transform:
-      translateY(14px)
-      scale(0.97);
+@keyframes ayat-target-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0.55vw
+        rgba(240, 197, 63, 0.42);
   }
 
-  to {
-    opacity: 1;
-
-    transform:
-      translateY(0)
-      scale(1);
+  50% {
+    box-shadow:
+      0 0 1.25vw
+        rgba(240, 197, 63, 0.85);
   }
 }
 
 /* =====================================================
-   TELEFON DAN TABLET MELINTANG
+   TELEFON MELINTANG
 ===================================================== */
 
 @media
@@ -1047,172 +1079,44 @@ button {
   (orientation: landscape)
   and (max-height: 520px) {
 
-  .majrur-training-card {
+  .ayat-quiz-frame {
     width: 96vw;
     height: 94dvh;
-
-    grid-template-rows:
-      13%
-      1.4%
-      minmax(0, 1fr)
-      10%;
   }
 
-  .majrur-training-header {
-    padding:
-      0.45vw
-      1.2vw;
+  .ayat-question-card h2 {
+    font-size:
+      clamp(14px, 2.5vw, 22px);
   }
 
-  .majrur-training-header > button {
-    min-width: 12vw;
-    height: 4.4vw;
+  .ayat-arabic-sentence {
+    margin-top: 0.6vw;
 
     font-size:
-      clamp(7px, 1.3vw, 11px);
+      clamp(31px, 6vw, 53px);
+
+    line-height: 1.4;
   }
 
-  .majrur-training-header h1 {
-    font-size:
-      clamp(16px, 3vw, 25px);
-  }
-
-  .majrur-training-header span {
-    font-size:
-      clamp(6px, 1vw, 9px);
-  }
-
-  .majrur-training-header > strong {
-    font-size:
-      clamp(11px, 2vw, 18px);
-  }
-
-  .majrur-question-area {
-    grid-template-columns:
-      minmax(0, 1fr)
-      minmax(0, 0.95fr);
-
-    gap: 1.2vw;
-
-    padding:
-      1vw
-      1.3vw;
-  }
-
-  .majrur-question-panel {
-    padding:
-      1vw
-      1.4vw;
-  }
-
-  .majrur-question-panel h2 {
-    font-size:
-      clamp(16px, 2.8vw, 24px);
-  }
-
-  .majrur-question-arabic {
-    font-size:
-      clamp(16px, 3.8vw, 44px);
-  }
-
-  .majrur-answer-list {
-    gap: 0.7vw;
-  }
-
-  .majrur-answer {
-    min-height: 6.8vw;
-
-    grid-template-columns:
-      4.6vw
-      minmax(0, 1fr);
-
+  .ayat-target-label {
     gap: 1vw;
-
-    padding:
-      0.5vw
-      0.8vw;
   }
 
-  .majrur-answer > span {
+  .ayat-answer {
+    min-height: 6.5vw;
+  }
+
+  .ayat-answer > span {
     width: 4vw;
+  }
 
+  .ayat-answer > strong {
     font-size:
-      clamp(8px, 1.5vw, 12px);
+      clamp(14px, 2.3vw, 20px);
   }
 
-  .majrur-answer-text {
-    font-size:
-      clamp(13px, 2.2vw, 19px);
-  }
-
-  .majrur-status-panel {
-    min-height: 6.2vw;
-
-    padding:
-      0.55vw
-      0.8vw;
-  }
-
-  .majrur-status-panel > span,
-  .majrur-status-panel p {
-    font-size:
-      clamp(6px, 1.15vw, 10px);
-  }
-
-  .majrur-status-panel > strong {
-    font-size:
-      clamp(8px, 1.4vw, 12px);
-  }
-
-  .majrur-training-footer {
-    gap: 0.8vw;
-  }
-
-  .majrur-training-footer span {
-    width: 3.6vw;
-
-    font-size:
-      clamp(7px, 1.3vw, 11px);
-  }
-
-  .majrur-result-card {
-    width: 88vw;
-    min-height: 86dvh;
-
-    padding:
-      2vw
-      3vw;
-
-    gap: 1vw;
-  }
-
-  .majrur-result-icon {
-    width: 8vw;
-
-    font-size:
-      clamp(24px, 4vw, 36px);
-  }
-
-  .majrur-result-card h1 {
-    font-size:
-      clamp(21px, 3.5vw, 32px);
-  }
-
-  .majrur-result-score > div {
-    min-height: 9vw;
-  }
-
-  .majrur-result-score strong {
-    font-size:
-      clamp(20px, 4vw, 34px);
-  }
-
-  .majrur-result-actions button {
-    min-width: 17vw;
-    min-height: 5vw;
-
-    font-size:
-      clamp(7px, 1.3vw, 11px);
+  .ayat-question-footer span {
+    width: 3.5vw;
   }
 }
 
@@ -1221,7 +1125,7 @@ button {
 ===================================================== */
 
 @media (orientation: portrait) {
-  .majrur-training-screen::after {
+  .ayat-quiz-page::after {
     content:
       "Sila pusingkan telefon kepada paparan melintang";
 
@@ -1241,7 +1145,7 @@ button {
     background:
       radial-gradient(
         circle at center,
-        #176044,
+        #17604d,
         #082a21
       );
 
@@ -1252,8 +1156,8 @@ button {
     line-height: 1.5;
   }
 
-  .majrur-training-card,
-  .majrur-result-card {
+  .ayat-quiz-frame,
+  .ayat-result-card {
     visibility: hidden;
   }
 }
@@ -1263,31 +1167,23 @@ button {
 ===================================================== */
 
 @media (hover: none) {
-  .majrur-training-header > button:hover,
-  .majrur-answer:hover:not(:disabled),
-  .majrur-result-actions button:hover {
+  .ayat-quiz-header > button:hover,
+  .ayat-answer:hover:not(:disabled) {
     transform: none;
     filter: none;
   }
 
-  .majrur-training-header > button:active,
-  .majrur-answer:active:not(:disabled),
-  .majrur-result-actions button:active {
+  .ayat-quiz-header > button:active,
+  .ayat-answer:active:not(:disabled) {
     transform: scale(0.985);
   }
 }
 
-/* =====================================================
-   KURANGKAN ANIMASI
-===================================================== */
-
 @media (prefers-reduced-motion: reduce) {
-  .majrur-question-panel,
-  .majrur-result-card,
-  .majrur-answer,
-  .majrur-training-header > button,
-  .majrur-result-actions button,
-  .majrur-progress-track span {
+  .ayat-question-card,
+  .ayat-target-word,
+  .ayat-answer,
+  .ayat-progress-track span {
     animation: none;
     transition: none;
   }

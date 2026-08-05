@@ -134,7 +134,7 @@ export default function LorongLatihan() {
 
     localStorage.setItem("lorongIrabDone", "true");
 
-    navigate("/kota-irab");
+    navigate("/lorong-latihan-irab");
   }
 
   return (

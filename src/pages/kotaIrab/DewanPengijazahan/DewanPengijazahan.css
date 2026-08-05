@@ -1,119 +1,1285 @@
-.dewan-screen {
+/* =====================================================
+   DEWAN PENGIJAZAHAN — LOKASI 5
+===================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+button {
+  font: inherit;
+}
+
+.dewan-page {
   position: fixed;
   inset: 0;
+
+  width: 100vw;
+  height: 100dvh;
 
   display: grid;
   place-items: center;
 
-  color: #f5e8bf;
+  overflow: hidden;
 
   background:
     radial-gradient(
       circle at center,
-      rgba(86, 67, 28, 0.45),
-      transparent 46%
-    ),
-    linear-gradient(145deg, #13140f, #28362f);
+      #415f4d,
+      #142c22 74%
+    );
 }
 
-.dewan-panel {
+.dewan-frame {
   position: relative;
 
-  width: min(880px, 92vw);
-  min-height: 470px;
-  padding: clamp(32px, 5vw, 64px);
+  width: min(
+    100vw,
+    calc(100dvh * 16 / 9)
+  );
 
-  border: 2px solid rgba(224, 189, 101, 0.55);
-  border-radius: 25px;
+  height: min(
+    100dvh,
+    calc(100vw * 9 / 16)
+  );
 
-  text-align: center;
+  overflow: hidden;
+  isolation: isolate;
+
+  container-type: inline-size;
+  container-name: dewan-frame;
+}
+
+.dewan-bg {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+  object-fit: fill;
+
+  pointer-events: none;
+  user-select: none;
+
+  filter:
+    saturate(0.9)
+    brightness(0.9);
+
+  z-index: 0;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.dewan-header {
+  position: absolute;
+
+  left: 5%;
+  top: 2.5%;
+
+  width: 90%;
+  height: 9.5%;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    auto
+    1fr;
+
+  align-items: center;
+
+  padding:
+    0.55cqw
+    1.25cqw;
+
+  color: #f9df84;
+
+  border:
+    clamp(1px, 0.14cqw, 2px)
+    solid #dab653;
+
+  border-radius:
+    clamp(10px, 1cqw, 16px);
 
   background:
     linear-gradient(
-      rgba(7, 27, 28, 0.94),
-      rgba(11, 34, 33, 0.96)
+      180deg,
+      rgba(65, 75, 55, 0.98),
+      rgba(27, 48, 35, 0.99)
     );
 
   box-shadow:
-    0 30px 70px rgba(0, 0, 0, 0.55),
-    inset 0 0 42px rgba(230, 191, 93, 0.06);
+    0 0.65cqw 1.3cqw
+      rgba(0, 0, 0, 0.3),
+    inset 0 0 0.7cqw
+      rgba(255, 224, 119, 0.08);
+
+  z-index: 5;
 }
 
-.dewan-back {
-  position: absolute;
-  top: 20px;
-  left: 20px;
+.dewan-header button {
+  justify-self: start;
 
-  padding: 10px 14px;
+  min-width: 10.5cqw;
+  height: 3cqw;
 
-  border: 1px solid rgba(228, 194, 108, 0.42);
-  border-radius: 10px;
+  padding:
+    0
+    1cqw;
 
-  color: #f0d994;
-  background: rgba(0, 0, 0, 0.25);
+  color: #fff1b3;
 
-  cursor: pointer;
-}
+  border: 1px solid #d2ae4e;
 
-.dewan-label {
-  color: #c7b378;
+  border-radius:
+    clamp(7px, 0.7cqw, 11px);
 
-  font-size: 12px;
+  background:
+    linear-gradient(
+      180deg,
+      #4f6c52,
+      #263e30
+    );
+
+  font-size:
+    clamp(8px, 0.9cqw, 15px);
+
   font-weight: 900;
-  letter-spacing: 0.2em;
-}
-
-.dewan-progress {
-  margin-top: 20px;
-
-  color: #a8c5ba;
-}
-
-.dewan-panel h1 {
-  max-width: 700px;
-  margin: 30px auto;
-
-  color: #f5d77d;
-
-  font-size: clamp(25px, 3.5vw, 42px);
-}
-
-.dewan-options {
-  display: grid;
-  gap: 15px;
-
-  max-width: 650px;
-  margin: auto;
-}
-
-.dewan-options button,
-.dewan-result button {
-  padding: 15px 22px;
-
-  border: 1px solid rgba(224, 191, 103, 0.5);
-  border-radius: 12px;
-
-  color: #f2e3b8;
-  background: #173537;
-
-  font-size: 17px;
-  font-weight: 800;
 
   cursor: pointer;
 }
 
-.dewan-options button.correct {
-  border-color: #6fe09e;
-  background: #17613e;
+.dewan-header > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
 }
 
-.dewan-options button.wrong {
-  border-color: #ed7c7c;
-  background: #682a2a;
+.dewan-header span {
+  color: #ddd0a2;
+
+  font-size:
+    clamp(7px, 0.7cqw, 12px);
+
+  font-weight: 900;
+  letter-spacing: 0.13em;
+}
+
+.dewan-header h1 {
+  margin: 0.12cqw 0 0;
+
+  color: #ffe17d;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(18px, 2.15cqw, 36px);
+
+  line-height: 1;
+}
+
+.dewan-header > strong {
+  justify-self: end;
+
+  min-width: 6cqw;
+
+  padding:
+    0.45cqw
+    0.8cqw;
+
+  color: #ffe57f;
+
+  text-align: center;
+
+  border:
+    1px solid rgba(232, 196, 91, 0.84);
+
+  border-radius: 999px;
+
+  background:
+    rgba(13, 34, 23, 0.78);
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(12px, 1.4cqw, 23px);
+}
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.dewan-progress-track {
+  position: absolute;
+
+  left: 8%;
+  top: 12.7%;
+
+  width: 84%;
+  height: 0.75%;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background:
+    rgba(11, 39, 26, 0.45);
+
+  z-index: 5;
+}
+
+.dewan-progress-track span {
+  display: block;
+
+  width: 0;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      #a8832d,
+      #e5c24e,
+      #fff1a0
+    );
+
+  box-shadow:
+    0 0 0.85cqw
+      rgba(231, 192, 67, 0.8);
+
+  transition: width 350ms ease;
+}
+
+/* =====================================================
+   KANDUNGAN UTAMA
+===================================================== */
+
+.dewan-content {
+  position: absolute;
+
+  left: 10%;
+  top: 15%;
+
+  width: 80%;
+  height: 69%;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.08fr)
+    minmax(0, 0.92fr);
+
+  grid-template-rows:
+    minmax(0, 1fr)
+    auto;
+
+  gap:
+    1cqw
+    1.2cqw;
+
+  padding:
+    1.1cqw
+    1.35cqw;
+
+  overflow: hidden;
+
+  border:
+    clamp(1px, 0.14cqw, 2px)
+    solid rgba(197, 158, 65, 0.88);
+
+  border-radius:
+    clamp(14px, 1.5cqw, 24px);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 253, 241, 0.96),
+      rgba(240, 231, 198, 0.95)
+    );
+
+  box-shadow:
+    0 0.9cqw 2cqw
+      rgba(41, 28, 7, 0.26),
+    inset 0 0 1.5cqw
+      rgba(255, 255, 255, 0.5);
+
+  z-index: 5;
+}
+
+/* =====================================================
+   PANEL SOALAN
+===================================================== */
+
+.dewan-question-panel {
+  grid-column: 1;
+  grid-row: 1 / 3;
+
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    1.2cqw
+    1.5cqw;
+
+  overflow: hidden;
+
+  text-align: center;
+
+  border:
+    1px solid rgba(185, 144, 52, 0.78);
+
+  border-radius:
+    clamp(11px, 1.1cqw, 18px);
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255, 255, 250, 0.99),
+      rgba(245, 235, 201, 0.97)
+    );
+
+  box-shadow:
+    inset 0 0 1.3cqw
+      rgba(163, 119, 30, 0.1);
+
+  animation:
+    dewan-question-enter
+    240ms ease;
+}
+
+.dewan-question-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.7cqw;
+}
+
+.dewan-question-meta span,
+.dewan-question-meta strong {
+  padding:
+    0.3cqw
+    1cqw;
+
+  border-radius: 999px;
+
+  font-size:
+    clamp(7px, 0.78cqw, 13px);
+
+  font-weight: 900;
+}
+
+.dewan-question-meta span {
+  color: #6f531a;
+
+  border: 1px solid #d0a947;
+
+  background:
+    rgba(249, 226, 149, 0.82);
+}
+
+.dewan-question-meta strong {
+  color: #fff1b2;
+
+  border: 1px solid #d2ae4d;
+
+  background:
+    linear-gradient(
+      180deg,
+      #5e7157,
+      #334b38
+    );
+}
+
+.dewan-question-panel h2 {
+  max-width: 92%;
+
+  margin:
+    0.8cqw
+    auto
+    0;
+
+  color: #354d3d;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(16px, 1.85cqw, 31px);
+
+  line-height: 1.3;
+}
+
+.dewan-arabic-sentence {
+  width: 100%;
+
+  margin:
+    0.9cqw
+    auto
+    0.6cqw;
+
+  color: #183e2f;
+
+  text-align: center;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size:
+    clamp(36px, 4.7cqw, 77px);
+
+  font-weight: 700;
+  line-height: 1.5;
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.dewan-target-word {
+  display: inline-block;
+
+  margin: 0 0.08em;
+
+  padding:
+    0.02em
+    0.2em;
+
+  color: #4c3911;
+
+  border:
+    2px solid
+    rgba(198, 150, 33, 0.78);
+
+  border-radius:
+    clamp(8px, 0.75cqw, 13px);
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff1a2,
+      #efcc5b
+    );
+
+  box-shadow:
+    0 0 1cqw
+      rgba(231, 182, 48, 0.58);
+}
+
+.dewan-target-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.8cqw;
+
+  padding:
+    0.35cqw
+    1cqw;
+
+  border:
+    1px solid rgba(163, 128, 53, 0.58);
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 248, 219, 0.9);
+}
+
+.dewan-target-label span {
+  color: #756023;
+
+  font-size:
+    clamp(7px, 0.78cqw, 13px);
+
+  font-weight: 900;
+}
+
+.dewan-target-label strong {
+  color: #ad3540;
+
+  font-family:
+    "Amiri",
+    serif;
+
+  font-size:
+    clamp(16px, 1.9cqw, 31px);
+
+  line-height: 1;
+}
+
+/* =====================================================
+   PILIHAN JAWAPAN
+===================================================== */
+
+.dewan-answer-list {
+  grid-column: 2;
+  grid-row: 1;
+
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 0.65cqw;
+
+  overflow: hidden;
+}
+
+.dewan-answer {
+  width: 100%;
+  min-height: 4.15cqw;
+
+  display: grid;
+
+  grid-template-columns:
+    3.1cqw
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  gap: 0.9cqw;
+
+  padding:
+    0.6cqw
+    1cqw;
+
+  color: #354f3e;
+
+  text-align: left;
+
+  border:
+    1px solid rgba(151, 163, 132, 0.75);
+
+  border-radius:
+    clamp(10px, 0.95cqw, 16px);
+
+  cursor: pointer;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.98),
+      rgba(231, 239, 219, 0.97)
+    );
+
+  box-shadow:
+    0 0.35cqw 0.75cqw
+      rgba(51, 81, 59, 0.1);
+
+  transition:
+    transform 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.dewan-answer:hover:not(:disabled) {
+  transform:
+    translateX(-0.2cqw)
+    scale(1.01);
+
+  border-color: #c69e3d;
+
+  box-shadow:
+    0 0.5cqw 1.1cqw
+      rgba(163, 116, 29, 0.2);
+}
+
+.dewan-answer > span {
+  width: 2.55cqw;
+  aspect-ratio: 1;
+
+  display: grid;
+  place-items: center;
+
+  color: #2b5140;
+
+  border:
+    1px solid rgba(96, 132, 102, 0.7);
+
+  border-radius: 50%;
+
+  background: #eef4e5;
+
+  font-size:
+    clamp(9px, 1cqw, 17px);
+
+  font-weight: 900;
+}
+
+.dewan-answer > strong {
+  min-width: 0;
+
+  color: inherit;
+
+  font-family:
+    "Amiri",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(16px, 1.7cqw, 28px);
+
+  line-height: 1.25;
+}
+
+.dewan-answer.correct {
+  color: #ffffff;
+
+  border-color: #68c579;
+
+  background:
+    linear-gradient(
+      135deg,
+      #299753,
+      #13713c
+    );
+
+  box-shadow:
+    0 0 1.1cqw
+      rgba(67, 199, 102, 0.48);
+}
+
+.dewan-answer.wrong {
+  color: #ffffff;
+
+  border-color: #e5837a;
+
+  background:
+    linear-gradient(
+      135deg,
+      #c94e44,
+      #92332f
+    );
+
+  box-shadow:
+    0 0 1cqw
+      rgba(214, 72, 62, 0.42);
+}
+
+.dewan-answer.muted {
+  opacity: 0.42;
+
+  filter:
+    grayscale(0.55)
+    brightness(0.93);
+}
+
+.dewan-answer:disabled {
+  cursor: default;
+}
+
+/* =====================================================
+   STATUS RINGKAS
+===================================================== */
+
+.dewan-feedback {
+  grid-column: 2;
+  grid-row: 2;
+
+  min-width: 0;
+  min-height: 4.1cqw;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    0.55cqw
+    0.9cqw;
+
+  color: #43594b;
+
+  text-align: center;
+
+  border:
+    1px solid rgba(188, 151, 65, 0.72);
+
+  border-radius:
+    clamp(9px, 0.85cqw, 14px);
+
+  background:
+    rgba(255, 248, 219, 0.95);
+}
+
+.dewan-feedback strong {
+  font-size:
+    clamp(9px, 1cqw, 16px);
+}
+
+.dewan-feedback .correct {
+  color: #218548;
+}
+
+.dewan-feedback .wrong {
+  color: #bd403a;
+}
+
+/* =====================================================
+   FOOTER 20 SOALAN
+===================================================== */
+
+.dewan-footer {
+  position: absolute;
+
+  left: 17%;
+  bottom: 3.7%;
+
+  width: 66%;
+  height: 6.3%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.35cqw;
+
+  padding:
+    0.4cqw
+    0.8cqw;
+
+  border:
+    1px solid rgba(196, 158, 70, 0.8);
+
+  border-radius: 999px;
+
+  background:
+    rgba(231, 237, 214, 0.96);
+
+  z-index: 5;
+}
+
+.dewan-footer span {
+  width: 1.55cqw;
+  aspect-ratio: 1;
+
+  display: grid;
+  place-items: center;
+
+  color: #526253;
+
+  border:
+    1px solid rgba(112, 137, 111, 0.76);
+
+  border-radius: 50%;
+
+  background: #eef3e7;
+
+  font-size:
+    clamp(6px, 0.62cqw, 10px);
+
+  font-weight: 900;
+}
+
+.dewan-footer span.completed {
+  color: #ffffff;
+
+  border-color: #4d985b;
+  background: #4d985b;
+}
+
+.dewan-footer span.active {
+  color: #183e2d;
+
+  border-color: #d7ae42;
+  background: #f4cf55;
+
+  box-shadow:
+    0 0 0.65cqw
+      rgba(231, 189, 51, 0.76);
+
+  transform: scale(1.22);
+}
+
+/* =====================================================
+   PAPARAN KEPUTUSAN
+===================================================== */
+
+.dewan-result {
+  position: absolute;
+
+  left: 20%;
+  top: 10%;
+
+  width: 60%;
+  height: 80%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.85cqw;
+
+  padding:
+    2cqw
+    3cqw;
+
+  color: #3b5143;
+
+  text-align: center;
+
+  border:
+    clamp(2px, 0.18cqw, 3px)
+    solid #d5af4c;
+
+  border-radius:
+    clamp(18px, 1.6cqw, 27px);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 253, 235, 0.98),
+      rgba(237, 232, 198, 0.97)
+    );
+
+  box-shadow:
+    0 1.4cqw 3cqw
+      rgba(4, 36, 25, 0.42),
+    inset 0 0 1.8cqw
+      rgba(255, 255, 255, 0.5);
+
+  z-index: 5;
+}
+
+.dewan-congratulations {
+  color: #956c17;
+
+  font-family:
+    "Amiri",
+    serif;
+
+  font-size:
+    clamp(21px, 2.6cqw, 42px);
+
+  font-weight: 700;
+}
+
+.dewan-result-icon {
+  width: 6cqw;
+  aspect-ratio: 1;
+
+  display: grid;
+  place-items: center;
+
+  border: 2px solid #e0ba54;
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #f5d66a,
+      #a36e18 75%
+    );
+
+  box-shadow:
+    0 0 1.5cqw
+      rgba(217, 167, 42, 0.48);
+
+  font-size:
+    clamp(28px, 3.2cqw, 52px);
+}
+
+.dewan-result.retry
+.dewan-result-icon {
+  background:
+    linear-gradient(
+      145deg,
+      #8b9f77,
+      #526447
+    );
+}
+
+.dewan-result-kicker {
+  color: #89691f;
+
+  font-size:
+    clamp(8px, 0.84cqw, 14px);
+
+  font-weight: 900;
+  letter-spacing: 0.15em;
 }
 
 .dewan-result h1 {
-  color: #ffe28b;
+  margin: 0;
 
-  font-size: 68px;
+  color: #65501e;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(26px, 2.9cqw, 48px);
+}
+
+.dewan-result p {
+  max-width: 78%;
+
+  margin: 0;
+
+  font-size:
+    clamp(10px, 1cqw, 17px);
+
+  line-height: 1.45;
+}
+
+.dewan-score-display {
+  min-width: 43%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding:
+    0.8cqw
+    1.5cqw;
+
+  border:
+    1px solid rgba(179, 142, 52, 0.72);
+
+  border-radius:
+    clamp(10px, 1cqw, 16px);
+
+  background:
+    rgba(255, 255, 247, 0.75);
+}
+
+.dewan-score-display strong,
+.dewan-perfect-score {
+  color: #1b563d;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(30px, 3.8cqw, 62px);
+
+  font-weight: 900;
+}
+
+.dewan-score-display span {
+  margin-top: 0.2cqw;
+
+  color: #716b51;
+
+  font-size:
+    clamp(7px, 0.75cqw, 12px);
+
+  font-weight: 800;
+}
+
+.dewan-perfect-score {
+  padding:
+    0.4cqw
+    1.5cqw;
+
+  color: #956a13;
+
+  border:
+    1px solid #d2a840;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 235, 149, 0.82);
+
+  box-shadow:
+    0 0 1cqw
+      rgba(225, 180, 48, 0.36);
+}
+
+.dewan-certificate {
+  min-width: 44%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding:
+    0.7cqw
+    1.5cqw;
+
+  border:
+    2px solid #c99f3b;
+
+  border-radius:
+    clamp(10px, 1cqw, 16px);
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff7d2,
+      #e9d58c
+    );
+}
+
+.dewan-certificate span {
+  color: #77601e;
+
+  font-size:
+    clamp(7px, 0.75cqw, 12px);
+
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.dewan-certificate strong {
+  margin-top: 0.2cqw;
+
+  color: #31533e;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(17px, 1.8cqw, 30px);
+}
+
+.dewan-retry-button,
+.dewan-palace-button {
+  min-width: 19cqw;
+  min-height: 3.6cqw;
+
+  padding:
+    0.6cqw
+    1.4cqw;
+
+  color: #fff2b5;
+
+  border:
+    2px solid #d1aa48;
+
+  border-radius:
+    clamp(9px, 0.9cqw, 15px);
+
+  cursor: pointer;
+
+  background:
+    linear-gradient(
+      180deg,
+      #536b50,
+      #2d4534
+    );
+
+  font-size:
+    clamp(9px, 1cqw, 16px);
+
+  font-weight: 900;
+
+  transition:
+    transform 160ms ease,
+    filter 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.dewan-palace-button {
+  background:
+    linear-gradient(
+      180deg,
+      #ad8128,
+      #735118
+    );
+
+  box-shadow:
+    0 0 1cqw
+      rgba(210, 158, 40, 0.42);
+}
+
+.dewan-retry-button:hover,
+.dewan-palace-button:hover {
+  transform: translateY(-0.2cqw);
+
+  filter: brightness(1.08);
+
+  box-shadow:
+    0 0.7cqw 1.4cqw
+      rgba(72, 49, 8, 0.22);
+}
+
+/* =====================================================
+   ANIMASI
+===================================================== */
+
+@keyframes dewan-question-enter {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(0.45cqw)
+      scale(0.992);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+/* =====================================================
+   TELEFON MELINTANG
+===================================================== */
+
+@media
+  (orientation: landscape)
+  and (max-width: 950px),
+  (orientation: landscape)
+  and (max-height: 520px) {
+
+  .dewan-header {
+    left: 3%;
+    width: 94%;
+  }
+
+  .dewan-content {
+    left: 5%;
+    top: 14%;
+
+    width: 90%;
+    height: 71%;
+  }
+
+  .dewan-question-panel h2 {
+    font-size:
+      clamp(14px, 2.4vw, 21px);
+  }
+
+  .dewan-arabic-sentence {
+    font-size:
+      clamp(30px, 5.8vw, 51px);
+  }
+
+  .dewan-answer {
+    min-height: 6.3vw;
+  }
+
+  .dewan-answer > span {
+    width: 4vw;
+  }
+
+  .dewan-answer > strong {
+    font-size:
+      clamp(11px, 1.9vw, 17px);
+  }
+
+  .dewan-footer {
+    left: 8%;
+    width: 84%;
+
+    gap: 0.45vw;
+  }
+
+  .dewan-footer span {
+    width: 2.6vw;
+
+    font-size:
+      clamp(5px, 0.85vw, 8px);
+  }
+
+  .dewan-result {
+    left: 9%;
+    top: 6%;
+
+    width: 82%;
+    height: 88%;
+  }
+}
+
+/* =====================================================
+   TELEFON MENEGAK
+===================================================== */
+
+@media (orientation: portrait) {
+  .dewan-page::after {
+    content:
+      "Sila pusingkan telefon kepada paparan melintang";
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 9999;
+
+    display: grid;
+    place-items: center;
+
+    padding: 32px;
+
+    color: #fff0ae;
+    text-align: center;
+
+    background:
+      radial-gradient(
+        circle at center,
+        #465f4b,
+        #182c22
+      );
+
+    font-size:
+      clamp(18px, 5vw, 28px);
+
+    font-weight: 900;
+    line-height: 1.5;
+  }
+
+  .dewan-frame {
+    visibility: hidden;
+  }
+}
+
+@media (hover: none) {
+  .dewan-answer:hover:not(:disabled),
+  .dewan-retry-button:hover,
+  .dewan-palace-button:hover {
+    transform: none;
+    filter: none;
+  }
+
+  .dewan-answer:active:not(:disabled),
+  .dewan-retry-button:active,
+  .dewan-palace-button:active {
+    transform: scale(0.985);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dewan-question-panel,
+  .dewan-answer,
+  .dewan-progress-track span,
+  .dewan-retry-button,
+  .dewan-palace-button {
+    animation: none;
+    transition: none;
+  }
 }
