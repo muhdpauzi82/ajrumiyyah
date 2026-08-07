@@ -1,0 +1,431 @@
+/* =====================================================
+   KITAB FA'IL
+   Base Design : 1600 × 900
+===================================================== */
+
+.kitab-fail-page{
+    position:fixed;
+    inset:0;
+
+    display:grid;
+    place-items:center;
+
+    width:100vw;
+    height:100vh;
+
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+        rgba(6,32,28,.45),
+        rgba(4,24,21,.72)
+    ),
+    url("/images/kotaMarfuat/perpustakaan-marfuat-bg.webp")
+    center/cover no-repeat;
+
+    font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+/*================================================*/
+
+.kitab-back-btn{
+
+    position:absolute;
+
+    top:4%;
+    left:3%;
+
+    z-index:20;
+
+    padding:12px 22px;
+
+    border:none;
+    border-radius:12px;
+
+    background:#176349;
+
+    color:#fff;
+
+    font-size:16px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.kitab-back-btn:hover{
+
+    background:#22845f;
+
+    transform:translateY(-2px);
+
+}
+
+/*================================================*/
+
+.kitab-fail-card{
+
+    width:min(980px,84vw);
+
+    padding:42px;
+
+    border-radius:28px;
+
+    background:
+    rgba(255,248,223,.96);
+
+    border:4px solid #c89b3d;
+
+    box-shadow:
+    0 24px 60px rgba(0,0,0,.45);
+
+}
+
+/*================================================*/
+
+.kitab-label{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border-radius:999px;
+
+    background:#176349;
+
+    color:#ffe59c;
+
+    font-size:15px;
+    font-weight:700;
+
+    letter-spacing:1px;
+
+}
+
+/*================================================*/
+
+.kitab-title{
+
+    margin-top:18px;
+
+    text-align:center;
+
+    color:#12402f;
+
+    font-family:"Amiri",serif;
+
+    font-size:clamp(42px,4vw,68px);
+
+}
+
+.kitab-subtitle{
+
+    margin-top:8px;
+
+    text-align:center;
+
+    color:#8c5c18;
+
+    font-size:26px;
+
+    font-weight:700;
+
+}
+
+/*================================================*/
+
+.kitab-section{
+
+    margin-top:30px;
+
+}
+
+.kitab-section h2{
+
+    margin-bottom:14px;
+
+    color:#1b573d;
+
+    font-size:24px;
+
+}
+
+/*================================================*/
+
+.kitab-arabic-box{
+
+    padding:
+    22px
+    26px;
+
+    border-radius:16px;
+
+    background:#fffef7;
+
+    border:2px solid #dcc37d;
+
+    font-family:"Amiri",serif;
+
+    color:#144230;
+
+    font-size:34px;
+
+    line-height:1.8;
+
+    text-align:center;
+
+}
+
+/*================================================*/
+
+.kitab-section p{
+
+    color:#444;
+
+    font-size:18px;
+
+    line-height:1.8;
+
+}
+
+/*================================================*/
+
+.example-box{
+
+    padding:22px;
+
+    border-radius:16px;
+
+    background:
+
+    linear-gradient(
+    180deg,
+    #fffdf5,
+    #efe3bc
+    );
+
+}
+
+.example-arabic{
+
+    font-family:"Amiri",serif;
+
+    color:#145038;
+
+    font-size:42px;
+
+    text-align:center;
+
+}
+
+.example-translation{
+
+    margin-top:10px;
+
+    text-align:center;
+
+    color:#666;
+
+    font-size:18px;
+
+}
+
+/*================================================*/
+
+.kitab-analysis{
+
+    margin-top:28px;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    border:2px solid #d9c07a;
+
+}
+
+.analysis-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:
+    16px
+    24px;
+
+    background:white;
+
+    border-bottom:1px solid #ece3c8;
+
+}
+
+.analysis-row:last-child{
+
+    border-bottom:none;
+
+}
+
+.highlight{
+
+    background:#edf9ef;
+
+}
+
+.analysis-word{
+
+    font-family:"Amiri",serif;
+
+    font-size:30px;
+
+    color:#145038;
+
+}
+
+/*================================================*/
+
+.kitab-rule{
+
+    margin-top:28px;
+
+    padding:18px 22px;
+
+    border-left:6px solid #1b7a56;
+
+    border-radius:12px;
+
+    background:#f3f8ef;
+
+}
+
+.kitab-rule strong{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:#145038;
+
+}
+
+.kitab-rule span{
+
+    color:#444;
+
+    line-height:1.8;
+
+}
+
+/*================================================*/
+
+.kitab-complete-btn{
+
+    display:block;
+
+    margin:
+    36px auto
+    0;
+
+    padding:
+    16px
+    38px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:
+
+    linear-gradient(
+    180deg,
+    #23865f,
+    #0d5e43
+    );
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    box-shadow:
+    0 10px 20px rgba(0,0,0,.25);
+
+}
+
+.kitab-complete-btn:hover{
+
+    transform:translateY(-3px);
+
+    background:
+
+    linear-gradient(
+    180deg,
+    #2da874,
+    #0f6b4d
+    );
+
+}
+
+/*================================================*/
+
+@media(max-width:900px){
+
+.kitab-fail-card{
+
+width:90vw;
+
+padding:30px;
+
+}
+
+.analysis-row{
+
+flex-direction:column;
+
+gap:10px;
+
+}
+
+}
+
+/*================================================*/
+
+@media(max-width:600px){
+
+.kitab-fail-card{
+
+padding:20px;
+
+}
+
+.kitab-title{
+
+font-size:46px;
+
+}
+
+.example-arabic{
+
+font-size:34px;
+
+}
+
+.kitab-complete-btn{
+
+width:100%;
+
+}
+
+}

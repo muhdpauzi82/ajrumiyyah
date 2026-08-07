@@ -1,0 +1,80 @@
+.marfuat-intro {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: grid;
+  place-items: center;
+
+  overflow: hidden;
+
+  background: #14342d;
+}
+
+.marfuat-intro-frame {
+  position: relative;
+
+  width: min(100vw, calc(100vh * 16 / 9));
+  height: min(100vh, calc(100vw * 9 / 16));
+
+  overflow: hidden;
+}
+
+.marfuat-intro-bg {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  display: block;
+
+  pointer-events: none;
+  user-select: none;
+}
+
+/* =========================================
+   HOTSPOT
+========================================= */
+
+.marfuat-intro-hotspot {
+  position: absolute;
+
+  border: 0;
+  padding: 0;
+
+  background: rgba(255, 255, 255, 0.001);
+
+  cursor: pointer;
+
+  z-index: 10;
+}
+
+/* KEMBALI */
+.hotspot-kembali {
+  left: 1.5%;
+  top: 2%;
+
+  width: 14%;
+  height: 9%;
+}
+
+/* MULAKAN PEMBELAJARAN */
+.hotspot-mula {
+  left: 33%;
+  bottom: 16%;
+
+  width: 34%;
+  height: 11%;
+}
+
+/* DEV SAHAJA — buka jika nak nampak hotspot */
+/*
+.marfuat-intro-hotspot {
+  background: rgba(255, 0, 0, 0.25);
+}
+*/

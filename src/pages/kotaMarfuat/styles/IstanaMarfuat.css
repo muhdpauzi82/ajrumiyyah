@@ -1,0 +1,395 @@
+/* =====================================================
+   ISTANA MARFU'AT
+   Base Design : 1600 × 900
+===================================================== */
+
+.istana-marfuat{
+    position:fixed;
+    inset:0;
+
+    display:grid;
+    place-items:center;
+
+    width:100vw;
+    height:100vh;
+
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+        rgba(5,28,23,.48),
+        rgba(3,20,17,.78)
+    ),
+    url("/images/kotaMarfuat/istana-marfuat-bg.webp")
+    center/cover no-repeat;
+
+    font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+/*==============================================*/
+
+.istana-back-btn{
+
+    position:absolute;
+
+    top:4%;
+    left:3%;
+
+    z-index:20;
+
+    padding:12px 22px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#176349;
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.istana-back-btn:hover{
+
+    background:#228760;
+
+    transform:translateY(-2px);
+
+}
+
+/*==============================================*/
+
+.istana-panel{
+
+    width:min(980px,84vw);
+
+    padding:40px;
+
+    border-radius:30px;
+
+    text-align:center;
+
+    background:
+    rgba(255,248,223,.97);
+
+    border:4px solid #c89b3d;
+
+    box-shadow:
+    0 25px 60px rgba(0,0,0,.45);
+
+}
+
+/*==============================================*/
+
+.boss-title{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border-radius:999px;
+
+    background:#176349;
+
+    color:#ffe8a5;
+
+    font-weight:700;
+
+}
+
+.istana-panel h1{
+
+    margin-top:20px;
+
+    font-family:"Amiri",serif;
+
+    color:#154330;
+
+    font-size:58px;
+
+}
+
+/*==============================================*/
+
+.boss-image{
+
+    margin:25px auto;
+
+    width:150px;
+    height:150px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:50%;
+
+    background:
+
+    radial-gradient(
+    circle,
+    #fff8dd,
+    #ecd38d
+    );
+
+    font-size:72px;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.18);
+
+}
+
+/*==============================================*/
+
+.boss-text{
+
+    max-width:650px;
+
+    margin:auto;
+
+    color:#444;
+
+    line-height:1.8;
+
+    font-size:18px;
+
+}
+
+/*==============================================*/
+
+.boss-progress{
+
+    height:14px;
+
+    margin-top:30px;
+
+    overflow:hidden;
+
+    border-radius:999px;
+
+    background:#ddd;
+
+}
+
+.boss-progress-fill{
+
+    height:100%;
+
+    background:
+
+    linear-gradient(
+    90deg,
+    #2fa56d,
+    #0d6c49
+    );
+
+}
+
+/*==============================================*/
+
+.boss-number{
+
+    margin-top:12px;
+
+    color:#8a5b16;
+
+    font-weight:700;
+
+}
+
+/*==============================================*/
+
+.boss-question{
+
+    margin-top:28px;
+
+    padding:22px;
+
+    border-radius:18px;
+
+    background:#fffef8;
+
+    border:2px solid #d9c07a;
+
+}
+
+.boss-question p{
+
+    margin-bottom:15px;
+
+    color:#444;
+
+    font-size:20px;
+
+}
+
+.boss-arabic{
+
+    font-family:"Amiri",serif;
+
+    color:#145038;
+
+    font-size:46px;
+
+}
+
+/*==============================================*/
+
+.boss-options{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:18px;
+
+    margin-top:28px;
+
+}
+
+.boss-option{
+
+    padding:
+    18px
+    24px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:
+
+    linear-gradient(
+    180deg,
+    #fffef8,
+    #efdfae
+    );
+
+    color:#144330;
+
+    font-family:"Amiri",serif;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    box-shadow:
+    0 8px 18px rgba(0,0,0,.15);
+
+}
+
+.boss-option:hover:not(:disabled){
+
+    transform:translateY(-4px);
+
+}
+
+.boss-option.correct{
+
+    background:#bfeccd;
+
+    color:#145434;
+
+}
+
+.boss-option.wrong{
+
+    background:#f8cbc7;
+
+    color:#9d3028;
+
+}
+
+/*==============================================*/
+
+.boss-score{
+
+    display:inline-block;
+
+    margin-top:35px;
+
+    padding:
+    12px
+    24px;
+
+    border-radius:999px;
+
+    background:#176349;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+/*==============================================*/
+
+@media(max-width:900px){
+
+.istana-panel{
+
+width:90vw;
+
+padding:28px;
+
+}
+
+.boss-options{
+
+grid-template-columns:1fr;
+
+}
+
+.boss-arabic{
+
+font-size:36px;
+
+}
+
+}
+
+/*==============================================*/
+
+@media(max-width:600px){
+
+.istana-panel h1{
+
+font-size:42px;
+
+}
+
+.boss-image{
+
+width:120px;
+height:120px;
+
+font-size:56px;
+
+}
+
+.boss-option{
+
+width:100%;
+
+font-size:24px;
+
+}
+
+}

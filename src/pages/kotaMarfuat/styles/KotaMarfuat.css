@@ -1,0 +1,488 @@
+/* =====================================================
+   KOTA MARFU‘AT — PETA UTAMA
+   Reka bentuk asas: 1600 × 900
+===================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+button {
+  font: inherit;
+}
+
+/* =====================================================
+   SKRIN UTAMA
+===================================================== */
+
+.kota-marfuat-page {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100dvh;
+
+  display: grid;
+  place-items: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at center,
+      #2a7046 0%,
+      #143c29 50%,
+      #071c13 100%
+    );
+}
+
+/* =====================================================
+   FRAME 16:9
+===================================================== */
+
+.kota-marfuat-frame {
+  position: relative;
+
+  width: min(
+    100vw,
+    calc(100dvh * 16 / 9)
+  );
+
+  height: min(
+    100dvh,
+    calc(100vw * 9 / 16)
+  );
+
+  overflow: hidden;
+  isolation: isolate;
+
+  container-type: inline-size;
+  container-name: kota-marfuat;
+
+  background: #173d29;
+}
+
+/* =====================================================
+   GAMBAR PETA
+===================================================== */
+
+.kota-marfuat-map {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: fill;
+
+  pointer-events: none;
+  user-select: none;
+
+  z-index: 0;
+}
+
+/* Lapisan lembut supaya hotspot lebih jelas */
+
+.kota-marfuat-frame::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(4, 31, 18, 0.07),
+      transparent 20%,
+      transparent 80%,
+      rgba(4, 31, 18, 0.07)
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.02),
+      transparent 80%
+    );
+
+  z-index: 1;
+}
+
+/* =====================================================
+   HOTSPOT ASAS
+===================================================== */
+
+.marfuat-hotspot {
+  position: absolute;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+
+  border-radius:
+    clamp(9px, 0.8cqw, 14px);
+
+  color: transparent;
+
+  cursor: pointer;
+
+  background:
+    rgba(255, 255, 255, 0.001);
+
+  z-index: 10;
+
+  transition:
+    transform 160ms ease,
+    filter 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.marfuat-hotspot::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  border-radius: inherit;
+
+  pointer-events: none;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+/* =====================================================
+   LOKASI TERBUKA
+===================================================== */
+
+.marfuat-hotspot.unlocked {
+  cursor: pointer;
+}
+
+.marfuat-hotspot.unlocked::before {
+  border:
+    1px solid
+    rgba(255, 222, 112, 0.05);
+
+  animation:
+    marfuat-hotspot-glow
+    1.9s ease-in-out infinite;
+}
+
+.marfuat-hotspot.unlocked:hover {
+  transform: scale(1.025);
+
+  filter: brightness(1.08);
+
+  background:
+    rgba(255, 225, 112, 0.08);
+
+  box-shadow:
+    0 0 1.1cqw
+      rgba(255, 204, 58, 0.48);
+}
+
+/* =====================================================
+   LOKASI TERKUNCI
+===================================================== */
+
+.marfuat-hotspot.disabled {
+  cursor: not-allowed;
+
+  background:
+    rgba(5, 24, 14, 0.06);
+
+  filter:
+    grayscale(0.16)
+    brightness(0.92);
+}
+
+.marfuat-hotspot.disabled::before {
+  border:
+    1px solid
+    rgba(42, 53, 44, 0.1);
+
+  box-shadow:
+    inset 0 0 0.9cqw
+      rgba(6, 22, 13, 0.11);
+}
+
+/* =====================================================
+   KEDUDUKAN HOTSPOT
+   Berdasarkan background Kota Marfu‘at 1600 × 900
+===================================================== */
+
+/* 1 — Madrasah Marfu‘at */
+.marfuat-hotspot.marfuat-madrasah {
+  left: 13%;
+  top: 65%;
+  width: 17%;
+  height: 18%;
+}
+
+/* 2 — Perpustakaan Marfu‘at */
+.marfuat-hotspot.marfuat-perpustakaan {
+  left: 31%;
+  top: 16%;
+  width: 14%;
+  height: 19%;
+}
+
+/* 3 — Lorong Latihan */
+.marfuat-hotspot.marfuat-lorong {
+  left: 58%;
+  top: 16%;
+  width: 15%;
+  height: 19%;
+}
+
+/* 4 — Dataran Marfu‘at */
+.marfuat-hotspot.marfuat-dataran {
+  left: 45%;
+  top: 67%;
+  width: 16%;
+  height: 17%;
+}
+
+/* 5 — Dewan Pengijazahan */
+.marfuat-hotspot.marfuat-dewan {
+  right: 3%;
+  top: 63%;
+  width: 17%;
+  height: 19%;
+}
+
+/* 6 — Istana Marfu‘at */
+.marfuat-hotspot.marfuat-istana {
+  right: 2%;
+  top: 11%;
+  width: 15%;
+  height: 18%;
+}
+
+/* Kembali */
+.marfuat-hotspot.marfuat-kembali {
+  left: 2%;
+  bottom: 2%;
+  width: 14%;
+  height: 9%;
+}
+
+/* Kota Mansubat */
+.marfuat-hotspot.marfuat-ke-mansubat {
+  right: 2%;
+  bottom: 2%;
+  width: 18%;
+  height: 9%;
+}
+
+/* =====================================================
+   BUTANG BAWAH
+===================================================== */
+
+.marfuat-hotspot.marfuat-kembali::before {
+  animation: none;
+}
+
+.marfuat-hotspot.marfuat-kembali:hover {
+  background:
+    rgba(255, 231, 132, 0.1);
+}
+
+.marfuat-hotspot.marfuat-ke-mansubat.disabled::before {
+  animation: none;
+}
+
+.marfuat-hotspot.marfuat-ke-mansubat.disabled {
+  background:
+    rgba(7, 22, 14, 0.13);
+
+  filter:
+    grayscale(0.5)
+    brightness(0.72);
+}
+
+.marfuat-hotspot.marfuat-ke-mansubat.unlocked {
+  animation:
+    mansubat-button-glow
+    1.7s ease-in-out infinite;
+}
+
+/* =====================================================
+   ANIMASI HOTSPOT
+===================================================== */
+
+@keyframes marfuat-hotspot-glow {
+  0%,
+  100% {
+    border-color:
+      rgba(255, 220, 100, 0.04);
+
+    box-shadow:
+      inset 0 0 0.3cqw
+        rgba(255, 223, 112, 0.03),
+      0 0 0.3cqw
+        rgba(255, 202, 44, 0.06);
+  }
+
+  50% {
+    border-color:
+      rgba(255, 220, 100, 0.42);
+
+    box-shadow:
+      inset 0 0 0.8cqw
+        rgba(255, 227, 128, 0.13),
+      0 0 1.15cqw
+        rgba(255, 198, 34, 0.5);
+  }
+}
+
+@keyframes mansubat-button-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0.4cqw
+        rgba(255, 204, 60, 0.18);
+  }
+
+  50% {
+    box-shadow:
+      0 0 1.4cqw
+        rgba(255, 201, 44, 0.7);
+  }
+}
+
+/* =====================================================
+   SKRIN LAPTOP KECIL
+===================================================== */
+
+@media
+  (orientation: landscape)
+  and (max-width: 1100px) {
+
+  .marfuat-hotspot.unlocked:hover {
+    transform: scale(1.015);
+  }
+}
+
+/* =====================================================
+   TELEFON DAN TABLET MELINTANG
+===================================================== */
+
+@media
+  (orientation: landscape)
+  and (max-width: 950px),
+  (orientation: landscape)
+  and (max-height: 520px) {
+
+  .marfuat-hotspot.unlocked:hover {
+    transform: none;
+
+    background:
+      rgba(255, 255, 255, 0.001);
+
+    box-shadow: none;
+  }
+
+  .marfuat-hotspot.unlocked:active {
+    transform: scale(0.985);
+
+    background:
+      rgba(255, 225, 112, 0.14);
+
+    box-shadow:
+      0 0 1.3cqw
+        rgba(255, 203, 48, 0.5);
+  }
+}
+
+/* =====================================================
+   TELEFON MENEGAK
+===================================================== */
+
+@media (orientation: portrait) {
+  .kota-marfuat-page::after {
+    content:
+      "Sila pusingkan telefon kepada paparan melintang";
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 9999;
+
+    display: grid;
+    place-items: center;
+
+    padding: 32px;
+
+    color: #fff2b7;
+    text-align: center;
+
+    background:
+      radial-gradient(
+        circle at center,
+        #36794d,
+        #123421
+      );
+
+    font-size:
+      clamp(18px, 5vw, 28px);
+
+    font-weight: 900;
+    line-height: 1.5;
+  }
+
+  .kota-marfuat-frame {
+    visibility: hidden;
+  }
+}
+
+/* =====================================================
+   PERANTI SENTUH
+===================================================== */
+
+@media (hover: none) {
+  .marfuat-hotspot.unlocked:hover {
+    transform: none;
+
+    filter: none;
+
+    background:
+      rgba(255, 255, 255, 0.001);
+
+    box-shadow: none;
+  }
+
+  .marfuat-hotspot.unlocked:active {
+    transform: scale(0.985);
+
+    background:
+      rgba(255, 224, 110, 0.13);
+  }
+}
+
+/* =====================================================
+   KURANGKAN ANIMASI
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .marfuat-hotspot,
+  .marfuat-hotspot::before {
+    animation: none;
+    transition: none;
+  }
+}

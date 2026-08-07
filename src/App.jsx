@@ -68,7 +68,7 @@ import LorongLatihan from "./pages/kotaIrab/LorongLatihan/LorongLatihan";
 import DataranIrab from "./pages/kotaIrab/DataranIrab/DataranIrab";
 import DewanPengijazahan from "./pages/kotaIrab/DewanPengijazahan/DewanPengijazahan";
 import IstanaQadhi from "./pages/kotaIrab/IstanaQadhi/IstanaQadhi";
-import BabIrabQuiz from "./pages/kotaIrab/Quiz/BabIrabQuiz";
+
 import KitabMarfuat from "./pages/kotaIrab/PerpustakaanIrab/KitabMarfuat/KitabMarfuat";
 import KitabMansubat from "./pages/kotaIrab/PerpustakaanIrab/KitabMansubat/KitabMansubat";
 import KitabMajrurat from "./pages/kotaIrab/PerpustakaanIrab/KitabMajrurat/KitabMajrurat";
@@ -83,6 +83,49 @@ import LatihanKeadaan from  "./pages/kotaIrab/LorongLatihan/LatihanKeadaan/Latih
 import LatihanTanda from  "./pages/kotaIrab/LorongLatihan/LatihanTanda/LatihanTanda";
 import LatihanAyat from"./pages/kotaIrab/LorongLatihan/LatihanAyat/LatihanAyat";
 import LatihanCampuran from  "./pages/kotaIrab/LorongLatihan/LatihanCampuran/LatihanCampuran";
+
+
+/* =====================================================
+   KOTA MARFU'AT
+===================================================== */
+
+import KotaMarfuat from "./pages/kotaMarfuat/KotaMarfuat";
+
+/* MADRASAH */
+import MarfuatIntro from "./pages/kotaMarfuat/Madrasah/MarfuatIntro";
+import MarfuatMatan from "./pages/kotaMarfuat/Madrasah/MarfuatMatan";
+import MarfuatLearning from "./pages/kotaMarfuat/Madrasah/MarfuatLearning";
+
+/* PERPUSTAKAAN */
+import PerpustakaanMarfuat from "./pages/kotaMarfuat/Perpustakaan/PerpustakaanMarfuat";
+import KitabFail from "./pages/kotaMarfuat/Perpustakaan/KitabFail";
+import KitabNaibFail from "./pages/kotaMarfuat/Perpustakaan/KitabNaibFail";
+import KitabMubtada from "./pages/kotaMarfuat/Perpustakaan/KitabMubtada";
+import KitabKhabar from "./pages/kotaMarfuat/Perpustakaan/KitabKhabar";
+import KitabIsimKana from "./pages/kotaMarfuat/Perpustakaan/KitabIsimKana";
+import KitabKhabarInna from "./pages/kotaMarfuat/Perpustakaan/KitabKhabarInna";
+
+/* LORONG LATIHAN */
+import LorongLatihanMarfuat from "./pages/kotaMarfuat/LorongLatihan/LorongLatihanMarfuat";
+import LorongLatihanMarfuatResult from "./pages/kotaMarfuat/LorongLatihan/LorongLatihanMarfuatResult";
+
+/* DATARAN */
+import DataranMarfuat from "./pages/kotaMarfuat/Dataran/DataranMarfuat";
+
+/* DEWAN */
+import DewanPengijazahanMarfuat from "./pages/kotaMarfuat/Dewan/DewanPengijazahanMarfuat";
+
+/* ISTANA */
+import IstanaMarfuat from "./pages/kotaMarfuat/Istana/IstanaMarfuat";
+
+/* CHAPTER COMPLETE */
+import ChapterCompleteMarfuat from "./pages/kotaMarfuat/ChapterComplete/ChapterCompleteMarfuat";
+
+
+
+
+
+
 /* =========================
    HALAMAN SAMPINGAN
 ========================= */
@@ -153,7 +196,7 @@ export default function App() {
 <Route  path="/dataran-irab"  element={<DataranIrab />}/>
 <Route  path="/dewan-pengijazahan-irab"  element={<DewanPengijazahan />}/>
 <Route  path="/istana-qadhi-irab"  element={<IstanaQadhi />}/>
-<Route  path="/bab-irab-quiz"  element={<BabIrabQuiz />}/>
+
 
 
 
@@ -175,6 +218,47 @@ export default function App() {
 <Route  path="/dewan-pengijazahan-irab"  element={<DewanPengijazahan />}/>
 
 
+{/* =====================================================
+    KOTA MARFU'AT
+===================================================== */}
+<Route  path="/kota-marfuat"  element={<KotaMarfuat />}/>
+
+{/* MADRASAH */}
+
+<Route  path="/marfuat-intro"  element={<MarfuatIntro />}/>
+<Route  path="/marfuat-matan"  element={<MarfuatMatan />}/>
+<Route  path="/marfuat-learning"  element={<MarfuatLearning />}/>
+
+{/* PERPUSTAKAAN */}
+
+<Route  path="/perpustakaan-marfuat"  element={<PerpustakaanMarfuat />}/>
+<Route  path="/kitab-fail" element={<KitabFail />}/>
+<Route  path="/kitab-naib-fail"  element={<KitabNaibFail />}/>
+<Route  path="/kitab-mubtada"  element={<KitabMubtada />}/>
+<Route  path="/kitab-khabar"  element={<KitabKhabar />}/>
+<Route  path="/kitab-isim-kana"  element={<KitabIsimKana />}/>
+<Route  path="/kitab-khabar-inna"  element={<KitabKhabarInna />}/>
+
+{/* LORONG LATIHAN */}
+
+<Route  path="/lorong-latihan-marfuat"  element={<LorongLatihanMarfuat />}/>
+<Route  path="/lorong-latihan-marfuat-result"  element={<LorongLatihanMarfuatResult />}/>
+
+{/* DATARAN */}
+
+<Route  path="/dataran-marfuat"  element={<DataranMarfuat />}/>
+
+{/* DEWAN */}
+
+<Route  path="/dewan-pengijazahan-marfuat"  element={<DewanPengijazahanMarfuat />}/>
+
+{/* ISTANA */}
+
+<Route  path="/istana-marfuat"  element={<IstanaMarfuat />}/>
+
+{/* CHAPTER COMPLETE */}
+
+<Route  path="/chapter-complete-marfuat"  element={<ChapterCompleteMarfuat />}/>
 
 
 

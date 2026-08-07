@@ -1,0 +1,396 @@
+/* =====================================================
+   LORONG LATIHAN MARFU'AT RESULT
+   Base Design : 1600 × 900
+===================================================== */
+
+.lorong-result-page{
+    position:fixed;
+    inset:0;
+
+    display:grid;
+    place-items:center;
+
+    width:100vw;
+    height:100vh;
+
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+        rgba(5,30,25,.45),
+        rgba(5,26,22,.75)
+    ),
+    url("/images/kotaMarfuat/dewan-marfuat-bg.webp")
+    center/cover no-repeat;
+
+    font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+/*================================================*/
+
+.lorong-result-card{
+
+    width:min(860px,82vw);
+
+    padding:45px;
+
+    border-radius:30px;
+
+    text-align:center;
+
+    background:
+    rgba(255,248,223,.97);
+
+    border:4px solid #c79b3d;
+
+    box-shadow:
+    0 25px 60px rgba(0,0,0,.45);
+
+    animation:resultShow .5s ease;
+
+}
+
+/*================================================*/
+
+.lorong-result-badge{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border-radius:999px;
+
+    background:#176349;
+
+    color:#ffe8a5;
+
+    font-size:14px;
+    font-weight:700;
+
+    letter-spacing:1px;
+
+}
+
+/*================================================*/
+
+.lorong-result-title{
+
+    margin-top:18px;
+
+    color:#154331;
+
+    font-family:"Amiri",serif;
+
+    font-size:clamp(42px,4vw,64px);
+
+}
+
+.lorong-result-subtitle{
+
+    margin-top:10px;
+
+    color:#8a5b16;
+
+    font-size:24px;
+
+}
+
+/*================================================*/
+
+.lorong-result-score{
+
+    margin:
+    35px auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+.result-percentage{
+
+    font-size:70px;
+
+    font-weight:800;
+
+    color:#18714e;
+
+}
+
+.result-score-text{
+
+    margin-top:8px;
+
+    color:#666;
+
+    font-size:20px;
+
+}
+
+/*================================================*/
+
+.lorong-result-stats{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:20px;
+
+    margin-bottom:35px;
+
+}
+
+.result-stat{
+
+    padding:22px;
+
+    border-radius:18px;
+
+    background:
+
+    linear-gradient(
+    180deg,
+    #fffef8,
+    #efe0b3
+    );
+
+    box-shadow:
+    0 8px 18px rgba(0,0,0,.15);
+
+}
+
+.result-stat strong{
+
+    display:block;
+
+    color:#176349;
+
+    font-size:34px;
+
+}
+
+.result-stat span{
+
+    color:#666;
+
+    font-weight:700;
+
+}
+
+/*================================================*/
+
+.lorong-result-message{
+
+    margin-bottom:35px;
+
+    padding:24px;
+
+    border-radius:18px;
+
+}
+
+.success{
+
+    background:#edf8ef;
+
+    border-left:7px solid #2ea864;
+
+}
+
+.retry{
+
+    background:#fff2ef;
+
+    border-left:7px solid #d4524c;
+
+}
+
+.result-arabic{
+
+    font-family:"Amiri",serif;
+
+    color:#154230;
+
+    font-size:34px;
+
+    margin-bottom:12px;
+
+}
+
+.lorong-result-message p{
+
+    color:#444;
+
+    line-height:1.8;
+
+    font-size:18px;
+
+}
+
+/*================================================*/
+
+.lorong-result-actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+
+}
+
+.result-btn{
+
+    padding:
+    15px
+    30px;
+
+    border:none;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    transition:.25s;
+
+}
+
+.retry-btn{
+
+    background:#d95a50;
+
+    color:white;
+
+}
+
+.retry-btn:hover{
+
+    background:#c94d45;
+
+}
+
+.continue-btn{
+
+    background:
+
+    linear-gradient(
+    180deg,
+    #238760,
+    #0c5c42
+    );
+
+    color:white;
+
+}
+
+.continue-btn:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.library-btn{
+
+    background:#176349;
+
+    color:white;
+
+}
+
+.library-btn:hover{
+
+    background:#238760;
+
+}
+
+/*================================================*/
+
+@keyframes resultShow{
+
+from{
+
+opacity:0;
+
+transform:
+
+scale(.95)
+translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:
+
+scale(1)
+translateY(0);
+
+}
+
+}
+
+/*================================================*/
+
+@media(max-width:900px){
+
+.lorong-result-stats{
+
+grid-template-columns:1fr;
+
+}
+
+.lorong-result-card{
+
+width:88vw;
+
+padding:30px;
+
+}
+
+}
+
+/*================================================*/
+
+@media(max-width:600px){
+
+.lorong-result-actions{
+
+flex-direction:column;
+
+}
+
+.result-btn{
+
+width:100%;
+
+}
+
+.result-percentage{
+
+font-size:52px;
+
+}
+
+.result-arabic{
+
+font-size:28px;
+
+}
+
+}

@@ -1,0 +1,361 @@
+/* =====================================================
+   MARFU'AT LEARNING
+   Base design : 1600 × 900
+===================================================== */
+
+.marfuat-learning {
+  position: fixed;
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      rgba(8, 37, 30, 0.48),
+      rgba(5, 29, 24, 0.72)
+    ),
+    url("/images/kotaMarfuat/madrasah-marfuat-bg.webp")
+      center/cover no-repeat;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/*=====================================================*/
+
+.learning-back-btn{
+  position:absolute;
+
+  top:4%;
+  left:3%;
+
+  z-index:50;
+
+  padding:12px 22px;
+
+  border:none;
+  border-radius:12px;
+
+  background:#176349;
+
+  color:#fff;
+
+  font-size:16px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.25s;
+}
+
+.learning-back-btn:hover{
+
+  background:#21825e;
+
+  transform:translateY(-2px);
+
+}
+
+/*=====================================================*/
+
+.learning-card{
+
+  width:min(980px,84vw);
+
+  padding:45px;
+
+  border-radius:28px;
+
+  background:rgba(255,248,225,.96);
+
+  border:4px solid #c99b3d;
+
+  box-shadow:
+  0 20px 55px rgba(0,0,0,.45);
+
+  text-align:center;
+
+}
+
+/*=====================================================*/
+
+.learning-badge{
+
+  display:inline-block;
+
+  padding:8px 20px;
+
+  border-radius:999px;
+
+  background:#176349;
+
+  color:#ffe9a3;
+
+  font-weight:700;
+
+  letter-spacing:1px;
+
+  margin-bottom:16px;
+
+}
+
+/*=====================================================*/
+
+.learning-title{
+
+  margin:0;
+
+  font-family:"Amiri",serif;
+
+  color:#14402f;
+
+  font-size:clamp(42px,4vw,66px);
+
+}
+
+/*=====================================================*/
+
+.learning-subtitle{
+
+  max-width:700px;
+
+  margin:
+  18px auto
+  35px;
+
+  color:#4b4b4b;
+
+  line-height:1.7;
+
+  font-size:18px;
+
+}
+
+/*=====================================================*/
+
+.learning-grid{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(3,1fr);
+
+  gap:22px;
+
+}
+
+/*=====================================================*/
+
+.topic-card{
+
+  position:relative;
+
+  padding:
+
+  28px
+  18px;
+
+  border:none;
+
+  border-radius:18px;
+
+  background:
+
+  linear-gradient(
+
+  180deg,
+
+  #ffffff,
+
+  #f0e0af
+
+  );
+
+  cursor:pointer;
+
+  transition:.25s;
+
+  box-shadow:
+
+  0 8px 18px rgba(0,0,0,.18);
+
+}
+
+.topic-card:hover{
+
+  transform:
+
+  translateY(-6px);
+
+  box-shadow:
+
+  0 18px 28px rgba(0,0,0,.22);
+
+  border-color:#c89b3d;
+
+}
+
+/*=====================================================*/
+
+.topic-number{
+
+  position:absolute;
+
+  top:12px;
+  right:12px;
+
+  width:34px;
+  height:34px;
+
+  border-radius:50%;
+
+  display:grid;
+  place-items:center;
+
+  background:#176349;
+
+  color:white;
+
+  font-weight:700;
+
+}
+
+/*=====================================================*/
+
+.topic-arabic{
+
+  margin-top:18px;
+
+  font-family:"Amiri",serif;
+
+  color:#12402f;
+
+  font-size:34px;
+
+  font-weight:bold;
+
+}
+
+/*=====================================================*/
+
+.topic-malay{
+
+  margin-top:8px;
+
+  color:#8b5b15;
+
+  font-size:18px;
+
+  font-weight:700;
+
+}
+
+/*=====================================================*/
+
+.learning-next-btn{
+
+  margin-top:40px;
+
+  padding:
+
+  16px
+  36px;
+
+  border:none;
+
+  border-radius:14px;
+
+  background:
+
+  linear-gradient(
+
+  180deg,
+
+  #1f7d59,
+
+  #0d5b42
+
+  );
+
+  color:white;
+
+  font-size:18px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.25s;
+
+  box-shadow:
+
+  0 8px 18px rgba(0,0,0,.28);
+
+}
+
+.learning-next-btn:hover{
+
+  transform:translateY(-3px);
+
+  background:
+
+  linear-gradient(
+
+  180deg,
+
+  #28976b,
+
+  #0f6b4d
+
+  );
+
+}
+
+/*=====================================================*/
+
+@media (max-width:900px){
+
+.learning-grid{
+
+grid-template-columns:
+
+repeat(2,1fr);
+
+}
+
+}
+
+/*=====================================================*/
+
+@media (max-width:600px){
+
+.learning-card{
+
+padding:25px;
+
+}
+
+.learning-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.topic-arabic{
+
+font-size:28px;
+
+}
+
+.learning-next-btn{
+
+width:100%;
+
+}
+
+}
