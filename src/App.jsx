@@ -61,6 +61,7 @@ import BabIrabMatan from "./pages/kotaIrab/BabIrabMatan";
 import BabIrabDialog from "./pages/kotaIrab/BabIrabDialog";
 import BabIrabAnimasi from "./pages/kotaIrab/BabIrabAnimasi";
 import BabIrabLearning from "./pages/kotaIrab/BabIrabLearning";
+import BabIrabQuiz from "./pages/kotaIrab/BabIrabQuiz";
 import BabIrabExercise from "./pages/kotaIrab/BabIrabExercise";
 import BabIrabSelesai from "./pages/kotaIrab/BabIrabSelesai";
 import PerpustakaanIrab from "./pages/kotaIrab/PerpustakaanIrab/PerpustakaanIrab";
@@ -96,14 +97,23 @@ import MarfuatIntro from "./pages/kotaMarfuat/Madrasah/MarfuatIntro";
 import MarfuatMatan from "./pages/kotaMarfuat/Madrasah/MarfuatMatan";
 import MarfuatLearning from "./pages/kotaMarfuat/Madrasah/MarfuatLearning";
 
-/* PERPUSTAKAAN */
-import PerpustakaanMarfuat from "./pages/kotaMarfuat/Perpustakaan/PerpustakaanMarfuat";
+/* PERPUSTAKAAN */import PerpustakaanMarfuat from "./pages/kotaMarfuat/Perpustakaan/PerpustakaanMarfuat";
+
 import KitabFail from "./pages/kotaMarfuat/Perpustakaan/KitabFail";
+import Fail from "./pages/kotaMarfuat/Kitab/Fail";
+import AnimasiFail  from "./pages/kotaMarfuat/Animasi/AnimasiFail";
+
 import KitabNaibFail from "./pages/kotaMarfuat/Perpustakaan/KitabNaibFail";
+import NaibFail from "./pages/kotaMarfuat/Kitab/NaibFail";
+
 import KitabMubtada from "./pages/kotaMarfuat/Perpustakaan/KitabMubtada";
+import Mubtada from "./pages/kotaMarfuat/Kitab/Mubtada";
 import KitabKhabar from "./pages/kotaMarfuat/Perpustakaan/KitabKhabar";
+import Khabar from "./pages/kotaMarfuat/Kitab/Khabar";
 import KitabIsimKana from "./pages/kotaMarfuat/Perpustakaan/KitabIsimKana";
+import IsimKana from "./pages/kotaMarfuat/Kitab/IsimKana";
 import KitabKhabarInna from "./pages/kotaMarfuat/Perpustakaan/KitabKhabarInna";
+import KhabarInna from "./pages/kotaMarfuat/Kitab/KhabarInna";
 
 /* LORONG LATIHAN */
 import LorongLatihanMarfuat from "./pages/kotaMarfuat/LorongLatihan/LorongLatihanMarfuat";
@@ -189,6 +199,7 @@ export default function App() {
 <Route path="/bab-irab-dialog" element={<BabIrabDialog />} />
 <Route path="/bab-irab-learning" element={<BabIrabLearning />} />
 <Route path="/bab-irab-animasi" element={<BabIrabAnimasi />} />
+<Route  path="/bab-irab-quiz"  element={<BabIrabQuiz />}/>
 <Route  path="/bab-irab-latihan"  element={<BabIrabExercise />}/>
 <Route  path="/bab-irab-selesai"  element={<BabIrabSelesai />}/>
 <Route  path="/perpustakaan-irab"  element={<PerpustakaanIrab />}/>
@@ -232,12 +243,14 @@ export default function App() {
 {/* PERPUSTAKAAN */}
 
 <Route  path="/perpustakaan-marfuat"  element={<PerpustakaanMarfuat />}/>
-<Route  path="/kitab-fail" element={<KitabFail />}/>
-<Route  path="/kitab-naib-fail"  element={<KitabNaibFail />}/>
-<Route  path="/kitab-mubtada"  element={<KitabMubtada />}/>
-<Route  path="/kitab-khabar"  element={<KitabKhabar />}/>
-<Route  path="/kitab-isim-kana"  element={<KitabIsimKana />}/>
-<Route  path="/kitab-khabar-inna"  element={<KitabKhabarInna />}/>
+<Route path="/kitab-fail" element={<Fail />} />
+<Route  path="/animasi-fail"  element={<AnimasiFail />}/>
+
+<Route  path="/kitab-naib-fail"  element={<NaibFail />}/>
+<Route  path="/kitab-mubtada"  element={<Mubtada />}/>
+<Route  path="/kitab-khabar"  element={<Khabar />}/>
+<Route  path="/kitab-isim-kana"  element={<IsimKana />}/>
+<Route  path="/kitab-khabar-inna"  element={<KhabarInna />}/>
 
 {/* LORONG LATIHAN */}
 

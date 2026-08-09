@@ -1,0 +1,125 @@
+const khabarDialog = [
+  {
+    type: "dialog",
+    speaker: "guru",
+    name: "Syeikh Abdul I'rab",
+    progress: 5,
+    text: "السلام عليكم ورحمة الله وبركاته",
+  },
+
+  {
+    type: "dialog",
+    speaker: "guru",
+    name: "Syeikh Abdul I'rab",
+    progress: 12,
+    text:
+      "Selamat datang, {player}. Sekarang kita akan mempelajari الخبر.",
+  },
+
+  {
+    type: "dialog",
+    speaker: "player",
+    name: "{player}",
+    progress: 20,
+    text:
+      "Guru, apakah yang dimaksudkan dengan الخبر?",
+  },
+
+  {
+    type: "dialog",
+    speaker: "guru",
+    name: "Syeikh Abdul I'rab",
+    progress: 28,
+    text:
+      "الخبر هو الاسم المرفوع الذي يتم به معنى المبتدأ. Khabar ialah isim yang berada dalam keadaan marfu' dan melengkapkan makna Mubtada'.",
+  },
+
+  {
+    type: "dialog",
+    speaker: "player",
+    name: "{player}",
+    progress: 36,
+    text:
+      "Jadi Khabar memberikan maklumat tentang Mubtada'?",
+  },
+
+  {
+    type: "dialog",
+    speaker: "guru",
+    name: "Syeikh Abdul I'rab",
+    progress: 44,
+    text:
+      "Benar. Dalam jumlah ismiyyah, Mubtada' dan Khabar saling melengkapkan untuk membentuk makna yang sempurna.",
+  },
+
+  {
+    type: "arabic",
+    speaker: "guru",
+    progress: 54,
+    title: "Contoh Khabar",
+    before: "زَيْدٌ",
+    word: "قَائِم",
+    ending: "ٌ",
+    text:
+      "Perhatikan ayat زَيْدٌ قَائِمٌ. زَيْدٌ ialah Mubtada', manakala قَائِمٌ ialah Khabar yang menerangkan keadaan Zaid.",
+  },
+
+  {
+    type: "dialog",
+    speaker: "player",
+    name: "{player}",
+    progress: 62,
+    text:
+      "Saya faham. زَيْدٌ ialah Mubtada' dan قَائِمٌ ialah Khabar.",
+  },
+
+  {
+    type: "dialog",
+    speaker: "guru",
+    name: "Syeikh Abdul I'rab",
+    progress: 70,
+    text:
+      "Bagus. Seperti Mubtada', Khabar juga berada dalam keadaan marfu'.",
+  },
+
+  {
+    type: "arabic",
+    speaker: "guru",
+    progress: 78,
+    title: "Tanda رفع",
+    before: "زَيْدٌ",
+    word: "قَائِم",
+    ending: "ٌ",
+    text:
+      "Dalam ayat زَيْدٌ قَائِمٌ, tanda رفع pada قَائِمٌ ialah dhammah.",
+  },
+
+  {
+    type: "dialog",
+    speaker: "player",
+    name: "{player}",
+    progress: 86,
+    text:
+      "Jadi Khabar ialah isim yang marfu' dan melengkapkan makna Mubtada'?",
+  },
+
+  {
+    type: "dialog",
+    speaker: "guru",
+    name: "Syeikh Abdul I'rab",
+    progress: 94,
+    text:
+      "Tepat. Ingat: الخبر اسمٌ مرفوعٌ يتم به معنى المبتدأ.",
+  },
+
+  {
+    type: "summary",
+    speaker: "guru",
+    progress: 100,
+    title: "Tahniah!",
+    text:
+      "Bagus, {player}. Kamu telah memahami asas الخبر. Khabar ialah isim marfu' yang melengkapkan makna Mubtada'.",
+  },
+];
+
+export default khabarDialog;

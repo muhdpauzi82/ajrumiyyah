@@ -1,0 +1,938 @@
+/* =========================================================
+   ANIMASI FA'IL
+   KOTA MARFU'AT
+   ========================================================= */
+
+.fail-animation-screen {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  overflow: hidden;
+
+  display: grid;
+  place-items: center;
+
+  background: #062f28;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+}
+
+
+/* =========================================================
+   FRAME 16 : 9
+   ========================================================= */
+
+.fail-animation-frame {
+  position: relative;
+
+  width: min(100vw, calc(100vh * 16 / 9));
+  height: min(100vh, calc(100vw * 9 / 16));
+
+  aspect-ratio: 16 / 9;
+
+  overflow: hidden;
+
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   BACKGROUND
+   ========================================================= */
+
+.fail-animation-background {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  z-index: -3;
+
+  user-select: none;
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   SHADE
+   ========================================================= */
+
+.fail-animation-shade {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 30, 25, 0.18),
+      rgba(0, 30, 25, 0.08)
+    );
+
+  z-index: -2;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.fail-animation-header {
+  position: absolute;
+
+  top: 4.5%;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 80%;
+
+  text-align: center;
+
+  z-index: 5;
+
+  pointer-events: none;
+}
+
+.fail-animation-kicker {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #f5d46b;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: clamp(
+    0.65rem,
+    1vw,
+    0.95rem
+  );
+
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+.fail-animation-header h1 {
+  margin: 0;
+
+  color: #fff9e8;
+
+  font-size: clamp(
+    1.25rem,
+    2.1vw,
+    2.1rem
+  );
+
+  font-weight: 500;
+
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.45);
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.fail-animation-card {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -48%);
+
+  width: 62%;
+  min-height: 46%;
+
+  padding:
+    3.8rem
+    3.5rem
+    2rem;
+
+  box-sizing: border-box;
+
+  border: 2px solid #d9ad3d;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 253, 241, 0.96),
+      rgba(247, 235, 197, 0.96)
+    );
+
+  box-shadow:
+    0 14px 35px rgba(0, 0, 0, 0.25),
+    inset 0 0 30px rgba(255, 255, 255, 0.45);
+
+  text-align: center;
+
+  z-index: 4;
+
+  animation:
+    failCardIn
+    0.35s
+    ease-out;
+}
+
+@keyframes failCardIn {
+  from {
+    opacity: 0;
+    transform:
+      translate(-50%, -43%)
+      scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translate(-50%, -48%)
+      scale(1);
+  }
+}
+
+
+/* =========================================================
+   STAGE LABEL
+   ========================================================= */
+
+.fail-stage-label {
+  position: absolute;
+
+  top: -25px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  min-width: 190px;
+
+  padding: 11px 25px;
+
+  border:
+    2px solid
+    #d9ad3d;
+
+  border-radius: 30px;
+
+  background: #086047;
+
+  color: #fff9e8;
+
+  box-shadow:
+    0 7px 16px
+    rgba(0, 0, 0, 0.25);
+
+  white-space: nowrap;
+}
+
+.fail-stage-label span {
+  font-size: clamp(
+    1rem,
+    1.5vw,
+    1.35rem
+  );
+}
+
+.fail-stage-label strong {
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: clamp(
+    0.8rem,
+    1vw,
+    1rem
+  );
+}
+
+
+/* =========================================================
+   ARABIC SENTENCE
+   ========================================================= */
+
+.fail-full-sentence {
+  display: flex;
+
+  align-items: baseline;
+  justify-content: center;
+
+  gap: 24px;
+
+  margin-top: 0.5rem;
+
+  color: #123f34;
+
+  font-size: clamp(
+    2.3rem,
+    4vw,
+    4rem
+  );
+
+  line-height: 1.3;
+}
+
+.fail-before {
+  color: #302c21;
+}
+
+.fail-focus-word {
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: baseline;
+
+  direction: rtl;
+}
+
+.fail-word-base {
+  color: #08735a;
+
+  font-weight: 700;
+}
+
+.fail-changing-ending {
+  display: inline-block;
+
+  color: #e75d50;
+
+  font-weight: 800;
+
+  animation:
+    failEndingIn
+    0.45s
+    ease-out;
+}
+
+@keyframes failEndingIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   SIGN INFORMATION
+   ========================================================= */
+
+.fail-sign-information {
+  display: inline-flex;
+
+  align-items: center;
+
+  margin-top: 1.3rem;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  box-shadow:
+    0 4px 10px
+    rgba(0, 0, 0, 0.12);
+}
+
+.fail-sign-information span {
+  padding: 10px 18px;
+
+  background: #08735a;
+
+  color: #fff;
+
+  font-size: 0.82rem;
+
+  font-weight: 700;
+}
+
+.fail-sign-information strong {
+  padding: 10px 18px;
+
+  background: #f1ca58;
+
+  color: #704c09;
+
+  font-size: 0.82rem;
+}
+
+
+/* =========================================================
+   NOTE
+   ========================================================= */
+
+.fail-stage-note {
+  max-width: 82%;
+
+  margin:
+    1.15rem
+    auto
+    0;
+
+  color: #173d34;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: clamp(
+    0.78rem,
+    1.05vw,
+    1rem
+  );
+
+  font-weight: 600;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   COMPARISON
+   ========================================================= */
+
+.fail-comparison-flow {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: clamp(
+    12px,
+    2vw,
+    28px
+  );
+
+  margin-top: 1.1rem;
+
+  padding: 10px 20px;
+
+  border-radius: 14px;
+
+  background:
+    rgba(218, 211, 176, 0.45);
+
+  color: #514a38;
+
+  font-size: clamp(
+    1rem,
+    1.6vw,
+    1.45rem
+  );
+}
+
+.fail-comparison-flow span {
+  padding: 7px 12px;
+
+  border-radius: 10px;
+
+  transition:
+    0.25s
+    ease;
+}
+
+.fail-comparison-flow span.current {
+  background: #08735a;
+
+  color: #fff;
+
+  box-shadow:
+    0 5px 12px
+    rgba(0, 0, 0, 0.18);
+}
+
+.fail-comparison-flow b {
+  color: #bd8b1d;
+
+  font-size: 1rem;
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.fail-animation-actions {
+  position: absolute;
+
+  left: 50%;
+  bottom: 3%;
+
+  transform: translateX(-50%);
+
+  width: 72%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  z-index: 8;
+}
+
+.fail-animation-button {
+  min-width: 145px;
+
+  padding:
+    12px
+    24px;
+
+  border-radius: 28px;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 0.9rem;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.fail-animation-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 7px 16px
+    rgba(0, 0, 0, 0.2);
+}
+
+.fail-animation-button.secondary {
+  border:
+    2px solid
+    #d9ad3d;
+
+  background: #fff9e8;
+
+  color: #145542;
+}
+
+.fail-animation-button.primary {
+  border:
+    2px solid
+    #d9ad3d;
+
+  background: #08735a;
+
+  color: #fff9e8;
+}
+
+
+/* =========================================================
+   STAGE INDICATOR
+   ========================================================= */
+
+.fail-stage-indicator {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+}
+
+.fail-stage-indicator .stage-book {
+  display: grid;
+
+  place-items: center;
+
+  width: 42px;
+  height: 42px;
+
+  border-radius: 7px;
+
+  background:
+    rgba(220, 225, 214, 0.65);
+
+  box-shadow:
+    0 3px 7px
+    rgba(0, 0, 0, 0.2);
+
+  font-size: 1.2rem;
+
+  opacity: 0.55;
+}
+
+.fail-stage-indicator .stage-book.done {
+  opacity: 0.9;
+}
+
+.fail-stage-indicator .stage-book.active {
+  background: #fff;
+
+  opacity: 1;
+
+  box-shadow:
+    0 0 0 2px #d9ad3d,
+    0 5px 12px
+    rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   KEKALKAN MELINTANG
+   ========================================================= */
+
+@media (max-aspect-ratio: 16 / 9) {
+  .fail-animation-frame {
+    width: 100vw;
+    height: calc(100vw * 9 / 16);
+  }
+}
+
+@media (min-aspect-ratio: 16 / 9) {
+  .fail-animation-frame {
+    width: calc(100vh * 16 / 9);
+    height: 100vh;
+  }
+}
+
+
+/* =========================================================
+   SKRIN KECIL
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .fail-animation-card {
+    width: 68%;
+
+    padding:
+      3.2rem
+      2rem
+      1.4rem;
+  }
+
+  .fail-animation-actions {
+    width: 82%;
+  }
+
+  .fail-animation-button {
+    min-width: 125px;
+
+    padding:
+      10px
+      18px;
+
+    font-size: 0.8rem;
+  }
+}
+
+
+/* =========================================================
+   TINGGI TERHAD
+   ========================================================= */
+
+@media (max-height: 650px) {
+  .fail-animation-card {
+    min-height: 44%;
+
+    padding:
+      3rem
+      2.5rem
+      1.2rem;
+  }
+
+  .fail-stage-note {
+    margin-top: 0.7rem;
+  }
+
+  .fail-comparison-flow {
+    margin-top: 0.7rem;
+  }
+
+  .fail-animation-actions {
+    bottom: 2%;
+  }
+}
+
+
+/* =========================================================
+   MOBILE LANDSCAPE
+   ========================================================= */
+
+@media (max-width: 700px) and (orientation: landscape) {
+  .fail-animation-card {
+    width: 72%;
+
+    border-radius: 18px;
+
+    padding:
+      2.7rem
+      1.4rem
+      0.8rem;
+  }
+
+  .fail-full-sentence {
+    gap: 12px;
+  }
+
+  .fail-stage-note {
+    max-width: 90%;
+
+    font-size: 0.7rem;
+  }
+
+  .fail-sign-information {
+    margin-top: 0.6rem;
+  }
+
+  .fail-comparison-flow {
+    margin-top: 0.5rem;
+  }
+
+  .fail-animation-button {
+    min-width: 110px;
+
+    padding:
+      8px
+      14px;
+
+    font-size: 0.72rem;
+  }
+
+  .fail-stage-indicator {
+    gap: 7px;
+  }
+
+  .fail-stage-indicator .stage-book {
+    width: 32px;
+    height: 32px;
+
+    font-size: 0.9rem;
+  }
+}
+/* =========================================================
+   PHONE / SKRIN KECIL
+   KEKAL MELINTANG
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .fail-animation-screen {
+    width: 100vw;
+    height: 100dvh;
+  }
+
+  .fail-animation-frame {
+    width: 100vw;
+    height: 100dvh;
+
+    aspect-ratio: auto;
+  }
+
+
+  /* BACKGROUND */
+
+  .fail-animation-background {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+  }
+
+
+  /* HEADER */
+
+  .fail-animation-header {
+    top: 3%;
+
+    width: 90%;
+  }
+
+  .fail-animation-kicker {
+    margin-bottom: 3px;
+
+    font-size: 0.55rem;
+  }
+
+  .fail-animation-header h1 {
+    font-size: 1rem;
+
+    line-height: 1.15;
+  }
+
+
+  /* CARD */
+
+  .fail-animation-card {
+    top: 50%;
+
+    width: 78%;
+    min-height: auto;
+
+    padding:
+      2.7rem
+      1rem
+      0.8rem;
+
+    border-radius: 16px;
+  }
+
+
+  /* LABEL */
+
+  .fail-stage-label {
+    top: -18px;
+
+    min-width: 130px;
+
+    padding:
+      6px
+      15px;
+
+    gap: 5px;
+
+    border-radius: 20px;
+  }
+
+  .fail-stage-label span {
+    font-size: 0.75rem;
+  }
+
+  .fail-stage-label strong {
+    font-size: 0.62rem;
+  }
+
+
+  /* AYAT ARAB */
+
+  .fail-full-sentence {
+    gap: 10px;
+
+    margin-top: 0;
+
+    font-size: 2rem;
+
+    line-height: 1.15;
+  }
+
+
+  /* TANDA AKHIR */
+
+  .fail-sign-information {
+    margin-top: 0.55rem;
+  }
+
+  .fail-sign-information span,
+  .fail-sign-information strong {
+    padding:
+      6px
+      10px;
+
+    font-size: 0.6rem;
+  }
+
+
+  /* NOTA */
+
+  .fail-stage-note {
+    max-width: 94%;
+
+    margin-top: 0.55rem;
+
+    font-size: 0.62rem;
+
+    line-height: 1.3;
+  }
+
+
+  /* PERBANDINGAN */
+
+  .fail-comparison-flow {
+    gap: 5px;
+
+    margin-top: 0.5rem;
+
+    padding: 5px 8px;
+
+    font-size: 0.8rem;
+
+    border-radius: 8px;
+  }
+
+  .fail-comparison-flow span {
+    padding: 4px 7px;
+  }
+
+  .fail-comparison-flow b {
+    font-size: 0.65rem;
+  }
+
+
+  /* BUTANG BAWAH */
+
+  .fail-animation-actions {
+    left: 50%;
+    bottom: 2%;
+
+    width: 92%;
+  }
+
+  .fail-animation-button {
+    min-width: 90px;
+
+    padding:
+      7px
+      11px;
+
+    border-radius: 20px;
+
+    font-size: 0.62rem;
+  }
+
+
+  /* BUKU */
+
+  .fail-stage-indicator {
+    gap: 5px;
+  }
+
+  .fail-stage-indicator .stage-book {
+    width: 27px;
+    height: 27px;
+
+    font-size: 0.7rem;
+  }
+}

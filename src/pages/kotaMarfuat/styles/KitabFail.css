@@ -3,429 +3,811 @@
    Base Design : 1600 × 900
 ===================================================== */
 
-.kitab-fail-page{
-    position:fixed;
-    inset:0;
+* {
+  box-sizing: border-box;
+}
 
-    display:grid;
-    place-items:center;
+/* =====================================================
+   PAGE + BACKGROUND
+===================================================== */
+.kitab-fail-page {
+  position: fixed;
+  inset: 0;
 
-    width:100vw;
-    height:100vh;
+  width: 100vw;
+  height: 100dvh;
 
-    overflow:hidden;
+  display: grid;
+  place-items: center;
 
-    background:
+  overflow: hidden;
+
+  background:
     linear-gradient(
-        rgba(6,32,28,.45),
-        rgba(4,24,21,.72)
+      rgba(5, 30, 24, .18),
+      rgba(4, 24, 20, .38)
     ),
     url("/images/kotaMarfuat/perpustakaan-marfuat-bg.webp")
-    center/cover no-repeat;
+    center / cover no-repeat;
+}
 
-    font-family:
+/* =====================================================
+   FRAME
+===================================================== */
+
+.kitab-fail-frame {
+  width: min(
+    1180px,
+    92vw
+  );
+
+  height: min(
+    820px,
+    90vh
+  );
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* =====================================================
+   MAIN CARD
+===================================================== */
+
+.kitab-fail-layout {
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+
+  grid-template-rows:
+    78px
+    135px
+    minmax(220px, 1fr)
+    72px
+    48px;
+
+  gap: 10px;
+
+  padding: 16px;
+
+  border-radius: 26px;
+
+  background:
+    rgba(255, 248, 223, 0.94);
+
+  border:
+    4px solid #c89b3d;
+
+  box-shadow:
+    0 20px 55px
+    rgba(0, 0, 0, 0.42);
+
+  overflow: hidden;
+}
+
+
+/* =====================================================
+   BARIS 1
+   KITAB 1 + TAJUK
+===================================================== */
+
+.kitab-header {
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  align-items: center;
+
+  border-bottom:
+    1px solid
+    rgba(180, 137, 49, 0.55);
+}
+
+
+/* KITAB 1 */
+
+.kitab-number {
+  justify-self: start;
+
+  padding:
+    9px 24px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #217657,
+      #12523d
+    );
+
+  color: #ffe59c;
+
+  font-size: 16px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.5px;
+
+  box-shadow:
+    0 4px 10px
+    rgba(0, 0, 0, 0.15);
+}
+
+
+/* TAJUK */
+
+.kitab-heading {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  text-align: center;
+}
+
+.kitab-heading h1 {
+  margin: 0;
+
+  color: #12402f;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size:
+    clamp(
+      40px,
+      4vw,
+      62px
+    );
+
+  line-height: 1;
+}
+
+.kitab-heading span {
+  margin-top: 5px;
+
+  color: #8c5c18;
+
+  font-size: 18px;
+
+  font-weight: 700;
+}
+
+
+/* =====================================================
+   BARIS 2
+   DEFINISI
+===================================================== */
+
+.kitab-definition {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding:
+    8px 20px;
+
+  border-radius: 15px;
+
+  background:
+    rgba(255, 253, 244, 0.9);
+
+  border:
+    2px solid #dcc37d;
+
+  text-align: center;
+
+  overflow: hidden;
+}
+
+.kitab-definition h2 {
+  margin:
+    0 0 5px;
+
+  color: #176349;
+
+  font-size: 21px;
+}
+
+.kitab-arabic-box {
+  width: 100%;
+
+  color: #144230;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size:
+    clamp(
+      24px,
+      2.3vw,
+      35px
+    );
+
+  line-height: 1.35;
+
+  text-align: center;
+}
+
+.kitab-definition p {
+  margin:
+    4px 0 0;
+
+  color: #555;
+
+  font-size: 15px;
+
+  line-height: 1.35;
+}
+
+
+/* =====================================================
+   BARIS 3
+   CONTOH + PERINGATAN
+===================================================== */
+
+.kitab-two-columns {
+  min-height: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap: 12px;
+}
+
+
+/* =====================================================
+   PANEL UMUM
+===================================================== */
+
+.kitab-example-panel,
+.kitab-warning-panel {
+  min-width: 0;
+  min-height: 0;
+
+  padding:
+    14px 18px;
+
+  border-radius: 16px;
+
+  border:
+    2px solid #d9c07a;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fffdf5,
+      #f0e2b9
+    );
+
+  overflow: hidden;
+}
+
+
+/* TAJUK PANEL */
+
+.kitab-example-panel h2,
+.kitab-warning-panel h2 {
+  margin:
+    0 0 9px;
+
+  color: #176349;
+
+  font-size: 20px;
+
+  text-align: center;
+}
+
+
+/* =====================================================
+   CONTOH
+===================================================== */
+
+.example-arabic {
+  color: #145038;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size:
+    clamp(
+      32px,
+      3vw,
+      46px
+    );
+
+  line-height: 1.1;
+
+  text-align: center;
+}
+
+.example-translation {
+  margin:
+    4px 0 10px;
+
+  color: #666;
+
+  font-size: 14px;
+
+  text-align: center;
+}
+
+
+/* ANALISIS CONTOH */
+
+.example-analysis {
+  overflow: hidden;
+
+  border:
+    1px solid #d9c07a;
+
+  border-radius: 9px;
+}
+
+.example-analysis > div {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  min-height: 38px;
+
+  padding:
+    5px 12px;
+
+  background: white;
+
+  border-bottom:
+    1px solid #ece3c8;
+
+  color: #555;
+
+  font-size: 14px;
+}
+
+.example-analysis > div:last-child {
+  border-bottom: none;
+}
+
+.example-analysis span:first-child {
+  color: #145038;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size: 25px;
+}
+
+.example-analysis small {
+  font-size: 13px;
+}
+
+.highlight {
+  background:
+    #edf9ef !important;
+}
+
+
+/* =====================================================
+   PERINGATAN
+===================================================== */
+
+.warning-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 8px;
+
+  padding:
+    8px 10px;
+
+  border-radius: 9px;
+
+  background:
+    rgba(255, 255, 255, 0.78);
+
+  border-left:
+    4px solid #b68727;
+
+  color: #4d4d4d;
+
+  font-size: 14px;
+
+  line-height: 1.4;
+}
+
+.warning-item strong {
+  flex:
+    0 0 auto;
+
+  width: 27px;
+  height: 27px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: #176349;
+
+  color: white;
+
+  font-size: 13px;
+}
+
+
+/* =====================================================
+   BARIS 4
+   ANALISIS
+===================================================== */
+
+.kitab-analysis {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding:
+    6px 15px;
+
+  border-radius: 14px;
+
+  background:
+    #f3f8ef;
+
+  border:
+    2px solid #d9c07a;
+
+  text-align: center;
+
+  overflow: hidden;
+}
+
+.kitab-analysis h2 {
+  margin:
+    0 0 3px;
+
+  color: #176349;
+
+  font-size: 18px;
+}
+
+.analysis-flow {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 14px;
+
+  color: #145038;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size: 25px;
+}
+
+.analysis-flow b {
+  color: #b68727;
+
+  font-family:
     Arial,
     Helvetica,
     sans-serif;
+
+  font-size: 18px;
 }
 
-/*================================================*/
+.highlight-word {
+  padding:
+    2px 9px;
 
-.kitab-back-btn{
+  border-radius: 6px;
 
-    position:absolute;
+  background:
+    #dff1df;
 
-    top:4%;
-    left:3%;
-
-    z-index:20;
-
-    padding:12px 22px;
-
-    border:none;
-    border-radius:12px;
-
-    background:#176349;
-
-    color:#fff;
-
-    font-size:16px;
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:.25s;
-
+  font-weight: 700;
 }
 
-.kitab-back-btn:hover{
 
-    background:#22845f;
+/* =====================================================
+   BARIS 5
+   SELESAI
+===================================================== */
 
-    transform:translateY(-2px);
+.kitab-complete-btn {
+  width: 100%;
+  height: 100%;
 
-}
+  border:
+    1px solid #d1aa43;
 
-/*================================================*/
+  border-radius: 12px;
 
-.kitab-fail-card{
-
-    width:min(980px,84vw);
-
-    padding:42px;
-
-    border-radius:28px;
-
-    background:
-    rgba(255,248,223,.96);
-
-    border:4px solid #c89b3d;
-
-    box-shadow:
-    0 24px 60px rgba(0,0,0,.45);
-
-}
-
-/*================================================*/
-
-.kitab-label{
-
-    display:inline-block;
-
-    padding:8px 18px;
-
-    border-radius:999px;
-
-    background:#176349;
-
-    color:#ffe59c;
-
-    font-size:15px;
-    font-weight:700;
-
-    letter-spacing:1px;
-
-}
-
-/*================================================*/
-
-.kitab-title{
-
-    margin-top:18px;
-
-    text-align:center;
-
-    color:#12402f;
-
-    font-family:"Amiri",serif;
-
-    font-size:clamp(42px,4vw,68px);
-
-}
-
-.kitab-subtitle{
-
-    margin-top:8px;
-
-    text-align:center;
-
-    color:#8c5c18;
-
-    font-size:26px;
-
-    font-weight:700;
-
-}
-
-/*================================================*/
-
-.kitab-section{
-
-    margin-top:30px;
-
-}
-
-.kitab-section h2{
-
-    margin-bottom:14px;
-
-    color:#1b573d;
-
-    font-size:24px;
-
-}
-
-/*================================================*/
-
-.kitab-arabic-box{
-
-    padding:
-    22px
-    26px;
-
-    border-radius:16px;
-
-    background:#fffef7;
-
-    border:2px solid #dcc37d;
-
-    font-family:"Amiri",serif;
-
-    color:#144230;
-
-    font-size:34px;
-
-    line-height:1.8;
-
-    text-align:center;
-
-}
-
-/*================================================*/
-
-.kitab-section p{
-
-    color:#444;
-
-    font-size:18px;
-
-    line-height:1.8;
-
-}
-
-/*================================================*/
-
-.example-box{
-
-    padding:22px;
-
-    border-radius:16px;
-
-    background:
-
+  background:
     linear-gradient(
-    180deg,
-    #fffdf5,
-    #efe3bc
+      180deg,
+      #23865f,
+      #0d5e43
     );
 
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 5px 12px
+    rgba(0, 0, 0, 0.2);
+
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
 }
 
-.example-arabic{
+.kitab-complete-btn:hover {
+  transform:
+    translateY(-2px);
 
-    font-family:"Amiri",serif;
-
-    color:#145038;
-
-    font-size:42px;
-
-    text-align:center;
-
+  filter:
+    brightness(1.08);
 }
 
-.example-translation{
+/* =====================================================
+   HP LANDSCAPE
+===================================================== */
 
-    margin-top:10px;
+@media (orientation: landscape) and (max-height: 520px) {
 
-    text-align:center;
+  .kitab-fail-frame {
+    width: 96vw;
+    height: 94vh;
+  }
 
-    color:#666;
+  .kitab-fail-layout {
+    padding: 8px;
+    gap: 6px;
 
-    font-size:18px;
+    border-width: 2px;
+    border-radius: 14px;
 
+    grid-template-rows:
+      48px
+      78px
+      minmax(125px, 1fr)
+      42px
+      34px;
+
+    overflow: hidden;
+  }
+
+
+  /* HEADER */
+
+  .kitab-header {
+    min-height: 0;
+  }
+
+  .kitab-number {
+    padding: 5px 14px;
+    font-size: 10px;
+  }
+
+  .kitab-heading h1 {
+    font-size: 34px;
+  }
+
+  .kitab-heading span {
+    font-size: 11px;
+  }
+
+
+  /* DEFINISI */
+
+  .kitab-definition {
+    padding: 4px 12px;
+  }
+
+  .kitab-definition h2 {
+    margin-bottom: 2px;
+    font-size: 13px;
+  }
+
+  .kitab-arabic-box {
+    font-size: 20px;
+    line-height: 1.25;
+  }
+
+  .kitab-definition p {
+    margin-top: 2px;
+    font-size: 9px;
+  }
+
+
+  /* CONTOH + PERINGATAN */
+
+  .kitab-two-columns {
+    gap: 7px;
+  }
+
+  .kitab-example-panel,
+  .kitab-warning-panel {
+    padding: 7px 10px;
+    border-radius: 9px;
+  }
+
+  .kitab-example-panel h2,
+  .kitab-warning-panel h2 {
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+
+
+  /* CONTOH */
+
+  .example-arabic {
+    font-size: 28px;
+  }
+
+  .example-translation {
+    margin: 2px 0 4px;
+    font-size: 9px;
+  }
+
+  .example-analysis > div {
+    min-height: 25px;
+    padding: 2px 7px;
+    font-size: 8px;
+  }
+
+  .example-analysis span:first-child {
+    font-size: 19px;
+  }
+
+  .example-analysis small {
+    font-size: 8px;
+  }
+
+
+  /* PERINGATAN */
+
+  .warning-item {
+    gap: 6px;
+
+    margin-bottom: 4px;
+
+    padding: 4px 6px;
+
+    font-size: 8px;
+    line-height: 1.2;
+  }
+
+  .warning-item strong {
+    width: 18px;
+    height: 18px;
+
+    font-size: 8px;
+  }
+
+
+  /* ANALISIS */
+
+  .kitab-analysis {
+    padding: 3px 8px;
+  }
+
+  .kitab-analysis h2 {
+    font-size: 11px;
+  }
+
+  .analysis-flow {
+    gap: 8px;
+    font-size: 17px;
+  }
+
+  .analysis-flow b {
+    font-size: 12px;
+  }
+
+
+  /* SELESAI */
+
+  .kitab-complete-btn {
+    font-size: 10px;
+    border-radius: 7px;
+  }
 }
 
-/*================================================*/
+/* =====================================================
+   HP PORTRAIT
+===================================================== */
 
-.kitab-analysis{
+@media
+  (max-width: 600px)
+  and (orientation: portrait) {
 
-    margin-top:28px;
+  .kitab-fail-frame {
+    width: 94vw;
+    height: 94vh;
+  }
 
-    border-radius:18px;
+  .kitab-fail-layout {
+    overflow-y: auto;
 
-    overflow:hidden;
+    grid-template-rows:
+      auto
+      auto
+      auto
+      auto
+      48px;
+  }
 
-    border:2px solid #d9c07a;
+  .kitab-header {
+    grid-template-columns:
+      90px
+      1fr;
+  }
 
+  .kitab-two-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .kitab-example-panel,
+  .kitab-warning-panel {
+    min-height: 150px;
+  }
+
+  .kitab-complete-btn {
+    min-height: 44px;
+  }
 }
 
-.analysis-row{
 
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:
-    16px
-    24px;
-
-    background:white;
-
-    border-bottom:1px solid #ece3c8;
-
-}
-
-.analysis-row:last-child{
-
-    border-bottom:none;
-
-}
-
-.highlight{
-
-    background:#edf9ef;
-
-}
-
-.analysis-word{
-
-    font-family:"Amiri",serif;
-
-    font-size:30px;
-
-    color:#145038;
-
-}
-
-/*================================================*/
-
-.kitab-rule{
-
-    margin-top:28px;
-
-    padding:18px 22px;
-
-    border-left:6px solid #1b7a56;
-
-    border-radius:12px;
-
-    background:#f3f8ef;
-
-}
-
-.kitab-rule strong{
-
-    display:block;
-
-    margin-bottom:8px;
-
-    color:#145038;
-
-}
-
-.kitab-rule span{
-
-    color:#444;
-
-    line-height:1.8;
-
-}
-
-/*================================================*/
-
-.kitab-complete-btn{
-
-    display:block;
-
-    margin:
-    36px auto
-    0;
-
-    padding:
-    16px
-    38px;
-
-    border:none;
-
-    border-radius:15px;
-
-    background:
-
-    linear-gradient(
-    180deg,
-    #23865f,
-    #0d5e43
-    );
-
-    color:white;
-
-    font-size:18px;
-
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-    box-shadow:
-    0 10px 20px rgba(0,0,0,.25);
-
-}
-
-.kitab-complete-btn:hover{
-
-    transform:translateY(-3px);
-
-    background:
-
-    linear-gradient(
-    180deg,
-    #2da874,
-    #0f6b4d
-    );
-
-}
-
-/*================================================*/
-
-@media(max-width:900px){
-
-.kitab-fail-card{
-
-width:90vw;
-
-padding:30px;
-
-}
-
-.analysis-row{
-
-flex-direction:column;
-
-gap:10px;
-
-}
-
-}
-
-/*================================================*/
-
-@media(max-width:600px){
-
-.kitab-fail-card{
-
-padding:20px;
-
-}
-
-.kitab-title{
-
-font-size:46px;
-
-}
-
-.example-arabic{
-
-font-size:34px;
-
-}
-
-.kitab-complete-btn{
-
-width:100%;
-
-}
-
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .kitab-complete-btn {
+    transition: none;
+  }
 }

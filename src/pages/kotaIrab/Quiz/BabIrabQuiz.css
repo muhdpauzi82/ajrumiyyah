@@ -1,0 +1,1378 @@
+/* =====================================================
+   BAB I'RAB QUIZ
+   Reka bentuk asas: 1600 × 900
+===================================================== */
+
+/* =====================================================
+   SKRIN UTAMA
+===================================================== */
+
+.bab-irab-screen {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: grid;
+  place-items: center;
+
+  overflow: hidden;
+
+  background: #102d27;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+/* =====================================================
+   FRAME 16:9
+===================================================== */
+
+.bab-irab-stage {
+  position: relative;
+
+  width: min(100vw, calc(100vh * 16 / 9));
+  height: min(100vh, calc(100vw * 9 / 16));
+
+  overflow: hidden;
+  isolation: isolate;
+
+  container-type: inline-size;
+  container-name: bab-irab-quiz;
+
+  background: #d5bb81;
+}
+
+/* =====================================================
+   LATAR BELAKANG
+===================================================== */
+
+.bab-irab-background {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+
+  z-index: 0;
+
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+
+.bab-irab-background-shade {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3, 29, 24, 0.08) 0%,
+      rgba(3, 29, 24, 0.03) 35%,
+      rgba(3, 29, 24, 0.34) 100%
+    );
+
+  pointer-events: none;
+}
+
+/* =====================================================
+   BUTANG KEMBALI
+===================================================== */
+
+.bab-irab-back {
+  position: absolute;
+
+  left: 2.4%;
+  bottom: 2.2%;
+
+  z-index: 20;
+
+  min-width: 12%;
+
+  padding:
+    clamp(8px, 0.8cqw, 13px)
+    clamp(16px, 1.6cqw, 27px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 0.55cqw, 10px);
+
+  border:
+    clamp(2px, 0.16cqw, 3px)
+    solid #d7b348;
+
+  border-radius: 999px;
+
+  color: #154636;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 253, 232, 0.98),
+      rgba(231, 211, 154, 0.98)
+    );
+
+  font-family: Georgia, serif;
+  font-size: clamp(10px, 1cqw, 17px);
+  font-weight: 850;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 7px 18px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+
+  transition:
+    transform 170ms ease,
+    filter 170ms ease;
+}
+
+.bab-irab-back:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+}
+
+.bab-irab-back:active {
+  transform: scale(0.98);
+}
+
+/* =====================================================
+   KAD SOALAN UTAMA
+===================================================== */
+
+.bab-irab-question-card {
+  position: absolute;
+
+  left: 55%;
+  top: 57%;
+
+  width: min(800px, 57%);
+  height: 60%;
+
+  transform: translate(-50%, -50%);
+
+  z-index: 10;
+
+  box-sizing: border-box;
+
+  padding:
+    clamp(39px, 4.1cqw, 67px)
+    clamp(42px, 4.8cqw, 78px)
+    clamp(28px, 3cqw, 48px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+
+  color: #183e33;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 254, 241, 0.98),
+      rgba(245, 231, 191, 0.98)
+    );
+
+  border:
+    clamp(2px, 0.24cqw, 4px)
+    solid #d3ad3d;
+
+  border-radius:
+    clamp(20px, 2.2cqw, 36px);
+
+  box-shadow:
+    0 22px 48px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 3px rgba(30, 98, 72, 0.15);
+
+  animation:
+    babIrabQuestionEnter
+    380ms ease-out both;
+}
+
+/* =====================================================
+   TAJUK KAD
+===================================================== */
+
+.bab-irab-card-title {
+  position: absolute;
+
+  left: 50%;
+  top: 0;
+
+  transform: translate(-50%, -50%);
+
+  min-width: 28%;
+
+  padding:
+    clamp(8px, 0.8cqw, 13px)
+    clamp(24px, 2.4cqw, 40px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(9px, 0.8cqw, 14px);
+
+  color: #fff2b5;
+
+  background:
+    linear-gradient(
+      180deg,
+      #157053,
+      #064739
+    );
+
+  border:
+    clamp(2px, 0.17cqw, 3px)
+    solid #e4c247;
+
+  border-radius: 999px;
+
+  font-family: Georgia, serif;
+  font-size: clamp(14px, 1.35cqw, 23px);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.3);
+}
+
+.bab-irab-card-title span {
+  color: #f3cb43;
+
+  font-size: 0.72em;
+}
+
+
+
+/* =====================================================
+   KOSA KATA
+===================================================== */
+
+.bab-irab-vocabulary {
+  flex: 0 0 auto;
+
+  width: 100%;
+
+  margin-bottom:
+    clamp(5px, 0.55cqw, 9px);
+}
+
+.bab-irab-vocabulary h2 {
+  margin: 0;
+
+  color: #126244;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size:
+    clamp(35px, 4.4cqw, 72px);
+
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.bab-irab-vocabulary p {
+  display: inline-block;
+
+  margin:
+    clamp(2px, 0.25cqw, 4px)
+    0 0;
+
+  padding:
+    clamp(3px, 0.3cqw, 5px)
+    clamp(13px, 1.2cqw, 20px);
+
+  border-radius: 999px;
+
+  color: #674617;
+  background: rgba(232, 194, 93, 0.24);
+
+  font-family: Georgia, serif;
+  font-size: clamp(10px, 0.95cqw, 16px);
+  font-weight: 700;
+}
+
+/* =====================================================
+   AYAT ARAB
+===================================================== */
+
+.bab-irab-sentence {
+  margin:
+    0 0
+    clamp(5px, 0.55cqw, 9px);
+
+  color: #174a39;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size:
+    clamp(27px, 3.1cqw, 51px);
+
+  line-height: 1.3;
+}
+
+/* =====================================================
+   TEKS SOALAN
+===================================================== */
+
+.bab-irab-question {
+  max-width: 92%;
+
+  margin:
+    clamp(5px, 0.6cqw, 10px)
+    auto
+    clamp(8px, 0.85cqw, 14px);
+
+  color: #163d34;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:
+    clamp(18px, 1.85cqw, 31px);
+
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+/* =====================================================
+   GARIS PEMISAH
+===================================================== */
+
+.bab-irab-question-divider {
+  width: 58%;
+
+  margin-bottom:
+    clamp(9px, 0.9cqw, 15px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 0.55cqw, 10px);
+
+  color: #c49620;
+}
+
+.bab-irab-question-divider span {
+  width: 42%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #c79c2d
+    );
+}
+
+.bab-irab-question-divider span:last-child {
+  background:
+    linear-gradient(
+      90deg,
+      #c79c2d,
+      transparent
+    );
+}
+
+.bab-irab-question-divider b {
+  font-size: clamp(8px, 0.65cqw, 11px);
+}
+
+/* =====================================================
+   PILIHAN JAWAPAN
+===================================================== */
+
+.bab-irab-options {
+  flex: 1 1 auto;
+
+  width: 88%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap:
+    clamp(7px, 0.7cqw, 12px);
+}
+
+.bab-irab-option {
+  position: relative;
+
+  width: 100%;
+  min-height:
+    clamp(49px, 5.3cqw, 86px);
+
+  padding:
+    clamp(6px, 0.65cqw, 11px)
+    clamp(47px, 5.1cqw, 83px)
+    clamp(6px, 0.65cqw, 11px)
+    clamp(64px, 6.8cqw, 110px);
+
+  display: flex;
+  align-items: center;
+
+  border:
+    clamp(2px, 0.16cqw, 3px)
+    solid #b79035;
+
+  border-radius: 999px;
+
+  color: #183f33;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 250, 0.98),
+      rgba(235, 225, 194, 0.98)
+    );
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:
+    clamp(16px, 1.75cqw, 29px);
+
+  font-weight: 800;
+  line-height: 1.2;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 6px 13px rgba(69, 47, 12, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+
+  transition:
+    transform 170ms ease,
+    filter 170ms ease,
+    background 170ms ease,
+    border-color 170ms ease,
+    opacity 170ms ease;
+}
+
+.bab-irab-option:hover:not(:disabled) {
+  transform: translateY(-2px);
+
+  filter: brightness(1.035);
+
+  border-color: #1c7750;
+
+  box-shadow:
+    0 9px 18px rgba(36, 92, 62, 0.22);
+}
+
+/* Huruf A, B dan C */
+.bab-irab-option-letter {
+  position: absolute;
+
+  left:
+    clamp(7px, 0.75cqw, 12px);
+
+  top: 50%;
+
+  width:
+    clamp(37px, 4cqw, 65px);
+
+  aspect-ratio: 1;
+
+  transform: translateY(-50%);
+
+  display: grid;
+  place-items: center;
+
+  border:
+    clamp(2px, 0.14cqw, 3px)
+    solid #d0aa42;
+
+  border-radius: 50%;
+
+  color: #fff2b1;
+
+  background:
+    linear-gradient(
+      180deg,
+      #187453,
+      #07503d
+    );
+
+  font-family: Georgia, serif;
+  font-size:
+    clamp(16px, 1.6cqw, 27px);
+
+  font-weight: 900;
+
+  box-shadow:
+    0 5px 10px rgba(0, 0, 0, 0.22);
+}
+
+.bab-irab-option-text {
+  flex: 1;
+}
+
+.bab-irab-option-feedback {
+  position: absolute;
+
+  right:
+    clamp(18px, 1.8cqw, 30px);
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  font-size:
+    clamp(20px, 2cqw, 33px);
+
+  font-weight: 900;
+}
+
+/* Jawapan betul */
+.bab-irab-option.correct {
+  border-color: #18804d;
+
+  color: #0f4c31;
+
+  background:
+    linear-gradient(
+      180deg,
+      #dff5e2,
+      #a9dcb3
+    );
+
+  box-shadow:
+    0 0 0
+      clamp(1px, 0.1cqw, 2px)
+      rgba(27, 128, 77, 0.2),
+    0 8px 18px rgba(26, 120, 73, 0.26);
+}
+
+.bab-irab-option.correct
+.bab-irab-option-letter {
+  color: #fff;
+  border-color: #64bd7e;
+  background:
+    linear-gradient(
+      180deg,
+      #25955b,
+      #12623b
+    );
+}
+
+.bab-irab-option.correct
+.bab-irab-option-feedback {
+  color: #12683c;
+}
+
+/* Jawapan salah */
+.bab-irab-option.wrong {
+  border-color: #b94b42;
+
+  color: #762e28;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f8dfd9,
+      #e6afa6
+    );
+
+  box-shadow:
+    0 8px 18px rgba(151, 57, 47, 0.22);
+}
+
+.bab-irab-option.wrong
+.bab-irab-option-letter {
+  color: #fff;
+  border-color: #d4786f;
+  background:
+    linear-gradient(
+      180deg,
+      #c4584d,
+      #8e332d
+    );
+}
+
+.bab-irab-option.wrong
+.bab-irab-option-feedback {
+  color: #96362f;
+}
+
+/* Jawapan lain selepas memilih */
+.bab-irab-option.inactive {
+  opacity: 0.42;
+  filter: grayscale(0.25);
+}
+
+.bab-irab-option:disabled {
+  cursor: default;
+}
+
+/* =====================================================
+   NAVIGASI NOMBOR 1–10
+===================================================== */
+
+.bab-irab-question-navigation {
+  position: absolute;
+
+  left: 50%;
+  bottom: 2.2%;
+
+  width: min(700px, 50%);
+
+  transform: translateX(-50%);
+
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap:
+    clamp(7px, 0.75cqw, 12px);
+}
+
+.bab-irab-number {
+  flex: 0 0 auto;
+
+  width:
+    clamp(23px, 2.5cqw, 41px);
+
+  aspect-ratio: 1;
+
+  display: grid;
+  place-items: center;
+
+  border:
+    clamp(1px, 0.11cqw, 2px)
+    solid rgba(223, 187, 75, 0.9);
+
+  border-radius: 50%;
+
+  color: #5c4722;
+  background: rgba(255, 248, 216, 0.94);
+
+  font-size:
+    clamp(8px, 0.78cqw, 13px);
+
+  font-weight: 850;
+
+  box-shadow:
+    0 4px 9px rgba(0, 0, 0, 0.18);
+
+  transition:
+    transform 170ms ease,
+    background 170ms ease,
+    color 170ms ease;
+}
+
+.bab-irab-number.current {
+  color: #fff3b9;
+  background: #126044;
+
+  transform: scale(1.18);
+
+  box-shadow:
+    0 0 16px rgba(245, 207, 70, 0.62);
+}
+
+.bab-irab-number.completed {
+  color: #124931;
+  background: #cfe7ca;
+}
+
+/* =====================================================
+   BANK SOALAN KOSONG
+===================================================== */
+
+.bab-irab-empty {
+  width: min(520px, 84vw);
+
+  padding: 36px;
+
+  border: 3px solid #d2ad45;
+  border-radius: 26px;
+
+  color: #173f32;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fffbea,
+      #ebd9a8
+    );
+
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.38);
+}
+
+.bab-irab-empty p {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.bab-irab-empty button {
+  margin-top: 18px;
+
+  padding: 11px 28px;
+
+  border: 2px solid #dbbd55;
+  border-radius: 999px;
+
+  color: #fff3b5;
+  background: #0c5941;
+
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* =====================================================
+   PAPARAN KEPUTUSAN AKHIR
+===================================================== */
+
+.bab-irab-result-overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: 50;
+
+  display: grid;
+  place-items: center;
+
+  padding: 4%;
+
+  background: rgba(8, 27, 22, 0.69);
+  backdrop-filter: blur(4px);
+
+  animation:
+    babIrabResultFadeIn
+    350ms ease-out;
+}
+
+.bab-irab-result-card {
+  width: min(520px, 66%);
+  min-height: 54%;
+
+  box-sizing: border-box;
+
+  padding:
+    clamp(27px, 3.3cqw, 54px)
+    clamp(32px, 3.8cqw, 62px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  color: #183f2f;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 253, 232, 0.99),
+      rgba(242, 223, 169, 0.99)
+    );
+
+  border:
+    clamp(2px, 0.24cqw, 4px)
+    solid #c69b33;
+
+  border-radius:
+    clamp(20px, 2.2cqw, 35px);
+
+  box-shadow:
+    0 22px 52px rgba(0, 0, 0, 0.48),
+    inset 0 0 0 3px rgba(26, 91, 66, 0.16);
+
+  animation:
+    babIrabResultCardIn
+    430ms ease-out both;
+}
+
+.bab-irab-result-card.passed {
+  border-color: #1f8151;
+}
+
+.bab-irab-result-card.failed {
+  border-color: #a2513b;
+}
+
+.bab-irab-result-arabic {
+  margin-bottom:
+    clamp(7px, 0.65cqw, 11px);
+
+  color: #a2781d;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size:
+    clamp(29px, 3.2cqw, 53px);
+
+  font-weight: 700;
+  line-height: 1;
+}
+
+.bab-irab-result-icon {
+  margin-bottom:
+    clamp(7px, 0.7cqw, 12px);
+
+  font-size:
+    clamp(34px, 3.8cqw, 62px);
+}
+
+.bab-irab-result-card h2 {
+  margin: 0;
+
+  color: #135039;
+
+  font-family: Georgia, serif;
+  font-size:
+    clamp(24px, 2.7cqw, 45px);
+
+  letter-spacing: 0.05em;
+}
+
+.bab-irab-result-card.failed h2 {
+  color: #813f2b;
+}
+
+.bab-irab-result-message {
+  max-width: 390px;
+
+  margin:
+    clamp(13px, 1.3cqw, 21px)
+    0
+    clamp(10px, 1cqw, 17px);
+
+  color: #47391e;
+
+  font-size:
+    clamp(12px, 1.2cqw, 20px);
+
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.bab-irab-result-score {
+  display: flex;
+  flex-direction: column;
+
+  margin:
+    clamp(5px, 0.5cqw, 8px)
+    0
+    clamp(8px, 0.8cqw, 13px);
+}
+
+.bab-irab-result-score span {
+  color: #725b2e;
+
+  font-size:
+    clamp(9px, 0.85cqw, 14px);
+
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.bab-irab-result-score strong {
+  margin-top:
+    clamp(5px, 0.45cqw, 8px);
+
+  color: #145239;
+
+  font-size:
+    clamp(34px, 4cqw, 66px);
+
+  line-height: 1;
+}
+
+.bab-irab-result-card.failed
+.bab-irab-result-score strong {
+  color: #8b432e;
+}
+
+.bab-irab-result-detail {
+  margin:
+    0 0
+    clamp(13px, 1.2cqw, 20px);
+
+  color: #664e28;
+
+  font-size:
+    clamp(10px, 0.9cqw, 15px);
+
+  font-weight: 750;
+}
+
+.bab-irab-result-button {
+  min-width: 44%;
+
+  margin-top:
+    clamp(8px, 0.8cqw, 13px);
+
+  padding:
+    clamp(9px, 0.85cqw, 14px)
+    clamp(23px, 2.3cqw, 38px);
+
+  border:
+    clamp(2px, 0.15cqw, 3px)
+    solid #d9bd5d;
+
+  border-radius: 999px;
+
+  color: #fff7d0;
+
+  font-family: Georgia, serif;
+  font-size:
+    clamp(11px, 1cqw, 17px);
+
+  font-weight: 850;
+  letter-spacing: 0.05em;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 17px rgba(0, 0, 0, 0.26);
+
+  transition:
+    transform 170ms ease,
+    filter 170ms ease;
+}
+
+.bab-irab-result-button.passed {
+  background:
+    linear-gradient(
+      180deg,
+      #25815a,
+      #0c533d
+    );
+}
+
+.bab-irab-result-button.failed {
+  background:
+    linear-gradient(
+      180deg,
+      #ad6440,
+      #793821
+    );
+}
+
+.bab-irab-result-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.07);
+}
+
+.bab-irab-result-button:active {
+  transform: scale(0.98);
+}
+
+/* =====================================================
+   ANIMASI
+===================================================== */
+
+@keyframes babIrabQuestionEnter {
+  from {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -46%)
+      scale(0.975);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+}
+
+@keyframes babIrabResultFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes babIrabResultCardIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(25px)
+      scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+/* =====================================================
+   SUSUN ATUR AKHIR — DESKTOP & TELEFON MELINTANG
+===================================================== */
+
+/* Tajuk kecil atas kad tidak diperlukan */
+.bab-irab-card-title {
+  display: none;
+}
+
+/* Terjemahan seperti Yusuf / Umar disembunyikan */
+.bab-irab-vocabulary p {
+  display: none;
+}
+
+/* Kad soalan utama */
+.bab-irab-question-card {
+  left: 55%;
+  top: 54%;
+
+  width: 61%;
+  height: 64%;
+
+  padding:
+    2.7cqw
+    4.2cqw
+    1.8cqw;
+
+  overflow: hidden;
+}
+
+/* Perkataan Arab */
+.bab-irab-vocabulary {
+  width: 100%;
+  margin: 0 0 0.25cqw;
+}
+
+.bab-irab-vocabulary h2 {
+  margin: 0;
+
+  font-size: clamp(27px, 4cqw, 64px);
+  line-height: 1.05;
+}
+
+/* Ayat Arab tambahan */
+.bab-irab-sentence {
+  margin: 0 0 0.3cqw;
+
+  font-size: clamp(23px, 3.1cqw, 50px);
+  line-height: 1.15;
+}
+
+/* Teks soalan */
+.bab-irab-question {
+  max-width: 94%;
+
+  margin:
+    0.3cqw
+    auto
+    0.55cqw;
+
+  font-size: clamp(15px, 1.65cqw, 27px);
+  line-height: 1.22;
+}
+
+/* Garisan hiasan */
+.bab-irab-question-divider {
+  width: 46%;
+
+  margin-bottom: 0.55cqw;
+}
+
+/* Bekas pilihan jawapan */
+.bab-irab-options {
+  flex: 1 1 auto;
+
+  width: 88%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 0.55cqw;
+}
+
+/* Pilihan jawapan */
+.bab-irab-option {
+  width: 100%;
+  min-height: 4.45cqw;
+
+  padding:
+    0.35cqw
+    4.6cqw
+    0.35cqw
+    6cqw;
+
+  font-size: clamp(13px, 1.45cqw, 24px);
+  line-height: 1.15;
+}
+
+/* Bulatan A, B dan C */
+.bab-irab-option-letter {
+  left: 0.55cqw;
+
+  width: 3.5cqw;
+
+  font-size: 1.35cqw;
+}
+
+/* Tanda betul atau salah */
+.bab-irab-option-feedback {
+  right: 1.45cqw;
+
+  font-size: 1.8cqw;
+}
+
+/* Navigasi nombor */
+.bab-irab-question-navigation {
+  left: 55%;
+  bottom: 1.45%;
+
+  width: 48%;
+
+  gap: 0.5cqw;
+}
+
+.bab-irab-number {
+  width: 2.35cqw;
+  min-width: 18px;
+
+  font-size: clamp(7px, 0.7cqw, 11px);
+}
+
+/* Butang kembali */
+.bab-irab-back {
+  left: 2%;
+  bottom: 1.45%;
+
+  min-width: 11%;
+
+  padding:
+    0.6cqw
+    1.4cqw;
+
+  font-size: clamp(8px, 0.82cqw, 14px);
+}
+
+/* =====================================================
+   TELEFON DAN TABLET MELINTANG
+===================================================== */
+@container bab-irab-quiz (max-width: 1050px) {
+  .bab-irab-options {
+    width: 90%;
+    gap: 0.65cqw;
+  }
+
+  .bab-irab-option {
+    min-height: 5.2cqw;
+
+    padding:
+      0.45cqw
+      5.2cqw
+      0.45cqw
+      6.6cqw;
+
+    font-size: 3.8cqw;
+  }
+
+  .bab-irab-option-text:lang(ar),
+  .bab-irab-option[dir="rtl"]
+  .bab-irab-option-text {
+    font-size: 3.6cqw;
+  }
+
+  .bab-irab-option-letter {
+    width: 4cqw;
+    font-size: 1.6cqw;
+  }
+}
+
+/* =====================================================
+   TELEFON MELINTANG KECIL
+===================================================== */
+
+@container bab-irab-quiz (max-width: 620px) {
+  .bab-irab-question-card {
+    left: 55%;
+    top: 53.5%;
+
+    width: 63%;
+    height: 63%;
+
+    padding:
+      2.7cqw
+      3.5cqw
+      1.6cqw;
+  }
+
+  .bab-irab-vocabulary {
+    margin-bottom: 0.1cqw;
+  }
+
+  .bab-irab-vocabulary h2 {
+    font-size: 4cqw;
+  }
+
+  .bab-irab-sentence {
+    font-size: 3cqw;
+  }
+
+  .bab-irab-question {
+    font-size: 1.68cqw;
+    line-height: 1.18;
+  }
+
+  .bab-irab-question-divider {
+    width: 42%;
+    margin-bottom: 0.4cqw;
+  }
+
+  .bab-irab-options {
+    width: 92%;
+    gap: 0.42cqw;
+  }
+
+  .bab-irab-option {
+    min-height: 4.45cqw;
+
+    padding:
+      1.28cqw
+      4.5cqw
+      0.28cqw
+      5.8cqw;
+
+    font-size: 3.28cqw;
+  }
+
+  .bab-irab-option-letter {
+    left: 0.5cqw;
+
+    width: 3.45cqw;
+  }
+
+  .bab-irab-question-navigation {
+    width: 50%;
+  }
+
+  .bab-irab-number {
+    min-width: 13px;
+  }
+
+  .bab-irab-back {
+    left: 1.8%;
+  }
+}
+
+/* =====================================================
+   TELEFON MENEGAK — MINTA PUSINGKAN SKRIN
+===================================================== */
+
+@media (orientation: portrait) {
+  .bab-irab-screen::after {
+    content:
+      "Sila pusingkan telefon kepada paparan melintang";
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 9999;
+
+    display: grid;
+    place-items: center;
+
+    box-sizing: border-box;
+    padding: 32px;
+
+    color: #fff2b5;
+    background:
+      radial-gradient(
+        circle at center,
+        #17533f,
+        #092b23
+      );
+
+    text-align: center;
+
+    font-size: clamp(18px, 5vw, 27px);
+    font-weight: 850;
+    line-height: 1.5;
+  }
+
+  .bab-irab-stage {
+    visibility: hidden;
+  }
+}
+
+/* =====================================================
+   PERANTI SENTUH
+===================================================== */
+
+@media (hover: none) {
+  .bab-irab-back:hover,
+  .bab-irab-option:hover:not(:disabled),
+  .bab-irab-result-button:hover {
+    transform: none;
+    filter: none;
+  }
+
+  .bab-irab-option:active:not(:disabled) {
+    transform: scale(0.985);
+  }
+}
+
+/* =====================================================
+   KURANGKAN ANIMASI
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .bab-irab-question-card,
+  .bab-irab-result-overlay,
+  .bab-irab-result-card {
+    animation: none;
+  }
+
+  .bab-irab-option,
+  .bab-irab-back,
+  .bab-irab-number,
+  .bab-irab-result-button {
+    transition: none;
+  }
+}

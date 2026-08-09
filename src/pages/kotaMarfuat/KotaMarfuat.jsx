@@ -5,7 +5,7 @@ import {
 } from "react";
 
 import { useNavigate } from "react-router-dom";
-
+import Fail from "./Kitab/Fail";
 import kotaMarfuatMap from
   "../../assets/maps/kotamarfuat.webp";
 

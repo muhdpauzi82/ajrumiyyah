@@ -1,0 +1,1048 @@
+/* =========================================================
+   BAB I'RAB QUIZ
+   STANDARD CANVAS : 1600 × 900
+   RATIO           : 16 : 9
+   LANDSCAPE ONLY
+========================================================= */
+
+.bab-irab-screen {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100dvh;
+
+  overflow: hidden;
+
+  background: #073f34;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+
+/* =========================================================
+   1600 × 900 CANVAS
+========================================================= */
+
+.bab-irab-stage {
+  position: relative;
+
+  /*
+    Kekalkan kanvas 16:9 pada semua skrin.
+    Ia akan mengecil mengikut ruang yang tersedia.
+  */
+  width: min(
+    100vw,
+    calc(100dvh * 16 / 9)
+  );
+
+  aspect-ratio: 16 / 9;
+
+  height: auto;
+
+  max-height: 100dvh;
+
+  margin: auto;
+
+  overflow: hidden;
+
+  background: #073f34;
+
+  container-type: inline-size;
+  container-name: bab-irab-quiz;
+}
+
+
+/* =========================================================
+   BACKGROUND 1600 × 900
+========================================================= */
+
+.bab-irab-background {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  z-index: 0;
+
+  user-select: none;
+  pointer-events: none;
+
+  -webkit-user-drag: none;
+}
+
+
+/* =========================================================
+   CENTER QUIZ PANEL
+========================================================= */
+
+.bab-irab-question-card {
+  position: absolute;
+
+  /*
+    Kedudukan berdasarkan kanvas,
+    bukan berdasarkan saiz monitor.
+  */
+  left: 60%;
+  top: 58%;
+
+  transform: translate(-50%, -50%);
+
+  width: 55%;
+  height: 59%;
+
+  box-sizing: border-box;
+
+  padding:
+    3.3cqw
+    4.2cqw
+    1.8cqw;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  overflow: hidden;
+
+  z-index: 10;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 253, 242, 0.985),
+      rgba(247, 232, 190, 0.985)
+    );
+
+  border:
+    0.18cqw solid #cba747;
+
+  border-radius: 1.5cqw;
+
+  box-shadow:
+    0 1cqw 2.5cqw rgba(0, 0, 0, 0.30),
+    inset 0 0 0 0.12cqw
+      rgba(255, 255, 255, 0.8);
+
+  animation:
+    babIrabQuestionIn
+    0.3s
+    ease-out;
+}
+
+
+/* =========================================================
+   LABEL SOALAN
+========================================================= */
+
+
+
+
+/* =========================================================
+   ARABIC DISPLAY
+========================================================= */
+
+.bab-irab-display {
+  width: 100%;
+
+  margin-top: 0.5cqw;
+
+  color: #176047;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size:
+    clamp(
+      22px,
+      3cqw,
+      48px
+    );
+
+  line-height: 1.1;
+
+  text-align: center;
+
+  direction: rtl;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   QUESTION TEXT
+========================================================= */
+
+.bab-irab-question {
+  width: 94%;
+
+  margin:
+    1cqw
+    auto
+    0.55cqw;
+
+  color: #173f30;
+
+  font-size:
+    clamp(
+      13px,
+      1.55cqw,
+      27px
+    );
+
+  font-weight: 800;
+
+  line-height: 1.25;
+
+  text-align: center;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.bab-irab-divider {
+  width: 45%;
+
+  height: 0.12cqw;
+
+  margin:
+    0
+    auto
+    0.7cqw;
+
+  flex-shrink: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #c9a441,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   ANSWER OPTIONS
+========================================================= */
+
+.bab-irab-options {
+  width: 91%;
+
+  flex: 1;
+
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  gap: 0.65cqw;
+}
+
+
+/* =========================================================
+   OPTION BUTTON
+========================================================= */
+
+.bab-irab-option {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 4.15cqw;
+
+  box-sizing: border-box;
+
+  padding:
+    0.42cqw
+    5cqw;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border:
+    0.13cqw solid #c8a34a;
+
+  border-radius: 999px;
+
+  color: #173f30;
+
+  background:
+    rgba(
+      255,
+      253,
+      247,
+      0.96
+    );
+
+  font-size:
+    clamp(
+      12px,
+      1.35cqw,
+      23px
+    );
+
+  font-weight: 800;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0.25cqw 0.6cqw
+      rgba(0, 0, 0, 0.12);
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.bab-irab-option:hover:not(:disabled) {
+  transform: translateY(-0.1cqw);
+
+  background: #fffef9;
+}
+
+.bab-irab-option:disabled {
+  cursor: default;
+}
+
+
+/* =========================================================
+   A B C CIRCLE
+========================================================= */
+
+.bab-irab-option-letter {
+  position: absolute;
+
+  left: 0.55cqw;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 3cqw;
+
+  aspect-ratio: 1;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 50%;
+
+  color: #fff8d3;
+
+  background:
+    linear-gradient(
+      180deg,
+      #1b7657,
+      #0c553e
+    );
+
+  font-size:
+    clamp(
+      11px,
+      1.15cqw,
+      20px
+    );
+
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   OPTION TEXT
+========================================================= */
+
+.bab-irab-option-text {
+  width: 100%;
+
+  display: block;
+
+  line-height: 1.15;
+}
+
+
+/* =========================================================
+   FEEDBACK
+========================================================= */
+
+.bab-irab-feedback {
+  position: absolute;
+
+  right: 1.3cqw;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  font-size:
+    clamp(
+      15px,
+      1.5cqw,
+      26px
+    );
+
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   CORRECT
+========================================================= */
+
+.bab-irab-option.correct {
+  color: #125238;
+
+  background: #e1f3e7;
+
+  border-color: #278457;
+}
+
+
+/* =========================================================
+   WRONG
+========================================================= */
+
+.bab-irab-option.wrong {
+  color: #813d2e;
+
+  background: #f5ddd6;
+
+  border-color: #a64e3c;
+}
+
+
+/* =========================================================
+   OTHER OPTIONS AFTER ANSWER
+========================================================= */
+
+.bab-irab-option.muted {
+  opacity: 0.5;
+}
+
+
+/* =========================================================
+   QUESTION NUMBERS
+========================================================= */
+
+.bab-irab-question-navigation {
+  width: 100%;
+
+  height: 2.7cqw;
+
+  margin-top: 0.45cqw;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.5cqw;
+
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   NUMBER
+========================================================= */
+
+.bab-irab-number {
+  width: 2.05cqw;
+
+  min-width: 15px;
+
+  aspect-ratio: 1;
+
+  display: grid;
+
+  place-items: center;
+
+  box-sizing: border-box;
+
+  border:
+    0.1cqw solid #c8a34a;
+
+  border-radius: 50%;
+
+  color: #765e2d;
+
+  background: #fffdf5;
+
+  font-size:
+    clamp(
+      7px,
+      0.68cqw,
+      12px
+    );
+
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   ACTIVE NUMBER
+========================================================= */
+
+.bab-irab-number.active {
+  color: #fff7cf;
+
+  background:
+    linear-gradient(
+      180deg,
+      #1b7657,
+      #0d523d
+    );
+
+  border-color: #d7b750;
+
+  box-shadow:
+    0 0 0.65cqw
+      rgba(
+        214,
+        181,
+        78,
+        0.5
+      );
+}
+
+
+/* =========================================================
+   COMPLETED NUMBER
+========================================================= */
+
+.bab-irab-number.done {
+  color: #176047;
+
+  background: #e3f2e7;
+}
+
+
+/* =========================================================
+   RESULT OVERLAY
+========================================================= */
+
+.bab-irab-result-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 50;
+
+  display: grid;
+
+  place-items: center;
+
+  background:
+    rgba(
+      4,
+      27,
+      20,
+      0.68
+    );
+
+  backdrop-filter: blur(4px);
+}
+
+
+/* =========================================================
+   RESULT CARD
+========================================================= */
+
+.bab-irab-result-card {
+  width: 42%;
+
+  min-height: 47%;
+
+  box-sizing: border-box;
+
+  padding: 2.7cqw;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fffdf0,
+      #f1ddb0
+    );
+
+  border:
+    0.2cqw solid #caa33f;
+
+  border-radius: 1.5cqw;
+
+  box-shadow:
+    0 1.2cqw 3cqw
+      rgba(0, 0, 0, 0.42);
+}
+
+
+.bab-irab-result-card.passed {
+  border-color: #248052;
+}
+
+
+.bab-irab-result-card.failed {
+  border-color: #a5523c;
+}
+
+
+/* =========================================================
+   RESULT ARABIC
+========================================================= */
+
+.bab-irab-result-arabic {
+  color: #a1791f;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size:
+    clamp(
+      22px,
+      2.8cqw,
+      45px
+    );
+}
+
+
+/* =========================================================
+   RESULT ICON
+========================================================= */
+
+.bab-irab-result-icon {
+  margin: 0.35cqw 0;
+
+  font-size:
+    clamp(
+      28px,
+      3.2cqw,
+      55px
+    );
+}
+
+
+/* =========================================================
+   RESULT TITLE
+========================================================= */
+
+.bab-irab-result-card h2 {
+  margin: 0;
+
+  color: #155039;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      20px,
+      2.2cqw,
+      38px
+    );
+}
+
+
+.bab-irab-result-card.failed h2 {
+  color: #843f2d;
+}
+
+
+/* =========================================================
+   RESULT MESSAGE
+========================================================= */
+
+.bab-irab-result-message {
+  max-width: 80%;
+
+  margin: 0.8cqw 0;
+
+  color: #544326;
+
+  font-size:
+    clamp(
+      10px,
+      0.9cqw,
+      16px
+    );
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   RESULT SCORE
+========================================================= */
+
+.bab-irab-result-score {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+
+.bab-irab-result-score span {
+  color: #735a2b;
+
+  font-size:
+    clamp(
+      8px,
+      0.75cqw,
+      13px
+    );
+
+  font-weight: 800;
+
+  letter-spacing: 0.1em;
+}
+
+
+.bab-irab-result-score strong {
+  color: #145139;
+
+  font-size:
+    clamp(
+      28px,
+      3.5cqw,
+      58px
+    );
+}
+
+
+/* =========================================================
+   RESULT DETAIL
+========================================================= */
+
+.bab-irab-result-detail {
+  margin: 0.35cqw 0;
+
+  color: #68532c;
+
+  font-size:
+    clamp(
+      8px,
+      0.8cqw,
+      14px
+    );
+}
+
+
+/* =========================================================
+   RESULT BUTTON
+========================================================= */
+
+.bab-irab-result-button {
+  margin-top: 0.7cqw;
+
+  padding:
+    0.65cqw
+    2.4cqw;
+
+  border:
+    0.13cqw solid #d9bd5d;
+
+  border-radius: 999px;
+
+  color: #fff5cb;
+
+  background:
+    linear-gradient(
+      180deg,
+      #23815a,
+      #0d523d
+    );
+
+  font-size:
+    clamp(
+      9px,
+      0.9cqw,
+      16px
+    );
+
+  font-weight: 900;
+
+  cursor: pointer;
+}
+
+
+.bab-irab-result-button.failed {
+  background:
+    linear-gradient(
+      180deg,
+      #ad6545,
+      #793b27
+    );
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.bab-irab-empty {
+  position: absolute;
+
+  inset: 0;
+
+  display: grid;
+
+  place-content: center;
+
+  text-align: center;
+
+  color: #fff4c5;
+}
+
+
+.bab-irab-empty button {
+  margin-top: 20px;
+
+  padding:
+    10px 28px;
+
+  border:
+    2px solid #d5b54d;
+
+  border-radius: 999px;
+
+  color: #fff5ca;
+
+  background: #0e5a42;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   ANIMATION
+========================================================= */
+
+@keyframes babIrabQuestionIn {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -48%)
+      scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+}
+
+
+/* =========================================================
+   TABLET LANDSCAPE
+   Masih 16:9 — cuma dipadatkan sedikit
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .bab-irab-question-card {
+    width: 58%;
+
+    height: 60%;
+
+    top: 58%;
+  }
+
+  .bab-irab-question {
+    font-size:
+      clamp(
+        22px,
+        2.65cqw,
+        22px
+      );
+  }
+
+  .bab-irab-option {
+    min-height: 4.25cqw;
+  }
+}
+
+
+/* =========================================================
+   PHONE LANDSCAPE
+   Tetap LANDSCAPE.
+   Tiada portrait mode.
+========================================================= */
+
+@media (max-width: 850px) {
+
+  .bab-irab-question-card {
+    width: 63%;
+
+    height: 61%;
+
+    top: 58%;
+
+    padding:
+      3.5cqw
+      4cqw
+      1.5cqw;
+  }
+
+  .bab-irab-card-title {
+    top: 0.9cqw;
+  }
+
+  .bab-irab-question {
+    margin-top: 0.9cqw;
+
+    font-size:
+      clamp(
+        11px,
+        1.75cqw,
+        19px
+      );
+  }
+
+  .bab-irab-option {
+    min-height: 4.5cqw;
+
+    font-size:
+      clamp(
+        10px,
+        1.5cqw,
+        17px
+      );
+  }
+
+  .bab-irab-option-letter {
+    width: 3.3cqw;
+  }
+
+  .bab-irab-question-navigation {
+    height: 2.8cqw;
+
+    gap: 0.45cqw;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONE LANDSCAPE
+   Contoh 844 × 390
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .bab-irab-question-card {
+    width: 72%;
+
+    height: 63%;
+
+    top: 58%;
+  }
+
+  .bab-irab-question {
+    font-size:
+      clamp(
+        12px,
+        1.8cqw,
+        15px
+      );
+  }
+
+  .bab-irab-option {
+    min-height: 4.7cqw;
+
+    font-size:
+      clamp(
+        12px,
+        1.55cqw,
+        14px
+      );
+
+    gap: 0;
+  }
+
+  .bab-irab-option-letter {
+    width: 3.4cqw;
+  }
+
+  .bab-irab-number {
+    min-width: 13px;
+  }
+}
+
+
+/* =========================================================
+   TOUCH
+========================================================= */
+
+@media (hover: none) {
+
+  .bab-irab-option:hover:not(:disabled) {
+    transform: none;
+
+    background:
+      rgba(
+        255,
+        253,
+        247,
+        0.96
+      );
+  }
+
+  .bab-irab-option:active:not(:disabled) {
+    transform: scale(0.985);
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .bab-irab-question-card {
+    animation: none;
+  }
+
+  .bab-irab-option,
+  .bab-irab-result-button {
+    transition: none;
+  }
+}

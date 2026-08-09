@@ -72,104 +72,104 @@ export default function LearningScene({
         }
       }}
     >
-      <section className="learning-scene-frame">
+      <div className="learning-scene-shade" />
+
+      {showCharacters && showGuru && (
         <img
-          src={madrasahIrabBg}
-          className="learning-scene-background"
-          alt=""
+          key={`guru-${step}`}
+          src={guruIrab}
+          className="learning-scene-character learning-scene-guru"
+          alt="Syeikh Abdul I'rab"
           draggable="false"
         />
+      )}
 
-        <div className="learning-scene-shade" />
-
-        {showCharacters && showGuru && (
-          <img
-            key={`guru-${step}`}
-            src={guruIrab}
-            className="learning-scene-character learning-scene-guru"
-            alt="Syeikh Abdul I'rab"
-            draggable="false"
-          />
-        )}
-
-        {showCharacters && showPelajar && (
-          <img
-            key={`pelajar-${step}`}
-            src={pelajarIrab}
-            className="learning-scene-character learning-scene-pelajar"
-            alt={playerName}
-            draggable="false"
-          />
-        )}
-
-        <ProgressBar
-          value={current.progress || 0}
+      {showCharacters && showPelajar && (
+        <img
+          key={`pelajar-${step}`}
+          src={pelajarIrab}
+          className="learning-scene-character learning-scene-pelajar"
+          alt={playerName}
+          draggable="false"
         />
+      )}
 
-        <div
-          className={[
-            "learning-scene-content",
-            showGuru ? "with-guru" : "",
-            showPelajar ? "with-pelajar" : "",
-            current.type === "arabic"
-              ? "without-character"
-              : "",
-          ]
-            .filter(Boolean)
-            .join(" ")}
-        >
-          {current.type === "dialog" && (
-            <DialogueBox
-              name={speakerName}
-              text={text}
-            />
-          )}
+      <ProgressBar
+        value={current.progress || 0}
+      />
 
-          {current.type === "arabic" && (
-            <ArabicBoard
-              title={current.title}
-              before={current.before}
-              word={current.word}
-              ending={current.ending}
-              text={text}
-            />
-          )}
+      <div
+        className={[
+          "learning-scene-content",
+          showGuru ? "with-guru" : "",
+          showPelajar ? "with-pelajar" : "",
+          current.type === "arabic"
+            ? "without-character"
+            : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
+      >
+        {current.type === "dialog" && (
+          <DialogueBox
+            name={speakerName}
+            text={text}
+          />
+        )}
 
-          {current.type === "summary" && (
-            <div className="learning-board">
-              <h2>{current.title}</h2>
+        {current.type === "arabic" && (
+          <ArabicBoard
+            title={current.title}
+            before={current.before}
+            word={current.word}
+            ending={current.ending}
+            text={text}
+          />
+        )}
 
+        {current.type === "summary" && (
+          <div className="learning-board">
+            <h2>{current.title}</h2>
+
+            {current.arabicFlow?.length > 0 && (
               <div
                 className="arabic-flow"
                 dir="rtl"
                 lang="ar"
               >
-                <div>مُحَمَّدٌ</div>
-                <b>↓</b>
-                <div>مُحَمَّدًا</div>
-                <b>↓</b>
-                <div>مُحَمَّدٍ</div>
+                {current.arabicFlow.map(
+                  (item, index) => (
+                    <span key={index}>
+                      {item}
+
+                      {index <
+                        current.arabicFlow.length - 1 && (
+                        <b> ↓ </b>
+                      )}
+                    </span>
+                  )
+                )}
               </div>
+            )}
 
-              <p>{text}</p>
+            <p>{text}</p>
 
-              <span
-                className="learning-next-indicator"
-                aria-hidden="true"
-              >
-                ▶
-              </span>
-            </div>
-          )}
-        </div>
+            <span
+              className="learning-next-indicator"
+              aria-hidden="true"
+            >
+              ▶
+            </span>
+          </div>
+        )}
+      </div>
 
-        <div
-          className="learning-click-hint"
-          aria-hidden="true"
-        >
-          Tekan untuk meneruskan
-        </div>
-      </section>
+      <div
+        className="learning-click-hint"
+        aria-hidden="true"
+      >
+        Tekan untuk meneruskan
+      </div>
     </main>
   );
 }

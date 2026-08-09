@@ -1,13 +1,28 @@
 export const babIrabQuestions = [
   // =====================================================
-  // FASA 1 — ASAS I'RAB
+  // FASA 1 — PENGENALAN I'RAB
   // =====================================================
 
   {
     id: 1,
-    category: "asas",
-    question: "I'rab berlaku pada bahagian mana?",
-    display: "مُحَمَّدٌ",
+    category: "pengenalan",
+    question: "Apakah maksud I'rab?",
+    display: "الإِعْرَابُ",
+    options: [
+      "Perubahan pada awal kalimah",
+      "Perubahan pada akhir kalimah",
+      "Perubahan pada semua huruf kalimah",
+    ],
+    answer: "Perubahan pada akhir kalimah",
+    explain:
+      "I'rab ialah perubahan pada akhir kalimah kerana perubahan عامل yang masuk kepadanya.",
+  },
+
+  {
+    id: 2,
+    category: "pengenalan",
+    question: "I'rab berlaku pada bahagian mana dalam kalimah?",
+    display: "آخِرُ الْكَلِمَةِ",
     options: [
       "Awal kalimah",
       "Tengah kalimah",
@@ -15,501 +30,451 @@ export const babIrabQuestions = [
     ],
     answer: "Akhir kalimah",
     explain:
-      "I'rab ialah perubahan yang berlaku pada akhir kalimah.",
-  },
-
-  {
-    id: 2,
-    category: "asas",
-    question: "Apakah maksud asas I'rab?",
-    display: "الإِعْرَابُ",
-    options: [
-      "Perubahan awal kalimah",
-      "Perubahan akhir kalimah",
-      "Perubahan seluruh ayat",
-    ],
-    answer: "Perubahan akhir kalimah",
-    explain:
-      "I'rab bermaksud perubahan pada akhir kalimah.",
+      "I'rab berkaitan dengan perubahan pada akhir kalimah.",
   },
 
   {
     id: 3,
-    category: "asas",
-    question:
-      "Dalam contoh berikut, apakah yang berubah?",
-    display: "مُحَمَّدٌ ← مُحَمَّدًا ← مُحَمَّدٍ",
+    category: "pengenalan",
+    question: "Apakah yang berubah dalam I'rab?",
+    display: "تَغَيُّرُ آخِرِ الْكَلِمَةِ",
     options: [
-      "Nama Muhammad",
       "Akhir kalimah",
+      "Awal kalimah",
       "Bilangan huruf",
     ],
     answer: "Akhir kalimah",
     explain:
-      "Huruf asal مُحَمَّد kekal. Yang berubah ialah tanda pada akhirnya.",
+      "Perubahan I'rab berlaku pada akhir kalimah.",
   },
 
   {
     id: 4,
-    category: "asas",
-    question:
-      "Adakah huruf asal kalimah ini berubah?",
-    display: "زَيْدٌ ← زَيْدًا ← زَيْدٍ",
+    category: "pengenalan",
+    question: "Perubahan akhir kalimah berlaku kerana perubahan apa?",
+    display: "بِاخْتِلَافِ الْعَوَامِلِ",
     options: [
-      "Ya, semua huruf berubah",
-      "Tidak, hanya akhirnya berubah",
-      "Ya, huruf pertama berubah",
+      "Perubahan huruf",
+      "Perubahan عامل",
+      "Perubahan makna sahaja",
     ],
-    answer: "Tidak, hanya akhirnya berubah",
+    answer: "Perubahan عامل",
     explain:
-      "Huruf ز ي د kekal. Perubahan berlaku pada akhir kalimah.",
+      "Dalam pengertian I'rab, perubahan akhir kalimah berlaku kerana perubahan عامل yang masuk kepadanya.",
   },
 
   {
     id: 5,
-    category: "asas",
-    question:
-      "Apakah yang perlu diperhatikan untuk mengenal I'rab?",
-    display: "آخِرُ الْكَلِمَةِ",
+    category: "pengenalan",
+    question: "Manakah yang merupakan contoh perubahan akhir kalimah?",
+    display: "مُحَمَّدٌ ← مُحَمَّدًا ← مُحَمَّدٍ",
     options: [
-      "Huruf pertama",
-      "Akhir kalimah",
-      "Panjang perkataan",
+      "Perubahan awal kalimah",
+      "Perubahan akhir kalimah",
+      "Perubahan semua huruf",
     ],
-    answer: "Akhir kalimah",
+    answer: "Perubahan akhir kalimah",
     explain:
-      "Untuk mengenal I'rab, perhatikan tanda pada akhir kalimah.",
+      "Huruf asal مُحَمَّد kekal. Yang berubah ialah tanda pada akhirnya.",
   },
 
+
   // =====================================================
-  // FASA 2 — NAMA ORANG
+  // FASA 2 — CONTOH PERUBAHAN I'RAB
   // =====================================================
 
   {
     id: 6,
-    category: "nama",
-    vocabulary: {
-      arabic: "زَيْدٌ",
-      meaning: "Zaid",
-    },
-    question:
-      "Yang manakah menunjukkan perubahan akhir dengan dhammah?",
-    display: "زَيْد",
-    options: ["زَيْدٌ", "زَيْدًا", "زَيْدٍ"],
-    answer: "زَيْدٌ",
+    category: "perubahan",
+    question: "Dalam ayat جَاءَ مُحَمَّدٌ, apakah tanda pada akhir مُحَمَّدٌ?",
+    display: "جَاءَ مُحَمَّدٌ",
+    options: [
+      "Dhammah",
+      "Fathah",
+      "Kasrah",
+    ],
+    answer: "Dhammah",
     explain:
-      "زَيْدٌ mempunyai dhammah pada akhirnya.",
+      "Kalimah مُحَمَّدٌ berakhir dengan dhammah.",
   },
 
   {
     id: 7,
-    category: "nama",
-    vocabulary: {
-      arabic: "خَالِدٌ",
-      meaning: "Khalid",
-    },
-    question:
-      "Yang manakah menunjukkan perubahan akhir dengan fathah?",
-    display: "خَالِد",
-    options: ["خَالِدٍ", "خَالِدٌ", "خَالِدًا"],
-    answer: "خَالِدًا",
+    category: "perubahan",
+    question: "Dalam ayat رَأَيْتُ مُحَمَّدًا, apakah tanda pada akhir مُحَمَّدًا?",
+    display: "رَأَيْتُ مُحَمَّدًا",
+    options: [
+      "Kasrah",
+      "Dhammah",
+      "Fathah",
+    ],
+    answer: "Fathah",
     explain:
-      "خَالِدًا mempunyai fathah pada akhirnya.",
+      "Kalimah مُحَمَّدًا berakhir dengan fathah.",
   },
 
   {
     id: 8,
-    category: "nama",
-    vocabulary: {
-      arabic: "عَلِيٌّ",
-      meaning: "Ali",
-    },
-    question:
-      "Yang manakah menunjukkan perubahan akhir dengan kasrah?",
-    display: "عَلِيّ",
-    options: ["عَلِيًّا", "عَلِيٍّ", "عَلِيٌّ"],
-    answer: "عَلِيٍّ",
+    category: "perubahan",
+    question: "Dalam ayat مَرَرْتُ بِمُحَمَّدٍ, apakah tanda pada akhir مُحَمَّدٍ?",
+    display: "مَرَرْتُ بِمُحَمَّدٍ",
+    options: [
+      "Fathah",
+      "Kasrah",
+      "Dhammah",
+    ],
+    answer: "Kasrah",
     explain:
-      "عَلِيٍّ mempunyai kasrah pada akhirnya.",
+      "Kalimah مُحَمَّدٍ berakhir dengan kasrah.",
   },
 
   {
     id: 9,
-    category: "nama",
-    vocabulary: {
-      arabic: "عُمَرُ",
-      meaning: "Umar",
-    },
-    question:
-      "Dalam perubahan berikut, bahagian manakah yang berubah?",
-    display: "عُمَرُ ← عُمَرَ",
+    category: "perubahan",
+    question: "Apakah huruf asal مُحَمَّد berubah dalam contoh I'rab?",
+    display: "مُحَمَّدٌ ← مُحَمَّدًا ← مُحَمَّدٍ",
     options: [
-      "Huruf pertama",
-      "Akhir kalimah",
-      "Semua huruf",
+      "Ya, semua huruf berubah",
+      "Tidak, huruf asal kekal",
+      "Ya, huruf pertama berubah",
     ],
-    answer: "Akhir kalimah",
+    answer: "Tidak, huruf asal kekal",
     explain:
-      "Kalimah عُمَر kekal. Tanda pada akhirnya sahaja berubah.",
+      "Huruf asal kalimah kekal. Perubahan berlaku pada akhirnya.",
   },
 
   {
     id: 10,
-    category: "nama",
-    vocabulary: {
-      arabic: "يُوسُفُ",
-      meaning: "Yusuf",
-    },
-    question:
-      "Apakah yang kekal dalam perubahan berikut?",
-    display: "يُوسُفُ ← يُوسُفَ",
+    category: "perubahan",
+    question: "Apakah tujuan melihat baris akhir dalam contoh I'rab?",
+    display: "مُحَمَّدٌ ← مُحَمَّدًا ← مُحَمَّدٍ",
     options: [
-      "Huruf asal kalimah",
-      "Tanda akhir",
-      "Baris terakhir",
+      "Untuk mengenal perubahan I'rab",
+      "Untuk mengira huruf",
+      "Untuk mengetahui bilangan perkataan",
     ],
-    answer: "Huruf asal kalimah",
+    answer: "Untuk mengenal perubahan I'rab",
     explain:
-      "Huruf يُوسُف kekal, tetapi tanda akhirnya berubah.",
+      "Perubahan pada akhir kalimah membantu kita mengenal keadaan I'rab.",
   },
 
+
   // =====================================================
-  // FASA 3 — HAIWAN
+  // FASA 3 — EMPAT KEADAAN I'RAB
   // =====================================================
 
   {
     id: 11,
-    category: "haiwan",
-    vocabulary: {
-      arabic: "أَسَدٌ",
-      meaning: "Singa",
-    },
-    question:
-      "Pilih kalimah أَسَد yang berakhir dengan dhammah.",
-    display: "أَسَدٌ — Singa",
-    options: ["أَسَدًا", "أَسَدٍ", "أَسَدٌ"],
-    answer: "أَسَدٌ",
+    category: "keadaan",
+    question: "Berapakah keadaan I'rab?",
+    display: "أَقْسَامُ الإِعْرَابِ",
+    options: [
+      "Tiga",
+      "Empat",
+      "Lima",
+    ],
+    answer: "Empat",
     explain:
-      "أَسَدٌ bermaksud singa dan berakhir dengan dhammah.",
+      "Keadaan I'rab ada empat: رفع، نصب، خفض، dan جزم.",
   },
 
   {
     id: 12,
-    category: "haiwan",
-    vocabulary: {
-      arabic: "جَمَلٌ",
-      meaning: "Unta",
-    },
-    question:
-      "Pilih kalimah جَمَل yang berakhir dengan fathah.",
-    display: "جَمَلٌ — Unta",
-    options: ["جَمَلٌ", "جَمَلًا", "جَمَلٍ"],
-    answer: "جَمَلًا",
+    category: "keadaan",
+    question: "Manakah yang merupakan keadaan I'rab?",
+    display: "حَالاتُ الإِعْرَابِ",
+    options: [
+      "رفع، نصب، خفض، جزم",
+      "ماضٍ، مضارع، أمر",
+      "اسم، فعل، حرف",
+    ],
+    answer: "رفع، نصب، خفض، جزم",
     explain:
-      "جَمَلًا berakhir dengan fathah.",
+      "Empat keadaan I'rab ialah رفع، نصب، خفض، dan جزم.",
   },
 
   {
     id: 13,
-    category: "haiwan",
-    vocabulary: {
-      arabic: "حِصَانٌ",
-      meaning: "Kuda",
-    },
-    question:
-      "Pilih kalimah حِصَان yang berakhir dengan kasrah.",
-    display: "حِصَانٌ — Kuda",
-    options: ["حِصَانٍ", "حِصَانًا", "حِصَانٌ"],
-    answer: "حِصَانٍ",
+    category: "keadaan",
+    question: "Apakah istilah Arab bagi keadaan رفع?",
+    display: "رَفْعٌ",
+    options: [
+      "رَفْعٌ",
+      "نَصْبٌ",
+      "جَزْمٌ",
+    ],
+    answer: "رَفْعٌ",
     explain:
-      "حِصَانٍ berakhir dengan kasrah.",
+      "رفع ialah salah satu daripada empat keadaan I'rab.",
   },
 
   {
     id: 14,
-    category: "haiwan",
-    vocabulary: {
-      arabic: "قِطٌّ",
-      meaning: "Kucing",
-    },
-    question:
-      "Dalam perubahan berikut, apakah yang tidak berubah?",
-    display: "قِطٌّ ← قِطًّا ← قِطٍّ",
+    category: "keadaan",
+    question: "Apakah istilah Arab bagi keadaan نصب?",
+    display: "نَصْبٌ",
     options: [
-      "Huruf asal قِطّ",
-      "Tanda akhir",
-      "Baris akhir",
+      "خَفْضٌ",
+      "نَصْبٌ",
+      "رَفْعٌ",
     ],
-    answer: "Huruf asal قِطّ",
+    answer: "نَصْبٌ",
     explain:
-      "Huruf asal kalimah قِطّ kekal. Yang berubah ialah akhirnya.",
+      "نصب ialah salah satu daripada empat keadaan I'rab.",
   },
 
   {
     id: 15,
-    category: "haiwan",
-    vocabulary: {
-      arabic: "طَائِرٌ",
-      meaning: "Burung",
-    },
-    question:
-      "Apakah maksud kalimah طَائِرٌ?",
-    display: "طَائِرٌ",
-    options: ["Burung", "Kuda", "Singa"],
-    answer: "Burung",
+    category: "keadaan",
+    question: "Apakah istilah Arab bagi keadaan خفض?",
+    display: "خَفْضٌ",
+    options: [
+      "جَزْمٌ",
+      "رَفْعٌ",
+      "خَفْضٌ",
+    ],
+    answer: "خَفْضٌ",
     explain:
-      "طَائِرٌ bermaksud burung. Perhatikan juga dhammah pada akhirnya.",
+      "خفض ialah salah satu daripada empat keadaan I'rab.",
   },
 
+
   // =====================================================
-  // FASA 4 — TEMPAT
+  // FASA 4 — جَزْم DAN PEMBAHAGIAN
   // =====================================================
 
   {
     id: 16,
-    category: "tempat",
-    vocabulary: {
-      arabic: "مَسْجِدٌ",
-      meaning: "Masjid",
-    },
-    question:
-      "Pilih bentuk مَسْجِد yang berakhir dengan dhammah.",
-    display: "مَسْجِدٌ — Masjid",
-    options: ["مَسْجِدًا", "مَسْجِدٌ", "مَسْجِدٍ"],
-    answer: "مَسْجِدٌ",
+    category: "keadaan",
+    question: "Apakah istilah Arab bagi keadaan جزم?",
+    display: "جَزْمٌ",
+    options: [
+      "نَصْبٌ",
+      "جَزْمٌ",
+      "خَفْضٌ",
+    ],
+    answer: "جَزْمٌ",
     explain:
-      "مَسْجِدٌ berakhir dengan dhammah.",
+      "جزم ialah salah satu daripada empat keadaan I'rab.",
   },
 
   {
     id: 17,
-    category: "tempat",
-    vocabulary: {
-      arabic: "بَيْتٌ",
-      meaning: "Rumah",
-    },
-    question:
-      "Pilih bentuk بَيْت yang berakhir dengan fathah.",
-    display: "بَيْتٌ — Rumah",
-    options: ["بَيْتٍ", "بَيْتًا", "بَيْتٌ"],
-    answer: "بَيْتًا",
+    category: "keadaan",
+    question: "Manakah pasangan yang betul?",
+    display: "الإِعْرَابُ",
+    options: [
+      "رفع، نصب، خفض، جزم",
+      "رفع، جر، أمر، نهي",
+      "اسم، فعل، حرف، جملة",
+    ],
+    answer: "رفع، نصب، خفض، جزم",
     explain:
-      "بَيْتًا berakhir dengan fathah.",
+      "Empat keadaan I'rab ialah رفع، نصب، خفض، dan جزم.",
   },
 
   {
     id: 18,
-    category: "tempat",
-    vocabulary: {
-      arabic: "مَدْرَسَةٌ",
-      meaning: "Sekolah",
-    },
-    question:
-      "Pilih bentuk مَدْرَسَة yang berakhir dengan kasrah.",
-    display: "مَدْرَسَةٌ — Sekolah",
+    category: "pembahagian",
+    question: "Menurut asas I'rab, kalimah yang menerima I'rab termasuk...",
+    display: "الْمُعْرَبُ",
     options: [
-      "مَدْرَسَةً",
-      "مَدْرَسَةٌ",
-      "مَدْرَسَةٍ",
+      "Isim dan fi'il tertentu",
+      "Semua huruf sahaja",
+      "Semua kalimah tanpa pengecualian",
     ],
-    answer: "مَدْرَسَةٍ",
+    answer: "Isim dan fi'il tertentu",
     explain:
-      "مَدْرَسَةٍ berakhir dengan kasrah.",
+      "I'rab berkaitan dengan isim dan fi'il yang menerima perubahan akhir.",
   },
 
   {
     id: 19,
-    category: "tempat",
-    vocabulary: {
-      arabic: "سُوقٌ",
-      meaning: "Pasar",
-    },
-    question:
-      "Apakah maksud kalimah سُوقٌ?",
-    display: "سُوقٌ",
-    options: ["Sekolah", "Pasar", "Taman"],
-    answer: "Pasar",
+    category: "pembahagian",
+    question: "Adakah semua kalimah menerima I'rab?",
+    display: "الإِعْرَابُ",
+    options: [
+      "Ya, semua kalimah",
+      "Tidak, bukan semua kalimah",
+      "Hanya huruf menerima I'rab",
+    ],
+    answer: "Tidak, bukan semua kalimah",
     explain:
-      "سُوقٌ bermaksud pasar. Kalimah ini berakhir dengan dhammah.",
+      "Tidak semua kalimah menerima I'rab.",
   },
 
   {
     id: 20,
-    category: "tempat",
-    vocabulary: {
-      arabic: "حَدِيقَةٌ",
-      meaning: "Taman",
-    },
-    question:
-      "Dalam perubahan berikut, apakah yang berubah?",
-    display: "حَدِيقَةٌ ← حَدِيقَةً ← حَدِيقَةٍ",
+    category: "pembahagian",
+    question: "Apakah yang menjadi perhatian utama ketika mempelajari I'rab?",
+    display: "آخِرُ الْكَلِمَةِ",
     options: [
       "Akhir kalimah",
-      "Huruf pertama",
-      "Bilangan huruf",
+      "Panjang kalimah",
+      "Bilangan huruf sahaja",
     ],
     answer: "Akhir kalimah",
     explain:
-      "حَدِيقَة bermaksud taman. Tanda pada akhirnya berubah.",
+      "Asas I'rab ialah memahami perubahan pada akhir kalimah.",
   },
 
+
   // =====================================================
-  // FASA 5 — BENDA
+  // FASA 5 — MEMBEZAKAN KEADAAN
   // =====================================================
 
   {
     id: 21,
-    category: "benda",
-    vocabulary: {
-      arabic: "كِتَابٌ",
-      meaning: "Buku",
-    },
-    question:
-      "Pilih bentuk كِتَاب yang berakhir dengan dhammah.",
-    display: "كِتَابٌ — Buku",
-    options: ["كِتَابٍ", "كِتَابٌ", "كِتَابًا"],
-    answer: "كِتَابٌ",
+    category: "aplikasi",
+    question: "مُحَمَّدٌ menunjukkan keadaan apa?",
+    display: "مُحَمَّدٌ",
+    options: [
+      "رفع",
+      "نصب",
+      "خفض",
+    ],
+    answer: "رفع",
     explain:
-      "كِتَابٌ bermaksud buku dan berakhir dengan dhammah.",
+      "Dhammah pada akhir مُحَمَّدٌ menunjukkan keadaan رفع dalam contoh asas ini.",
   },
 
   {
     id: 22,
-    category: "benda",
-    vocabulary: {
-      arabic: "قَلَمٌ",
-      meaning: "Pen",
-    },
-    question:
-      "Pilih bentuk قَلَم yang berakhir dengan fathah.",
-    display: "قَلَمٌ — Pen",
-    options: ["قَلَمًا", "قَلَمٍ", "قَلَمٌ"],
-    answer: "قَلَمًا",
+    category: "aplikasi",
+    question: "مُحَمَّدًا menunjukkan keadaan apa?",
+    display: "مُحَمَّدًا",
+    options: [
+      "خفض",
+      "نصب",
+      "رفع",
+    ],
+    answer: "نصب",
     explain:
-      "قَلَمًا berakhir dengan fathah.",
+      "Fathah pada akhir مُحَمَّدًا menunjukkan keadaan نصب dalam contoh asas ini.",
   },
 
   {
     id: 23,
-    category: "benda",
-    vocabulary: {
-      arabic: "بَابٌ",
-      meaning: "Pintu",
-    },
-    question:
-      "Pilih bentuk بَاب yang berakhir dengan kasrah.",
-    display: "بَابٌ — Pintu",
-    options: ["بَابٌ", "بَابًا", "بَابٍ"],
-    answer: "بَابٍ",
+    category: "aplikasi",
+    question: "مُحَمَّدٍ menunjukkan keadaan apa?",
+    display: "مُحَمَّدٍ",
+    options: [
+      "نصب",
+      "جزم",
+      "خفض",
+    ],
+    answer: "خفض",
     explain:
-      "بَابٍ berakhir dengan kasrah.",
+      "Kasrah pada akhir مُحَمَّدٍ menunjukkan keadaan خفض dalam contoh asas ini.",
   },
 
   {
     id: 24,
-    category: "benda",
-    vocabulary: {
-      arabic: "مِفْتَاحٌ",
-      meaning: "Kunci",
-    },
-    question:
-      "Apakah maksud kalimah مِفْتَاحٌ?",
-    display: "مِفْتَاحٌ",
-    options: ["Pintu", "Kunci", "Kerusi"],
-    answer: "Kunci",
+    category: "aplikasi",
+    question: "Manakah susunan perubahan yang betul?",
+    display: "مُحَمَّدٌ ← ؟ ← ؟",
+    options: [
+      "مُحَمَّدًا ← مُحَمَّدٍ",
+      "مُحَمَّدٍ ← مُحَمَّدًا",
+      "مُحَمَّدُ ← مُحَمَّدَ",
+    ],
+    answer: "مُحَمَّدًا ← مُحَمَّدٍ",
     explain:
-      "مِفْتَاحٌ bermaksud kunci.",
+      "Contoh asas perubahan ialah مُحَمَّدٌ، مُحَمَّدًا، مُحَمَّدٍ.",
   },
 
   {
     id: 25,
-    category: "benda",
-    vocabulary: {
-      arabic: "كُرْسِيٌّ",
-      meaning: "Kerusi",
-    },
-    question:
-      "Apakah yang berubah dalam contoh berikut?",
-    display: "كُرْسِيٌّ ← كُرْسِيًّا ← كُرْسِيٍّ",
+    category: "aplikasi",
+    question: "Dalam contoh مُحَمَّدٌ، مُحَمَّدًا، مُحَمَّدٍ, apakah yang kekal?",
+    display: "مُحَمَّدٌ ← مُحَمَّدًا ← مُحَمَّدٍ",
     options: [
-      "Akhir kalimah",
-      "Huruf ك",
-      "Semua huruf",
+      "Huruf asal kalimah",
+      "Tanda akhir",
+      "Baris akhir",
     ],
-    answer: "Akhir kalimah",
+    answer: "Huruf asal kalimah",
     explain:
-      "كُرْسِيّ bermaksud kerusi. Perubahan berlaku pada akhirnya.",
+      "Huruf asal مُحَمَّد kekal. Perubahan berlaku pada akhir kalimah.",
   },
 
+
   // =====================================================
-  // FASA 6 — CAMPURAN DAN RUMUSAN
+  // FASA 6 — RUMUSAN BAB I'RAB
   // =====================================================
 
   {
     id: 26,
-    category: "campuran",
-    question:
-      "Yang manakah mempunyai dhammah pada akhir?",
-    display: "اخْتَرِ الْكَلِمَةَ الصَّحِيحَةَ",
-    options: ["مَسْجِدٍ", "أَسَدٌ", "قَلَمًا"],
-    answer: "أَسَدٌ",
+    category: "rumusan",
+    question: "Apakah perkara pertama yang perlu difahami dalam Bab I'rab?",
+    display: "مَعْنَى الإِعْرَابِ",
+    options: [
+      "Maksud I'rab",
+      "Semua tanda I'rab secara terperinci",
+      "Semua jenis fi'il",
+    ],
+    answer: "Maksud I'rab",
     explain:
-      "أَسَدٌ mempunyai dhammah pada akhirnya.",
+      "Pelajaran asas dimulakan dengan memahami maksud I'rab.",
   },
 
   {
     id: 27,
-    category: "campuran",
-    question:
-      "Yang manakah mempunyai fathah pada akhir?",
-    display: "اخْتَرِ الْكَلِمَةَ الصَّحِيحَةَ",
-    options: ["بَيْتًا", "كِتَابٌ", "حِصَانٍ"],
-    answer: "بَيْتًا",
+    category: "rumusan",
+    question: "Apakah yang berubah dalam I'rab?",
+    display: "تَغَيُّرُ آخِرِ الْكَلِمَةِ",
+    options: [
+      "Akhir kalimah",
+      "Semua huruf kalimah",
+      "Awal kalimah",
+    ],
+    answer: "Akhir kalimah",
     explain:
-      "بَيْتًا mempunyai fathah pada akhirnya.",
+      "I'rab berkaitan dengan perubahan pada akhir kalimah.",
   },
 
   {
     id: 28,
-    category: "campuran",
-    question:
-      "Yang manakah mempunyai kasrah pada akhir?",
-    display: "اخْتَرِ الْكَلِمَةَ الصَّحِيحَةَ",
-    options: ["طَائِرٌ", "مَدْرَسَةٍ", "جَمَلًا"],
-    answer: "مَدْرَسَةٍ",
+    category: "rumusan",
+    question: "Berapakah keadaan asas I'rab yang perlu diketahui?",
+    display: "رَفْعٌ، نَصْبٌ، خَفْضٌ، جَزْمٌ",
+    options: [
+      "Dua",
+      "Tiga",
+      "Empat",
+    ],
+    answer: "Empat",
     explain:
-      "مَدْرَسَةٍ mempunyai kasrah pada akhirnya.",
+      "Empat keadaan I'rab ialah رفع، نصب، خفض، dan جزم.",
   },
 
   {
     id: 29,
-    category: "campuran",
-    question:
-      "Manakah pasangan kalimah dan maksud yang betul?",
-    display: "مُفْرَدَاتٌ",
+    category: "rumusan",
+    question: "Manakah rumusan yang paling tepat?",
+    display: "خُلَاصَةُ الإِعْرَابِ",
     options: [
-      "مِفْتَاحٌ — Kunci",
-      "حَدِيقَةٌ — Buku",
-      "أَسَدٌ — Sekolah",
-    ],
-    answer: "مِفْتَاحٌ — Kunci",
-    explain:
-      "مِفْتَاحٌ bermaksud kunci.",
-  },
-
-  {
-    id: 30,
-    category: "campuran",
-    question:
-      "Pilih rumusan yang paling tepat tentang I'rab.",
-    display: "خُلَاصَةُ الدَّرْسِ",
-    options: [
-      "I'rab mengubah semua huruf kalimah",
+      "I'rab ialah perubahan pada awal kalimah",
       "I'rab ialah perubahan pada akhir kalimah",
-      "I'rab menambah bilangan perkataan",
+      "I'rab ialah perubahan semua huruf kalimah",
     ],
     answer: "I'rab ialah perubahan pada akhir kalimah",
     explain:
       "I'rab ialah perubahan yang berlaku pada akhir kalimah.",
+  },
+
+  {
+    id: 30,
+    category: "rumusan",
+    question: "Apakah empat keadaan I'rab?",
+    display: "حَالاتُ الإِعْرَابِ",
+    options: [
+      "رفع، نصب، خفض، جزم",
+      "اسم، فعل، حرف، كلمة",
+      "ماضٍ، مضارع، أمر، نهي",
+    ],
+    answer: "رفع، نصب، خفض، جزم",
+    explain:
+      "Empat keadaan I'rab ialah رفع، نصب، خفض، dan جزم.",
   },
 ];
