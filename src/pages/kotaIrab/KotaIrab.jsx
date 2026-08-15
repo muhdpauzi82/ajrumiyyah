@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import "../../styles/KotaIrab.css";
-
 import kotaIrabMap from "../../assets/maps/kotairab.webp";
 
 /* =====================================================
@@ -11,45 +10,72 @@ import kotaIrabMap from "../../assets/maps/kotairab.webp";
 
 function bacaStatusKotaIrab() {
   return {
+    /* -----------------------------------------------
+       BAB I‘RAB
+    ------------------------------------------------ */
+
     babIrabDone:
-      localStorage.getItem(
-        "babIrabQuizDone"
-      ) === "true",
+      localStorage.getItem("babIrabQuizDone") === "true",
+
+    /* -----------------------------------------------
+       PERPUSTAKAAN I‘RAB
+       Dibuka selepas Bab I‘rab selesai.
+    ------------------------------------------------ */
 
     perpustakaanDone:
-      localStorage.getItem(
-        "perpustakaanIrabDone"
-      ) === "true",
+      localStorage.getItem("perpustakaanIrabDone") === "true",
+
+    /* -----------------------------------------------
+       LATIHAN MAJZUMAT
+       Ini ialah KUNCI untuk membuka LORONG LATIHAN.
+    ------------------------------------------------ */
+
+    latihanMajzumatDone:
+      localStorage.getItem("latihanMajzumatDone") === "true",
+
+    /* -----------------------------------------------
+       LORONG LATIHAN
+       Akan menjadi true selepas semua latihan
+       dalam Lorong selesai.
+    ------------------------------------------------ */
 
     lorongDone:
-      localStorage.getItem(
-        "lorongIrabDone"
-      ) === "true",
+      localStorage.getItem("lorongIrabDone") === "true",
+
+    /* -----------------------------------------------
+       DATARAN I‘RAB
+    ------------------------------------------------ */
 
     dataranDone:
-      localStorage.getItem(
-        "dataranIrabDone"
-      ) === "true",
+      localStorage.getItem("dataranIrabDone") === "true",
+
+    /* -----------------------------------------------
+       DEWAN PENGIJAZAHAN
+    ------------------------------------------------ */
 
     dewanDone:
-      localStorage.getItem(
-        "dewanIrabDone"
-      ) === "true",
+      localStorage.getItem("dewanIrabDone") === "true",
+
+    /* -----------------------------------------------
+       ISTANA QADHI
+    ------------------------------------------------ */
 
     istanaQadhiDone:
-      localStorage.getItem(
-        "istanaQadhiDone"
-      ) === "true",
+      localStorage.getItem("istanaQadhiDone") === "true",
+
+    /* -----------------------------------------------
+       ARTIFAK I‘RAB
+    ------------------------------------------------ */
 
     artifactIrab:
-      localStorage.getItem(
-        "artifact_irab"
-      ) === "true",
+      localStorage.getItem("artifact_irab") === "true",
+
+    /* -----------------------------------------------
+       KOTA MARFU‘AT
+    ------------------------------------------------ */
 
     marfuatUnlocked:
-      localStorage.getItem(
-        "marfuatUnlocked"
-      ) === "true",
+      localStorage.getItem("marfuatUnlocked") === "true",
   };
 }
 
@@ -67,6 +93,7 @@ export default function KotaIrab() {
   const {
     babIrabDone,
     perpustakaanDone,
+    latihanMajzumatDone,
     lorongDone,
     dataranDone,
     dewanDone,
@@ -74,6 +101,10 @@ export default function KotaIrab() {
     artifactIrab,
     marfuatUnlocked,
   } = status;
+
+  /* =====================================================
+     KOTA MARFU‘AT
+  ===================================================== */
 
   const kotaMarfuatTerbuka =
     marfuatUnlocked ||
@@ -110,9 +141,7 @@ export default function KotaIrab() {
 
   useEffect(() => {
     function kemasKiniStatus() {
-      setStatus(
-        bacaStatusKotaIrab()
-      );
+      setStatus(bacaStatusKotaIrab());
     }
 
     kemasKiniStatus();
@@ -167,11 +196,17 @@ export default function KotaIrab() {
     navigate(route);
   }
 
+  /* =====================================================
+     RENDER
+  ===================================================== */
+
   return (
     <div className="kota-irab-wrap">
       <div className="map-frame">
 
-        {/* PETA */}
+        {/* =================================================
+            PETA KOTA I‘RAB
+        ================================================== */}
 
         <img
           src={kotaIrabMap}
@@ -182,6 +217,7 @@ export default function KotaIrab() {
 
         {/* =================================================
             1 — MADRASAH I‘RAB
+            Sentiasa boleh masuk.
         ================================================== */}
 
         <button
@@ -210,6 +246,9 @@ export default function KotaIrab() {
 
         {/* =================================================
             2 — PERPUSTAKAAN I‘RAB
+
+            KUNCI:
+            babIrabDone
         ================================================== */}
 
         <button
@@ -224,8 +263,10 @@ export default function KotaIrab() {
           onClick={() =>
             bukaLokasi({
               unlocked: babIrabDone,
+
               route:
                 "/perpustakaan-irab",
+
               lockedMessage:
                 "Selesaikan Madrasah Bab I‘rab dahulu.",
             })
@@ -240,6 +281,13 @@ export default function KotaIrab() {
 
         {/* =================================================
             3 — LORONG LATIHAN
+
+            KUNCI BAHARU:
+
+            latihanMajzumatDone
+
+            BUKAN lagi:
+            perpustakaanDone
         ================================================== */}
 
         <button
@@ -247,30 +295,35 @@ export default function KotaIrab() {
           className={[
             "irab-hotspot",
             "lorong",
-            perpustakaanDone
+            latihanMajzumatDone
               ? "unlocked"
               : "disabled",
           ].join(" ")}
           onClick={() =>
             bukaLokasi({
               unlocked:
-                perpustakaanDone,
+                latihanMajzumatDone,
+
               route:
                 "/lorong-latihan-irab",
+
               lockedMessage:
-                "Selesaikan Perpustakaan I‘rab dahulu.",
+                "Selesaikan dan lulus Latihan Majzumat 10/10 dahulu.",
             })
           }
           aria-label="Masuk ke Lorong Latihan"
           title={
-            perpustakaanDone
+            latihanMajzumatDone
               ? "Lorong Latihan"
-              : "Selesaikan Perpustakaan I‘rab dahulu"
+              : "Selesaikan dan lulus Latihan Majzumat 10/10 dahulu"
           }
         />
 
         {/* =================================================
             4 — DATARAN I‘RAB
+
+            KUNCI:
+            lorongDone
         ================================================== */}
 
         <button
@@ -285,9 +338,12 @@ export default function KotaIrab() {
           onClick={() =>
             bukaLokasi({
               unlocked: lorongDone,
-              route: "/dataran-irab",
+
+              route:
+                "/dataran-irab",
+
               lockedMessage:
-                "Selesaikan Lorong Latihan dahulu.",
+                "Selesaikan semua latihan dalam Lorong Latihan dahulu.",
             })
           }
           aria-label="Masuk ke Dataran I‘rab"
@@ -300,6 +356,9 @@ export default function KotaIrab() {
 
         {/* =================================================
             5 — DEWAN PENGIJAZAHAN
+
+            KUNCI:
+            dataranDone
         ================================================== */}
 
         <button
@@ -314,8 +373,10 @@ export default function KotaIrab() {
           onClick={() =>
             bukaLokasi({
               unlocked: dataranDone,
+
               route:
                 "/dewan-pengijazahan-irab",
+
               lockedMessage:
                 "Selesaikan Dataran I‘rab dahulu.",
             })
@@ -330,6 +391,9 @@ export default function KotaIrab() {
 
         {/* =================================================
             6 — ISTANA QADHI
+
+            KUNCI:
+            dewanDone
         ================================================== */}
 
         <button
@@ -344,8 +408,10 @@ export default function KotaIrab() {
           onClick={() =>
             bukaLokasi({
               unlocked: dewanDone,
+
               route:
                 "/istana-qadhi-irab",
+
               lockedMessage:
                 "Selesaikan Dewan Pengijazahan dahulu.",
             })
@@ -359,7 +425,10 @@ export default function KotaIrab() {
         />
 
         {/* =================================================
-            HOTSPOT KE KOTA MARFU‘AT
+            KOTA MARFU‘AT
+
+            KUNCI:
+            Istana Qadhi / Artifak I‘rab
         ================================================== */}
 
         <button
@@ -375,7 +444,10 @@ export default function KotaIrab() {
             bukaLokasi({
               unlocked:
                 kotaMarfuatTerbuka,
-              route: "/kota-marfuat",
+
+              route:
+                "/kota-marfuat",
+
               lockedMessage:
                 "Selesaikan Istana Qadhi dan tuntut Artifak I‘rab terlebih dahulu.",
             })
