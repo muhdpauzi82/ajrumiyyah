@@ -101,14 +101,23 @@ export default function LatihanMarfuat() {
 
     window.setTimeout(() => {
       if (isLastQuestion) {
-        localStorage.setItem(
-          "latihanMarfuatDone",
-          "true"
-        );
+  const passed =
+    updatedCorrectCount === questions.length;
 
-        setPhase("result");
-        return;
-      }
+  if (passed) {
+    localStorage.setItem(
+      "latihanMarfuatDone",
+      "true"
+    );
+  } else {
+    localStorage.removeItem(
+      "latihanMarfuatDone"
+    );
+  }
+
+  setPhase("result");
+  return;
+}
 
       setQuestionIndex(
         (current) => current + 1

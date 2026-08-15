@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import "./PerpustakaanIrab.css";
 
 const KITAB = [
@@ -13,7 +14,9 @@ const KITAB = [
     explanation:
       "Marfu‘ ialah salah satu daripada empat keadaan I‘rab. Tanda asasnya ialah dhammah.",
     example: "مُحَمَّدٌ",
+    unlockKey: null,
   },
+
   {
     id: "mansub",
     title: "مَنْصُوب",
@@ -24,7 +27,9 @@ const KITAB = [
     explanation:
       "Mansub ialah salah satu daripada empat keadaan I‘rab. Tanda asasnya ialah fathah.",
     example: "مُحَمَّدًا",
+    unlockKey: "latihanMarfuatDone",
   },
+
   {
     id: "majrur",
     title: "مَجْرُور",
@@ -35,7 +40,9 @@ const KITAB = [
     explanation:
       "Majrur ialah keadaan I‘rab yang berlaku pada isim. Tanda asasnya ialah kasrah.",
     example: "مُحَمَّدٍ",
+    unlockKey: "latihanMansubatDone",
   },
+
   {
     id: "majzum",
     title: "مَجْزُوم",
@@ -46,111 +53,237 @@ const KITAB = [
     explanation:
       "Majzum ialah keadaan I‘rab yang berlaku pada fi‘il mudhari‘. Tanda asasnya ialah sukun.",
     example: "يَذْهَبْ",
+    unlockKey: "latihanMajruratDone",
   },
 ];
 
-function getCompletedBooks() {
-  try {
-    const saved = JSON.parse(
-      localStorage.getItem("perpustakaanIrabBooks") || "[]"
-    );
 
-    return Array.isArray(saved) ? saved : [];
-  } catch {
-    return [];
+/* =========================================================
+   SEMAK STATUS LATIHAN
+========================================================= */
+
+function isPassed(key) {
+  if (!key) {
+    return true;
   }
+
+  return (
+    localStorage.getItem(key) ===
+    "true"
+  );
 }
+
+
+/* =========================================================
+   PERPUSTAKAAN I‘RAB
+========================================================= */
 
 export default function PerpustakaanIrab() {
   const navigate = useNavigate();
 
-  const [completedBooks] = useState(getCompletedBooks);
+  /*
+   * Kita gunakan state supaya halaman boleh
+   * membaca semula status selepas kembali
+   * daripada latihan.
+   */
+  const [
+    unlockVersion,
+    setUnlockVersion,
+  ] = useState(0);
+
   const [selectedBookId, setSelectedBookId] =
     useState("marfu");
+
+
+  /* =======================================================
+     STATUS KITAB
+  ======================================================= */
+
+  const unlockedBooks = useMemo(() => {
+    /*
+     * unlockVersion sengaja digunakan supaya
+     * useMemo membaca semula localStorage
+     * apabila diperlukan.
+     */
+    void unlockVersion;
+
+    return KITAB.reduce(
+      (result, book) => {
+        result[book.id] =
+          isPassed(book.unlockKey);
+
+        return result;
+      },
+      {}
+    );
+  }, [unlockVersion]);
+
 
   const selectedBook = useMemo(
     () =>
       KITAB.find(
-        (book) => book.id === selectedBookId
+        (book) =>
+          book.id === selectedBookId
       ) ?? KITAB[0],
     [selectedBookId]
   );
 
-  const completedCount = KITAB.filter((book) =>
-    completedBooks.includes(book.id)
+
+  /* =======================================================
+     KIRA PROGRESS
+  ======================================================= */
+
+  const passedCount = [
+    "latihanMarfuatDone",
+    "latihanMansubatDone",
+    "latihanMajruratDone",
+    "latihanMajzumatDone",
+  ].filter(
+    (key) =>
+      localStorage.getItem(key) ===
+      "true"
   ).length;
 
-  const semuaKitabSelesai =
-    completedCount === KITAB.length;
+
+  /*
+   * Lorong Latihan hanya dibuka selepas
+   * Latihan Majzum lulus.
+   */
+  const lorongUnlocked =
+    localStorage.getItem(
+      "latihanMajzumatDone"
+    ) === "true";
+
+
+  /* =======================================================
+     PILIH KITAB
+  ======================================================= */
 
   function pilihKitab(book) {
     setSelectedBookId(book.id);
   }
 
-  function bukaKitab(book) {
-    navigate(book.route);
-  }
 
-  function tamatPerpustakaan() {
-    if (!semuaKitabSelesai) {
+  /* =======================================================
+     BUKA KITAB
+  ======================================================= */
+
+  function bukaKitab(book) {
+    const unlocked =
+      unlockedBooks[book.id];
+
+    if (!unlocked) {
       alert(
-        "Selesaikan pembelajaran dan lulus ujian bagi keempat-empat kitab terlebih dahulu."
+        "Kitab ini masih terkunci. Selesaikan dan lulus latihan sebelumnya terlebih dahulu."
       );
+
       return;
     }
 
-    localStorage.setItem(
-      "perpustakaanIrabDone",
-      "true"
-    );
-
-    navigate("/kota-irab");
+    navigate(book.route);
   }
+
+
+  /* =======================================================
+     LORONG LATIHAN
+  ======================================================= */
+
+  function bukaLorongLatihan() {
+    if (!lorongUnlocked) {
+      alert(
+        "Selesaikan dan lulus Latihan Majzum terlebih dahulu."
+      );
+
+      return;
+    }
+
+    navigate("/lorong-latihan");
+  }
+
+
+  /* =======================================================
+     REFRESH STATUS
+  ======================================================= */
+
+  function refreshUnlockStatus() {
+    setUnlockVersion(
+      (value) => value + 1
+    );
+  }
+
 
   return (
     <main className="perpustakaan-page">
+
       <section className="perpustakaan-viewport">
+
+        {/* =================================================
+            BACKGROUND
+        ================================================= */}
+
         <img
-           src="/images/perpustakaan/perpustakaan-irab-bg.webp"
+          src="/images/perpustakaan/perpustakaan-irab-bg.webp"
           alt=""
           className="perpustakaan-bg"
           draggable="false"
         />
 
+
+        {/* =================================================
+            BACK
+        ================================================= */}
+
         <button
           type="button"
           className="perpustakaan-back-hotspot"
-          onClick={() => navigate("/kota-irab")}
+          onClick={() =>
+            navigate("/kota-irab")
+          }
           aria-label="Kembali ke Kota I‘rab"
         />
 
+
+        {/* =================================================
+            PROGRESS
+        ================================================= */}
+
         <section
           className="perpustakaan-progress-layer"
-          aria-label={`Kemajuan ${completedCount} daripada ${KITAB.length}`}
+          aria-label={`Latihan lulus ${passedCount} daripada 4`}
         >
           <strong>
-            {completedCount} / {KITAB.length}
+            {passedCount} / 4
           </strong>
 
           <div className="perpustakaan-progress-track">
+
             <span
               style={{
                 width: `${
-                  (completedCount / KITAB.length) *
+                  (passedCount / 4) *
                   100
                 }%`,
               }}
             />
+
           </div>
         </section>
 
+
+        {/* =================================================
+            BOOKS
+        ================================================= */}
+
         <section className="perpustakaan-books-layer">
+
           {KITAB.map((book) => {
-            const selesai =
-              completedBooks.includes(book.id);
+
+            const unlocked =
+              unlockedBooks[book.id];
 
             const dipilih =
-              selectedBook.id === book.id;
+              selectedBook.id ===
+              book.id;
 
             return (
               <article
@@ -158,21 +291,32 @@ export default function PerpustakaanIrab() {
                 className={[
                   "perpustakaan-book-slot",
                   `book-${book.id}`,
-                  selesai ? "completed" : "",
-                  dipilih ? "selected" : "",
+                  unlocked
+                    ? "unlocked"
+                    : "locked",
+                  dipilih
+                    ? "selected"
+                    : "",
                 ]
                   .filter(Boolean)
                   .join(" ")}
               >
+
+                {/* BOOK */}
+
                 <button
                   type="button"
                   className="perpustakaan-book-button"
-                  onClick={() => pilihKitab(book)}
-                  onDoubleClick={() =>
-                    bukaKitab(book)
+                  onClick={() =>
+                    pilihKitab(book)
                   }
-                  aria-label={`Pilih kitab ${book.name}`}
+                  aria-label={
+                    unlocked
+                      ? `Pilih kitab ${book.name}`
+                      : `Kitab ${book.name} masih terkunci`
+                  }
                 >
+
                   <img
                     src={book.image}
                     alt={`Kitab ${book.name}`}
@@ -180,47 +324,93 @@ export default function PerpustakaanIrab() {
                     draggable="false"
                   />
 
-                  {selesai && (
+                  {!unlocked && (
                     <span
-                      className="perpustakaan-completed-badge"
-                      aria-label="Selesai"
+                      className="perpustakaan-lock-badge"
+                      aria-label="Terkunci"
                     >
-                      ✓
+                      🔒
                     </span>
                   )}
+
                 </button>
+
+
+                {/* OPEN */}
 
                 <button
                   type="button"
-                  className="perpustakaan-open-book"
-                  onClick={() => bukaKitab(book)}
+                  className={
+                    unlocked
+                      ? "perpustakaan-open-book"
+                      : "perpustakaan-open-book locked"
+                  }
+                  onClick={() =>
+                    bukaKitab(book)
+                  }
+                  disabled={!unlocked}
                 >
-                  BUKA KITAB
+                  {unlocked
+                    ? "BUKA KITAB"
+                    : "TERKUNCI"}
                 </button>
+
               </article>
             );
           })}
+
         </section>
 
-        <section className="perpustakaan-selected-layer">
-          <div className="selected-book-main">
-            <h2>{selectedBook.name}</h2>
 
-            <p>{selectedBook.explanation}</p>
+        {/* =================================================
+            SELECTED BOOK
+        ================================================= */}
+
+        <section className="perpustakaan-selected-layer">
+
+          <div className="selected-book-main">
+
+            <h2>
+              {selectedBook.name}
+            </h2>
+
+            <p>
+              {selectedBook.explanation}
+            </p>
 
             <button
               type="button"
-              className="selected-book-open-button"
+              className={
+                unlockedBooks[
+                  selectedBook.id
+                ]
+                  ? "selected-book-open-button"
+                  : "selected-book-open-button locked"
+              }
               onClick={() =>
                 bukaKitab(selectedBook)
               }
+              disabled={
+                !unlockedBooks[
+                  selectedBook.id
+                ]
+              }
             >
-              MULAKAN PEMBELAJARAN
+              {unlockedBooks[
+                selectedBook.id
+              ]
+                ? "MULAKAN PEMBELAJARAN"
+                : "KITAB TERKUNCI"}
             </button>
+
           </div>
 
+
           <div className="selected-book-sign">
-            <span>TANDA ASAS</span>
+
+            <span>
+              TANDA ASAS
+            </span>
 
             <strong
               dir="rtl"
@@ -228,10 +418,15 @@ export default function PerpustakaanIrab() {
             >
               {selectedBook.sign}
             </strong>
+
           </div>
 
+
           <div className="selected-book-example">
-            <span>CONTOH</span>
+
+            <span>
+              CONTOH
+            </span>
 
             <strong
               dir="rtl"
@@ -239,25 +434,45 @@ export default function PerpustakaanIrab() {
             >
               {selectedBook.example}
             </strong>
+
           </div>
+
         </section>
+
+
+        {/* =================================================
+            LORONG LATIHAN
+        ================================================= */}
 
         <button
           type="button"
           className={[
             "perpustakaan-complete-hotspot",
-            semuaKitabSelesai
+            lorongUnlocked
               ? "ready"
               : "locked",
           ].join(" ")}
-          onClick={tamatPerpustakaan}
+          onClick={bukaLorongLatihan}
           aria-label={
-            semuaKitabSelesai
-              ? "Selesaikan perpustakaan"
-              : "Perpustakaan belum selesai"
+            lorongUnlocked
+              ? "Buka Lorong Latihan"
+              : "Lorong Latihan masih terkunci"
           }
         />
+
+        {/* =================================================
+            REFRESH STATUS
+        ================================================= */}
+
+        <button
+          type="button"
+          className="perpustakaan-refresh-status"
+          onClick={refreshUnlockStatus}
+          aria-label="Semak semula status latihan"
+        />
+
       </section>
+
     </main>
   );
 }

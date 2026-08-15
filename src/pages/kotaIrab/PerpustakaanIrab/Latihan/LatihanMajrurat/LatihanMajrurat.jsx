@@ -77,7 +77,10 @@ export default function LatihanMajrurat() {
     100;
 
   function chooseAnswer(option) {
-    if (selectedAnswer || phase !== "playing") {
+    if (
+      selectedAnswer ||
+      phase !== "playing"
+    ) {
       return;
     }
 
@@ -87,23 +90,43 @@ export default function LatihanMajrurat() {
       option === currentQuestion.answer;
 
     const updatedCorrectCount =
-      correctCount + (isCorrect ? 1 : 0);
+      correctCount +
+      (isCorrect ? 1 : 0);
 
     const updatedWrongCount =
-      wrongCount + (isCorrect ? 0 : 1);
+      wrongCount +
+      (isCorrect ? 0 : 1);
 
     if (isCorrect) {
-      setCorrectCount(updatedCorrectCount);
+      setCorrectCount(
+        updatedCorrectCount
+      );
     } else {
-      setWrongCount(updatedWrongCount);
+      setWrongCount(
+        updatedWrongCount
+      );
     }
 
     window.setTimeout(() => {
       if (isLastQuestion) {
-        localStorage.setItem(
-          "latihanMajruratDone",
-          "true"
-        );
+        /*
+         * Majrurat hanya lulus jika
+         * semua 10 soalan betul.
+         */
+        const passed =
+          updatedCorrectCount ===
+          questions.length;
+
+        if (passed) {
+          localStorage.setItem(
+            "latihanMajruratDone",
+            "true"
+          );
+        } else {
+          localStorage.removeItem(
+            "latihanMajruratDone"
+          );
+        }
 
         setPhase("result");
         return;
@@ -122,7 +145,9 @@ export default function LatihanMajrurat() {
       return "majrur-answer";
     }
 
-    if (option === currentQuestion.answer) {
+    if (
+      option === currentQuestion.answer
+    ) {
       return "majrur-answer correct";
     }
 
@@ -137,43 +162,103 @@ export default function LatihanMajrurat() {
     window.location.reload();
   }
 
+  /* =======================================================
+     RESULT
+  ======================================================= */
+
   if (phase === "result") {
+    const passed =
+      correctCount === questions.length;
+
     return (
       <main className="majrur-training-screen">
+
         <section className="majrur-result-card">
+
           <span className="majrur-result-icon">
-            📖
+            {passed ? "🏆" : "📖"}
           </span>
 
           <p className="majrur-result-kicker">
             LATIHAN SELESAI
           </p>
 
-          <h1>Latihan Majrurat</h1>
+          <h1>
+            Latihan Majrurat
+          </h1>
 
           <p>
-            Anda telah menjawab semua soalan
-            latihan.
+            {passed
+              ? "Tahniah! Anda telah menguasai latihan Majrurat."
+              : "Latihan telah selesai. Sila cuba lagi untuk mendapatkan 10/10."
+            }
           </p>
 
           <div className="majrur-result-score">
+
             <div>
               <span>Betul</span>
-              <strong>{correctCount}</strong>
+
+              <strong>
+                {correctCount}
+              </strong>
             </div>
 
             <div>
               <span>Belum tepat</span>
-              <strong>{wrongCount}</strong>
+
+              <strong>
+                {wrongCount}
+              </strong>
             </div>
 
             <div>
               <span>Jumlah</span>
-              <strong>{questions.length}</strong>
+
+              <strong>
+                {questions.length}
+              </strong>
             </div>
+
+          </div>
+
+          <div
+            className={
+              passed
+                ? "majrur-result-message success"
+                : "majrur-result-message retry"
+            }
+          >
+
+            {passed ? (
+              <>
+                <strong>
+                  ✓ LATIHAN LULUS
+                </strong>
+
+                <p>
+                  Kitab Majzum kini
+                  boleh diteruskan.
+                </p>
+              </>
+            ) : (
+              <>
+                <strong>
+                  BELUM LULUS
+                </strong>
+
+                <p>
+                  Anda perlu mendapat
+                  10/10 untuk membuka
+                  pembelajaran seterusnya.
+                </p>
+              </>
+            )}
+
           </div>
 
           <div className="majrur-result-actions">
+
             <button
               type="button"
               onClick={restartQuiz}
@@ -184,7 +269,9 @@ export default function LatihanMajrurat() {
             <button
               type="button"
               onClick={() =>
-                navigate("/kitab-majrurat")
+                navigate(
+                  "/kitab-majrurat"
+                )
               }
             >
               Kembali ke Kitab
@@ -193,38 +280,59 @@ export default function LatihanMajrurat() {
             <button
               type="button"
               onClick={() =>
-                navigate("/perpustakaan-irab")
+                navigate(
+                  "/perpustakaan-irab"
+                )
               }
             >
               Perpustakaan
             </button>
+
           </div>
+
         </section>
+
       </main>
     );
   }
 
+  /* =======================================================
+     LATIHAN
+  ======================================================= */
+
   return (
     <main className="majrur-training-screen">
+
       <section className="majrur-training-card">
+
         <header className="majrur-training-header">
+
           <button
             type="button"
             onClick={() =>
-              navigate("/kitab-majrurat")
+              navigate(
+                "/kitab-majrurat"
+              )
             }
           >
             ← Kembali
           </button>
 
           <div>
-            <span>LATIHAN KITAB 3</span>
-            <h1>MAJRURAT</h1>
+            <span>
+              LATIHAN KITAB 3
+            </span>
+
+            <h1>
+              MAJRURAT
+            </h1>
           </div>
 
           <strong>
-            {questionIndex + 1}/{questions.length}
+            {questionIndex + 1}/
+            {questions.length}
           </strong>
+
         </header>
 
         <div className="majrur-progress-track">
@@ -236,12 +344,16 @@ export default function LatihanMajrurat() {
         </div>
 
         <section className="majrur-question-area">
+
           <div className="majrur-question-panel">
+
             <span className="majrur-question-number">
               Soalan {questionIndex + 1}
             </span>
 
-            <h2>{currentQuestion.question}</h2>
+            <h2>
+              {currentQuestion.question}
+            </h2>
 
             {currentQuestion.arabic && (
               <p
@@ -252,22 +364,31 @@ export default function LatihanMajrurat() {
                 {currentQuestion.arabic}
               </p>
             )}
+
           </div>
 
           <div className="majrur-answer-list">
+
             {currentQuestion.options.map(
               (option, index) => (
                 <button
                   key={`${option}-${index}`}
                   type="button"
-                  className={getAnswerClass(option)}
-                  disabled={Boolean(selectedAnswer)}
+                  className={getAnswerClass(
+                    option
+                  )}
+                  disabled={Boolean(
+                    selectedAnswer
+                  )}
                   onClick={() =>
                     chooseAnswer(option)
                   }
                 >
+
                   <span>
-                    {String.fromCharCode(65 + index)}
+                    {String.fromCharCode(
+                      65 + index
+                    )}
                   </span>
 
                   <strong
@@ -277,13 +398,18 @@ export default function LatihanMajrurat() {
                   >
                     {option}
                   </strong>
+
                 </button>
               )
             )}
+
           </div>
 
           <aside className="majrur-status-panel">
-            <span>Status Jawapan</span>
+
+            <span>
+              Status Jawapan
+            </span>
 
             {!selectedAnswer && (
               <strong>
@@ -300,7 +426,9 @@ export default function LatihanMajrurat() {
                   </strong>
 
                   <p>
-                    {currentQuestion.explanation}
+                    {
+                      currentQuestion.explanation
+                    }
                   </p>
                 </>
               )}
@@ -314,30 +442,40 @@ export default function LatihanMajrurat() {
                   </strong>
 
                   <p>
-                    {currentQuestion.explanation}
+                    {
+                      currentQuestion.explanation
+                    }
                   </p>
                 </>
               )}
+
           </aside>
+
         </section>
 
         <footer className="majrur-training-footer">
-          {questions.map((question, index) => (
-            <span
-              key={question.id}
-              className={
-                index === questionIndex
-                  ? "active"
-                  : index < questionIndex
-                    ? "completed"
-                    : ""
-              }
-            >
-              {index + 1}
-            </span>
-          ))}
+
+          {questions.map(
+            (question, index) => (
+              <span
+                key={question.id}
+                className={
+                  index === questionIndex
+                    ? "active"
+                    : index < questionIndex
+                      ? "completed"
+                      : ""
+                }
+              >
+                {index + 1}
+              </span>
+            )
+          )}
+
         </footer>
+
       </section>
+
     </main>
   );
 }

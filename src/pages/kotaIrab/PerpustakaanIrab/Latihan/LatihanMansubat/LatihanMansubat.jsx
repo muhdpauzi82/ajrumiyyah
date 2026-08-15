@@ -77,7 +77,10 @@ export default function LatihanMansubat() {
     100;
 
   function chooseAnswer(option) {
-    if (selectedAnswer || phase !== "playing") {
+    if (
+      selectedAnswer ||
+      phase !== "playing"
+    ) {
       return;
     }
 
@@ -87,23 +90,43 @@ export default function LatihanMansubat() {
       option === currentQuestion.answer;
 
     const updatedCorrectCount =
-      correctCount + (isCorrect ? 1 : 0);
+      correctCount +
+      (isCorrect ? 1 : 0);
 
     const updatedWrongCount =
-      wrongCount + (isCorrect ? 0 : 1);
+      wrongCount +
+      (isCorrect ? 0 : 1);
 
     if (isCorrect) {
-      setCorrectCount(updatedCorrectCount);
+      setCorrectCount(
+        updatedCorrectCount
+      );
     } else {
-      setWrongCount(updatedWrongCount);
+      setWrongCount(
+        updatedWrongCount
+      );
     }
 
     window.setTimeout(() => {
       if (isLastQuestion) {
-        localStorage.setItem(
-          "latihanMansubatDone",
-          "true"
-        );
+        /*
+         * Mansubat hanya dianggap selesai
+         * jika semua 10 soalan dijawab betul.
+         */
+        const passed =
+          updatedCorrectCount ===
+          questions.length;
+
+        if (passed) {
+          localStorage.setItem(
+            "latihanMansubatDone",
+            "true"
+          );
+        } else {
+          localStorage.removeItem(
+            "latihanMansubatDone"
+          );
+        }
 
         setPhase("result");
         return;
@@ -122,7 +145,10 @@ export default function LatihanMansubat() {
       return "mansub-answer";
     }
 
-    if (option === currentQuestion.answer) {
+    if (
+      option ===
+      currentQuestion.answer
+    ) {
       return "mansub-answer correct";
     }
 
@@ -137,43 +163,99 @@ export default function LatihanMansubat() {
     window.location.reload();
   }
 
+  /*
+   * =========================
+   * KEPUTUSAN LATIHAN
+   * =========================
+   */
+
   if (phase === "result") {
+    const passed =
+      correctCount === questions.length;
+
     return (
       <main className="mansub-training-screen">
         <section className="mansub-result-card">
+
           <span className="mansub-result-icon">
-            📖
+            {passed ? "🏆" : "📖"}
           </span>
 
           <p className="mansub-result-kicker">
             LATIHAN SELESAI
           </p>
 
-          <h1>Latihan Marfu‘at</h1>
+          <h1>
+            Latihan Mansubat
+          </h1>
 
           <p>
-            Anda telah menjawab semua soalan
-            latihan.
+            {passed
+              ? "Tahniah! Anda telah menguasai latihan Mansubat."
+              : "Latihan telah selesai. Sila cuba lagi untuk mendapatkan 10/10."
+            }
           </p>
 
           <div className="mansub-result-score">
+
             <div>
               <span>Betul</span>
-              <strong>{correctCount}</strong>
+              <strong>
+                {correctCount}
+              </strong>
             </div>
 
             <div>
               <span>Belum tepat</span>
-              <strong>{wrongCount}</strong>
+              <strong>
+                {wrongCount}
+              </strong>
             </div>
 
             <div>
               <span>Jumlah</span>
-              <strong>{questions.length}</strong>
+              <strong>
+                {questions.length}
+              </strong>
             </div>
+
+          </div>
+
+          <div
+            className={
+              passed
+                ? "mansub-result-message success"
+                : "mansub-result-message retry"
+            }
+          >
+            {passed ? (
+              <>
+                <strong>
+                  ✓ LATIHAN LULUS
+                </strong>
+
+                <p>
+                  Kitab Majrurat kini
+                  boleh diteruskan.
+                </p>
+              </>
+            ) : (
+              <>
+                <strong>
+                  BELUM LULUS
+                </strong>
+
+                <p>
+                  Anda perlu mendapat
+                  10/10 untuk membuka
+                  pembelajaran seterusnya.
+                </p>
+              </>
+            )}
           </div>
 
           <div className="mansub-result-actions">
+
             <button
               type="button"
               onClick={restartQuiz}
@@ -184,7 +266,9 @@ export default function LatihanMansubat() {
             <button
               type="button"
               onClick={() =>
-                navigate("/kitab-mansubat")
+                navigate(
+                  "/kitab-mansubat"
+                )
               }
             >
               Kembali ke Kitab
@@ -193,39 +277,60 @@ export default function LatihanMansubat() {
             <button
               type="button"
               onClick={() =>
-                navigate("/perpustakaan-irab")
+                navigate(
+                  "/perpustakaan-irab"
+                )
               }
             >
               Perpustakaan
             </button>
+
           </div>
+
         </section>
       </main>
     );
   }
 
+  /*
+   * =========================
+   * PAPARAN LATIHAN
+   * =========================
+   */
+
   return (
     <main className="mansub-training-screen">
+
       <section className="mansub-training-card">
 
         <header className="mansub-training-header">
+
           <button
             type="button"
             onClick={() =>
-              navigate("/kitab-mansubat")
+              navigate(
+                "/kitab-mansubat"
+              )
             }
           >
             ← Kembali
           </button>
 
           <div>
-            <span>LATIHAN KITAB 1</span>
-            <h1>MARFU‘AT</h1>
+            <span>
+              LATIHAN KITAB 2
+            </span>
+
+            <h1>
+              MANSUBAT
+            </h1>
           </div>
 
           <strong>
-            {questionIndex + 1}/{questions.length}
+            {questionIndex + 1}/
+            {questions.length}
           </strong>
+
         </header>
 
         <div className="mansub-progress-track">
@@ -237,12 +342,16 @@ export default function LatihanMansubat() {
         </div>
 
         <section className="mansub-question-area">
+
           <div className="mansub-question-panel">
+
             <span className="mansub-question-number">
               Soalan {questionIndex + 1}
             </span>
 
-            <h2>{currentQuestion.question}</h2>
+            <h2>
+              {currentQuestion.question}
+            </h2>
 
             {currentQuestion.arabic && (
               <p
@@ -253,38 +362,52 @@ export default function LatihanMansubat() {
                 {currentQuestion.arabic}
               </p>
             )}
+
           </div>
 
           <div className="mansub-answer-list">
+
             {currentQuestion.options.map(
               (option, index) => (
                 <button
                   key={option}
                   type="button"
-                  className={getAnswerClass(option)}
-                  disabled={Boolean(selectedAnswer)}
+                  className={getAnswerClass(
+                    option
+                  )}
+                  disabled={Boolean(
+                    selectedAnswer
+                  )}
                   onClick={() =>
                     chooseAnswer(option)
                   }
                 >
+
                   <span>
-                    {String.fromCharCode(65 + index)}
+                    {String.fromCharCode(
+                      65 + index
+                    )}
                   </span>
 
                   <strong
-                  className="mansub-answer-text"
-                  dir="rtl"
-                   lang="ar"
-                   >
-                   {option}
-                </strong>
+                    className="mansub-answer-text"
+                    dir="rtl"
+                    lang="ar"
+                  >
+                    {option}
+                  </strong>
+
                 </button>
               )
             )}
+
           </div>
 
           <aside className="mansub-status-panel">
-            <span>Status Jawapan</span>
+
+            <span>
+              Status Jawapan
+            </span>
 
             {!selectedAnswer && (
               <strong>
@@ -301,7 +424,9 @@ export default function LatihanMansubat() {
                   </strong>
 
                   <p>
-                    {currentQuestion.explanation}
+                    {
+                      currentQuestion.explanation
+                    }
                   </p>
                 </>
               )}
@@ -315,30 +440,40 @@ export default function LatihanMansubat() {
                   </strong>
 
                   <p>
-                    {currentQuestion.explanation}
+                    {
+                      currentQuestion.explanation
+                    }
                   </p>
                 </>
               )}
+
           </aside>
+
         </section>
 
         <footer className="mansub-training-footer">
-          {questions.map((question, index) => (
-            <span
-              key={question.id}
-              className={
-                index === questionIndex
-                  ? "active"
-                  : index < questionIndex
-                    ? "completed"
-                    : ""
-              }
-            >
-              {index + 1}
-            </span>
-          ))}
+
+          {questions.map(
+            (question, index) => (
+              <span
+                key={question.id}
+                className={
+                  index === questionIndex
+                    ? "active"
+                    : index < questionIndex
+                      ? "completed"
+                      : ""
+                }
+              >
+                {index + 1}
+              </span>
+            )
+          )}
+
         </footer>
+
       </section>
+
     </main>
   );
 }

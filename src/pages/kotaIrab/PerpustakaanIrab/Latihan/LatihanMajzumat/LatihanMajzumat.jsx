@@ -113,7 +113,10 @@ export default function LatihanMajzumat() {
     100;
 
   function chooseAnswer(option) {
-    if (selectedAnswer || phase !== "playing") {
+    if (
+      selectedAnswer ||
+      phase !== "playing"
+    ) {
       return;
     }
 
@@ -123,23 +126,44 @@ export default function LatihanMajzumat() {
       option === currentQuestion.answer;
 
     const updatedCorrectCount =
-      correctCount + (isCorrect ? 1 : 0);
+      correctCount +
+      (isCorrect ? 1 : 0);
 
     const updatedWrongCount =
-      wrongCount + (isCorrect ? 0 : 1);
+      wrongCount +
+      (isCorrect ? 0 : 1);
 
     if (isCorrect) {
-      setCorrectCount(updatedCorrectCount);
+      setCorrectCount(
+        updatedCorrectCount
+      );
     } else {
-      setWrongCount(updatedWrongCount);
+      setWrongCount(
+        updatedWrongCount
+      );
     }
 
     window.setTimeout(() => {
       if (isLastQuestion) {
-        localStorage.setItem(
-          "latihanMajzumatDone",
-          "true"
-        );
+        /*
+         * MAJZUM ialah latihan terakhir.
+         *
+         * Hanya 10/10 dianggap lulus.
+         */
+        const passed =
+          updatedCorrectCount ===
+          questions.length;
+
+        if (passed) {
+          localStorage.setItem(
+            "latihanMajzumatDone",
+            "true"
+          );
+        } else {
+          localStorage.removeItem(
+            "latihanMajzumatDone"
+          );
+        }
 
         setPhase("result");
         return;
@@ -158,7 +182,9 @@ export default function LatihanMajzumat() {
       return "majzum-answer";
     }
 
-    if (option === currentQuestion.answer) {
+    if (
+      option === currentQuestion.answer
+    ) {
       return "majzum-answer correct";
     }
 
@@ -173,43 +199,108 @@ export default function LatihanMajzumat() {
     window.location.reload();
   }
 
+  /* =======================================================
+     RESULT
+  ======================================================= */
+
   if (phase === "result") {
+    const passed =
+      correctCount === questions.length;
+
     return (
       <main className="majzum-training-screen">
+
         <section className="majzum-result-card">
+
           <span className="majzum-result-icon">
-            📖
+            {passed ? "🏆" : "📖"}
           </span>
 
           <p className="majzum-result-kicker">
             LATIHAN SELESAI
           </p>
 
-          <h1>Latihan Majzumat</h1>
+          <h1>
+            Latihan Majzumat
+          </h1>
 
           <p>
-            Anda telah menjawab semua soalan
-            latihan.
+            {passed
+              ? "Tahniah! Anda telah menguasai latihan Majzumat."
+              : "Latihan telah selesai. Sila cuba lagi untuk mendapatkan 10/10."
+            }
           </p>
 
           <div className="majzum-result-score">
+
             <div>
               <span>Betul</span>
-              <strong>{correctCount}</strong>
+
+              <strong>
+                {correctCount}
+              </strong>
             </div>
 
             <div>
               <span>Belum tepat</span>
-              <strong>{wrongCount}</strong>
+
+              <strong>
+                {wrongCount}
+              </strong>
             </div>
 
             <div>
               <span>Jumlah</span>
-              <strong>{questions.length}</strong>
+
+              <strong>
+                {questions.length}
+              </strong>
             </div>
+
+          </div>
+
+          <div
+            className={
+              passed
+                ? "majzum-result-message success"
+                : "majzum-result-message retry"
+            }
+          >
+
+            {passed ? (
+              <>
+                <strong>
+                  ✓ LATIHAN LULUS
+                </strong>
+
+                <p>
+                  Semua asas I‘rab telah
+                  diselesaikan.
+                </p>
+
+                <p>
+                  Lorong Latihan kini
+                  boleh dibuka.
+                </p>
+              </>
+            ) : (
+              <>
+                <strong>
+                  BELUM LULUS
+                </strong>
+
+                <p>
+                  Anda perlu mendapat
+                  10/10 untuk membuka
+                  Lorong Latihan.
+                </p>
+              </>
+            )}
+
           </div>
 
           <div className="majzum-result-actions">
+
             <button
               type="button"
               onClick={restartQuiz}
@@ -220,7 +311,9 @@ export default function LatihanMajzumat() {
             <button
               type="button"
               onClick={() =>
-                navigate("/kitab-majzumat")
+                navigate(
+                  "/kitab-majzum"
+                )
               }
             >
               Kembali ke Kitab
@@ -229,38 +322,59 @@ export default function LatihanMajzumat() {
             <button
               type="button"
               onClick={() =>
-                navigate("/perpustakaan-irab")
+                navigate(
+                  "/perpustakaan-irab"
+                )
               }
             >
               Perpustakaan
             </button>
+
           </div>
+
         </section>
+
       </main>
     );
   }
 
+  /* =======================================================
+     LATIHAN
+  ======================================================= */
+
   return (
     <main className="majzum-training-screen">
+
       <section className="majzum-training-card">
+
         <header className="majzum-training-header">
+
           <button
             type="button"
             onClick={() =>
-              navigate("/kitab-majzumat")
+              navigate(
+                "/kitab-majzumat"
+              )
             }
           >
             ← Kembali
           </button>
 
           <div>
-            <span>LATIHAN KITAB 3</span>
-            <h1>MAJZUMAT</h1>
+            <span>
+              LATIHAN KITAB 4
+            </span>
+
+            <h1>
+              MAJZUMAT
+            </h1>
           </div>
 
           <strong>
-            {questionIndex + 1}/{questions.length}
+            {questionIndex + 1}/
+            {questions.length}
           </strong>
+
         </header>
 
         <div className="majzum-progress-track">
@@ -272,51 +386,64 @@ export default function LatihanMajzumat() {
         </div>
 
         <section className="majzum-question-area">
-         <div className="majzum-question-panel">
-  <span className="majzum-question-number">
-    Soalan {questionIndex + 1}
-  </span>
 
-  <div className="majzum-question-content">
-    <h2 className="majzum-question-title">
-      {renderMixedText(
-        currentQuestion.question
-      )}
-    </h2>
+          <div className="majzum-question-panel">
 
-    {currentQuestion.arabic && (
-      <>
-        <span
-          className="majzum-question-divider"
-          aria-hidden="true"
-        />
+            <span className="majzum-question-number">
+              Soalan {questionIndex + 1}
+            </span>
 
-        <p
-          className="majzum-question-arabic"
-          dir="rtl"
-          lang="ar"
-        >
-          {currentQuestion.arabic}
-        </p>
-      </>
-    )}
-  </div>
-</div>
+            <div className="majzum-question-content">
+
+              <h2 className="majzum-question-title">
+                {renderMixedText(
+                  currentQuestion.question
+                )}
+              </h2>
+
+              {currentQuestion.arabic && (
+                <>
+                  <span
+                    className="majzum-question-divider"
+                    aria-hidden="true"
+                  />
+
+                  <p
+                    className="majzum-question-arabic"
+                    dir="rtl"
+                    lang="ar"
+                  >
+                    {currentQuestion.arabic}
+                  </p>
+                </>
+              )}
+
+            </div>
+
+          </div>
 
           <div className="majzum-answer-list">
+
             {currentQuestion.options.map(
               (option, index) => (
                 <button
                   key={`${option}-${index}`}
                   type="button"
-                  className={getAnswerClass(option)}
-                  disabled={Boolean(selectedAnswer)}
+                  className={getAnswerClass(
+                    option
+                  )}
+                  disabled={Boolean(
+                    selectedAnswer
+                  )}
                   onClick={() =>
                     chooseAnswer(option)
                   }
                 >
+
                   <span>
-                    {String.fromCharCode(65 + index)}
+                    {String.fromCharCode(
+                      65 + index
+                    )}
                   </span>
 
                   <strong
@@ -326,13 +453,18 @@ export default function LatihanMajzumat() {
                   >
                     {option}
                   </strong>
+
                 </button>
               )
             )}
+
           </div>
 
           <aside className="majzum-status-panel">
-            <span>Status Jawapan</span>
+
+            <span>
+              Status Jawapan
+            </span>
 
             {!selectedAnswer && (
               <strong>
@@ -349,8 +481,8 @@ export default function LatihanMajzumat() {
                   </strong>
 
                   <p className="majzum-status-explanation">
-                     {renderMixedText(
-                     currentQuestion.explanation
+                    {renderMixedText(
+                      currentQuestion.explanation
                     )}
                   </p>
                 </>
@@ -365,30 +497,40 @@ export default function LatihanMajzumat() {
                   </strong>
 
                   <p>
-                    {currentQuestion.explanation}
+                    {
+                      currentQuestion.explanation
+                    }
                   </p>
                 </>
               )}
+
           </aside>
+
         </section>
 
         <footer className="majzum-training-footer">
-          {questions.map((question, index) => (
-            <span
-              key={question.id}
-              className={
-                index === questionIndex
-                  ? "active"
-                  : index < questionIndex
-                    ? "completed"
-                    : ""
-              }
-            >
-              {index + 1}
-            </span>
-          ))}
+
+          {questions.map(
+            (question, index) => (
+              <span
+                key={question.id}
+                className={
+                  index === questionIndex
+                    ? "active"
+                    : index < questionIndex
+                      ? "completed"
+                      : ""
+                }
+              >
+                {index + 1}
+              </span>
+            )
+          )}
+
         </footer>
+
       </section>
+
     </main>
   );
 }

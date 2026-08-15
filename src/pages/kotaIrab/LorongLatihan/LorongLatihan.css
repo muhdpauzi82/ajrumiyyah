@@ -1,7 +1,8 @@
-/* =====================================================
+/* =========================================================
    LORONG LATIHAN I‘RAB
-   Background penuh + empat kad React
-===================================================== */
+   KANVAS ASAS : 1600 × 900
+   SEMUA PAPARAN : LANDSCAPE
+========================================================= */
 
 * {
   box-sizing: border-box;
@@ -20,9 +21,10 @@ button {
   font: inherit;
 }
 
-/* =====================================================
+
+/* =========================================================
    SKRIN UTAMA
-===================================================== */
+========================================================= */
 
 .lorong-page {
   position: fixed;
@@ -36,19 +38,26 @@ button {
 
   overflow: hidden;
 
-  background:
-    radial-gradient(
-      circle at center,
-      #2f6959,
-      #082d23 72%
-    );
+  background: #082d23;
 }
+
+
+/* =========================================================
+   KANVAS 1600 × 900
+========================================================= */
 
 .lorong-frame {
   position: relative;
 
-  width: min(100vw, calc(100dvh * 16 / 9));
-  height: min(100dvh, calc(100vw * 9 / 16));
+  width: min(
+    100vw,
+    calc(100dvh * 16 / 9)
+  );
+
+  aspect-ratio: 16 / 9;
+
+  max-width: 100vw;
+  max-height: 100dvh;
 
   overflow: hidden;
   isolation: isolate;
@@ -57,9 +66,10 @@ button {
   container-name: lorong-frame;
 }
 
-/* =====================================================
+
+/* =========================================================
    BACKGROUND
-===================================================== */
+========================================================= */
 
 .lorong-bg {
   position: absolute;
@@ -69,6 +79,12 @@ button {
   height: 100%;
 
   display: block;
+
+  /*
+    Background asal ialah 1600 × 900.
+    Jangan gunakan cover kerana kedudukan hotspot
+    perlu kekal sepadan dengan background.
+  */
   object-fit: fill;
 
   pointer-events: none;
@@ -77,9 +93,10 @@ button {
   z-index: 0;
 }
 
-/* =====================================================
-   KEMAJUAN KANAN ATAS
-===================================================== */
+
+/* =========================================================
+   KEMAJUAN
+========================================================= */
 
 .lorong-progress-overlay {
   position: absolute;
@@ -98,6 +115,7 @@ button {
   gap: 0.65cqw;
 
   color: #123f33;
+
   text-align: center;
 
   z-index: 8;
@@ -110,26 +128,28 @@ button {
     serif;
 
   font-size:
-    clamp(16px, 2cqw, 34px);
+    clamp(14px, 2cqw, 34px);
 
   font-weight: 900;
+
   line-height: 1;
 }
 
 .lorong-progress-dots {
+  position: relative;
+
   width: 88%;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  position: relative;
 }
 
 .lorong-progress-dots::before {
   content: "";
 
   position: absolute;
+
   left: 5%;
   right: 5%;
   top: 50%;
@@ -145,7 +165,9 @@ button {
 }
 
 .lorong-progress-dots span {
-  width: clamp(8px, 1cqw, 16px);
+  width:
+    clamp(7px, 1cqw, 16px);
+
   aspect-ratio: 1;
 
   display: block;
@@ -178,12 +200,13 @@ button {
 
   box-shadow:
     0 0 0.75cqw
-      rgba(232, 192, 63, 0.65);
+    rgba(232, 192, 63, 0.65);
 }
 
-/* =====================================================
+
+/* =========================================================
    EMPAT KAD LATIHAN
-===================================================== */
+========================================================= */
 
 .lorong-card-grid {
   position: absolute;
@@ -195,6 +218,7 @@ button {
   height: 43.5%;
 
   display: grid;
+
   grid-template-columns:
     repeat(4, minmax(0, 1fr));
 
@@ -202,6 +226,11 @@ button {
 
   z-index: 7;
 }
+
+
+/* =========================================================
+   KAD
+========================================================= */
 
 .lorong-card {
   position: relative;
@@ -222,6 +251,7 @@ button {
   overflow: hidden;
 
   color: #344d41;
+
   text-align: center;
 
   border:
@@ -263,13 +293,15 @@ button {
     1px solid
     rgba(190, 164, 101, 0.25);
 
-  border-radius:
-    inherit;
+  border-radius: inherit;
 
   pointer-events: none;
 }
 
-/* Warna setiap kad */
+
+/* =========================================================
+   WARNA SETIAP KAD
+========================================================= */
 
 .lorong-card-keadaan {
   --card-accent: #25834d;
@@ -291,6 +323,11 @@ button {
   --card-light: #f7e4d5;
 }
 
+
+/* =========================================================
+   HOVER KAD TERBUKA
+========================================================= */
+
 .lorong-card.unlocked:hover {
   transform:
     translateY(-2.2%)
@@ -309,6 +346,11 @@ button {
       rgba(58, 39, 10, 0.2);
 }
 
+
+/* =========================================================
+   KAD TERKUNCI
+========================================================= */
+
 .lorong-card.locked {
   cursor: not-allowed;
 
@@ -318,6 +360,11 @@ button {
     saturate(0.55)
     brightness(0.94);
 }
+
+
+/* =========================================================
+   KAD SELESAI
+========================================================= */
 
 .lorong-card.completed {
   border-color: #55a96c;
@@ -329,9 +376,10 @@ button {
       rgba(84, 188, 104, 0.09);
 }
 
-/* =====================================================
+
+/* =========================================================
    NOMBOR KAD
-===================================================== */
+========================================================= */
 
 .lorong-card-number {
   position: absolute;
@@ -340,6 +388,7 @@ button {
   top: 3.5%;
 
   width: 3.2cqw;
+
   aspect-ratio: 1;
 
   display: grid;
@@ -348,7 +397,8 @@ button {
   color: #ffffff;
 
   border:
-    2px solid rgba(255, 255, 255, 0.72);
+    2px solid
+    rgba(255, 255, 255, 0.72);
 
   border-radius: 50%;
 
@@ -361,22 +411,25 @@ button {
 
   font-family:
     Georgia,
+    "Times New Roman",
     serif;
 
   font-size:
-    clamp(12px, 1.6cqw, 27px);
+    clamp(10px, 1.6cqw, 27px);
 
   font-weight: 900;
 
   z-index: 3;
 }
 
-/* =====================================================
+
+/* =========================================================
    IKON KAD
-===================================================== */
+========================================================= */
 
 .lorong-card-icon-wrap {
   width: 5.7cqw;
+
   aspect-ratio: 1;
 
   display: grid;
@@ -405,31 +458,23 @@ button {
   height: 68%;
 
   display: block;
+
   object-fit: contain;
 
   pointer-events: none;
   user-select: none;
 }
 
-.lorong-placeholder-icon {
-  font-family:
-    Georgia,
-    serif;
 
-  font-size:
-    clamp(22px, 3cqw, 49px);
-
-  font-weight: 900;
-}
-
-/* =====================================================
-   TEKS KAD
-===================================================== */
+/* =========================================================
+   TEKS ARAB
+========================================================= */
 
 .lorong-card-arabic {
   width: 100%;
 
-  color: var(--card-accent);
+  color:
+    var(--card-accent);
 
   font-family:
     "Amiri",
@@ -437,16 +482,23 @@ button {
     serif;
 
   font-size:
-    clamp(21px, 2.5cqw, 42px);
+    clamp(18px, 2.5cqw, 42px);
 
   font-weight: 700;
+
   line-height: 1.2;
 }
+
+
+/* =========================================================
+   TAJUK
+========================================================= */
 
 .lorong-card-title {
   margin-top: 0.35cqw;
 
-  color: var(--card-accent);
+  color:
+    var(--card-accent);
 
   font-family:
     Georgia,
@@ -454,11 +506,17 @@ button {
     serif;
 
   font-size:
-    clamp(11px, 1.25cqw, 21px);
+    clamp(10px, 1.25cqw, 21px);
 
   font-weight: 900;
+
   line-height: 1.2;
 }
+
+
+/* =========================================================
+   GARIS PEMISAH
+========================================================= */
 
 .lorong-card-divider {
   width: 72%;
@@ -479,6 +537,11 @@ button {
   opacity: 0.5;
 }
 
+
+/* =========================================================
+   HURAIAN
+========================================================= */
+
 .lorong-card-description {
   max-width: 92%;
 
@@ -498,9 +561,10 @@ button {
   line-height: 1.4;
 }
 
-/* =====================================================
+
+/* =========================================================
    TANDA SELESAI
-===================================================== */
+========================================================= */
 
 .lorong-completed-badge {
   position: absolute;
@@ -509,6 +573,7 @@ button {
   top: 4%;
 
   width: 2.5cqw;
+
   aspect-ratio: 1;
 
   display: grid;
@@ -540,9 +605,10 @@ button {
   z-index: 4;
 }
 
-/* =====================================================
-   HOTSPOT BUTANG BAWAH
-===================================================== */
+
+/* =========================================================
+   BUTANG SELESAI / GATE
+========================================================= */
 
 .lorong-complete-hotspot {
   position: absolute;
@@ -556,6 +622,7 @@ button {
   padding: 0;
 
   border: 0;
+
   border-radius:
     clamp(15px, 1.6cqw, 26px);
 
@@ -584,7 +651,10 @@ button {
     rgba(255, 225, 111, 0.08);
 }
 
-/* Kiraan dinamik di atas teks background */
+
+/* =========================================================
+   KIRAAN
+========================================================= */
 
 .lorong-complete-count {
   position: absolute;
@@ -596,10 +666,11 @@ button {
 
   font-family:
     Georgia,
+    "Times New Roman",
     serif;
 
   font-size:
-    clamp(10px, 1.22cqw, 20px);
+    clamp(9px, 1.22cqw, 20px);
 
   font-weight: 900;
 
@@ -608,9 +679,10 @@ button {
   z-index: 13;
 }
 
-/* =====================================================
+
+/* =========================================================
    FOCUS
-===================================================== */
+========================================================= */
 
 .lorong-card:focus-visible,
 .lorong-complete-hotspot:focus-visible {
@@ -622,42 +694,196 @@ button {
     clamp(2px, 0.16cqw, 3px);
 }
 
-/* =====================================================
-   ANIMASI
-===================================================== */
+
+/* =========================================================
+   LORONG TERKUNCI
+   Digunakan jika gate belum dibuka
+========================================================= */
+
+.lorong-locked-overlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 4%;
+
+  background:
+    rgba(4, 35, 27, 0.68);
+
+  z-index: 30;
+}
+
+.lorong-locked-card {
+  width: min(520px, 70%);
+
+  padding:
+    clamp(24px, 3cqw, 48px);
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fffdf2,
+      #f3e8c6
+    );
+
+  border:
+    clamp(1px, 0.16cqw, 3px)
+    solid #c99a32;
+
+  border-radius:
+    clamp(16px, 1.8cqw, 28px);
+
+  box-shadow:
+    0 1.2cqw 3cqw
+      rgba(0, 0, 0, 0.38),
+    inset 0 0 1.2cqw
+      rgba(255, 255, 255, 0.7);
+
+  color: #214437;
+}
+
+.lorong-locked-icon {
+  display: block;
+
+  margin-bottom: 0.7cqw;
+
+  font-size:
+    clamp(30px, 4cqw, 64px);
+}
+
+.lorong-locked-kicker {
+  margin: 0 0 0.4cqw;
+
+  color: #9a7423;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(10px, 1.1cqw, 18px);
+
+  font-weight: 900;
+
+  letter-spacing:
+    0.12em;
+}
+
+.lorong-locked-card h1 {
+  margin:
+    0 0 1cqw;
+
+  color: #164936;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(22px, 2.6cqw, 42px);
+
+  font-weight: 900;
+}
+
+.lorong-locked-card p {
+  margin:
+    0 auto 1.5cqw;
+
+  max-width: 90%;
+
+  color: #4b574f;
+
+  font-size:
+    clamp(11px, 1.15cqw, 18px);
+
+  line-height: 1.6;
+}
+
+.lorong-locked-card p strong {
+  color: #176044;
+}
+
+.lorong-locked-card button {
+  border:
+    1px solid #b68a2d;
+
+  border-radius: 999px;
+
+  padding:
+    clamp(9px, 0.9cqw, 15px)
+    clamp(16px, 1.7cqw, 28px);
+
+  color: #fff8dc;
+
+  background:
+    linear-gradient(
+      180deg,
+      #19704f,
+      #0d4b37
+    );
+
+  font-size:
+    clamp(9px, 0.9cqw, 15px);
+
+  font-weight: 900;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0.4cqw 0.8cqw
+      rgba(0, 0, 0, 0.2);
+}
+
+.lorong-locked-card button:hover {
+  filter: brightness(1.08);
+}
+
+.lorong-locked-card button:active {
+  transform: scale(0.98);
+}
+
+
+/* =========================================================
+   ANIMASI GATE
+========================================================= */
 
 @keyframes lorong-complete-glow {
   0%,
   100% {
     box-shadow:
       0 0 0.65cqw
-        rgba(255, 196, 48, 0.24);
+      rgba(255, 196, 48, 0.24);
   }
 
   50% {
     box-shadow:
       0 0 1.6cqw
-        rgba(255, 201, 55, 0.72);
+      rgba(255, 201, 55, 0.72);
   }
 }
 
-/* =====================================================
-   TELEFON / TABLET MELINTANG
-===================================================== */
+
+/* =========================================================
+   SKRIN LANDSCAPE KECIL
+   HP / TABLET
+========================================================= */
 
 @media
   (orientation: landscape)
-  and (max-width: 950px),
-  (orientation: landscape)
-  and (max-height: 520px) {
+  and (max-width: 950px) {
 
   .lorong-frame {
     width: 100vw;
-    height: 100dvh;
-  }
+    height: auto;
 
-  .lorong-bg {
-    object-fit: cover;
+    aspect-ratio: 16 / 9;
   }
 
   .lorong-card-grid {
@@ -681,7 +907,7 @@ button {
     width: 4.2vw;
 
     font-size:
-      clamp(9px, 1.8vw, 16px);
+      clamp(8px, 1.8vw, 16px);
   }
 
   .lorong-card-icon-wrap {
@@ -690,7 +916,7 @@ button {
 
   .lorong-card-arabic {
     font-size:
-      clamp(17px, 3.4vw, 29px);
+      clamp(15px, 3.4vw, 29px);
   }
 
   .lorong-card-title {
@@ -713,7 +939,7 @@ button {
 
   .lorong-progress-overlay > strong {
     font-size:
-      clamp(13px, 2.6vw, 23px);
+      clamp(12px, 2.6vw, 23px);
   }
 
   .lorong-complete-hotspot {
@@ -726,67 +952,58 @@ button {
   }
 }
 
-/* =====================================================
-   TELEFON MENEGAK
-===================================================== */
 
-@media (orientation: portrait) {
-  .lorong-page::after {
-    content:
-      "Sila pusingkan telefon kepada paparan melintang";
+/* =========================================================
+   SKRIN LANDSCAPE SANGAT RENDAH
+   Contoh telefon dengan tinggi pendek
+========================================================= */
 
-    position: fixed;
-    inset: 0;
-
-    z-index: 9999;
-
-    display: grid;
-    place-items: center;
-
-    padding: 32px;
-
-    color: #fff1b1;
-    text-align: center;
-
-    background:
-      radial-gradient(
-        circle at center,
-        #176044,
-        #082a21
-      );
-
-    font-size:
-      clamp(18px, 5vw, 28px);
-
-    font-weight: 900;
-    line-height: 1.5;
-  }
+@media
+  (orientation: landscape)
+  and (max-height: 520px) {
 
   .lorong-frame {
-    visibility: hidden;
+    width: 100vw;
+    height: auto;
+
+    aspect-ratio: 16 / 9;
   }
 }
 
-/* =====================================================
+
+/* =========================================================
    PERANTI SENTUH
-===================================================== */
+========================================================= */
 
 @media (hover: none) {
+
   .lorong-card.unlocked:hover {
     transform: none;
     filter: none;
+
+    box-shadow:
+      0 0.7cqw 1.5cqw
+        rgba(79, 49, 12, 0.16),
+      inset 0 0 1.2cqw
+        rgba(255, 255, 255, 0.58);
   }
 
   .lorong-card:active {
     transform: scale(0.985);
   }
+
+  .lorong-complete-hotspot.ready:hover {
+    background: transparent;
+  }
 }
 
-/* =====================================================
+
+/* =========================================================
    KURANGKAN ANIMASI
-===================================================== */
+========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
+
   .lorong-card,
   .lorong-progress-dots span,
   .lorong-complete-hotspot {
