@@ -1,7 +1,10 @@
 import LearningScene from "../../../engine/learning/LearningScene";
 import naibFailDialog from "./NaibFailDialog";
+import { useNavigate } from "react-router-dom";
 
 export default function NaibFail() {
+  const navigate = useNavigate();
+
   const playerName =
     localStorage.getItem("playerName") || "Pelajar";
 
@@ -11,7 +14,7 @@ export default function NaibFail() {
       "true"
     );
 
-    window.location.href = "/marfuaat-learning";
+    navigate("/animasi-naib-fail");
   }
 
   return (

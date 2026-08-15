@@ -1,0 +1,781 @@
+/* =========================================================
+   ANIMASI MUBTADA'
+   KOTA MARFU'AT
+   ========================================================= */
+
+.mubtada-animation-screen {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100dvh;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  padding: 2dvh 4vw;
+
+  background:
+    url("/images/kotaMarfuat/bg-marfuat.webp")
+    center / cover no-repeat;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+
+/* =========================================================
+   SHADE
+   ========================================================= */
+
+.mubtada-animation-shade {
+  position: absolute;
+  inset: 0;
+
+  background:
+    rgba(0, 35, 28, 0.25);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.mubtada-animation-header {
+  position: relative;
+  z-index: 2;
+
+  flex: 0 0 auto;
+
+  width: 100%;
+
+  text-align: center;
+}
+
+.mubtada-animation-kicker {
+  display: inline-block;
+
+  padding: 6px 20px;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius: 25px;
+
+  background: #08735a;
+
+  color: #fff;
+
+  font-family:
+    "Noto Naskh Arabic",
+    "Amiri",
+    serif;
+
+  font-size: clamp(
+    0.75rem,
+    1.7dvh,
+    1rem
+  );
+
+  font-weight: 700;
+}
+
+.mubtada-animation-header h1 {
+  margin: 7px 0 0;
+
+  color: #fff;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    1rem,
+    3dvh,
+    2rem
+  );
+
+  line-height: 1.1;
+
+  text-shadow:
+    0 3px 8px
+    rgba(0, 0, 0, 0.55);
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.mubtada-animation-card {
+  position: relative;
+  z-index: 2;
+
+  width: min(760px, 82vw);
+
+  flex: 1 1 auto;
+
+  min-height: 0;
+
+  margin:
+    2dvh 0 1dvh;
+
+  padding:
+    2dvh 3vw;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 253, 242, 0.97),
+      rgba(247, 235, 198, 0.97)
+    );
+
+  box-shadow:
+    0 15px 40px
+    rgba(0, 0, 0, 0.3);
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   LABEL
+   ========================================================= */
+
+.mubtada-stage-label {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  padding:
+    7px 22px;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius: 25px;
+
+  background: #08735a;
+
+  color: #fff;
+}
+
+.mubtada-stage-label span {
+  font-family:
+    "Noto Naskh Arabic",
+    "Amiri",
+    serif;
+
+  font-size:
+    clamp(
+      0.9rem,
+      2.3dvh,
+      1.3rem
+    );
+}
+
+.mubtada-stage-label strong {
+  font-size:
+    clamp(
+      0.65rem,
+      1.8dvh,
+      0.9rem
+    );
+}
+
+
+/* =========================================================
+   PERKATAAN ARAB
+   ========================================================= */
+
+.mubtada-full-sentence {
+  display: flex;
+
+  align-items: baseline;
+  justify-content: center;
+
+  margin-top:
+    2dvh;
+
+  min-height:
+    10dvh;
+
+  direction: rtl;
+
+  font-family:
+    "Noto Naskh Arabic",
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+}
+
+.mubtada-focus-word {
+  display: inline-flex;
+
+  align-items: baseline;
+
+  color: #08735a;
+
+  font-size:
+    clamp(
+      3rem,
+      8dvh,
+      5rem
+    );
+
+  font-weight: 800;
+
+  line-height: 1;
+}
+
+.mubtada-word-base {
+  color: #08735a;
+}
+
+.mubtada-changing-ending {
+  color: #d9483e;
+
+  font-weight: 900;
+
+  animation:
+    mubtada-ending-pop
+    0.45s ease;
+}
+
+@keyframes mubtada-ending-pop {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   TANDA AKHIR
+   ========================================================= */
+
+.mubtada-sign-information {
+  display: inline-flex;
+
+  align-items: center;
+
+  margin-top:
+    1dvh;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    #d8ad3c;
+
+  border-radius: 24px;
+}
+
+.mubtada-sign-information span {
+  padding:
+    7px 16px;
+
+  background: #08735a;
+
+  color: #fff;
+
+  font-size:
+    clamp(
+      0.55rem,
+      1.6dvh,
+      0.8rem
+    );
+
+  font-weight: 700;
+}
+
+.mubtada-sign-information strong {
+  padding:
+    7px 16px;
+
+  background: #f2c94c;
+
+  color: #624c12;
+
+  font-size:
+    clamp(
+      0.55rem,
+      1.6dvh,
+      0.8rem
+    );
+}
+
+
+/* =========================================================
+   NOTA
+   ========================================================= */
+
+.mubtada-stage-note {
+  width: min(650px, 90%);
+
+  margin:
+    1.5dvh auto 0;
+
+  color: #283e37;
+
+  text-align: center;
+
+  font-size:
+    clamp(
+      0.6rem,
+      1.8dvh,
+      0.95rem
+    );
+
+  font-weight: 600;
+
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   PERBANDINGAN
+   ========================================================= */
+
+.mubtada-comparison-flow {
+  width: min(620px, 90%);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap:
+    clamp(
+      8px,
+      2vw,
+      24px
+    );
+
+  margin-top:
+    1.5dvh;
+
+  padding:
+    7px 14px;
+
+  box-sizing: border-box;
+
+  border-radius: 13px;
+
+  background:
+    rgba(222, 214, 173, 0.55);
+
+  font-family:
+    "Noto Naskh Arabic",
+    "Amiri",
+    serif;
+
+  font-size:
+    clamp(
+      1rem,
+      3.2dvh,
+      1.8rem
+    );
+}
+
+.mubtada-comparison-flow span {
+  padding:
+    3px 10px;
+
+  border-radius: 9px;
+
+  color: #514b3c;
+
+  transition:
+    0.25s ease;
+}
+
+.mubtada-comparison-flow span.current {
+  background: #08735a;
+
+  color: #fff;
+
+  box-shadow:
+    0 5px 12px
+    rgba(0, 0, 0, 0.18);
+}
+
+.mubtada-comparison-flow b {
+  color: #b78619;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 0.8em;
+}
+
+
+/* =========================================================
+   FOOTER / BUTANG
+   ========================================================= */
+
+.mubtada-animation-actions {
+  position: relative;
+  z-index: 3;
+
+  flex: 0 0 auto;
+
+  width: min(900px, 90vw);
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    auto
+    1fr;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-bottom: 1dvh;
+}
+
+.mubtada-animation-button {
+  min-width: 145px;
+
+  padding:
+    9px 20px;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius: 25px;
+
+  font-size:
+    clamp(
+      0.6rem,
+      1.8dvh,
+      0.9rem
+    );
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.mubtada-animation-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 6px 15px
+    rgba(0, 0, 0, 0.2);
+}
+
+.mubtada-animation-button.secondary {
+  justify-self: start;
+
+  background: #fffdf0;
+
+  color: #164b3d;
+}
+
+.mubtada-animation-button.primary {
+  justify-self: end;
+
+  background: #08735a;
+
+  color: #fff;
+}
+
+
+/* =========================================================
+   INDIKATOR
+   ========================================================= */
+
+.mubtada-stage-indicator {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 7px;
+}
+
+.mubtada-stage-book {
+  width: 38px;
+  height: 38px;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 8px;
+
+  background:
+    rgba(255, 255, 255, 0.55);
+
+  font-size: 1.15rem;
+
+  opacity: 0.55;
+
+  transition:
+    0.25s ease;
+}
+
+.mubtada-stage-book.done {
+  opacity: 0.8;
+}
+
+.mubtada-stage-book.active {
+  opacity: 1;
+
+  background: #fff;
+
+  box-shadow:
+    0 0 15px
+    rgba(255, 215, 80, 0.8);
+
+  transform:
+    translateY(-2px);
+}
+
+
+/* =========================================================
+   HP / TABLET LANDSCAPE
+   ========================================================= */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+  .mubtada-animation-screen {
+    padding:
+      1dvh 2vw;
+  }
+
+  .mubtada-animation-kicker {
+    padding:
+      4px 14px;
+
+    font-size:
+      0.6rem;
+  }
+
+  .mubtada-animation-header h1 {
+    margin-top: 3px;
+
+    font-size:
+      1.05rem;
+  }
+
+  .mubtada-animation-card {
+    width: 86vw;
+
+    margin:
+      1dvh 0;
+
+    padding:
+      1.2dvh 2vw;
+
+    border-radius: 16px;
+  }
+
+  .mubtada-stage-label {
+    padding:
+      4px 14px;
+
+    gap: 7px;
+  }
+
+  .mubtada-stage-label span {
+    font-size:
+      0.8rem;
+  }
+
+  .mubtada-stage-label strong {
+    font-size:
+      0.6rem;
+  }
+
+  .mubtada-full-sentence {
+    min-height:
+      7dvh;
+
+    margin-top:
+      1dvh;
+  }
+
+  .mubtada-focus-word {
+    font-size:
+      clamp(
+        2.2rem,
+        7dvh,
+        3.5rem
+      );
+  }
+
+  .mubtada-sign-information {
+    margin-top:
+      0.6dvh;
+  }
+
+  .mubtada-sign-information span,
+  .mubtada-sign-information strong {
+    padding:
+      5px 10px;
+
+    font-size:
+      0.58rem;
+  }
+
+  .mubtada-stage-note {
+    margin-top:
+      0.8dvh;
+
+    font-size:
+      0.62rem;
+
+    line-height:
+      1.25;
+  }
+
+  .mubtada-comparison-flow {
+    margin-top:
+      0.8dvh;
+
+    padding:
+      4px 9px;
+
+    gap:
+      7px;
+
+    font-size:
+      1.05rem;
+  }
+
+  .mubtada-animation-actions {
+    width: 92vw;
+
+    gap: 7px;
+
+    margin-bottom:
+      0.8dvh;
+  }
+
+  .mubtada-animation-button {
+    min-width:
+      105px;
+
+    padding:
+      6px 12px;
+
+    font-size:
+      0.58rem;
+  }
+
+  .mubtada-stage-book {
+    width: 29px;
+    height: 29px;
+
+    font-size:
+      0.8rem;
+  }
+}
+
+
+/* =========================================================
+   HP LANDSCAPE SANGAT KECIL
+   ========================================================= */
+
+@media (max-height: 430px) and (orientation: landscape) {
+
+  .mubtada-animation-screen {
+    padding:
+      0.5dvh 1.5vw;
+  }
+
+  .mubtada-animation-header h1 {
+    font-size:
+      0.9rem;
+  }
+
+  .mubtada-animation-card {
+    margin:
+      0.6dvh 0;
+
+    padding:
+      0.8dvh 1.5vw;
+  }
+
+  .mubtada-focus-word {
+    font-size:
+      clamp(
+        2rem,
+        7dvh,
+        2.8rem
+      );
+  }
+
+  .mubtada-stage-note {
+    font-size:
+      0.55rem;
+
+    line-height:
+      1.15;
+  }
+
+  .mubtada-comparison-flow {
+    font-size:
+      0.9rem;
+  }
+
+  .mubtada-animation-button {
+    min-width:
+      90px;
+
+    padding:
+      5px 8px;
+
+    font-size:
+      0.53rem;
+  }
+
+  .mubtada-stage-book {
+    width: 25px;
+    height: 25px;
+
+    font-size:
+      0.7rem;
+  }
+}

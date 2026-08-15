@@ -11,7 +11,7 @@ export default function Khabar() {
       "true"
     );
 
-    window.location.href = "/marfuaat-learning";
+    window.location.href = "/animasi-khabar";
   }
 
   return (

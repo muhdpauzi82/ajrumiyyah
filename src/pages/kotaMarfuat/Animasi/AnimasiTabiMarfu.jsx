@@ -1,44 +1,44 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import "../styles/AnimasiKhabarInna.css";
+import "../styles/AnimasiTabiMarfu.css";
 
 const stages = [
   {
-    before: "إِنَّ مُحَمَّدًا",
-    word: "مُجْتَهِد",
-    ending: "ٌ",
-    label: "Khabar Inna",
-    arabicLabel: "خَبَرُ إِنَّ",
+    before: "جَاءَ مُحَمَّدٌ",
+    word: "الْمُجْتَهِد",
+    ending: "ُ",
+    label: "Na'at",
+    arabicLabel: "النَّعْتُ",
     sign: "Dhammah",
     note:
-      "مُجْتَهِدٌ ialah خبر إنّ kerana menerangkan keadaan مُحَمَّدًا. خبر إنّ berada dalam keadaan marfu‘ dan tanda رفعnya ialah dhammah.",
+      "الْمُجْتَهِدُ ialah نعت yang mengikuti مُحَمَّدٌ. Oleh sebab مُحَمَّدٌ marfu‘, النعت juga menjadi marfu‘.",
   },
 
   {
-    before: "إِنَّ الطَّالِبَ",
-    word: "مُجْتَهِد",
+    before: "جَاءَ مُحَمَّدٌ",
+    word: "وَخَالِد",
     ending: "ٌ",
-    label: "Khabar Inna",
-    arabicLabel: "خَبَرُ إِنَّ",
+    label: "‘Ataf",
+    arabicLabel: "الْعَطْفُ",
     sign: "Dhammah",
     note:
-      "مُجْتَهِدٌ ialah خبر إنّ. Walaupun اسم إنّ menjadi mansub, خبر إنّ tetap berada dalam keadaan marfu‘.",
+      "وَخَالِدٌ mengikuti مُحَمَّدٌ yang marfu‘. Oleh itu خَالِدٌ juga berada dalam keadaan marfu‘.",
   },
 
   {
-    before: "إِنَّ الْجَوَّ",
-    word: "جَمِيل",
-    ending: "ٌ",
-    label: "Khabar Inna",
-    arabicLabel: "خَبَرُ إِنَّ",
+    before: "جَاءَ مُحَمَّدٌ",
+    word: "نَفْسُه",
+    ending: "ُ",
+    label: "Taukid",
+    arabicLabel: "التَّوْكِيدُ",
     sign: "Dhammah",
     note:
-      "جَمِيلٌ ialah خبر إنّ kerana menyempurnakan makna ayat. Tanda رفعnya ialah dhammah.",
+      "نَفْسُهُ ialah توكيد yang mengikuti مُحَمَّدٌ. Oleh sebab المتبوع marfu‘, التوكيد juga marfu‘.",
   },
 ];
 
-export default function AnimasiKhabarInna() {
+export default function AnimasiTabiMarfu() {
   const navigate = useNavigate();
 
   const [step, setStep] = useState(0);
@@ -57,11 +57,11 @@ export default function AnimasiKhabarInna() {
     }
 
     localStorage.setItem(
-      "khabarInnaAnimasiDone",
+      "tabiMarfuAnimasiDone",
       "true"
     );
 
-    navigate("/latihan-khabar-inna");
+    navigate("/latihan-tabi-marfu");
   }
 
   function previous() {
@@ -72,32 +72,32 @@ export default function AnimasiKhabarInna() {
       return;
     }
 
-    navigate("/kitab-khabar-inna");
+    navigate("/kitab-tabi-marfu");
   }
 
   return (
-    <main className="khabar-inna-animation-screen">
+    <main className="tabi-marfu-animation-screen">
 
-      <div className="khabar-inna-animation-shade" />
+      <div className="tabi-marfu-animation-shade" />
 
-      <header className="khabar-inna-animation-header">
+      <header className="tabi-marfu-animation-header">
 
-        <span className="khabar-inna-animation-kicker">
-          خَبَرُ إِنَّ
+        <span className="tabi-marfu-animation-kicker">
+          التَّابِعُ لِلْمَرْفُوعِ
         </span>
 
         <h1>
-          Perhatikan Khabar Inna yang Marfu‘
+          Perhatikan Tabi‘ yang Mengikuti Marfu‘
         </h1>
 
       </header>
 
       <article
         key={step}
-        className="khabar-inna-animation-card"
+        className="tabi-marfu-animation-card"
       >
 
-        <div className="khabar-inna-stage-label">
+        <div className="tabi-marfu-stage-label">
 
           <span>
             {current.arabicLabel}
@@ -110,24 +110,24 @@ export default function AnimasiKhabarInna() {
         </div>
 
         <div
-          className="khabar-inna-full-sentence"
+          className="tabi-marfu-full-sentence"
           dir="rtl"
           lang="ar"
         >
 
-          <span className="khabar-inna-before">
+          <span className="tabi-marfu-before">
             {current.before}
           </span>
 
-          <span className="khabar-inna-focus-word">
+          <span className="tabi-marfu-focus-word">
 
-            <span className="khabar-inna-word-base">
+            <span className="tabi-marfu-word-base">
               {current.word}
             </span>
 
             <span
               key={`${step}-${current.ending}`}
-              className="khabar-inna-changing-ending"
+              className="tabi-marfu-changing-ending"
             >
               {current.ending}
             </span>
@@ -136,7 +136,7 @@ export default function AnimasiKhabarInna() {
 
         </div>
 
-        <div className="khabar-inna-sign-information">
+        <div className="tabi-marfu-sign-information">
 
           <span>
             Tanda akhir
@@ -148,12 +148,12 @@ export default function AnimasiKhabarInna() {
 
         </div>
 
-        <p className="khabar-inna-stage-note">
+        <p className="tabi-marfu-stage-note">
           {current.note}
         </p>
 
         <div
-          className="khabar-inna-comparison-flow"
+          className="tabi-marfu-comparison-flow"
           dir="rtl"
           lang="ar"
         >
@@ -165,7 +165,7 @@ export default function AnimasiKhabarInna() {
                 : ""
             }
           >
-            مُجْتَهِدٌ
+            النَّعْتُ
           </span>
 
           <b>←</b>
@@ -177,7 +177,7 @@ export default function AnimasiKhabarInna() {
                 : ""
             }
           >
-            مُجْتَهِدٌ
+            الْعَطْفُ
           </span>
 
           <b>←</b>
@@ -189,18 +189,18 @@ export default function AnimasiKhabarInna() {
                 : ""
             }
           >
-            جَمِيلٌ
+            التَّوْكِيدُ
           </span>
 
         </div>
 
       </article>
 
-      <footer className="khabar-inna-animation-actions">
+      <footer className="tabi-marfu-animation-actions">
 
         <button
           type="button"
-          className="khabar-inna-animation-button secondary"
+          className="tabi-marfu-animation-button secondary"
           onClick={(event) => {
             event.stopPropagation();
             previous();
@@ -212,12 +212,12 @@ export default function AnimasiKhabarInna() {
             : "Sebelumnya"}
         </button>
 
-        <div className="khabar-inna-stage-indicator">
+        <div className="tabi-marfu-stage-indicator">
 
           {stages.map((item, index) => (
             <div
               key={item.label + index}
-              className={`khabar-inna-stage-book ${
+              className={`tabi-marfu-stage-book ${
                 index < step
                   ? "done"
                   : index === step
@@ -233,7 +233,7 @@ export default function AnimasiKhabarInna() {
 
         <button
           type="button"
-          className="khabar-inna-animation-button primary"
+          className="tabi-marfu-animation-button primary"
           onClick={(event) => {
             event.stopPropagation();
             next();

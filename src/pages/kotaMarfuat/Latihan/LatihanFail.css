@@ -1,0 +1,564 @@
+/* =========================================================
+   LATIHAN FA'IL
+   KOTA MARFU'AT
+   FRAME 1600 × 900
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden;
+}
+
+/* =========================================================
+   SCREEN
+========================================================= */
+
+.latihan-fail-screen {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100dvh;
+
+  display: grid;
+  place-items: center;
+
+  overflow: hidden;
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.latihan-fail-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    rgba(0, 35, 28, 0.28);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.latihan-fail-panel {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(900px, 82vw);
+
+  max-height: 88dvh;
+
+  padding: 28px 42px;
+
+  overflow: hidden;
+
+  border:
+    2px solid #d8ad3c;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 253, 242, 0.97),
+      rgba(247, 235, 198, 0.97)
+    );
+
+  box-shadow:
+    0 15px 40px
+    rgba(0, 0, 0, 0.28);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.latihan-fail-header {
+  text-align: center;
+}
+
+.latihan-fail-header > span {
+  display: inline-block;
+
+  padding: 7px 20px;
+
+  border-radius: 20px;
+
+  background: #08735a;
+
+  color: #fff;
+
+  font-size: 0.75rem;
+  font-weight: 800;
+
+  letter-spacing: 0.06em;
+}
+
+.latihan-fail-header h1 {
+  margin: 8px 0 2px;
+
+  color: #104c3d;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    1.5rem,
+    2.6vw,
+    2.3rem
+  );
+
+  line-height: 1.1;
+}
+
+.latihan-fail-header p {
+  margin: 4px 0 12px;
+
+  color: #655d4b;
+
+  font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.latihan-fail-progress {
+  width: 100%;
+  height: 8px;
+
+  overflow: hidden;
+
+  border-radius: 10px;
+
+  background: #ddd5b8;
+}
+
+.latihan-fail-progress-fill {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: #19805f;
+
+  transition:
+    width 0.3s ease;
+}
+
+.latihan-fail-question-number {
+  margin-top: 8px;
+
+  text-align: center;
+
+  color: #765a18;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   QUESTION
+========================================================= */
+
+.latihan-fail-card {
+  margin-top: 12px;
+
+  padding: 20px;
+
+  border-radius: 17px;
+
+  background:
+    rgba(255, 255, 255, 0.55);
+
+  border:
+    1px solid
+    rgba(188, 150, 55, 0.5);
+}
+
+.latihan-fail-card h2 {
+  margin: 0 0 16px;
+
+  text-align: center;
+
+  color: #173f34;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    1.15rem,
+    2vw,
+    1.7rem
+  );
+
+  line-height: 1.35;
+}
+
+
+/* =========================================================
+   OPTIONS
+========================================================= */
+
+.latihan-fail-options {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 9px;
+}
+
+.latihan-fail-option {
+  display: flex;
+
+  align-items: center;
+
+  width: 100%;
+
+  min-height: 48px;
+
+  padding: 8px 14px;
+
+  border:
+    1.5px solid
+    #d2b15b;
+
+  border-radius: 12px;
+
+  background:
+    rgba(255, 252, 239, 0.95);
+
+  color: #293f38;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease,
+    border 0.15s ease;
+}
+
+.latihan-fail-option:hover:not(:disabled) {
+  transform: translateX(4px);
+
+  border-color: #08735a;
+
+  background: #eef7ef;
+}
+
+.latihan-fail-option:disabled {
+  cursor: default;
+}
+
+.option-number {
+  flex: 0 0 auto;
+
+  display: grid;
+  place-items: center;
+
+  width: 30px;
+  height: 30px;
+
+  margin-right: 12px;
+
+  border-radius: 50%;
+
+  background: #176e55;
+
+  color: white;
+
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.latihan-fail-option.selected {
+  border-color: #bd8a1e;
+
+  background: #fff1c9;
+}
+
+.latihan-fail-option.correct {
+  border-color: #187451;
+
+  background: #dff1df;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.latihan-fail-footer {
+  margin-top: 12px;
+
+  text-align: center;
+
+  color: #766b55;
+
+  font-size: 0.7rem;
+}
+
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+.latihan-fail-result {
+  position: relative;
+
+  z-index: 3;
+
+  width: min(560px, 82vw);
+
+  padding: 40px;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius: 24px;
+
+  background:
+    rgba(255, 252, 238, 0.97);
+
+  text-align: center;
+
+  box-shadow:
+    0 15px 40px
+    rgba(0, 0, 0, 0.3);
+}
+
+.result-badge {
+  display: inline-block;
+
+  padding: 8px 18px;
+
+  border-radius: 20px;
+
+  background: #08735a;
+
+  color: white;
+
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.latihan-fail-result h1 {
+  margin: 15px 0 5px;
+
+  color: #104c3d;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+}
+
+.result-score {
+  margin: 5px 0;
+
+  color: #b17d16;
+
+  font-size: 2.3rem;
+  font-weight: 800;
+}
+
+.result-text {
+  color: #514d42;
+
+  line-height: 1.5;
+}
+
+.result-button {
+  margin-top: 15px;
+
+  padding: 11px 28px;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius: 25px;
+
+  background: #08735a;
+
+  color: white;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   HP / TABLET LANDSCAPE
+========================================================= */
+
+@media (
+  orientation: landscape
+) and (max-height: 600px) {
+
+  .latihan-fail-panel {
+    width: 84vw;
+
+    max-height: 92dvh;
+
+    padding:
+      14px 24px;
+
+    border-radius: 17px;
+  }
+
+  .latihan-fail-header > span {
+    padding: 4px 12px;
+
+    font-size: 0.55rem;
+  }
+
+  .latihan-fail-header h1 {
+    margin: 4px 0 0;
+
+    font-size: 1.15rem;
+  }
+
+  .latihan-fail-header p {
+    margin: 2px 0 6px;
+
+    font-size: 0.62rem;
+  }
+
+  .latihan-fail-progress {
+    height: 5px;
+  }
+
+  .latihan-fail-question-number {
+    margin-top: 4px;
+
+    font-size: 0.58rem;
+  }
+
+  .latihan-fail-card {
+    margin-top: 6px;
+
+    padding: 10px 14px;
+  }
+
+  .latihan-fail-card h2 {
+    margin-bottom: 8px;
+
+    font-size: 0.95rem;
+  }
+
+  .latihan-fail-options {
+    gap: 5px;
+  }
+
+  .latihan-fail-option {
+    min-height: 31px;
+
+    padding: 4px 9px;
+
+    border-radius: 8px;
+
+    font-size: 0.68rem;
+  }
+
+  .option-number {
+    width: 21px;
+    height: 21px;
+
+    margin-right: 7px;
+
+    font-size: 0.58rem;
+  }
+
+  .latihan-fail-footer {
+    margin-top: 5px;
+
+    font-size: 0.52rem;
+  }
+}
+
+
+/* =========================================================
+   HP LANDSCAPE SANGAT PENDEK
+========================================================= */
+
+@media (
+  orientation: landscape
+) and (max-height: 430px) {
+
+  .latihan-fail-panel {
+    width: 88vw;
+
+    max-height: 94dvh;
+
+    padding:
+      10px 18px;
+  }
+
+  .latihan-fail-header h1 {
+    font-size: 1rem;
+  }
+
+  .latihan-fail-card {
+    padding: 8px 10px;
+  }
+
+  .latihan-fail-card h2 {
+    font-size: 1.0rem;
+
+    margin-bottom: 5px;
+  }
+
+  .latihan-fail-option {
+    min-height: 27px;
+
+    font-size: 1.42rem;
+  }
+
+  .option-number {
+    width: 19px;
+    height: 19px;
+
+    font-size: 0.5rem;
+  }
+}

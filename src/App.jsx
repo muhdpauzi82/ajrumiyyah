@@ -97,23 +97,44 @@ import MarfuatIntro from "./pages/kotaMarfuat/Madrasah/MarfuatIntro";
 import MarfuatMatan from "./pages/kotaMarfuat/Madrasah/MarfuatMatan";
 import MarfuatLearning from "./pages/kotaMarfuat/Madrasah/MarfuatLearning";
 
+
 /* PERPUSTAKAAN */import PerpustakaanMarfuat from "./pages/kotaMarfuat/Perpustakaan/PerpustakaanMarfuat";
 
 import KitabFail from "./pages/kotaMarfuat/Perpustakaan/KitabFail";
 import Fail from "./pages/kotaMarfuat/Kitab/Fail";
 import AnimasiFail  from "./pages/kotaMarfuat/Animasi/AnimasiFail";
+import LatihanFail  from "./pages/kotaMarfuat/Latihan/LatihanFail";
 
 import KitabNaibFail from "./pages/kotaMarfuat/Perpustakaan/KitabNaibFail";
 import NaibFail from "./pages/kotaMarfuat/Kitab/NaibFail";
+import AnimasiNaibFail from "./pages/kotaMarfuat/Animasi/AnimasiNaibFail";
+import LatihanNaibFail  from "./pages/kotaMarfuat/Latihan/LatihanNaibFail";
 
 import KitabMubtada from "./pages/kotaMarfuat/Perpustakaan/KitabMubtada";
 import Mubtada from "./pages/kotaMarfuat/Kitab/Mubtada";
+import AnimasiMubtada  from "./pages/kotaMarfuat/Animasi/AnimasiMubtada";
+import LatihanMubtada  from "./pages/kotaMarfuat/Latihan/LatihanMubtada";
+
 import KitabKhabar from "./pages/kotaMarfuat/Perpustakaan/KitabKhabar";
 import Khabar from "./pages/kotaMarfuat/Kitab/Khabar";
+import AnimasiKhabar from "./pages/kotaMarfuat/Animasi/AnimasiKhabar";
+import LatihanKhabar from "./pages/kotaMarfuat/Latihan/LatihanKhabar";
+
+
 import KitabIsimKana from "./pages/kotaMarfuat/Perpustakaan/KitabIsimKana";
 import IsimKana from "./pages/kotaMarfuat/Kitab/IsimKana";
+import AnimasiIsimKana from "./pages/kotaMarfuat/Animasi/AnimasiIsimKana";
+import LatihanIsimKana  from "./pages/kotaMarfuat/Latihan/LatihanIsimKana";
+
 import KitabKhabarInna from "./pages/kotaMarfuat/Perpustakaan/KitabKhabarInna";
 import KhabarInna from "./pages/kotaMarfuat/Kitab/KhabarInna";
+import AnimasiKhabarInna  from "./pages/kotaMarfuat/Animasi/AnimasiKhabarInna";
+import LatihanKhabarInna  from "./pages/kotaMarfuat/Latihan/LatihanKhabarInna";
+
+import TabiMarfu  from "./pages/kotaMarfuat/Kitab/TabiMarfu";
+import AnimasiTabiMarfu  from "./pages/kotaMarfuat/Animasi/AnimasiTabiMarfu";
+import LatihanTabiMarfu  from "./pages/kotaMarfuat/Latihan/LatihanTabiMarfu";
+
 
 /* LORONG LATIHAN */
 import LorongLatihanMarfuat from "./pages/kotaMarfuat/LorongLatihan/LorongLatihanMarfuat";
@@ -239,6 +260,8 @@ export default function App() {
 <Route  path="/marfuat-intro"  element={<MarfuatIntro />}/>
 <Route  path="/marfuat-matan"  element={<MarfuatMatan />}/>
 <Route  path="/marfuat-learning"  element={<MarfuatLearning />}/>
+<Route  path="/latihan-fail"  element={<LatihanFail />}/>
+
 
 {/* PERPUSTAKAAN */}
 
@@ -247,10 +270,28 @@ export default function App() {
 <Route  path="/animasi-fail"  element={<AnimasiFail />}/>
 
 <Route  path="/kitab-naib-fail"  element={<NaibFail />}/>
+<Route  path="/animasi-naib-fail"  element={<AnimasiNaibFail />}/>
+<Route  path="/latihan-naib-fail"  element={<LatihanNaibFail />}/>
+
 <Route  path="/kitab-mubtada"  element={<Mubtada />}/>
+<Route  path="/animasi-mubtada"  element={<AnimasiMubtada />}/>
+<Route  path="/latihan-mubtada"  element={<LatihanMubtada />}/>
+
 <Route  path="/kitab-khabar"  element={<Khabar />}/>
+<Route  path="/animasi-khabar"  element={<AnimasiKhabar />}/>
+<Route  path="/latihan-khabar"  element={<LatihanKhabar />}/>
+
 <Route  path="/kitab-isim-kana"  element={<IsimKana />}/>
+<Route  path="/animasi-isim-kana"  element={<AnimasiIsimKana />}/>
+<Route  path="/latihan-isim-kana"  element={<LatihanIsimKana />}/>
+
 <Route  path="/kitab-khabar-inna"  element={<KhabarInna />}/>
+<Route  path="/animasi-khabar-inna"  element={<AnimasiKhabarInna />}/>
+<Route  path="/latihan-khabar-inna"  element={<LatihanKhabarInna />}/>
+
+<Route  path="/kitab-tabi-marfu"  element={<TabiMarfu />}/>
+<Route  path="/animasi-tabi-marfu"  element={<AnimasiTabiMarfu />}/>
+<Route  path="/latihan-tabi-marfu"  element={<LatihanTabiMarfu />}/>
 
 {/* LORONG LATIHAN */}
 

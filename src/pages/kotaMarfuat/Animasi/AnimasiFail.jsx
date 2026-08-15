@@ -90,7 +90,6 @@ export default function AnimasiFail() {
         key={step}
         className="fail-animation-card"
       >
-
         <div className="fail-stage-label">
           <span>{current.arabicLabel}</span>
           <strong>{current.label}</strong>
@@ -106,7 +105,6 @@ export default function AnimasiFail() {
           </span>
 
           <span className="fail-focus-word">
-
             <span className="fail-word-base">
               {current.word}
             </span>
@@ -117,7 +115,6 @@ export default function AnimasiFail() {
             >
               {current.ending}
             </span>
-
           </span>
         </div>
 
@@ -163,7 +160,6 @@ export default function AnimasiFail() {
             الطَّالِبُ
           </span>
         </div>
-
       </article>
 
       <footer className="fail-animation-actions">
@@ -183,7 +179,6 @@ export default function AnimasiFail() {
         </button>
 
         <div className="fail-stage-indicator">
-
           {stages.map((item, index) => (
             <div
               key={item.label + index}
@@ -198,7 +193,6 @@ export default function AnimasiFail() {
               📖
             </div>
           ))}
-
         </div>
 
         <button

@@ -1,0 +1,918 @@
+/* =========================================================
+   LATIHAN ISIM KANA
+   KOTA MARFU'AT
+   LANDSCAPE 16:9
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+.latihan-isim-kana-screen {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100dvh;
+
+  overflow: hidden;
+
+  display: grid;
+  place-items: center;
+
+  padding: 12px;
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.latihan-isim-kana-panel {
+  position: relative;
+  z-index: 2;
+
+  width: min(900px, 86vw);
+  max-height: 90dvh;
+
+  padding:
+    clamp(18px, 3vh, 28px)
+    clamp(22px, 4vw, 42px);
+
+  overflow: hidden;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius:
+    clamp(16px, 2vw, 24px);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 253, 242, 0.97),
+      rgba(247, 235, 198, 0.97)
+    );
+
+  box-shadow:
+    0 15px 40px
+    rgba(0, 0, 0, 0.28);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.latihan-isim-kana-header {
+  text-align: center;
+}
+
+.latihan-isim-kana-header > span {
+  display: inline-block;
+
+  padding:
+    6px 18px;
+
+  border-radius:
+    20px;
+
+  background:
+    #08735a;
+
+  color:
+    #fff;
+
+  font-size:
+    clamp(
+      0.7rem,
+      1.2vw,
+      0.85rem
+    );
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    0.04em;
+}
+
+.latihan-isim-kana-header h1 {
+  margin:
+    7px 0 3px;
+
+  color:
+    #104c3d;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      1.45rem,
+      2.8vw,
+      2.3rem
+    );
+
+  line-height:
+    1.1;
+
+  font-weight:
+    700;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.latihan-isim-kana-progress {
+  width:
+    100%;
+
+  height:
+    clamp(
+      5px,
+      0.8vh,
+      8px
+    );
+
+  margin-top:
+    clamp(
+      7px,
+      1.5vh,
+      14px
+    );
+
+  overflow:
+    hidden;
+
+  border-radius:
+    10px;
+
+  background:
+    #ddd5b8;
+}
+
+.latihan-isim-kana-progress-fill {
+  height:
+    100%;
+
+  border-radius:
+    inherit;
+
+  background:
+    #19805f;
+
+  transition:
+    width 0.3s ease;
+}
+
+.latihan-isim-kana-question-number {
+  margin-top:
+    6px;
+
+  text-align:
+    center;
+
+  color:
+    #765a18;
+
+  font-size:
+    clamp(
+      0.68rem,
+      1vw,
+      0.78rem
+    );
+
+  font-weight:
+    700;
+}
+
+
+/* =========================================================
+   QUESTION CARD
+========================================================= */
+
+.latihan-isim-kana-card {
+  margin-top:
+    clamp(
+      8px,
+      1.5vh,
+      14px
+    );
+
+  padding:
+    clamp(
+      12px,
+      2vh,
+      22px
+    );
+
+  border-radius:
+    clamp(
+      12px,
+      1.5vw,
+      17px
+    );
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.58
+    );
+
+  border:
+    1px solid
+    rgba(
+      188,
+      150,
+      55,
+      0.5
+    );
+}
+
+.latihan-isim-kana-card h2 {
+  margin:
+    0 0
+    clamp(
+      9px,
+      1.5vh,
+      18px
+    );
+
+  text-align:
+    center;
+
+  color:
+    #173f34;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      1.15rem,
+      2.2vw,
+      1.7rem
+    );
+
+  line-height:
+    1.3;
+
+  font-weight:
+    700;
+}
+
+
+/* =========================================================
+   OPTIONS
+========================================================= */
+
+.latihan-isim-kana-options {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    clamp(
+      5px,
+      1vh,
+      10px
+    );
+
+  width:
+    100%;
+}
+
+.latihan-isim-kana-option {
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  width:
+    100%;
+
+  min-height:
+    clamp(
+      38px,
+      5vh,
+      50px
+    );
+
+  padding:
+    6px 12px;
+
+  box-sizing:
+    border-box;
+
+  border:
+    1.5px solid
+    #d2b15b;
+
+  border-radius:
+    clamp(
+      8px,
+      1vw,
+      12px
+    );
+
+  background:
+    rgba(
+      255,
+      252,
+      239,
+      0.96
+    );
+
+  color:
+    #293f38;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:
+    clamp(
+      0.78rem,
+      1.25vw,
+      0.95rem
+    );
+
+  font-weight:
+    600;
+
+  text-align:
+    left;
+
+  cursor:
+    pointer;
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease,
+    border 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.latihan-isim-kana-option:hover:not(:disabled) {
+  transform:
+    translateX(4px);
+
+  border-color:
+    #08735a;
+
+  background:
+    #eef7ef;
+
+  box-shadow:
+    0 4px 10px
+    rgba(
+      0,
+      0,
+      0,
+      0.08
+    );
+}
+
+.latihan-isim-kana-option:disabled {
+  cursor:
+    default;
+}
+
+
+/* =========================================================
+   OPTION NUMBER
+========================================================= */
+
+.option-number {
+  flex:
+    0 0 auto;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  width:
+    clamp(
+      25px,
+      3vw,
+      31px
+    );
+
+  height:
+    clamp(
+      25px,
+      3vw,
+      31px
+    );
+
+  margin-right:
+    clamp(
+      7px,
+      1vw,
+      12px
+    );
+
+  border-radius:
+    50%;
+
+  background:
+    #176e55;
+
+  color:
+    #fff;
+
+  font-size:
+    clamp(
+      0.65rem,
+      1vw,
+      0.78rem
+    );
+
+  font-weight:
+    800;
+}
+
+
+/* =========================================================
+   SELECTED
+========================================================= */
+
+.latihan-isim-kana-option.selected {
+  border-color:
+    #bd8a1e;
+
+  background:
+    #fff1c9;
+}
+
+
+/* =========================================================
+   CORRECT
+========================================================= */
+
+.latihan-isim-kana-option.correct {
+  border-color:
+    #187451;
+
+  background:
+    #dff1df;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.latihan-isim-kana-footer {
+  margin-top:
+    9px;
+
+  text-align:
+    center;
+
+  color:
+    #766b55;
+
+  font-size:
+    clamp(
+      0.58rem,
+      0.9vw,
+      0.72rem
+    );
+}
+
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+.latihan-isim-kana-result {
+  position:
+    relative;
+
+  z-index:
+    3;
+
+  width:
+    min(
+      560px,
+      84vw
+    );
+
+  padding:
+    clamp(
+      24px,
+      5vh,
+      40px
+    );
+
+  box-sizing:
+    border-box;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius:
+    clamp(
+      17px,
+      2vw,
+      24px
+    );
+
+  background:
+    rgba(
+      255,
+      252,
+      238,
+      0.97
+    );
+
+  text-align:
+    center;
+
+  box-shadow:
+    0 15px 40px
+    rgba(
+      0,
+      0,
+      0,
+      0.3
+    );
+}
+
+
+/* =========================================================
+   RESULT CONTENT
+========================================================= */
+
+.result-badge {
+  display:
+    inline-block;
+
+  padding:
+    7px 18px;
+
+  border-radius:
+    20px;
+
+  background:
+    #08735a;
+
+  color:
+    #fff;
+
+  font-size:
+    0.75rem;
+
+  font-weight:
+    800;
+}
+
+.latihan-isim-kana-result h1 {
+  margin:
+    13px 0 5px;
+
+  color:
+    #104c3d;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      2rem,
+      4vw,
+      3rem
+    );
+}
+
+.result-score {
+  margin:
+    5px 0;
+
+  color:
+    #b17d16;
+
+  font-size:
+    clamp(
+      2rem,
+      4vw,
+      2.7rem
+    );
+
+  font-weight:
+    800;
+}
+
+.result-text {
+  color:
+    #514d42;
+
+  font-size:
+    clamp(
+      0.8rem,
+      1.2vw,
+      1rem
+    );
+
+  line-height:
+    1.5;
+}
+
+.result-button {
+  margin-top:
+    15px;
+
+  padding:
+    10px 26px;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius:
+    25px;
+
+  background:
+    #08735a;
+
+  color:
+    #fff;
+
+  font-size:
+    clamp(
+      0.75rem,
+      1.1vw,
+      0.9rem
+    );
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+}
+
+
+/* =========================================================
+   HP LANDSCAPE
+========================================================= */
+
+@media
+  (max-width: 700px)
+  and (orientation: landscape) {
+
+  .latihan-isim-kana-screen {
+    padding:
+      6px 10px;
+  }
+
+  .latihan-isim-kana-panel {
+    width:
+      92vw;
+
+    max-height:
+      94dvh;
+
+    padding:
+      10px 16px;
+
+    border-radius:
+      14px;
+  }
+
+
+  /* HEADER */
+
+  .latihan-isim-kana-header > span {
+    padding:
+      4px 12px;
+
+    font-size:
+      0.62rem;
+  }
+
+  .latihan-isim-kana-header h1 {
+    margin:
+      3px 0 1px;
+
+    font-size:
+      1.05rem;
+  }
+
+
+  /* PROGRESS */
+
+  .latihan-isim-kana-progress {
+    height:
+      5px;
+
+    margin-top:
+      5px;
+  }
+
+  .latihan-isim-kana-question-number {
+    margin-top:
+      3px;
+
+    font-size:
+      0.58rem;
+  }
+
+
+  /* QUESTION */
+
+  .latihan-isim-kana-card {
+    margin-top:
+      5px;
+
+    padding:
+      8px 10px;
+
+    border-radius:
+      9px;
+  }
+
+  .latihan-isim-kana-card h2 {
+    margin-bottom:
+      6px;
+
+    font-size:
+      clamp(
+        0.95rem,
+        3vw,
+        1.2rem
+      );
+
+    line-height:
+      1.2;
+  }
+
+
+  /* OPTIONS */
+
+  .latihan-isim-kana-options {
+    gap:
+      4px;
+  }
+
+  .latihan-isim-kana-option {
+    min-height:
+      29px;
+
+    padding:
+      3px 7px;
+
+    border-radius:
+      7px;
+
+    font-size:
+      clamp(
+        0.68rem,
+        2vw,
+        0.8rem
+      );
+  }
+
+  .option-number {
+    width:
+      21px;
+
+    height:
+      21px;
+
+    margin-right:
+      7px;
+
+    font-size:
+      0.58rem;
+  }
+
+
+  /* FOOTER */
+
+  .latihan-isim-kana-footer {
+    margin-top:
+      4px;
+
+    font-size:
+      0.5rem;
+  }
+}
+
+
+/* =========================================================
+   HP LANDSCAPE PENDEK
+========================================================= */
+
+@media
+  (orientation: landscape)
+  and (max-height: 500px) {
+
+  .latihan-isim-kana-panel {
+    max-height:
+      95dvh;
+
+    padding:
+      8px 14px;
+  }
+
+  .latihan-isim-kana-header > span {
+    padding:
+      3px 10px;
+
+    font-size:
+      0.55rem;
+  }
+
+  .latihan-isim-kana-header h1 {
+    font-size:
+      0.95rem;
+  }
+
+  .latihan-isim-kana-progress {
+    height:
+      4px;
+
+    margin-top:
+      4px;
+  }
+
+  .latihan-isim-kana-question-number {
+    font-size:
+      0.54rem;
+  }
+
+  .latihan-isim-kana-card {
+    padding:
+      6px 9px;
+  }
+
+  .latihan-isim-kana-card h2 {
+    margin-bottom:
+      5px;
+
+    font-size:
+      0.9rem;
+  }
+
+  .latihan-isim-kana-option {
+    min-height:
+      27px;
+
+    padding:
+      2px 6px;
+
+    font-size:
+      1.25rem;
+  }
+
+  .option-number {
+    width:
+      19px;
+
+    height:
+      19px;
+
+    margin-right:
+      6px;
+  }
+
+  .latihan-isim-kana-footer {
+    display:
+      none;
+  }
+}

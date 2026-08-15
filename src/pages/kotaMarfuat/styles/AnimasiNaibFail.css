@@ -1,0 +1,926 @@
+/* =========================================================
+   ANIMASI NAIB FA'IL
+   KOTA MARFU'AT
+   ========================================================= */
+
+.naib-animation-screen {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100dvh;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background:
+    url("/images/kotaMarfuat/bg-marfuat.webp")
+    center / cover no-repeat;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  color: #173f34;
+}
+
+
+/* =========================================================
+   SHADE
+   ========================================================= */
+
+.naib-animation-shade {
+  position: absolute;
+  inset: 0;
+
+  background:
+    rgba(0, 35, 28, 0.22);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.naib-animation-header {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+
+  padding-top: 28px;
+
+  text-align: center;
+}
+
+.naib-animation-kicker {
+  display: inline-block;
+
+  padding: 8px 24px;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius: 24px;
+
+  background: #08735a;
+
+  color: #fff;
+
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.naib-animation-header h1 {
+  margin: 10px 0 0;
+
+  color: #fff;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    1.5rem,
+    2.8vw,
+    2.4rem
+  );
+
+  text-shadow:
+    0 3px 8px
+    rgba(0, 0, 0, 0.55);
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.naib-animation-card {
+  position: relative;
+  z-index: 2;
+
+  width: min(760px, 78vw);
+
+  margin-top: 38px;
+
+  padding: 30px 40px;
+
+  box-sizing: border-box;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 253, 242, 0.96),
+      rgba(247, 235, 198, 0.96)
+    );
+
+  box-shadow:
+    0 18px 45px
+    rgba(0, 0, 0, 0.32);
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   LABEL
+   ========================================================= */
+
+.naib-stage-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 10px 24px;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius: 30px;
+
+  background: #08735a;
+
+  color: #fff;
+
+  box-shadow:
+    0 8px 18px
+    rgba(0, 0, 0, 0.2);
+}
+
+.naib-stage-label span {
+  font-family:
+    "Noto Naskh Arabic",
+    "Amiri",
+    serif;
+
+  font-size: 1.1rem;
+}
+
+.naib-stage-label strong {
+  font-size: 0.95rem;
+}
+
+
+/* =========================================================
+   AYAT ARAB
+   ========================================================= */
+
+.naib-full-sentence {
+  display: flex;
+
+  justify-content: center;
+  align-items: baseline;
+
+  gap: 22px;
+
+  margin-top: 25px;
+
+  direction: rtl;
+
+  font-family:
+    "Noto Naskh Arabic",
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size: clamp(
+    2.7rem,
+    5vw,
+    4.5rem
+  );
+
+  line-height: 1.3;
+}
+
+.naib-before {
+  color: #2c2920;
+}
+
+.naib-focus-word {
+  position: relative;
+
+  color: #08735a;
+
+  font-weight: 800;
+}
+
+.naib-word-base {
+  display: inline;
+}
+
+.naib-changing-ending {
+  display: inline;
+
+  color: #d9483e;
+
+  font-weight: 900;
+
+  animation:
+    naib-ending-pop
+    0.45s ease;
+}
+
+@keyframes naib-ending-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   TANDA AKHIR
+   ========================================================= */
+
+.naib-sign-information {
+  display: inline-flex;
+  align-items: center;
+
+  margin-top: 15px;
+
+  overflow: hidden;
+
+  border-radius: 25px;
+
+  border:
+    1px solid
+    #d8ad3c;
+}
+
+.naib-sign-information span {
+  padding: 10px 18px;
+
+  background: #08735a;
+
+  color: #fff;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.naib-sign-information strong {
+  padding: 10px 18px;
+
+  background: #f2c94c;
+
+  color: #624c12;
+
+  font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   NOTA
+   ========================================================= */
+
+.naib-stage-note {
+  max-width: 650px;
+
+  margin: 18px auto 0;
+
+  color: #283e37;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   PERBANDINGAN
+   ========================================================= */
+
+.naib-comparison-flow {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 18px;
+
+  margin-top: 18px;
+
+  padding: 12px 20px;
+
+  border-radius: 15px;
+
+  background:
+    rgba(223, 216, 177, 0.55);
+
+  font-family:
+    "Noto Naskh Arabic",
+    "Amiri",
+    serif;
+
+  font-size: 1.5rem;
+}
+
+.naib-comparison-flow span {
+  padding: 5px 12px;
+
+  border-radius: 10px;
+
+  color: #5c5544;
+
+  transition:
+    0.25s ease;
+}
+
+.naib-comparison-flow span.current {
+  background: #08735a;
+
+  color: #fff;
+
+  box-shadow:
+    0 5px 14px
+    rgba(0, 0, 0, 0.2);
+}
+
+.naib-comparison-flow b {
+  color: #b78619;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size: 1rem;
+}
+
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.naib-animation-actions {
+  position: relative;
+  z-index: 3;
+
+  width: min(900px, 82vw);
+
+  margin-top: auto;
+  margin-bottom: 24px;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    auto
+    1fr;
+
+  align-items: center;
+
+  gap: 20px;
+}
+
+.naib-animation-button {
+  min-width: 175px;
+
+  padding: 13px 24px;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius: 28px;
+
+  font-size: 0.9rem;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.naib-animation-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 7px 18px
+    rgba(0, 0, 0, 0.22);
+}
+
+.naib-animation-button.secondary {
+  justify-self: start;
+
+  background:
+    #fffdf0;
+
+  color: #164b3d;
+}
+
+.naib-animation-button.primary {
+  justify-self: end;
+
+  background: #08735a;
+
+  color: #fff;
+}
+
+
+/* =========================================================
+   STAGE INDICATOR
+   ========================================================= */
+
+.naib-stage-indicator {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.naib-stage-indicator .stage-book {
+  width: 42px;
+  height: 42px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 9px;
+
+  background:
+    rgba(255, 255, 255, 0.55);
+
+  font-size: 1.35rem;
+
+  opacity: 0.55;
+
+  transition:
+    0.25s ease;
+}
+
+.naib-stage-indicator .stage-book.done {
+  opacity: 0.8;
+}
+
+.naib-stage-indicator .stage-book.active {
+  opacity: 1;
+
+  background: #fff;
+
+  box-shadow:
+    0 0 16px
+    rgba(255, 215, 80, 0.8);
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   LANDSCAPE SKRIN KECIL
+   ========================================================= */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+  .naib-animation-header {
+    padding-top: 14px;
+  }
+
+  .naib-animation-kicker {
+    padding: 5px 16px;
+    font-size: 0.65rem;
+  }
+
+  .naib-animation-header h1 {
+    margin-top: 5px;
+    font-size: 1.3rem;
+  }
+
+  .naib-animation-card {
+    width: 84vw;
+
+    margin-top: 14px;
+
+    padding: 18px 24px;
+
+    border-radius: 18px;
+  }
+
+  .naib-stage-label {
+    padding: 6px 17px;
+    gap: 8px;
+  }
+
+  .naib-stage-label span {
+    font-size: 0.85rem;
+  }
+
+  .naib-stage-label strong {
+    font-size: 0.72rem;
+  }
+
+  .naib-full-sentence {
+    margin-top: 12px;
+
+    gap: 15px;
+
+    font-size: 2.4rem;
+  }
+
+  .naib-sign-information {
+    margin-top: 8px;
+  }
+
+  .naib-sign-information span,
+  .naib-sign-information strong {
+    padding: 6px 12px;
+
+    font-size: 0.68rem;
+  }
+
+  .naib-stage-note {
+    margin-top: 9px;
+
+    font-size: 0.72rem;
+
+    line-height: 1.4;
+  }
+
+  .naib-comparison-flow {
+    margin-top: 9px;
+
+    padding: 7px 12px;
+
+    gap: 10px;
+
+    font-size: 1.15rem;
+  }
+
+  .naib-animation-actions {
+    width: 88vw;
+
+    margin-bottom: 12px;
+
+    gap: 10px;
+  }
+
+  .naib-animation-button {
+    min-width: 135px;
+
+    padding: 8px 15px;
+
+    font-size: 0.72rem;
+  }
+
+  .naib-stage-indicator .stage-book {
+    width: 34px;
+    height: 34px;
+
+    font-size: 1rem;
+  }
+}
+/* =========================================================
+   HP / TABLET LANDSCAPE
+   SEMUA ELEMEN MENGIKUT KETINGGIAN SKRIN
+   ========================================================= */
+
+@media (max-width: 1000px) and (orientation: landscape) {
+
+  .naib-animation-screen {
+    width: 100vw;
+    height: 100dvh;
+
+    min-height: 0;
+
+    overflow: hidden;
+  }
+
+  /* ================= HEADER ================= */
+
+  .naib-animation-header {
+    flex: 0 0 auto;
+
+    padding-top: 1.5dvh;
+  }
+
+  .naib-animation-kicker {
+    padding: 0.6dvh 2.5vw;
+
+    border-width: 1.5px;
+
+    font-size: clamp(
+      0.5rem,
+      1.7dvh,
+      0.75rem
+    );
+  }
+
+  .naib-animation-header h1 {
+    margin: 0.6dvh 0 0;
+
+    font-size: clamp(
+      0.85rem,
+      3.2dvh,
+      1.35rem
+    );
+
+    line-height: 1.1;
+  }
+
+
+  /* ================= CARD ================= */
+
+  .naib-animation-card {
+    flex: 1 1 auto;
+
+    width: min(84vw, 760px);
+
+    min-height: 0;
+    max-height: none;
+
+    margin-top: 1.5dvh;
+    margin-bottom: 1dvh;
+
+    padding:
+      1.5dvh
+      2.5vw;
+
+    border-radius: 16px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    overflow: hidden;
+  }
+
+
+  /* ================= LABEL ================= */
+
+  .naib-stage-label {
+    flex: 0 0 auto;
+
+    padding:
+      0.7dvh
+      2vw;
+
+    gap: 1vw;
+
+    border-width: 1.5px;
+  }
+
+  .naib-stage-label span {
+    font-size: clamp(
+      0.65rem,
+      2dvh,
+      0.9rem
+    );
+  }
+
+  .naib-stage-label strong {
+    font-size: clamp(
+      0.55rem,
+      1.7dvh,
+      0.75rem
+    );
+  }
+
+
+  /* ================= AYAT ================= */
+
+  .naib-full-sentence {
+    flex: 0 0 auto;
+
+    margin-top: 1dvh;
+
+    gap: 2vw;
+
+    font-size: clamp(
+      2rem,
+      7dvh,
+      3.4rem
+    );
+
+    line-height: 1;
+  }
+
+
+  /* ================= TANDA ================= */
+
+  .naib-sign-information {
+    flex: 0 0 auto;
+
+    margin-top: 0.8dvh;
+  }
+
+  .naib-sign-information span,
+  .naib-sign-information strong {
+    padding:
+      0.6dvh
+      1.5vw;
+
+    font-size: clamp(
+      0.5rem,
+      1.6dvh,
+      0.7rem
+    );
+  }
+
+
+  /* ================= NOTA ================= */
+
+  .naib-stage-note {
+    flex: 0 0 auto;
+
+    max-width: 90%;
+
+    margin:
+      1dvh
+      auto
+      0;
+
+    font-size: clamp(
+      0.52rem,
+      1.7dvh,
+      0.72rem
+    );
+
+    line-height: 1.3;
+  }
+
+
+  /* ================= PERBANDINGAN ================= */
+
+  .naib-comparison-flow {
+    flex: 0 0 auto;
+
+    margin-top: 1dvh;
+
+    padding:
+      0.5dvh
+      1.5vw;
+
+    gap: 1.5vw;
+
+    border-radius: 10px;
+
+    font-size: clamp(
+      0.9rem,
+      3.5dvh,
+      1.35rem
+    );
+  }
+
+  .naib-comparison-flow span {
+    padding:
+      0.3dvh
+      0.8vw;
+  }
+
+  .naib-comparison-flow b {
+    font-size: clamp(
+      0.6rem,
+      1.8dvh,
+      0.85rem
+    );
+  }
+
+
+  /* ================= BUTTON AREA ================= */
+
+  .naib-animation-actions {
+    flex: 0 0 auto;
+
+    width: 88vw;
+
+    margin:
+      0
+      auto
+      1.5dvh;
+
+    grid-template-columns:
+      1fr
+      auto
+      1fr;
+
+    gap: 1.5vw;
+  }
+
+
+  /* ================= BUTTON ================= */
+
+  .naib-animation-button {
+    min-width: 0;
+
+    padding:
+      0.8dvh
+      1.8vw;
+
+    border-width: 1.5px;
+
+    border-radius: 22px;
+
+    font-size: clamp(
+      0.52rem,
+      1.7dvh,
+      0.72rem
+    );
+
+    white-space: nowrap;
+  }
+
+
+  /* ================= BOOK ================= */
+
+  .naib-stage-indicator {
+    gap: 0.7vw;
+  }
+
+  .naib-stage-indicator .stage-book {
+    width: clamp(
+      25px,
+      5dvh,
+      34px
+    );
+
+    height: clamp(
+      25px,
+      5dvh,
+      34px
+    );
+
+    border-radius: 6px;
+
+    font-size: clamp(
+      0.7rem,
+      2.5dvh,
+      1rem
+    );
+  }
+}
+
+
+/* =========================================================
+   HP LANDSCAPE SANGAT PENDEK
+   ========================================================= */
+
+@media (max-height: 430px) and (orientation: landscape) {
+
+  .naib-animation-header {
+    padding-top: 1dvh;
+  }
+
+  .naib-animation-header h1 {
+    font-size: 0.95rem;
+  }
+
+  .naib-animation-card {
+    width: 86vw;
+
+    margin-top: 1dvh;
+    margin-bottom: 0.5dvh;
+
+    padding:
+      1dvh
+      2vw;
+  }
+
+  .naib-full-sentence {
+    font-size: clamp(
+      1.8rem,
+      7dvh,
+      2.8rem
+    );
+  }
+
+  .naib-stage-note {
+    margin-top: 0.5dvh;
+
+    font-size: 0.58rem;
+
+    line-height: 1.2;
+  }
+
+  .naib-comparison-flow {
+    margin-top: 0.5dvh;
+  }
+
+  .naib-animation-actions {
+    margin-bottom: 1dvh;
+  }
+}

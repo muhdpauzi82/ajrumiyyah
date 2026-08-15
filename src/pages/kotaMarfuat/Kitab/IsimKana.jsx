@@ -11,7 +11,7 @@ export default function IsimKana() {
       "true"
     );
 
-    window.location.href = "/marfuaat-learning";
+    window.location.href = "/animasi-isim-kana";
   }
 
   return (

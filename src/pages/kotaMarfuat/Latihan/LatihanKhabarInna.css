@@ -1,0 +1,959 @@
+/* =========================================================
+   LATIHAN MARFU'AT
+   CSS INDUK UNTUK SEMUA LATIHAN
+   FA'IL • NAIB FA'IL • MUBTADA' • KHABAR
+   ISIM KANA • KHABAR INNA
+========================================================= */
+
+:is(
+  .latihan-fail-screen,
+  .naib-fail-screen,
+  .latihan-mubtada-screen,
+  .latihan-khabar-screen,
+  .latihan-isim-kana-screen,
+  .latihan-khabar-inna-screen
+) {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100dvh;
+
+  overflow: hidden;
+
+  display: grid;
+  place-items: center;
+
+  box-sizing: border-box;
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+:is(
+  .latihan-fail-panel,
+  .naib-fail-panel,
+  .latihan-mubtada-panel,
+  .latihan-khabar-panel,
+  .latihan-isim-kana-panel,
+  .latihan-khabar-inna-panel
+) {
+  position: relative;
+  z-index: 2;
+
+  width: min(900px, 88vw);
+
+  max-height: 92dvh;
+
+  padding: 24px 38px 20px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 253, 242, 0.98),
+      rgba(247, 235, 198, 0.98)
+    );
+
+  box-shadow:
+    0 15px 40px
+    rgba(0, 0, 0, 0.30);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+:is(
+  .latihan-fail-header,
+  .naib-fail-header,
+  .latihan-mubtada-header,
+  .latihan-khabar-header,
+  .latihan-isim-kana-header,
+  .latihan-khabar-inna-header
+) {
+  text-align: center;
+}
+
+:is(
+  .latihan-fail-header > span,
+  .naib-fail-header > span,
+  .latihan-mubtada-header > span,
+  .latihan-khabar-header > span,
+  .latihan-isim-kana-header > span,
+  .latihan-khabar-inna-header > span
+) {
+  display: inline-block;
+
+  padding: 6px 18px;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius: 20px;
+
+  background: #08735a;
+
+  color: #fff;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    "Times New Roman",
+    serif;
+
+  font-size: 0.82rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.03em;
+}
+
+:is(
+  .latihan-fail-header h1,
+  .naib-fail-header h1,
+  .latihan-mubtada-header h1,
+  .latihan-khabar-header h1,
+  .latihan-isim-kana-header h1,
+  .latihan-khabar-inna-header h1
+) {
+  margin: 7px 0 2px;
+
+  color: #104c3d;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 2rem;
+
+  line-height: 1.15;
+
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+:is(
+  .latihan-fail-progress,
+  .naib-fail-progress,
+  .latihan-mubtada-progress,
+  .latihan-khabar-progress,
+  .latihan-isim-kana-progress,
+  .latihan-khabar-inna-progress
+) {
+  width: 100%;
+
+  height: 7px;
+
+  margin-top: 10px;
+
+  overflow: hidden;
+
+  border-radius: 10px;
+
+  background: #ddd5b8;
+}
+
+:is(
+  .latihan-fail-progress-fill,
+  .naib-fail-progress-fill,
+  .latihan-mubtada-progress-fill,
+  .latihan-khabar-progress-fill,
+  .latihan-isim-kana-progress-fill,
+  .latihan-khabar-inna-progress-fill
+) {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: #19805f;
+
+  transition:
+    width 0.3s ease;
+}
+
+
+/* =========================================================
+   QUESTION NUMBER
+========================================================= */
+
+:is(
+  .latihan-fail-question-number,
+  .naib-fail-question-number,
+  .latihan-mubtada-question-number,
+  .latihan-khabar-question-number,
+  .latihan-isim-kana-question-number,
+  .latihan-khabar-inna-question-number
+) {
+  margin-top: 6px;
+
+  text-align: center;
+
+  color: #765a18;
+
+  font-size: 0.72rem;
+
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   QUESTION CARD
+========================================================= */
+
+:is(
+  .latihan-fail-card,
+  .naib-fail-card,
+  .latihan-mubtada-card,
+  .latihan-khabar-card,
+  .latihan-isim-kana-card,
+  .latihan-khabar-inna-card
+) {
+  margin-top: 9px;
+
+  padding: 15px 17px;
+
+  border-radius: 16px;
+
+  background:
+    rgba(255, 255, 255, 0.62);
+
+  border:
+    1px solid
+    rgba(188, 150, 55, 0.55);
+}
+
+:is(
+  .latihan-fail-card h2,
+  .naib-fail-card h2,
+  .latihan-mubtada-card h2,
+  .latihan-khabar-card h2,
+  .latihan-isim-kana-card h2,
+  .latihan-khabar-inna-card h2
+) {
+  margin:
+    0 0 11px;
+
+  text-align: center;
+
+  color: #173f34;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    "Times New Roman",
+    Georgia,
+    serif;
+
+  font-size: 1.45rem;
+
+  line-height: 1.3;
+
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   OPTIONS
+========================================================= */
+
+:is(
+  .latihan-fail-options,
+  .naib-fail-options,
+  .latihan-mubtada-options,
+  .latihan-khabar-options,
+  .latihan-isim-kana-options,
+  .latihan-khabar-inna-options
+) {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   OPTION BUTTON
+========================================================= */
+
+:is(
+  .latihan-fail-option,
+  .naib-fail-option,
+  .latihan-mubtada-option,
+  .latihan-khabar-option,
+  .latihan-isim-kana-option,
+  .latihan-khabar-inna-option
+) {
+  display: flex;
+
+  align-items: center;
+
+  width: 100%;
+
+  min-height: 42px;
+
+  padding: 5px 12px;
+
+  box-sizing: border-box;
+
+  border:
+    1.5px solid
+    #d2b15b;
+
+  border-radius: 10px;
+
+  background:
+    rgba(255, 252, 239, 0.97);
+
+  color: #173f34;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    "Times New Roman",
+    Arial,
+    sans-serif;
+
+  font-size: 1.05rem;
+
+  line-height: 1.25;
+
+  font-weight: 700;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease,
+    border 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+:is(
+  .latihan-fail-option,
+  .naib-fail-option,
+  .latihan-mubtada-option,
+  .latihan-khabar-option,
+  .latihan-isim-kana-option,
+  .latihan-khabar-inna-option
+):hover:not(:disabled) {
+  transform:
+    translateX(4px);
+
+  border-color:
+    #08735a;
+
+  background:
+    #eef7ef;
+
+  box-shadow:
+    0 4px 10px
+    rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   DISABLED
+========================================================= */
+
+:is(
+  .latihan-fail-option,
+  .naib-fail-option,
+  .latihan-mubtada-option,
+  .latihan-khabar-option,
+  .latihan-isim-kana-option,
+  .latihan-khabar-inna-option
+):disabled {
+  cursor: default;
+}
+
+
+/* =========================================================
+   OPTION NUMBER
+========================================================= */
+
+.option-number,
+.naib-option-number {
+  flex:
+    0 0 auto;
+
+  display: grid;
+
+  place-items: center;
+
+  width: 30px;
+
+  height: 30px;
+
+  margin-right: 10px;
+
+  border-radius: 50%;
+
+  background:
+    #176e55;
+
+  color:
+    #fff;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size:
+    0.72rem;
+
+  font-weight:
+    800;
+}
+
+
+/* =========================================================
+   SELECTED
+========================================================= */
+
+:is(
+  .latihan-fail-option,
+  .naib-fail-option,
+  .latihan-mubtada-option,
+  .latihan-khabar-option,
+  .latihan-isim-kana-option,
+  .latihan-khabar-inna-option
+).selected {
+  border-color:
+    #bd8a1e;
+
+  background:
+    #fff1c9;
+}
+
+
+/* =========================================================
+   CORRECT
+========================================================= */
+
+:is(
+  .latihan-fail-option,
+  .naib-fail-option,
+  .latihan-mubtada-option,
+  .latihan-khabar-option,
+  .latihan-isim-kana-option,
+  .latihan-khabar-inna-option
+).correct {
+  border-color:
+    #187451;
+
+  background:
+    #dff1df;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+:is(
+  .latihan-fail-footer,
+  .naib-fail-footer,
+  .latihan-mubtada-footer,
+  .latihan-khabar-footer,
+  .latihan-isim-kana-footer,
+  .latihan-khabar-inna-footer
+) {
+  margin-top: 7px;
+
+  text-align: center;
+
+  color: #766b55;
+
+  font-size: 0.65rem;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+:is(
+  .latihan-fail-result,
+  .naib-fail-result,
+  .latihan-mubtada-result,
+  .latihan-khabar-result,
+  .latihan-isim-kana-result,
+  .latihan-khabar-inna-result
+) {
+  position: relative;
+
+  z-index: 3;
+
+  width: min(560px, 82vw);
+
+  padding: 38px;
+
+  box-sizing: border-box;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius: 24px;
+
+  background:
+    rgba(255, 252, 238, 0.98);
+
+  text-align: center;
+
+  box-shadow:
+    0 15px 40px
+    rgba(0, 0, 0, 0.30);
+}
+
+:is(
+  .latihan-fail-result h1,
+  .naib-fail-result h1,
+  .latihan-mubtada-result h1,
+  .latihan-khabar-result h1,
+  .latihan-isim-kana-result h1,
+  .latihan-khabar-inna-result h1
+) {
+  margin:
+    14px 0 5px;
+
+  color:
+    #104c3d;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    Georgia,
+    serif;
+
+  font-size:
+    2.2rem;
+}
+
+.result-badge,
+.naib-result-badge {
+  display: inline-block;
+
+  padding:
+    7px 18px;
+
+  border-radius:
+    20px;
+
+  background:
+    #08735a;
+
+  color:
+    #fff;
+
+  font-size:
+    0.75rem;
+
+  font-weight:
+    800;
+}
+
+.result-score,
+.naib-result-score {
+  margin:
+    5px 0;
+
+  color:
+    #b17d16;
+
+  font-size:
+    2.3rem;
+
+  font-weight:
+    800;
+}
+
+.result-text,
+.naib-result-text {
+  color:
+    #514d42;
+
+  line-height:
+    1.5;
+}
+
+.result-button,
+.naib-result-button {
+  margin-top:
+    15px;
+
+  padding:
+    11px 28px;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius:
+    25px;
+
+  background:
+    #08735a;
+
+  color:
+    #fff;
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+}
+
+
+/* =========================================================
+   LAPTOP 1366 × 768
+========================================================= */
+
+@media (max-height: 800px) and (min-width: 800px) {
+
+  :is(
+    .latihan-fail-panel,
+    .naib-fail-panel,
+    .latihan-mubtada-panel,
+    .latihan-khabar-panel,
+    .latihan-isim-kana-panel,
+    .latihan-khabar-inna-panel
+  ) {
+    width:
+      min(900px, 88vw);
+
+    max-height:
+      94dvh;
+
+    padding:
+      16px 32px 14px;
+  }
+
+  :is(
+    .latihan-fail-header h1,
+    .naib-fail-header h1,
+    .latihan-mubtada-header h1,
+    .latihan-khabar-header h1,
+    .latihan-isim-kana-header h1,
+    .latihan-khabar-inna-header h1
+  ) {
+    margin-top:
+      4px;
+
+    font-size:
+      1.75rem;
+  }
+
+  :is(
+    .latihan-fail-progress,
+    .naib-fail-progress,
+    .latihan-mubtada-progress,
+    .latihan-khabar-progress,
+    .latihan-isim-kana-progress,
+    .latihan-khabar-inna-progress
+  ) {
+    height:
+      6px;
+
+    margin-top:
+      7px;
+  }
+
+  :is(
+    .latihan-fail-card,
+    .naib-fail-card,
+    .latihan-mubtada-card,
+    .latihan-khabar-card,
+    .latihan-isim-kana-card,
+    .latihan-khabar-inna-card
+  ) {
+    margin-top:
+      7px;
+
+    padding:
+      11px 14px;
+  }
+
+  :is(
+    .latihan-fail-card h2,
+    .naib-fail-card h2,
+    .latihan-mubtada-card h2,
+    .latihan-khabar-card h2,
+    .latihan-isim-kana-card h2,
+    .latihan-khabar-inna-card h2
+  ) {
+    margin-bottom:
+      8px;
+
+    font-size:
+      1.35rem;
+  }
+
+  :is(
+    .latihan-fail-options,
+    .naib-fail-options,
+    .latihan-mubtada-options,
+    .latihan-khabar-options,
+    .latihan-isim-kana-options,
+    .latihan-khabar-inna-options
+  ) {
+    gap:
+      4px;
+  }
+
+  :is(
+    .latihan-fail-option,
+    .naib-fail-option,
+    .latihan-mubtada-option,
+    .latihan-khabar-option,
+    .latihan-isim-kana-option,
+    .latihan-khabar-inna-option
+  ) {
+    min-height:
+      38px;
+
+    padding:
+      4px 10px;
+
+    font-size:
+      1rem;
+  }
+
+  .option-number,
+  .naib-option-number {
+    width:
+      27px;
+
+    height:
+      27px;
+
+    margin-right:
+      8px;
+  }
+
+  :is(
+    .latihan-fail-footer,
+    .naib-fail-footer,
+    .latihan-mubtada-footer,
+    .latihan-khabar-footer,
+    .latihan-isim-kana-footer,
+    .latihan-khabar-inna-footer
+  ) {
+    margin-top:
+      4px;
+
+    font-size:
+      0.6rem;
+  }
+}
+
+
+/* =========================================================
+   PHONE LANDSCAPE
+========================================================= */
+
+@media (max-width: 700px) and (orientation: landscape) {
+
+  :is(
+    .latihan-fail-panel,
+    .naib-fail-panel,
+    .latihan-mubtada-panel,
+    .latihan-khabar-panel,
+    .latihan-isim-kana-panel,
+    .latihan-khabar-inna-panel
+  ) {
+    width:
+      92vw;
+
+    max-height:
+      94dvh;
+
+    padding:
+      10px 18px;
+
+    border-radius:
+      16px;
+  }
+
+  :is(
+    .latihan-fail-header > span,
+    .naib-fail-header > span,
+    .latihan-mubtada-header > span,
+    .latihan-khabar-header > span,
+    .latihan-isim-kana-header > span,
+    .latihan-khabar-inna-header > span
+  ) {
+    padding:
+      4px 12px;
+
+    font-size:
+      0.65rem;
+  }
+
+  :is(
+    .latihan-fail-header h1,
+    .naib-fail-header h1,
+    .latihan-mubtada-header h1,
+    .latihan-khabar-header h1,
+    .latihan-isim-kana-header h1,
+    .latihan-khabar-inna-header h1
+  ) {
+    margin:
+      3px 0;
+
+    font-size:
+      1.2rem;
+  }
+
+  :is(
+    .latihan-fail-question-number,
+    .naib-fail-question-number,
+    .latihan-mubtada-question-number,
+    .latihan-khabar-question-number,
+    .latihan-isim-kana-question-number,
+    .latihan-khabar-inna-question-number
+  ) {
+    margin-top:
+      3px;
+
+    font-size:
+      0.58rem;
+  }
+
+  :is(
+    .latihan-fail-card,
+    .naib-fail-card,
+    .latihan-mubtada-card,
+    .latihan-khabar-card,
+    .latihan-isim-kana-card,
+    .latihan-khabar-inna-card
+  ) {
+    margin-top:
+      5px;
+
+    padding:
+      8px 10px;
+  }
+
+  :is(
+    .latihan-fail-card h2,
+    .naib-fail-card h2,
+    .latihan-mubtada-card h2,
+    .latihan-khabar-card h2,
+    .latihan-isim-kana-card h2,
+    .latihan-khabar-inna-card h2
+  ) {
+    margin-bottom:
+      6px;
+
+    font-size:
+      1rem;
+  }
+
+  :is(
+    .latihan-fail-options,
+    .naib-fail-options,
+    .latihan-mubtada-options,
+    .latihan-khabar-options,
+    .latihan-isim-kana-options,
+    .latihan-khabar-inna-options
+  ) {
+    gap:
+      4px;
+  }
+
+  :is(
+    .latihan-fail-option,
+    .naib-fail-option,
+    .latihan-mubtada-option,
+    .latihan-khabar-option,
+    .latihan-isim-kana-option,
+    .latihan-khabar-inna-option
+  ) {
+    min-height:
+      31px;
+
+    padding:
+      3px 7px;
+
+    border-radius:
+      8px;
+
+    font-size:
+      1.22rem;
+  }
+
+  .option-number,
+  .naib-option-number {
+    width:
+      22px;
+
+    height:
+      22px;
+
+    margin-right:
+      6px;
+
+    font-size:
+      0.58rem;
+  }
+
+  :is(
+    .latihan-fail-footer,
+    .naib-fail-footer,
+    .latihan-mubtada-footer,
+    .latihan-khabar-footer,
+    .latihan-isim-kana-footer,
+    .latihan-khabar-inna-footer
+  ) {
+    margin-top:
+      3px;
+
+    font-size:
+      0.5rem;
+  }
+}

@@ -1,108 +1,246 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/LorongLatihanMarfuat.css";
+
+import "./LorongLatihanMarfuat.css";
+
+/* =====================================================
+   BANK SOALAN MARFU‘AT
+===================================================== */
 
 const QUESTION_BANK = [
   {
-    question: "Apakah fungsi perkataan مُحَمَّدٌ dalam ayat جَاءَ مُحَمَّدٌ؟",
+    id: 1,
+    question:
+      "Apakah fungsi perkataan مُحَمَّدٌ dalam ayat berikut?",
     arabic: "جَاءَ مُحَمَّدٌ",
-    options: ["فاعل", "مبتدأ", "خبر", "نائب الفاعل"],
+    options: [
+      "فاعل",
+      "مبتدأ",
+      "خبر",
+      "نائب الفاعل",
+    ],
     answer: "فاعل",
   },
+
   {
-    question: "Apakah kedudukan الدَّرْسُ dalam ayat berikut?",
+    id: 2,
+    question:
+      "Apakah kedudukan الدَّرْسُ dalam ayat berikut?",
     arabic: "كُتِبَ الدَّرْسُ",
-    options: ["فاعل", "نائب الفاعل", "خبر", "اسم كان"],
+    options: [
+      "فاعل",
+      "نائب الفاعل",
+      "خبر",
+      "اسم كان",
+    ],
     answer: "نائب الفاعل",
   },
+
   {
-    question: "Apakah fungsi الطَّالِبُ dalam ayat berikut?",
+    id: 3,
+    question:
+      "Apakah fungsi الطَّالِبُ dalam ayat berikut?",
     arabic: "الطَّالِبُ مُجْتَهِدٌ",
-    options: ["مبتدأ", "خبر", "فاعل", "خبر إن"],
+    options: [
+      "مبتدأ",
+      "خبر",
+      "فاعل",
+      "خبر إن",
+    ],
     answer: "مبتدأ",
   },
+
   {
-    question: "Apakah fungsi مُجْتَهِدٌ dalam ayat berikut?",
+    id: 4,
+    question:
+      "Apakah fungsi مُجْتَهِدٌ dalam ayat berikut?",
     arabic: "الطَّالِبُ مُجْتَهِدٌ",
-    options: ["مبتدأ", "خبر", "فاعل", "اسم كان"],
+    options: [
+      "مبتدأ",
+      "خبر",
+      "فاعل",
+      "اسم كان",
+    ],
     answer: "خبر",
   },
+
   {
-    question: "Apakah fungsi الطَّالِبُ dalam ayat berikut?",
+    id: 5,
+    question:
+      "Apakah fungsi الطَّالِبُ dalam ayat berikut?",
     arabic: "كَانَ الطَّالِبُ مُجْتَهِدًا",
-    options: ["اسم كان", "خبر كان", "مبتدأ", "فاعل"],
+    options: [
+      "اسم كان",
+      "خبر كان",
+      "مبتدأ",
+      "فاعل",
+    ],
     answer: "اسم كان",
   },
+
   {
-    question: "Apakah fungsi مُجْتَهِدٌ dalam ayat berikut?",
+    id: 6,
+    question:
+      "Apakah fungsi مُجْتَهِدٌ dalam ayat berikut?",
     arabic: "إِنَّ الطَّالِبَ مُجْتَهِدٌ",
-    options: ["خبر إن", "اسم إن", "فاعل", "مبتدأ"],
+    options: [
+      "خبر إن",
+      "اسم إن",
+      "فاعل",
+      "مبتدأ",
+    ],
     answer: "خبر إن",
   },
+
   {
-    question: "Fa'il berada dalam keadaan...",
+    id: 7,
+    question:
+      "Fa'il berada dalam keadaan...",
     arabic: "الْفَاعِلُ",
-    options: ["مرفوع", "منصوب", "مجرور", "مجزوم"],
+    options: [
+      "مرفوع",
+      "منصوب",
+      "مجرور",
+      "مجزوم",
+    ],
     answer: "مرفوع",
   },
+
   {
-    question: "Naib Fa'il berada dalam keadaan...",
+    id: 8,
+    question:
+      "Naib Fa'il berada dalam keadaan...",
     arabic: "نَائِبُ الْفَاعِلِ",
-    options: ["مرفوع", "منصوب", "مجرور", "مجزوم"],
+    options: [
+      "مرفوع",
+      "منصوب",
+      "مجرور",
+      "مجزوم",
+    ],
     answer: "مرفوع",
   },
+
   {
-    question: "Isim Kana berada dalam keadaan...",
+    id: 9,
+    question:
+      "Isim Kana berada dalam keadaan...",
     arabic: "اسْمُ كَانَ",
-    options: ["مرفوع", "منصوب", "مجرور", "مجزوم"],
+    options: [
+      "مرفوع",
+      "منصوب",
+      "مجرور",
+      "مجزوم",
+    ],
     answer: "مرفوع",
   },
+
   {
-    question: "Khabar Inna berada dalam keadaan...",
+    id: 10,
+    question:
+      "Khabar Inna berada dalam keadaan...",
     arabic: "خَبَرُ إِنَّ",
-    options: ["مرفوع", "منصوب", "مجرور", "مجزوم"],
+    options: [
+      "مرفوع",
+      "منصوب",
+      "مجرور",
+      "مجزوم",
+    ],
     answer: "مرفوع",
   },
 ];
 
+const TOTAL_QUESTIONS = 10;
+const ANSWER_DELAY = 850;
+
+/* =====================================================
+   UTILITI
+===================================================== */
+
 function shuffleArray(items) {
   const result = [...items];
 
-  for (let i = result.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
+  for (
+    let index = result.length - 1;
+    index > 0;
+    index -= 1
+  ) {
+    const randomIndex = Math.floor(
+      Math.random() * (index + 1)
+    );
 
-    [result[i], result[j]] = [
-      result[j],
-      result[i],
+    [result[index], result[randomIndex]] = [
+      result[randomIndex],
+      result[index],
     ];
   }
 
   return result;
 }
 
+function prepareQuestions() {
+  return shuffleArray(QUESTION_BANK)
+    .slice(
+      0,
+      Math.min(
+        TOTAL_QUESTIONS,
+        QUESTION_BANK.length
+      )
+    )
+    .map((question) => ({
+      ...question,
+      options: shuffleArray(question.options),
+    }));
+}
+
+/* =====================================================
+   KOMPONEN UTAMA
+===================================================== */
+
 export default function LorongLatihanMarfuat() {
   const navigate = useNavigate();
 
   const questions = useMemo(
-    () =>
-      shuffleArray(QUESTION_BANK).map((question) => ({
-        ...question,
-        options: shuffleArray(question.options),
-      })),
+    () => prepareQuestions(),
     []
   );
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [correctCount, setCorrectCount] = useState(0);
+  const [questionIndex, setQuestionIndex] =
+    useState(0);
 
-  const currentQuestion = questions[currentIndex];
+  const [selectedAnswer, setSelectedAnswer] =
+    useState(null);
+
+  const [correctCount, setCorrectCount] =
+    useState(0);
+
+  const [wrongCount, setWrongCount] =
+    useState(0);
+
+  const [phase, setPhase] =
+    useState("playing");
+
+  const currentQuestion =
+    questions[questionIndex];
 
   const isLastQuestion =
-    currentIndex === questions.length - 1;
+    questionIndex === questions.length - 1;
 
-  function handleAnswer(option) {
-    if (selectedAnswer !== null) return;
+  const progress =
+    ((questionIndex + 1) /
+      questions.length) *
+    100;
+
+  /* =====================================================
+     JAWAPAN
+  ===================================================== */
+
+  function chooseAnswer(option) {
+    if (
+      selectedAnswer ||
+      phase !== "playing"
+    ) {
+      return;
+    }
 
     setSelectedAnswer(option);
 
@@ -110,142 +248,344 @@ export default function LorongLatihanMarfuat() {
       option === currentQuestion.answer;
 
     const updatedCorrectCount =
-      isCorrect
-        ? correctCount + 1
-        : correctCount;
+      correctCount +
+      (isCorrect ? 1 : 0);
 
-    if (isCorrect) {
-      setCorrectCount(updatedCorrectCount);
-    }
+    const updatedWrongCount =
+      wrongCount +
+      (isCorrect ? 0 : 1);
 
-    setTimeout(() => {
+    setCorrectCount(
+      updatedCorrectCount
+    );
+
+    setWrongCount(
+      updatedWrongCount
+    );
+
+    window.setTimeout(() => {
       if (isLastQuestion) {
-        const passed =
-          updatedCorrectCount === questions.length;
-
-        if (passed) {
+        if (
+          updatedCorrectCount ===
+          questions.length
+        ) {
           localStorage.setItem(
             "lorongMarfuatDone",
             "true"
           );
+        } else {
+          localStorage.removeItem(
+            "lorongMarfuatDone"
+          );
         }
 
-        navigate("/lorong-latihan-marfuat-result", {
-          state: {
-            correctCount: updatedCorrectCount,
-            totalQuestions: questions.length,
-            passed,
-          },
-        });
-
+        setPhase("result");
         return;
       }
 
-      setCurrentIndex((index) => index + 1);
+      setQuestionIndex(
+        (current) => current + 1
+      );
+
       setSelectedAnswer(null);
-    }, 700);
+    }, ANSWER_DELAY);
   }
 
-  return (
-    <div className="lorong-marfuat">
-      <button
-        className="lorong-back-btn"
-        onClick={() => navigate("/kota-marfuat")}
-      >
-        ← Kembali
-      </button>
+  /* =====================================================
+     WARNA JAWAPAN
+  ===================================================== */
 
-      <div className="lorong-panel">
-        <div className="lorong-header">
+  function getAnswerClass(option) {
+    if (!selectedAnswer) {
+      return "marfuat-answer";
+    }
+
+    if (
+      option === currentQuestion.answer
+    ) {
+      return "marfuat-answer correct";
+    }
+
+    if (option === selectedAnswer) {
+      return "marfuat-answer wrong";
+    }
+
+    return "marfuat-answer muted";
+  }
+
+  /* =====================================================
+     ULANG
+  ===================================================== */
+
+  function restartQuiz() {
+    window.location.reload();
+  }
+
+  /* =====================================================
+     KEPUTUSAN
+  ===================================================== */
+
+  if (phase === "result") {
+    const passed =
+      correctCount === questions.length;
+
+    return (
+      <main className="marfuat-quiz-page">
+
+        <section className="marfuat-result-card">
+
+          <span className="marfuat-result-icon">
+            {passed ? "✓" : "!"}
+          </span>
+
+          <p className="marfuat-result-kicker">
+            {passed
+              ? "LATIHAN MARFU‘AT SELESAI"
+              : "LATIHAN BELUM SELESAI"}
+          </p>
+
+          <h1>
+            {passed
+              ? "تَهَانِينَا!"
+              : "حَاوِلْ مَرَّةً أُخْرَى"}
+          </h1>
+
+          <p>
+            {passed
+              ? "Tahniah! Semua soalan telah dijawab dengan tepat."
+              : "Jawab semua soalan dengan betul untuk menyelesaikan latihan ini."}
+          </p>
+
+          <div className="marfuat-result-score">
+
+            <div>
+              <span>Betul</span>
+              <strong>
+                {correctCount}
+              </strong>
+            </div>
+
+            <div>
+              <span>Belum tepat</span>
+              <strong>
+                {wrongCount}
+              </strong>
+            </div>
+
+            <div>
+              <span>Jumlah</span>
+              <strong>
+                {questions.length}
+              </strong>
+            </div>
+
+          </div>
+
+          <div className="marfuat-result-actions">
+
+            <button
+              type="button"
+              onClick={restartQuiz}
+            >
+              Cuba Lagi
+            </button>
+
+            <button
+              type="button"
+              onClick={() =>
+                navigate("/kota-marfuat")
+              }
+            >
+              Kembali ke Kota Marfu‘at
+            </button>
+
+          </div>
+
+        </section>
+
+      </main>
+    );
+  }
+
+  /* =====================================================
+     PAPARAN LATIHAN
+  ===================================================== */
+
+  return (
+    <main className="marfuat-quiz-page">
+
+      <section className="marfuat-quiz-frame">
+
+        {/* ================= HEADER ================= */}
+
+        <header className="marfuat-quiz-header">
+
+          <button
+            type="button"
+            onClick={() =>
+              navigate("/kota-marfuat")
+            }
+          >
+            ← Kota Marfu‘at
+          </button>
+
           <div>
-            <span className="lorong-badge">
-              LORONG LATIHAN
+
+            <span>
+              تَدْرِيبٌ
             </span>
 
             <h1>
               تَدْرِيبُ الْمَرْفُوعَاتِ
             </h1>
+
           </div>
 
-          <div className="lorong-score">
-            {correctCount} / {questions.length}
-          </div>
-        </div>
+          <strong>
+            {questionIndex + 1}/
+            {questions.length}
+          </strong>
 
-        <div className="lorong-progress">
-          <div
-            className="lorong-progress-fill"
+        </header>
+
+        {/* ================= PROGRESS ================= */}
+
+        <div className="marfuat-progress-track">
+
+          <span
             style={{
-              width: `${
-                ((currentIndex + 1) /
-                  questions.length) *
-                100
-              }%`,
+              width: `${progress}%`,
             }}
           />
+
         </div>
 
-        <div className="lorong-question-number">
-          Soalan {currentIndex + 1} daripada{" "}
-          {questions.length}
-        </div>
+        {/* ================= KANDUNGAN ================= */}
 
-        <div className="lorong-question">
-          <p>{currentQuestion.question}</p>
+        <section className="marfuat-question-area">
 
-          <div
-            className="lorong-arabic"
-            dir="rtl"
-            lang="ar"
-          >
-            {currentQuestion.arabic}
-          </div>
-        </div>
+          {/* ================= SOALAN ================= */}
 
-        <div className="lorong-options">
-          {currentQuestion.options.map((option) => {
-            let className = "lorong-option";
+          <article className="marfuat-question-card">
 
-            if (selectedAnswer !== null) {
-              if (option === currentQuestion.answer) {
-                className += " correct";
-              } else if (option === selectedAnswer) {
-                className += " wrong";
-              }
-            }
-
-            return (
-              <button
-                key={option}
-                className={className}
-                disabled={selectedAnswer !== null}
-                onClick={() => handleAnswer(option)}
-                dir="rtl"
-                lang="ar"
-              >
-                {option}
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="lorong-numbers">
-          {questions.map((_, index) => (
-            <span
-              key={index}
-              className={
-                index === currentIndex
-                  ? "active"
-                  : index < currentIndex
-                  ? "done"
-                  : ""
-              }
-            >
-              {index + 1}
+            <span className="marfuat-question-number">
+              Soalan {questionIndex + 1}
             </span>
-          ))}
-        </div>
-      </div>
-    </div>
+
+            <h2>
+              {currentQuestion.question}
+            </h2>
+
+            <p
+              className="marfuat-arabic-sentence"
+              dir="rtl"
+              lang="ar"
+            >
+              {currentQuestion.arabic}
+            </p>
+
+          </article>
+
+          {/* ================= JAWAPAN ================= */}
+
+          <section className="marfuat-answer-list">
+
+            {currentQuestion.options.map(
+              (option, index) => (
+
+                <button
+                  type="button"
+                  key={option}
+                  className={getAnswerClass(
+                    option
+                  )}
+                  disabled={Boolean(
+                    selectedAnswer
+                  )}
+                  onClick={() =>
+                    chooseAnswer(option)
+                  }
+                >
+
+                  <span>
+                    {String.fromCharCode(
+                      65 + index
+                    )}
+                  </span>
+
+                  <strong
+                    dir="rtl"
+                    lang="ar"
+                  >
+                    {option}
+                  </strong>
+
+                </button>
+
+              )
+            )}
+
+          </section>
+
+          {/* ================= FEEDBACK ================= */}
+
+          <aside className="marfuat-feedback">
+
+            {!selectedAnswer && (
+              <strong>
+              
+              </strong>
+            )}
+
+            {selectedAnswer ===
+              currentQuestion.answer && (
+              <strong className="correct">
+                ✓ Betul
+              </strong>
+            )}
+
+            {selectedAnswer &&
+              selectedAnswer !==
+                currentQuestion.answer && (
+              <strong className="wrong">
+                ✗ Belum tepat
+              </strong>
+            )}
+
+          </aside>
+
+        </section>
+
+        {/* ================= FOOTER ================= */}
+
+        <footer className="marfuat-question-footer">
+
+          {questions.map(
+            (question, index) => (
+
+              <span
+                key={question.id}
+                className={[
+                  index === questionIndex
+                    ? "active"
+                    : "",
+                  index < questionIndex
+                    ? "completed"
+                    : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+              >
+                {index + 1}
+              </span>
+
+            )
+          )}
+
+        </footer>
+
+      </section>
+
+    </main>
   );
 }

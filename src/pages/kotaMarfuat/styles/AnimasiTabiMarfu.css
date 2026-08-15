@@ -1,14 +1,11 @@
 /* =========================================================
-   ANIMASI KHABAR INNA
+   ANIMASI التَّابِعُ لِلْمَرْفُوعِ
    KOTA MARFU'AT
-   LANDSCAPE LAPTOP + HP
+   FULL LANDSCAPE
+   LAPTOP / TABLET
 ========================================================= */
 
-* {
-  box-sizing: border-box;
-}
-
-.khabar-inna-animation-screen {
+.tabi-marfu-animation-screen {
   position: fixed;
   inset: 0;
 
@@ -21,13 +18,15 @@
   flex-direction: column;
   align-items: center;
 
+  box-sizing: border-box;
+
   padding:
-    clamp(10px, 2vh, 22px)
-    clamp(12px, 3vw, 40px);
+    18px 32px 12px;
 
   background:
     url("/images/kotaMarfuat/bg-marfuat.webp")
-    center / cover no-repeat;
+    center / cover
+    no-repeat;
 
   font-family:
     Arial,
@@ -35,12 +34,11 @@
     sans-serif;
 }
 
-
 /* =========================================================
    SHADE
 ========================================================= */
 
-.khabar-inna-animation-shade {
+.tabi-marfu-animation-shade {
   position: absolute;
   inset: 0;
 
@@ -52,25 +50,27 @@
   pointer-events: none;
 }
 
-
 /* =========================================================
    HEADER
 ========================================================= */
 
-.khabar-inna-animation-header {
+.tabi-marfu-animation-header {
   position: relative;
+
   z-index: 2;
 
   flex-shrink: 0;
 
+  width: 100%;
+
   text-align: center;
 }
 
-.khabar-inna-animation-kicker {
+.tabi-marfu-animation-kicker {
   display: inline-block;
 
   padding:
-    6px 20px;
+    6px 22px;
 
   border:
     2px solid
@@ -90,21 +90,17 @@
     serif;
 
   font-size:
-    clamp(
-      0.68rem,
-      1.2vw,
-      0.9rem
-    );
+    0.9rem;
 
   font-weight:
-    800;
+    700;
 
   box-shadow:
     0 5px 14px
     rgba(0, 0, 0, 0.25);
 }
 
-.khabar-inna-animation-header h1 {
+.tabi-marfu-animation-header h1 {
   margin:
     7px 0 0;
 
@@ -118,8 +114,8 @@
 
   font-size:
     clamp(
-      1.35rem,
-      2.6vw,
+      1.45rem,
+      2.4vw,
       2.2rem
     );
 
@@ -134,56 +130,42 @@
     rgba(0, 0, 0, 0.55);
 }
 
-
 /* =========================================================
-   CARD
+   MAIN CARD
 ========================================================= */
 
-.khabar-inna-animation-card {
-  position:
-    relative;
+.tabi-marfu-animation-card {
+  position: relative;
 
-  z-index:
-    2;
+  z-index: 2;
 
   width:
-    min(
-      900px,
-      86vw
-    );
+    min(900px, 84vw);
 
   max-height:
-    76dvh;
+    calc(100dvh - 145px);
 
   margin-top:
-    clamp(
-      30px,
-      5vh,
-      42px
-    );
+    34px;
 
   padding:
-    clamp(
-      24px,
-      4vh,
-      42px
-    )
-    clamp(
-      26px,
-      4vw,
-      48px
-    );
+    38px 44px 20px;
+
+  box-sizing:
+    border-box;
+
+  overflow:
+    hidden;
+
+  flex-shrink:
+    1;
 
   border:
     2px solid
     #d8ad3c;
 
   border-radius:
-    clamp(
-      16px,
-      2vw,
-      24px
-    );
+    24px;
 
   background:
     linear-gradient(
@@ -200,12 +182,12 @@
     center;
 
   animation:
-    khabarInnaCardIn
+    tabiMarfuCardIn
     0.35s
     ease;
 }
 
-@keyframes khabarInnaCardIn {
+@keyframes tabiMarfuCardIn {
 
   from {
     opacity:
@@ -226,17 +208,16 @@
   }
 }
 
-
 /* =========================================================
    STAGE LABEL
 ========================================================= */
 
-.khabar-inna-stage-label {
+.tabi-marfu-stage-label {
   position:
     absolute;
 
   top:
-    -25px;
+    -24px;
 
   left:
     50%;
@@ -254,13 +235,16 @@
     center;
 
   gap:
-    10px;
+    12px;
 
   min-width:
-    210px;
+    205px;
 
   padding:
-    9px 22px;
+    9px 23px;
+
+  box-sizing:
+    border-box;
 
   border:
     2px solid
@@ -283,38 +267,35 @@
     nowrap;
 }
 
-.khabar-inna-stage-label span {
+.tabi-marfu-stage-label span {
   font-family:
     "Times New Roman",
     "Amiri",
     serif;
 
   font-size:
-    clamp(
-      0.95rem,
-      1.5vw,
-      1.15rem
-    );
+    1.1rem;
+
+  line-height:
+    1;
 
   direction:
     rtl;
 }
 
-.khabar-inna-stage-label strong {
+.tabi-marfu-stage-label strong {
   font-size:
-    clamp(
-      0.7rem,
-      1vw,
-      0.85rem
-    );
-}
+    0.82rem;
 
+  line-height:
+    1;
+}
 
 /* =========================================================
    ARABIC SENTENCE
 ========================================================= */
 
-.khabar-inna-full-sentence {
+.tabi-marfu-full-sentence {
   display:
     flex;
 
@@ -325,14 +306,16 @@
     baseline;
 
   gap:
-    clamp(
-      12px,
-      2vw,
-      28px
-    );
+    24px;
+
+  width:
+    100%;
+
+  min-height:
+    90px;
 
   margin-top:
-    8px;
+    4px;
 
   direction:
     rtl;
@@ -340,20 +323,24 @@
   font-family:
     "Times New Roman",
     "Amiri",
+    "Traditional Arabic",
     serif;
 
   font-size:
     clamp(
-      2.5rem,
-      5vw,
+      2.8rem,
+      4.7vw,
       4.3rem
     );
 
   line-height:
-    1.2;
+    1.1;
+
+  white-space:
+    nowrap;
 }
 
-.khabar-inna-before {
+.tabi-marfu-before {
   color:
     #173f34;
 
@@ -361,7 +348,7 @@
     500;
 }
 
-.khabar-inna-focus-word {
+.tabi-marfu-focus-word {
   position:
     relative;
 
@@ -375,12 +362,12 @@
     800;
 }
 
-.khabar-inna-word-base {
+.tabi-marfu-word-base {
   display:
     inline;
 }
 
-.khabar-inna-changing-ending {
+.tabi-marfu-changing-ending {
   display:
     inline-block;
 
@@ -391,12 +378,12 @@
     900;
 
   animation:
-    khabarInnaEndingIn
+    tabiMarfuEndingIn
     0.45s
     ease;
 }
 
-@keyframes khabarInnaEndingIn {
+@keyframes tabiMarfuEndingIn {
 
   from {
     opacity:
@@ -417,12 +404,11 @@
   }
 }
 
-
 /* =========================================================
    SIGN
 ========================================================= */
 
-.khabar-inna-sign-information {
+.tabi-marfu-sign-information {
   display:
     inline-flex;
 
@@ -430,27 +416,26 @@
     center;
 
   margin:
-    12px auto
-    14px;
+    9px auto 0;
 
   overflow:
     hidden;
 
-  border-radius:
-    22px;
-
   border:
     1px solid
     #d8ad3c;
+
+  border-radius:
+    22px;
 
   box-shadow:
     0 3px 8px
     rgba(0, 0, 0, 0.12);
 }
 
-.khabar-inna-sign-information span {
+.tabi-marfu-sign-information span {
   padding:
-    8px 18px;
+    8px 19px;
 
   background:
     #08735a;
@@ -459,19 +444,18 @@
     #fff;
 
   font-size:
-    clamp(
-      0.68rem,
-      1vw,
-      0.82rem
-    );
+    0.8rem;
 
   font-weight:
     700;
+
+  white-space:
+    nowrap;
 }
 
-.khabar-inna-sign-information strong {
+.tabi-marfu-sign-information strong {
   padding:
-    8px 20px;
+    8px 21px;
 
   background:
     #f4ca50;
@@ -480,52 +464,47 @@
     #604a16;
 
   font-size:
-    clamp(
-      0.7rem,
-      1vw,
-      0.82rem
-    );
+    0.8rem;
 
   font-weight:
     800;
-}
 
+  white-space:
+    nowrap;
+}
 
 /* =========================================================
    NOTE
 ========================================================= */
 
-.khabar-inna-stage-note {
-  max-width:
-    760px;
+.tabi-marfu-stage-note {
+  width:
+    min(760px, 100%);
 
   margin:
-    10px auto
-    12px;
+    11px auto 8px;
 
   color:
     #293f38;
 
   font-size:
-    clamp(
-      0.75rem,
-      1.2vw,
-      0.88rem
-    );
+    0.82rem;
 
   font-weight:
     600;
 
   line-height:
-    1.5;
-}
+    1.45;
 
+  text-align:
+    center;
+}
 
 /* =========================================================
    COMPARISON FLOW
 ========================================================= */
 
-.khabar-inna-comparison-flow {
+.tabi-marfu-comparison-flow {
   display:
     flex;
 
@@ -536,25 +515,28 @@
     center;
 
   gap:
-    clamp(
-      8px,
-      1.5vw,
-      24px
-    );
+    20px;
+
+  width:
+    fit-content;
+
+  max-width:
+    100%;
+
+  margin:
+    0 auto;
 
   padding:
-    8px 14px;
+    8px 16px;
+
+  box-sizing:
+    border-box;
 
   border-radius:
     14px;
 
   background:
-    rgba(
-      225,
-      215,
-      177,
-      0.45
-    );
+    rgba(225, 215, 177, 0.45);
 
   color:
     #645a43;
@@ -565,14 +547,13 @@
     serif;
 
   font-size:
-    clamp(
-      0.95rem,
-      1.6vw,
-      1.15rem
-    );
+    1.05rem;
+
+  white-space:
+    nowrap;
 }
 
-.khabar-inna-comparison-flow span {
+.tabi-marfu-comparison-flow span {
   padding:
     4px 9px;
 
@@ -583,7 +564,7 @@
     0.25s ease;
 }
 
-.khabar-inna-comparison-flow span.current {
+.tabi-marfu-comparison-flow span.current {
   background:
     #08735a;
 
@@ -595,24 +576,24 @@
     rgba(0, 0, 0, 0.18);
 }
 
-.khabar-inna-comparison-flow b {
+.tabi-marfu-comparison-flow b {
   color:
     #b58a25;
 
-  font-size:
-    clamp(
-      0.8rem,
-      1.2vw,
-      1.2rem
-    );
-}
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
 
+  font-size:
+    1.05rem;
+}
 
 /* =========================================================
    ACTIONS
 ========================================================= */
 
-.khabar-inna-animation-actions {
+.tabi-marfu-animation-actions {
   position:
     relative;
 
@@ -620,10 +601,10 @@
     3;
 
   width:
-    min(
-      900px,
-      86vw
-    );
+    min(900px, 84vw);
+
+  min-height:
+    48px;
 
   display:
     flex;
@@ -638,26 +619,21 @@
     auto;
 
   padding-top:
-    10px;
+    8px;
 
-  padding-bottom:
-    clamp(
-      6px,
-      2vh,
-      18px
-    );
+  flex-shrink:
+    0;
 }
 
-.khabar-inna-animation-button {
+.tabi-marfu-animation-button {
   min-width:
-    clamp(
-      130px,
-      14vw,
-      150px
-    );
+    145px;
 
   padding:
     10px 20px;
+
+  box-sizing:
+    border-box;
 
   border:
     2px solid
@@ -667,11 +643,7 @@
     28px;
 
   font-size:
-    clamp(
-      0.72rem,
-      1.1vw,
-      0.9rem
-    );
+    0.85rem;
 
   font-weight:
     800;
@@ -684,7 +656,7 @@
     box-shadow 0.15s ease;
 }
 
-.khabar-inna-animation-button:hover {
+.tabi-marfu-animation-button:hover {
   transform:
     translateY(-2px);
 
@@ -693,7 +665,7 @@
     rgba(0, 0, 0, 0.22);
 }
 
-.khabar-inna-animation-button.secondary {
+.tabi-marfu-animation-button.secondary {
   background:
     #fffdf2;
 
@@ -701,7 +673,7 @@
     #08735a;
 }
 
-.khabar-inna-animation-button.primary {
+.tabi-marfu-animation-button.primary {
   background:
     #08735a;
 
@@ -709,12 +681,11 @@
     #fff;
 }
 
-
 /* =========================================================
    STAGE INDICATOR
 ========================================================= */
 
-.khabar-inna-stage-indicator {
+.tabi-marfu-stage-indicator {
   display:
     flex;
 
@@ -725,7 +696,7 @@
     8px;
 }
 
-.khabar-inna-stage-book {
+.tabi-marfu-stage-book {
   display:
     grid;
 
@@ -733,36 +704,19 @@
     center;
 
   width:
-    clamp(
-      32px,
-      4vw,
-      42px
-    );
+    40px;
 
   height:
-    clamp(
-      32px,
-      4vw,
-      42px
-    );
+    40px;
 
   border-radius:
     9px;
 
   background:
-    rgba(
-      238,
-      240,
-      224,
-      0.65
-    );
+    rgba(238, 240, 224, 0.65);
 
   font-size:
-    clamp(
-      1rem,
-      1.5vw,
-      1.35rem
-    );
+    1.25rem;
 
   opacity:
     0.65;
@@ -771,7 +725,7 @@
     0.25s ease;
 }
 
-.khabar-inna-stage-book.done {
+.tabi-marfu-stage-book.done {
   background:
     #6b8d7d;
 
@@ -779,7 +733,7 @@
     0.8;
 }
 
-.khabar-inna-stage-book.active {
+.tabi-marfu-stage-book.active {
   background:
     #fffdf2;
 
@@ -792,348 +746,383 @@
 
   box-shadow:
     0 0 18px
-    rgba(
-      216,
-      173,
-      60,
-      0.65
-    );
+    rgba(216, 173, 60, 0.65);
 
   transform:
     translateY(-2px);
 }
 
-
 /* =========================================================
-   LAPTOP PENDEK
+   LAPTOP 1366 × 768
 ========================================================= */
 
-@media
-  (max-height: 800px)
-  and (min-width: 701px) {
+@media (max-height: 800px) {
 
-  .khabar-inna-animation-screen {
-    padding-top:
-      10px;
-
-    padding-bottom:
-      8px;
-  }
-
-  .khabar-inna-animation-header h1 {
-    margin-top:
-      4px;
-
-    font-size:
-      1.65rem;
-  }
-
-  .khabar-inna-animation-card {
-    margin-top:
-      32px;
-
+  .tabi-marfu-animation-screen {
     padding:
-      28px 40px 20px;
+      10px 28px 7px;
   }
 
-  .khabar-inna-full-sentence {
-    font-size:
-      3.4rem;
-  }
-
-  .khabar-inna-stage-note {
-    margin-top:
-      8px;
-
-    margin-bottom:
-      8px;
-  }
-
-  .khabar-inna-animation-actions {
-    padding-top:
-      6px;
-  }
-}
-
-
-/* =========================================================
-   HP LANDSCAPE
-========================================================= */
-
-@media
-  (max-width: 700px)
-  and (orientation: landscape) {
-
-  .khabar-inna-animation-screen {
+  .tabi-marfu-animation-kicker {
     padding:
-      5px 10px;
-  }
+      5px 18px;
 
-  .khabar-inna-animation-header {
-    margin-top:
-      0;
-  }
-
-  .khabar-inna-animation-kicker {
-    padding:
-      4px 12px;
-
-    font-size:
-      0.58rem;
-  }
-
-  .khabar-inna-animation-header h1 {
-    margin-top:
-      3px;
-
-    font-size:
-      1.05rem;
-  }
-
-
-  /* CARD */
-
-  .khabar-inna-animation-card {
-    width:
-      92vw;
-
-    max-height:
-      76dvh;
-
-    margin-top:
-      28px;
-
-    padding:
-      13px 16px;
-
-    border-radius:
-      14px;
-  }
-
-
-  /* LABEL */
-
-  .khabar-inna-stage-label {
-    top:
-      -18px;
-
-    min-width:
-      160px;
-
-    padding:
-      5px 12px;
-
-    gap:
-      6px;
-  }
-
-  .khabar-inna-stage-label span {
     font-size:
       0.8rem;
   }
 
-  .khabar-inna-stage-label strong {
+  .tabi-marfu-animation-header h1 {
+    margin-top:
+      4px;
+
     font-size:
-      0.58rem;
+      1.55rem;
   }
 
+  .tabi-marfu-animation-card {
+    width:
+      min(900px, 86vw);
 
-  /* SENTENCE */
-
-  .khabar-inna-full-sentence {
-    gap:
-      10px;
+    max-height:
+      calc(100dvh - 120px);
 
     margin-top:
-      8px;
+      27px;
 
-    font-size:
-      clamp(
-        2rem,
-        6vw,
-        2.8rem
-      );
-  }
-
-
-  /* SIGN */
-
-  .khabar-inna-sign-information {
-    margin:
-      5px auto 7px;
-  }
-
-  .khabar-inna-sign-information span,
-  .khabar-inna-sign-information strong {
     padding:
-      5px 10px;
+      30px 38px 14px;
 
-    font-size:
-      0.58rem;
+    border-radius:
+      22px;
   }
 
+  .tabi-marfu-stage-label {
+    top:
+      -22px;
 
-  /* NOTE */
+    min-width:
+      190px;
 
-  .khabar-inna-stage-note {
-    margin:
-      5px auto 7px;
+    padding:
+      8px 20px;
+  }
+
+  .tabi-marfu-stage-label span {
+    font-size:
+      1rem;
+  }
+
+  .tabi-marfu-stage-label strong {
+    font-size:
+      0.76rem;
+  }
+
+  .tabi-marfu-full-sentence {
+    min-height:
+      76px;
+
+    gap:
+      20px;
 
     font-size:
-      0.62rem;
+      3.2rem;
+  }
+
+  .tabi-marfu-sign-information {
+    margin-top:
+      7px;
+  }
+
+  .tabi-marfu-sign-information span,
+  .tabi-marfu-sign-information strong {
+    padding:
+      7px 16px;
+
+    font-size:
+      0.74rem;
+  }
+
+  .tabi-marfu-stage-note {
+    margin:
+      8px auto 6px;
+
+    font-size:
+      0.76rem;
+
+    line-height:
+      1.35;
+  }
+
+  .tabi-marfu-comparison-flow {
+    gap:
+      15px;
+
+    padding:
+      6px 13px;
+
+    font-size:
+      0.95rem;
+  }
+
+  .tabi-marfu-animation-actions {
+    width:
+      min(900px, 86vw);
+
+    min-height:
+      40px;
+
+    padding-top:
+      5px;
+  }
+
+  .tabi-marfu-animation-button {
+    min-width:
+      125px;
+
+    padding:
+      8px 16px;
+
+    font-size:
+      0.78rem;
+  }
+
+  .tabi-marfu-stage-indicator {
+    gap:
+      6px;
+  }
+
+  .tabi-marfu-stage-book {
+    width:
+      34px;
+
+    height:
+      34px;
+
+    font-size:
+      1rem;
+  }
+}
+
+/* =========================================================
+   LAPTOP RENDAH 1280 × 720
+========================================================= */
+
+@media (max-height: 720px) {
+
+  .tabi-marfu-animation-screen {
+    padding:
+      6px 22px 4px;
+  }
+
+  .tabi-marfu-animation-kicker {
+    padding:
+      4px 16px;
+
+    font-size:
+      0.74rem;
+  }
+
+  .tabi-marfu-animation-header h1 {
+    margin-top:
+      3px;
+
+    font-size:
+      1.35rem;
+  }
+
+  .tabi-marfu-animation-card {
+    width:
+      min(900px, 88vw);
+
+    max-height:
+      calc(100dvh - 96px);
+
+    margin-top:
+      21px;
+
+    padding:
+      25px 30px 10px;
+
+    border-radius:
+      20px;
+  }
+
+  .tabi-marfu-stage-label {
+    top:
+      -20px;
+
+    min-width:
+      175px;
+
+    padding:
+      7px 17px;
+  }
+
+  .tabi-marfu-stage-label span {
+    font-size:
+      0.9rem;
+  }
+
+  .tabi-marfu-stage-label strong {
+    font-size:
+      0.7rem;
+  }
+
+  .tabi-marfu-full-sentence {
+    min-height:
+      62px;
+
+    gap:
+      16px;
+
+    font-size:
+      2.75rem;
+
+    line-height:
+      1;
+  }
+
+  .tabi-marfu-sign-information {
+    margin-top:
+      5px;
+  }
+
+  .tabi-marfu-sign-information span,
+  .tabi-marfu-sign-information strong {
+    padding:
+      6px 14px;
+
+    font-size:
+      0.68rem;
+  }
+
+  .tabi-marfu-stage-note {
+    margin:
+      6px auto 5px;
+
+    font-size:
+      0.68rem;
 
     line-height:
       1.3;
   }
 
-
-  /* COMPARISON */
-
-  .khabar-inna-comparison-flow {
+  .tabi-marfu-comparison-flow {
     gap:
-      5px;
+      11px;
 
     padding:
-      5px 8px;
+      5px 11px;
 
     font-size:
-      0.82rem;
+      0.84rem;
   }
 
-  .khabar-inna-comparison-flow span {
-    padding:
-      3px 6px;
-  }
-
-  .khabar-inna-comparison-flow b {
-    font-size:
-      0.62rem;
-  }
-
-
-  /* ACTIONS */
-
-  .khabar-inna-animation-actions {
-    width:
-      92vw;
-
-    padding-bottom:
-      4px;
-  }
-
-  .khabar-inna-animation-button {
-    min-width:
-      105px;
-
-    padding:
-      6px 12px;
-
-    font-size:
-      0.62rem;
-  }
-
-
-  /* INDICATOR */
-
-  .khabar-inna-stage-indicator {
-    gap:
-      4px;
-  }
-
-  .khabar-inna-stage-book {
-    width:
-      27px;
-
-    height:
-      27px;
-
+  .tabi-marfu-comparison-flow b {
     font-size:
       0.85rem;
   }
-}
 
+  .tabi-marfu-animation-actions {
+    width:
+      min(900px, 88vw);
 
-/* =========================================================
-   HP LANDSCAPE SANGAT PENDEK
-========================================================= */
-
-@media
-  (max-width: 700px)
-  and (orientation: landscape)
-  and (max-height: 430px) {
-
-  .khabar-inna-animation-card {
-    margin-top:
-      23px;
-
-    padding:
-      9px 13px;
-  }
-
-  .khabar-inna-stage-label {
-    top:
-      -16px;
-
-    min-width:
-      140px;
-
-    padding:
-      4px 9px;
-  }
-
-  .khabar-inna-stage-label span {
-    font-size:
-      0.68rem;
-  }
-
-  .khabar-inna-stage-label strong {
-    font-size:
-      0.5rem;
-  }
-
-  .khabar-inna-full-sentence {
     min-height:
-      45px;
+      34px;
 
-    font-size:
-      1.8rem;
+    padding-top:
+      3px;
   }
 
-  .khabar-inna-stage-note {
-    font-size:
-      0.55rem;
+  .tabi-marfu-animation-button {
+    min-width:
+      112px;
 
-    margin-bottom:
-      4px;
-  }
-
-  .khabar-inna-comparison-flow {
     padding:
-      3px 6px;
+      6px 13px;
 
     font-size:
       0.7rem;
   }
 
-  .khabar-inna-animation-button {
-    min-width:
-      90px;
-
-    padding:
-      4px 9px;
-
-    font-size:
-      0.55rem;
+  .tabi-marfu-stage-indicator {
+    gap:
+      5px;
   }
 
-  .khabar-inna-stage-book {
+  .tabi-marfu-stage-book {
     width:
-      23px;
+      30px;
 
     height:
-      23px;
+      30px;
 
     font-size:
-      0.7rem;
+      0.9rem;
+
+    border-radius:
+      7px;
+  }
+}
+
+/* =========================================================
+   TABLET LANDSCAPE
+========================================================= */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+  .tabi-marfu-animation-screen {
+    padding:
+      8px 18px 5px;
+  }
+
+  .tabi-marfu-animation-card {
+    width:
+      90vw;
+  }
+
+  .tabi-marfu-animation-actions {
+    width:
+      90vw;
+  }
+
+  .tabi-marfu-full-sentence {
+    font-size:
+      clamp(
+        2.4rem,
+        6vw,
+        3.2rem
+      );
+  }
+}
+
+/* =========================================================
+   TOUCH DEVICE
+========================================================= */
+
+@media (hover: none) {
+
+  .tabi-marfu-animation-button:hover {
+    transform:
+      none;
+
+    box-shadow:
+      none;
+  }
+}
+
+/* =========================================================
+   PORTRAIT
+   Jangan benarkan layout menegak.
+========================================================= */
+
+@media (orientation: portrait) {
+
+  .tabi-marfu-animation-screen {
+    min-width:
+      100vw;
+
+    min-height:
+      100dvh;
   }
 }

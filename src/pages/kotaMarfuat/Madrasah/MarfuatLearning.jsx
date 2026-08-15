@@ -8,7 +8,7 @@ const TOPICS = [
     id: 1,
     key: "fail",
     arabic: "الفاعل",
-    malay: "Fa‘il",
+    malay: "Bab Fa‘il",
     route: "/kitab-fail",
     storageKey: "failLearningDone",
   },
@@ -16,7 +16,7 @@ const TOPICS = [
     id: 2,
     key: "naibFail",
     arabic: "نائب الفاعل",
-    malay: "Naib Fa‘il",
+    malay: "Bab Naib Fa‘il",
     route: "/kitab-naib-fail",
     storageKey: "naibFailLearningDone",
   },
@@ -24,7 +24,7 @@ const TOPICS = [
     id: 3,
     key: "mubtada",
     arabic: "المبتدأ",
-    malay: "Mubtada‘",
+    malay: "Bab Mubtada‘",
     route: "/kitab-mubtada",
     storageKey: "mubtadaLearningDone",
   },
@@ -32,7 +32,7 @@ const TOPICS = [
     id: 4,
     key: "khabar",
     arabic: "الخبر",
-    malay: "Khabar",
+    malay: "Bab Khabar",
     route: "/kitab-khabar",
     storageKey: "khabarLearningDone",
   },
@@ -40,7 +40,7 @@ const TOPICS = [
     id: 5,
     key: "isimKana",
     arabic: "اسم كان",
-    malay: "Isim Kana",
+    malay: "Bab Isim Kana",
     route: "/kitab-isim-kana",
     storageKey: "isimKanaLearningDone",
   },
@@ -48,9 +48,17 @@ const TOPICS = [
     id: 6,
     key: "khabarInna",
     arabic: "خبر إن",
-    malay: "Khabar Inna",
+    malay: "Bab Khabar Inna",
     route: "/kitab-khabar-inna",
     storageKey: "khabarInnaLearningDone",
+  },
+  {
+    id: 7,
+    key: "tabiMarfu",
+    arabic: "التَّابِعُ لِلْمَرْفُوعِ",
+    malay: "Bab Tabi‘ Marfu‘",
+    route: "/kitab-tabi-marfu",
+    storageKey: "tabiMarfuLearningDone",
   },
 ];
 
@@ -66,9 +74,7 @@ function bacaStatus() {
 export default function MarfuatLearning() {
   const navigate = useNavigate();
 
-  const [completed, setCompleted] = useState(
-    bacaStatus
-  );
+  const [completed, setCompleted] = useState(bacaStatus);
 
   useEffect(() => {
     function kemasKiniStatus() {
@@ -77,58 +83,56 @@ export default function MarfuatLearning() {
 
     kemasKiniStatus();
 
-    window.addEventListener(
-      "focus",
-      kemasKiniStatus
-    );
-
-    window.addEventListener(
-      "pageshow",
-      kemasKiniStatus
-    );
-
-    window.addEventListener(
-      "storage",
-      kemasKiniStatus
-    );
+    window.addEventListener("focus", kemasKiniStatus);
+    window.addEventListener("pageshow", kemasKiniStatus);
+    window.addEventListener("storage", kemasKiniStatus);
 
     return () => {
-      window.removeEventListener(
-        "focus",
-        kemasKiniStatus
-      );
-
-      window.removeEventListener(
-        "pageshow",
-        kemasKiniStatus
-      );
-
-      window.removeEventListener(
-        "storage",
-        kemasKiniStatus
-      );
+      window.removeEventListener("focus", kemasKiniStatus);
+      window.removeEventListener("pageshow", kemasKiniStatus);
+      window.removeEventListener("storage", kemasKiniStatus);
     };
   }, []);
+
+  const completedCount = TOPICS.filter(
+    (topic) => completed[topic.key]
+  ).length;
+
+  function isUnlocked(index) {
+    // Bab pertama sentiasa terbuka.
+    if (index === 0) return true;
+
+    // Bab berikutnya hanya terbuka apabila bab sebelumnya selesai.
+    return completed[TOPICS[index - 1].key];
+  }
+
+  function bukaBab(topic, index) {
+    if (!isUnlocked(index)) return;
+
+    navigate(topic.route);
+  }
+
+  const semuaSelesai =
+    completedCount === TOPICS.length;
 
   return (
     <main className="marfuat-learning-page">
       <section className="marfuat-learning-frame">
 
+        {/* KEMBALI */}
         <button
           type="button"
           className="learning-back-btn"
-          onClick={() =>
-            navigate("/marfuat-matan")
-          }
+          onClick={() => navigate("/marfuat-matan")}
         >
           ← Kembali
         </button>
 
-        <section className="learning-card">
-
-          <span className="learning-badge">
+        {/* TAJUK */}
+        <div className="learning-heading">
+          <div className="learning-badge">
             MODUL PEMBELAJARAN
-          </span>
+          </div>
 
           <h1
             className="learning-title"
@@ -139,72 +143,125 @@ export default function MarfuatLearning() {
           </h1>
 
           <p className="learning-subtitle">
-            Pilih salah satu kitab di bawah untuk
-            mempelajari sebab-sebab isim berada dalam
-            keadaan marfu‘.
+            Pilih bab dan pelajari Marfu‘āt secara
+            teratur dan berurutan.
           </p>
+        </div>
 
-          <div className="learning-grid">
-            {TOPICS.map((topic) => {
-              const isDone =
-                completed[topic.key];
+        {/* KEMAJUAN */}
+        <div className="learning-progress">
+                  <strong>
+            {completedCount} / {TOPICS.length}
+          </strong>
 
-              return (
-                <button
-                  key={topic.id}
-                  type="button"
-                  className={[
-                    "topic-card",
-                    isDone ? "completed" : "",
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
-                  onClick={() =>
-                    navigate(topic.route)
-                  }
-                >
-                  <span className="topic-number">
-                    {topic.id}
-                  </span>
-
-                  <span
-                    className="topic-arabic"
-                    dir="rtl"
-                    lang="ar"
-                  >
-                    {topic.arabic}
-                  </span>
-
-                  <strong className="topic-malay">
-                    {topic.malay}
-                  </strong>
-
-                  {isDone && (
-                    <span
-                      className="topic-completed"
-                      aria-label="Selesai"
-                    >
-                      ✓ Selesai
-                    </span>
-                  )}
-                </button>
-              );
-            })}
+          <div className="learning-progress-bar">
+            <div
+              className="learning-progress-fill"
+              style={{
+                width: `${
+                  (completedCount / TOPICS.length) * 100
+                }%`,
+              }}
+            />
           </div>
+        </div>
 
-          <button
-            type="button"
-            className="learning-next-btn"
-            onClick={() =>
-              navigate(
-                "/perpustakaan-marfuat"
-              )
-            }
-          >
-            📚 Masuk ke Perpustakaan Marfu‘at
-          </button>
+        {/* BAB */}
+        <div className="learning-topics">
 
-        </section>
+          {TOPICS.map((topic, index) => {
+            const isDone =
+              completed[topic.key];
+
+            const unlocked =
+              isUnlocked(index);
+
+            return (
+              <button
+                key={topic.id}
+                type="button"
+                className={[
+                  "learning-topic",
+                  `topic-${topic.id}`,
+                  isDone ? "completed" : "",
+                  unlocked ? "unlocked" : "locked",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                onClick={() =>
+                  bukaBab(topic, index)
+                }
+                disabled={!unlocked}
+                aria-label={topic.malay}
+              >
+
+                <span className="topic-ui-number">
+                  {topic.id}
+                </span>
+
+                <span
+                  className="topic-ui-arabic"
+                  dir="rtl"
+                  lang="ar"
+                >
+                  {topic.arabic}
+                </span>
+
+                <span className="topic-ui-malay">
+                  {topic.malay}
+                </span>
+
+                <span className="topic-ui-status">
+                  {isDone
+                    ? "✓ Selesai"
+                    : unlocked
+                    ? "📖 Buka Bab"
+                    : ""}
+                </span>
+
+              </button>
+            );
+          })}
+
+        </div>
+
+        {/* FOOTER */}
+        <div className="learning-footer">
+
+          <span>
+            📖 Setiap bab mengandungi
+          </span>
+
+          <strong>
+            Dialog
+          </strong>
+
+          <b>→</b>
+
+          <strong>
+            Animasi
+          </strong>
+
+          <b>→</b>
+
+          <strong>
+            Latihan
+          </strong>
+
+          <b>→</b>
+
+          <strong>
+            Selesai
+          </strong>
+
+          <span className="footer-next">
+            {semuaSelesai
+              ? "⭐ Lorong Latihan terbuka!"
+              : "Selesaikan semua bab untuk membuka Lorong Latihan."}
+          </span>
+
+        </div>
+
       </section>
     </main>
   );

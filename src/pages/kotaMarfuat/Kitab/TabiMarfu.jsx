@@ -1,25 +1,22 @@
 import LearningScene from "../../../engine/learning/LearningScene";
-import mubtadaDialog from "./MubtadaDialog";
-import { useNavigate } from "react-router-dom";
+import tabiMarfuDialog from "./TabiMarfuDialog";
 
-export default function Mubtada() {
-  const navigate = useNavigate();
-
+export default function TabiMarfu() {
   const playerName =
     localStorage.getItem("playerName") || "Pelajar";
 
   function handleFinish() {
     localStorage.setItem(
-      "mubtadaLearningDone",
+      "tabiMarfuLearningDone",
       "true"
     );
 
-    navigate("/animasi-mubtada");
+    window.location.href = "/animasi-tabi-marfu";
   }
 
   return (
     <LearningScene
-      scene={mubtadaDialog}
+      scene={tabiMarfuDialog}
       playerName={playerName}
       onFinish={handleFinish}
     />

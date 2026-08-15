@@ -1,0 +1,958 @@
+/* =========================================================
+   ANIMASI KHABAR
+   KOTA MARFU'AT
+   LANDSCAPE 16:9
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+.khabar-animation-screen {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100dvh;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: clamp(10px, 2vh, 22px)
+           clamp(14px, 3vw, 40px);
+
+  background:
+    url("/images/kotaMarfuat/bg-marfuat.webp")
+    center / cover
+    no-repeat;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+/* =========================================================
+   SHADE
+========================================================= */
+
+.khabar-animation-shade {
+  position: absolute;
+  inset: 0;
+
+  background:
+    rgba(0, 35, 28, 0.42);
+
+  z-index: 0;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.khabar-animation-header {
+  position: relative;
+  z-index: 2;
+
+  flex-shrink: 0;
+
+  text-align: center;
+}
+
+.khabar-animation-kicker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 34px;
+
+  padding:
+    4px
+    clamp(14px, 2vw, 22px);
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius: 24px;
+
+  background: #08735a;
+
+  color: #fff;
+
+  font-family:
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(0.7rem, 1.2vw, 0.9rem);
+
+  font-weight: 700;
+
+  box-shadow:
+    0 5px 14px
+    rgba(0, 0, 0, 0.25);
+}
+
+.khabar-animation-header h1 {
+  margin:
+    clamp(3px, 0.8vh, 8px)
+    0
+    0;
+
+  color: #fffdf2;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(1.25rem, 2.4vw, 2.2rem);
+
+  line-height: 1.1;
+
+  font-weight: 700;
+
+  text-shadow:
+    0 2px 5px
+    rgba(0, 0, 0, 0.55);
+}
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.khabar-animation-card {
+  position: relative;
+  z-index: 2;
+
+  width:
+    min(
+      900px,
+      88vw
+    );
+
+  /*
+   * Jangan terlalu turun pada HP.
+   */
+  margin-top:
+    clamp(28px, 5vh, 48px);
+
+  padding:
+    clamp(24px, 4vh, 42px)
+    clamp(20px, 4vw, 48px)
+    clamp(16px, 3vh, 26px);
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius:
+    clamp(16px, 2vw, 24px);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 253, 242, 0.97),
+      rgba(247, 235, 198, 0.97)
+    );
+
+  box-shadow:
+    0 15px 40px
+    rgba(0, 0, 0, 0.32);
+
+  text-align: center;
+
+  animation:
+    khabarCardIn
+    0.35s
+    ease;
+
+  flex-shrink: 1;
+}
+
+@keyframes khabarCardIn {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(12px)
+      scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+/* =========================================================
+   STAGE LABEL
+========================================================= */
+
+.khabar-stage-label {
+  position: absolute;
+
+  top:
+    clamp(-22px, -3vh, -16px);
+
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  min-width:
+    clamp(160px, 22vw, 190px);
+
+  padding:
+    7px
+    clamp(18px, 2.5vw, 25px);
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius: 30px;
+
+  background:
+    #08735a;
+
+  color: #fff;
+
+  box-shadow:
+    0 8px 18px
+    rgba(0, 0, 0, 0.25);
+
+  white-space: nowrap;
+}
+
+.khabar-stage-label span {
+  font-family:
+    "Times New Roman",
+    "Amiri",
+    serif;
+
+  font-size:
+    clamp(1rem, 1.6vw, 1.15rem);
+
+  direction: rtl;
+}
+
+.khabar-stage-label strong {
+  font-size:
+    clamp(0.7rem, 1.1vw, 0.85rem);
+}
+
+/* =========================================================
+   ARABIC SENTENCE
+========================================================= */
+
+.khabar-full-sentence {
+  display: flex;
+
+  justify-content: center;
+  align-items: baseline;
+
+  gap:
+    clamp(16px, 3vw, 28px);
+
+  margin-top:
+    clamp(2px, 1vh, 10px);
+
+  direction: rtl;
+
+  font-family:
+    "Times New Roman",
+    "Amiri",
+    serif;
+
+  /*
+   * Besar pada laptop.
+   * Masih jelas pada HP.
+   */
+  font-size:
+    clamp(
+      2.25rem,
+      5vw,
+      4.5rem
+    );
+
+  line-height: 1.1;
+}
+
+.khabar-before {
+  color:
+    #173f34;
+
+  font-weight:
+    500;
+}
+
+.khabar-focus-word {
+  position: relative;
+
+  display: inline-block;
+
+  color:
+    #08735a;
+
+  font-weight:
+    800;
+}
+
+.khabar-word-base {
+  display: inline;
+}
+
+.khabar-changing-ending {
+  display: inline-block;
+
+  color:
+    #c2382b;
+
+  font-weight:
+    900;
+
+  animation:
+    khabarEndingIn
+    0.45s
+    ease;
+}
+
+@keyframes khabarEndingIn {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(-10px)
+      scale(1.25);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+/* =========================================================
+   SIGN
+========================================================= */
+
+.khabar-sign-information {
+  display: inline-flex;
+
+  align-items: stretch;
+
+  margin-top:
+    clamp(8px, 2vh, 18px);
+
+  overflow: hidden;
+
+  border-radius: 22px;
+
+  border:
+    1px solid
+    #d8ad3c;
+
+  box-shadow:
+    0 3px 8px
+    rgba(0, 0, 0, 0.12);
+}
+
+.khabar-sign-information span {
+  padding:
+    7px
+    clamp(14px, 2vw, 20px);
+
+  background:
+    #08735a;
+
+  color:
+    #fff;
+
+  font-size:
+    clamp(0.7rem, 1.1vw, 0.82rem);
+
+  font-weight:
+    700;
+}
+
+.khabar-sign-information strong {
+  padding:
+    7px
+    clamp(16px, 2vw, 22px);
+
+  background:
+    #f4ca50;
+
+  color:
+    #604a16;
+
+  font-size:
+    clamp(0.7rem, 1.1vw, 0.82rem);
+
+  font-weight:
+    800;
+}
+
+/* =========================================================
+   NOTE
+========================================================= */
+
+.khabar-stage-note {
+  width: 100%;
+
+  max-width:
+    760px;
+
+  margin:
+    clamp(8px, 2vh, 18px)
+    auto
+    clamp(7px, 1.5vh, 14px);
+
+  color:
+    #293f38;
+
+  font-size:
+    clamp(
+      0.72rem,
+      1.1vw,
+      0.88rem
+    );
+
+  font-weight:
+    600;
+
+  line-height:
+    1.4;
+}
+
+/* =========================================================
+   COMPARISON FLOW
+========================================================= */
+
+.khabar-comparison-flow {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  flex-wrap: nowrap;
+
+  gap:
+    clamp(10px, 2vw, 24px);
+
+  padding:
+    7px
+    clamp(10px, 2vw, 18px);
+
+  border-radius: 14px;
+
+  background:
+    rgba(225, 215, 177, 0.45);
+
+  color:
+    #645a43;
+
+  font-family:
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      0.9rem,
+      1.4vw,
+      1.15rem
+    );
+}
+
+.khabar-comparison-flow span {
+  padding:
+    4px
+    clamp(7px, 1vw, 10px);
+
+  border-radius: 9px;
+
+  transition:
+    0.25s ease;
+}
+
+.khabar-comparison-flow span.current {
+  background:
+    #08735a;
+
+  color:
+    #fff;
+
+  box-shadow:
+    0 5px 12px
+    rgba(0, 0, 0, 0.18);
+}
+
+.khabar-comparison-flow b {
+  color:
+    #b58a25;
+
+  font-size:
+    clamp(
+      1rem,
+      1.5vw,
+      1.2rem
+    );
+}
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.khabar-animation-actions {
+  position: relative;
+
+  z-index: 3;
+
+  width:
+    min(
+      900px,
+      88vw
+    );
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top:
+    auto;
+
+  padding-top:
+    clamp(8px, 1.5vh, 16px);
+
+  flex-shrink: 0;
+}
+
+.khabar-animation-button {
+  min-width:
+    clamp(110px, 12vw, 150px);
+
+  padding:
+    clamp(8px, 1.5vh, 12px)
+    clamp(14px, 2vw, 22px);
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius: 28px;
+
+  font-size:
+    clamp(
+      0.72rem,
+      1.1vw,
+      0.9rem
+    );
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.khabar-animation-button:hover {
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 7px 15px
+    rgba(0, 0, 0, 0.22);
+}
+
+.khabar-animation-button.secondary {
+  background:
+    #fffdf2;
+
+  color:
+    #08735a;
+}
+
+.khabar-animation-button.primary {
+  background:
+    #08735a;
+
+  color:
+    #fff;
+}
+
+/* =========================================================
+   STAGE INDICATOR
+========================================================= */
+
+.khabar-stage-indicator {
+  display: flex;
+
+  align-items: center;
+
+  gap:
+    clamp(5px, 1vw, 10px);
+}
+
+.khabar-stage-book {
+  display: grid;
+
+  place-items: center;
+
+  width:
+    clamp(30px, 4vw, 42px);
+
+  height:
+    clamp(30px, 4vw, 42px);
+
+  border-radius: 9px;
+
+  background:
+    rgba(238, 240, 224, 0.65);
+
+  font-size:
+    clamp(1rem, 1.8vw, 1.35rem);
+
+  opacity:
+    0.65;
+
+  transition:
+    0.25s ease;
+}
+
+.khabar-stage-book.done {
+  background:
+    #6b8d7d;
+
+  opacity:
+    0.8;
+}
+
+.khabar-stage-book.active {
+  background:
+    #fffdf2;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  opacity:
+    1;
+
+  box-shadow:
+    0 0 18px
+    rgba(216, 173, 60, 0.65);
+
+  transform:
+    translateY(-2px);
+}
+
+/* =========================================================
+   HP LANDSCAPE
+   700px DAN KE BAWAH
+========================================================= */
+
+@media
+  (max-width: 700px)
+  and (orientation: landscape) {
+
+  .khabar-animation-screen {
+    padding:
+      7px
+      12px
+      7px;
+
+    justify-content:
+      flex-start;
+  }
+
+  .khabar-animation-kicker {
+    min-height:
+      27px;
+
+    padding:
+      2px
+      12px;
+
+    font-size:
+      0.62rem;
+  }
+
+  .khabar-animation-header h1 {
+    margin-top:
+      2px;
+
+    font-size:
+      1rem;
+  }
+
+  /* CARD */
+
+  .khabar-animation-card {
+    width:
+      min(92vw, 760px);
+
+    margin-top:
+      25px;
+
+    padding:
+      20px
+      18px
+      11px;
+
+    border-radius:
+      15px;
+  }
+
+  /* LABEL */
+
+  .khabar-stage-label {
+    top:
+      -17px;
+
+    min-width:
+      135px;
+
+    padding:
+      5px
+      12px;
+
+    gap:
+      7px;
+
+    border-width:
+      1.5px;
+  }
+
+  .khabar-stage-label span {
+    font-size:
+      0.9rem;
+  }
+
+  .khabar-stage-label strong {
+    font-size:
+      0.62rem;
+  }
+
+  /* AYAT */
+
+  .khabar-full-sentence {
+    gap:
+      13px;
+
+    margin-top:
+      1px;
+
+    font-size:
+      clamp(
+        2rem,
+        6vw,
+        3rem
+      );
+
+    line-height:
+      1.05;
+  }
+
+  /* SIGN */
+
+  .khabar-sign-information {
+    margin-top:
+      7px;
+  }
+
+  .khabar-sign-information span,
+  .khabar-sign-information strong {
+    padding:
+      5px
+      12px;
+
+    font-size:
+      0.62rem;
+  }
+
+  /* NOTE */
+
+  .khabar-stage-note {
+    max-width:
+      90%;
+
+    margin:
+      7px auto
+      6px;
+
+    font-size:
+      0.62rem;
+
+    line-height:
+      1.25;
+  }
+
+  /* FLOW */
+
+  .khabar-comparison-flow {
+    gap:
+      7px;
+
+    padding:
+      4px
+      8px;
+
+    font-size:
+      0.7rem;
+  }
+
+  .khabar-comparison-flow span {
+    padding:
+      3px
+      6px;
+  }
+
+  /* ACTIONS */
+
+  .khabar-animation-actions {
+    width:
+      min(92vw, 760px);
+
+    padding-top:
+      5px;
+  }
+
+  .khabar-animation-button {
+    min-width:
+      90px;
+
+    padding:
+      6px
+      12px;
+
+    font-size:
+      0.62rem;
+  }
+
+  .khabar-stage-book {
+    width:
+      27px;
+
+    height:
+      27px;
+
+    font-size:
+      0.85rem;
+  }
+}
+
+/* =========================================================
+   HP LANDSCAPE PENDEK
+   Contoh: 800 × 400
+========================================================= */
+
+@media
+  (orientation: landscape)
+  and (max-height: 500px) {
+
+  .khabar-animation-screen {
+    padding:
+      5px
+      10px;
+  }
+
+  .khabar-animation-header h1 {
+    font-size:
+      0.9rem;
+  }
+
+  .khabar-animation-card {
+    margin-top:
+      21px;
+
+    padding:
+      17px
+      15px
+      8px;
+  }
+
+  .khabar-full-sentence {
+    font-size:
+      clamp(
+        1.75rem,
+        6vh,
+        2.6rem
+      );
+  }
+
+  .khabar-sign-information {
+    margin-top:
+      5px;
+  }
+
+  .khabar-stage-note {
+    margin:
+      5px auto;
+
+    font-size:
+      0.58rem;
+  }
+
+  .khabar-comparison-flow {
+    padding:
+      3px
+      7px;
+
+    font-size:
+      0.64rem;
+  }
+
+  .khabar-animation-actions {
+    padding-top:
+      3px;
+  }
+}
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
+@media
+  (min-width: 1000px)
+  and (min-height: 700px) {
+
+  .khabar-animation-card {
+    margin-top:
+      40px;
+  }
+
+  .khabar-full-sentence {
+    font-size:
+      clamp(
+        3rem,
+        5vw,
+        4.5rem
+      );
+  }
+}

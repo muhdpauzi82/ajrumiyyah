@@ -1,0 +1,650 @@
+/* =========================================================
+   LATIHAN التَّابِعُ لِلْمَرْفُوعِ
+   KOTA MARFU'AT
+   LAPTOP + HP LANDSCAPE
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+.latihan-tabi-marfu-screen {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100dvh;
+
+  overflow: hidden;
+
+  display: grid;
+  place-items: center;
+
+  padding: 12px;
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.latihan-tabi-marfu-panel {
+  position: relative;
+  z-index: 2;
+
+  width: min(900px, 88vw);
+  max-height: 92dvh;
+
+  padding: 24px 38px;
+
+  overflow: hidden;
+
+  border: 2px solid #d8ad3c;
+  border-radius: 22px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 253, 242, 0.98),
+      rgba(247, 235, 198, 0.98)
+    );
+
+  box-shadow:
+    0 15px 40px
+    rgba(0, 0, 0, 0.32);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.latihan-tabi-marfu-header {
+  text-align: center;
+}
+
+.latihan-tabi-marfu-header > span {
+  display: inline-block;
+
+  padding: 6px 18px;
+
+  border: 1px solid #d8ad3c;
+  border-radius: 20px;
+
+  background: #08735a;
+
+  color: #fff;
+
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.latihan-tabi-marfu-header h1 {
+  margin: 8px 0 4px;
+
+  color: #104c3d;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    1.6rem,
+    2.6vw,
+    2.3rem
+  );
+
+  line-height: 1.15;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.latihan-tabi-marfu-progress {
+  width: 100%;
+  height: 8px;
+
+  margin-top: 12px;
+
+  overflow: hidden;
+
+  border-radius: 10px;
+
+  background: #ddd5b8;
+}
+
+.latihan-tabi-marfu-progress-fill {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: #19805f;
+
+  transition:
+    width 0.3s ease;
+}
+
+.latihan-tabi-marfu-question-number {
+  margin-top: 7px;
+
+  text-align: center;
+
+  color: #765a18;
+
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   QUESTION CARD
+========================================================= */
+
+.latihan-tabi-marfu-card {
+  margin-top: 12px;
+
+  padding: 18px 20px;
+
+  border-radius: 16px;
+
+  background:
+    rgba(255, 255, 255, 0.62);
+
+  border:
+    1px solid
+    rgba(188, 150, 55, 0.5);
+}
+
+.latihan-tabi-marfu-card h2 {
+  margin: 0 0 14px;
+
+  text-align: center;
+
+  color: #173f34;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(
+    1.2rem,
+    2vw,
+    1.7rem
+  );
+
+  line-height: 1.35;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   OPTIONS
+========================================================= */
+
+.latihan-tabi-marfu-options {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  width: 100%;
+}
+
+.latihan-tabi-marfu-option {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+  min-height: 46px;
+
+  padding: 7px 13px;
+
+  border:
+    1.5px solid
+    #d2b15b;
+
+  border-radius: 11px;
+
+  background:
+    rgba(255, 252, 239, 0.97);
+
+  color: #293f38;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 0.92rem;
+  font-weight: 700;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.latihan-tabi-marfu-option:hover:not(:disabled) {
+  transform: translateX(4px);
+
+  border-color: #08735a;
+
+  background: #eef7ef;
+
+  box-shadow:
+    0 4px 10px
+    rgba(0, 0, 0, 0.08);
+}
+
+.latihan-tabi-marfu-option:disabled {
+  cursor: default;
+}
+
+
+/* =========================================================
+   OPTION NUMBER
+========================================================= */
+
+.latihan-tabi-marfu-option .option-number {
+  flex: 0 0 auto;
+
+  display: grid;
+  place-items: center;
+
+  width: 30px;
+  height: 30px;
+
+  margin-right: 11px;
+
+  border-radius: 50%;
+
+  background: #176e55;
+
+  color: #fff;
+
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   SELECTED
+========================================================= */
+
+.latihan-tabi-marfu-option.selected {
+  border-color: #bd8a1e;
+
+  background: #fff1c9;
+}
+
+
+/* =========================================================
+   CORRECT
+========================================================= */
+
+.latihan-tabi-marfu-option.correct {
+  border-color: #187451;
+
+  background: #dff1df;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.latihan-tabi-marfu-footer {
+  margin-top: 10px;
+
+  text-align: center;
+
+  color: #766b55;
+
+  font-size: 0.7rem;
+}
+
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+.latihan-tabi-marfu-result {
+  position: relative;
+  z-index: 3;
+
+  width: min(560px, 88vw);
+
+  padding: 34px 38px;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius: 22px;
+
+  background:
+    rgba(255, 252, 238, 0.98);
+
+  text-align: center;
+
+  box-shadow:
+    0 15px 40px
+    rgba(0, 0, 0, 0.32);
+}
+
+.latihan-tabi-marfu-result .result-badge {
+  display: inline-block;
+
+  padding: 7px 18px;
+
+  border-radius: 20px;
+
+  background: #08735a;
+
+  color: #fff;
+
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.latihan-tabi-marfu-result h1 {
+  margin: 14px 0 5px;
+
+  color: #104c3d;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 2rem;
+}
+
+.latihan-tabi-marfu-result .result-score {
+  margin: 5px 0;
+
+  color: #b17d16;
+
+  font-size: 2.4rem;
+  font-weight: 800;
+}
+
+.latihan-tabi-marfu-result .result-text {
+  margin: 8px auto;
+
+  max-width: 440px;
+
+  color: #514d42;
+
+  font-size: 0.95rem;
+
+  line-height: 1.5;
+}
+
+.latihan-tabi-marfu-result .result-button {
+  margin-top: 15px;
+
+  padding: 11px 28px;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius: 25px;
+
+  background: #08735a;
+
+  color: #fff;
+
+  font-size: 0.9rem;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.latihan-tabi-marfu-result .result-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 6px 15px
+    rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================================
+   LAPTOP KECIL
+========================================================= */
+
+@media (max-height: 800px) {
+
+  .latihan-tabi-marfu-screen {
+    padding: 8px;
+  }
+
+  .latihan-tabi-marfu-panel {
+    width: min(900px, 88vw);
+
+    padding:
+      18px 30px;
+
+    border-radius: 19px;
+  }
+
+  .latihan-tabi-marfu-header > span {
+    padding: 5px 15px;
+
+    font-size: 0.68rem;
+  }
+
+  .latihan-tabi-marfu-header h1 {
+    margin-top: 5px;
+
+    font-size: 1.55rem;
+  }
+
+  .latihan-tabi-marfu-progress {
+    height: 6px;
+
+    margin-top: 8px;
+  }
+
+  .latihan-tabi-marfu-question-number {
+    margin-top: 5px;
+
+    font-size: 0.68rem;
+  }
+
+  .latihan-tabi-marfu-card {
+    margin-top: 8px;
+
+    padding: 13px 16px;
+  }
+
+  .latihan-tabi-marfu-card h2 {
+    margin-bottom: 10px;
+
+    font-size: 1.15rem;
+  }
+
+  .latihan-tabi-marfu-options {
+    gap: 6px;
+  }
+
+  .latihan-tabi-marfu-option {
+    min-height: 39px;
+
+    padding: 5px 10px;
+
+    font-size: 1.2rem;
+  }
+
+  .latihan-tabi-marfu-option .option-number {
+    width: 25px;
+    height: 25px;
+
+    margin-right: 8px;
+
+    font-size: 0.65rem;
+  }
+
+  .latihan-tabi-marfu-footer {
+    margin-top: 6px;
+
+    font-size: 0.58rem;
+  }
+}
+
+
+/* =========================================================
+   HP LANDSCAPE
+========================================================= */
+
+@media (max-width: 700px) and (orientation: landscape) {
+
+  .latihan-tabi-marfu-screen {
+    padding: 5px;
+  }
+
+  .latihan-tabi-marfu-panel {
+    width: 92vw;
+    max-height: 94dvh;
+
+    padding:
+      10px 18px;
+
+    border-radius: 15px;
+  }
+
+  .latihan-tabi-marfu-header > span {
+    padding: 3px 10px;
+
+    border-width: 1px;
+
+    font-size: 0.55rem;
+  }
+
+  .latihan-tabi-marfu-header h1 {
+    margin: 3px 0;
+
+    font-size: 1rem;
+  }
+
+  .latihan-tabi-marfu-progress {
+    height: 4px;
+
+    margin-top: 5px;
+  }
+
+  .latihan-tabi-marfu-question-number {
+    margin-top: 3px;
+
+    font-size: 0.52rem;
+  }
+
+  .latihan-tabi-marfu-card {
+    margin-top: 5px;
+
+    padding: 8px 10px;
+
+    border-radius: 10px;
+  }
+
+  .latihan-tabi-marfu-card h2 {
+    margin-bottom: 6px;
+
+    font-size: 0.82rem;
+
+    line-height: 1.25;
+  }
+
+  .latihan-tabi-marfu-options {
+    gap: 4px;
+  }
+
+  .latihan-tabi-marfu-option {
+    min-height: 28px;
+
+    padding: 3px 7px;
+
+    border-radius: 7px;
+
+    font-size: 0.9rem;
+  }
+
+  .latihan-tabi-marfu-option .option-number {
+    width: 20px;
+    height: 20px;
+
+    margin-right: 6px;
+
+    font-size: 0.55rem;
+  }
+
+  .latihan-tabi-marfu-footer {
+    margin-top: 3px;
+
+    font-size: 0.48rem;
+  }
+
+  .latihan-tabi-marfu-result {
+    width: 82vw;
+
+    padding: 20px;
+
+    border-radius: 16px;
+  }
+
+  .latihan-tabi-marfu-result .result-badge {
+    padding: 5px 12px;
+
+    font-size: 0.6rem;
+  }
+
+  .latihan-tabi-marfu-result h1 {
+    margin: 8px 0 3px;
+
+    font-size: 1.35rem;
+  }
+
+  .latihan-tabi-marfu-result .result-score {
+    font-size: 1.8rem;
+  }
+
+  .latihan-tabi-marfu-result .result-text {
+    font-size: 0.7rem;
+  }
+
+  .latihan-tabi-marfu-result .result-button {
+    margin-top: 8px;
+
+    padding: 7px 18px;
+
+    font-size: 0.68rem;
+  }
+}

@@ -13,7 +13,7 @@ const khabarInnaDialog = [
     name: "Syeikh Abdul I'rab",
     progress: 12,
     text:
-      "Selamat datang, {player}. Sekarang kita akan mempelajari خبر إنَّ.",
+      "Selamat datang, {player}. Sekarang kita akan mempelajari خبر إنّ.",
   },
 
   {
@@ -22,7 +22,7 @@ const khabarInnaDialog = [
     name: "{player}",
     progress: 20,
     text:
-      "Guru, apakah yang dimaksudkan dengan خبر إنَّ?",
+      "Guru, apakah yang dimaksudkan dengan خبر إنّ?",
   },
 
   {
@@ -31,7 +31,7 @@ const khabarInnaDialog = [
     name: "Syeikh Abdul I'rab",
     progress: 28,
     text:
-      "خبر إنَّ هو الاسم المرفوع الذي يتم به معنى إنَّ واسمها. Khabar إنَّ ialah isim yang berada dalam keadaan marfu' dan melengkapkan makna إنَّ bersama isimnya.",
+      "خبر إنّ هو الاسم المرفوع الذي يتمم معنى الجملة بعد إنّ. Khabar إنّ ialah isim yang berada dalam keadaan marfu' dan menyempurnakan makna ayat.",
   },
 
   {
@@ -40,7 +40,7 @@ const khabarInnaDialog = [
     name: "{player}",
     progress: 36,
     text:
-      "Jadi apabila إنَّ masuk ke dalam jumlah ismiyyah, Mubtada' menjadi اسم إنَّ dan Khabar menjadi خبر إنَّ?",
+      "Jadi خبر إنّ berada dalam keadaan marfu'?",
   },
 
   {
@@ -49,19 +49,19 @@ const khabarInnaDialog = [
     name: "Syeikh Abdul I'rab",
     progress: 44,
     text:
-      "Benar. إنَّ dan saudara-saudaranya menasabkan isimnya dan merafakkan khabarnya.",
+      "Benar. Apabila إنّ masuk ke dalam jumlah ismiyyah, اسم إنّ menjadi mansub manakala خبر إنّ kekal dalam keadaan marfu'.",
   },
 
   {
     type: "arabic",
     speaker: "guru",
     progress: 54,
-    title: "Contoh خبر إنَّ",
-    before: "إِنَّ",
-    word: "زَيْدًا",
-    ending: " ",
+    title: "Contoh خبر إنّ",
+    before: "إِنَّ مُحَمَّدًا",
+    word: "مُجْتَهِد",
+    ending: "ٌ",
     text:
-      "Perhatikan ayat إِنَّ زَيْدًا قَائِمٌ. زَيْدًا ialah اسم إنَّ dan berada dalam keadaan mansub, manakala قَائِمٌ ialah خبر إنَّ dan berada dalam keadaan marfu'.",
+      "Perhatikan ayat إِنَّ مُحَمَّدًا مُجْتَهِدٌ. مُحَمَّدًا ialah اسم إنّ manakala مُجْتَهِدٌ ialah خبر إنّ.",
   },
 
   {
@@ -70,7 +70,7 @@ const khabarInnaDialog = [
     name: "{player}",
     progress: 62,
     text:
-      "Saya faham. زَيْدًا menjadi اسم إنَّ, manakala قَائِمٌ menjadi خبر إنَّ.",
+      "Saya faham. مُجْتَهِدٌ menjadi خبر إنّ dan hukumnya marfu'.",
   },
 
   {
@@ -79,7 +79,7 @@ const khabarInnaDialog = [
     name: "Syeikh Abdul I'rab",
     progress: 70,
     text:
-      "Bagus. Jadi jangan tertukar antara kedua-duanya. اسم إنَّ adalah mansub, tetapi خبر إنَّ adalah marfu'.",
+      "Bagus. Ingat bahawa tanda asal رفع bagi خبر إنّ ialah dhammah.",
   },
 
   {
@@ -87,11 +87,11 @@ const khabarInnaDialog = [
     speaker: "guru",
     progress: 78,
     title: "Tanda رفع",
-    before: "إِنَّ زَيْدًا",
-    word: "قَائِم",
+    before: "إِنَّ الطَّالِبَ",
+    word: "مُجْتَهِد",
     ending: "ٌ",
     text:
-      "Dalam ayat إِنَّ زَيْدًا قَائِمٌ, tanda رفع pada قَائِمٌ ialah dhammah.",
+      "Dalam ayat إِنَّ الطَّالِبَ مُجْتَهِدٌ, tanda رفع pada خبر إنّ ialah dhammah.",
   },
 
   {
@@ -100,7 +100,7 @@ const khabarInnaDialog = [
     name: "{player}",
     progress: 86,
     text:
-      "Jadi خبر إنَّ ialah isim marfu' yang melengkapkan makna إنَّ bersama isimnya?",
+      "Jadi اسم إنّ منصوب dan خبر إنّ مرفوع?",
   },
 
   {
@@ -109,7 +109,7 @@ const khabarInnaDialog = [
     name: "Syeikh Abdul I'rab",
     progress: 94,
     text:
-      "Tepat. Ingat: إنَّ وأخواتها تنصب الاسم وترفع الخبر.",
+      "Tepat. Ingat: إِنَّ تنصب الاسم وترفع الخبر.",
   },
 
   {
@@ -118,7 +118,7 @@ const khabarInnaDialog = [
     progress: 100,
     title: "Tahniah!",
     text:
-      "Bagus, {player}. Kamu telah memahami asas خبر إنَّ. Ingat bahawa اسم إنَّ adalah mansub, manakala خبر إنَّ adalah marfu'.",
+      "Bagus, {player}. Kamu telah memahami bahawa خبر إنّ ialah isim yang marfu' dan menyempurnakan makna ayat selepas إنّ.",
   },
 ];
 

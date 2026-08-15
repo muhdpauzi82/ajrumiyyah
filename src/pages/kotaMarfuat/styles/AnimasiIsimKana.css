@@ -1,0 +1,1119 @@
+/* =========================================================
+   ANIMASI ISIM KANA
+   KOTA MARFU'AT
+   LANDSCAPE LAPTOP + HP
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+.isim-kana-animation-screen {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100dvh;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding:
+    clamp(10px, 2vh, 22px)
+    clamp(12px, 3vw, 40px);
+
+  background:
+    url("/images/kotaMarfuat/bg-marfuat.webp")
+    center / cover no-repeat;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+
+/* =========================================================
+   SHADE
+========================================================= */
+
+.isim-kana-animation-shade {
+  position: absolute;
+  inset: 0;
+
+  background:
+    rgba(0, 35, 28, 0.30);
+
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.isim-kana-animation-header {
+  position: relative;
+  z-index: 2;
+
+  flex-shrink: 0;
+
+  text-align: center;
+
+  color: white;
+}
+
+.isim-kana-animation-kicker {
+  display: inline-block;
+
+  padding:
+    6px 20px;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius:
+    24px;
+
+  background:
+    #08735a;
+
+  color:
+    white;
+
+  font-size:
+    clamp(
+      0.68rem,
+      1.2vw,
+      0.85rem
+    );
+
+  font-weight:
+    800;
+}
+
+.isim-kana-animation-header h1 {
+  margin:
+    7px 0 0;
+
+  color:
+    white;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      1.35rem,
+      2.6vw,
+      2.2rem
+    );
+
+  line-height:
+    1.15;
+
+  text-shadow:
+    0 2px 5px
+    rgba(0, 0, 0, 0.45);
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.isim-kana-animation-card {
+  position: relative;
+  z-index: 2;
+
+  width:
+    min(
+      900px,
+      86vw
+    );
+
+  max-height:
+    76dvh;
+
+  margin-top:
+    clamp(
+      30px,
+      5vh,
+      42px
+    );
+
+  padding:
+    clamp(
+      24px,
+      4vh,
+      34px
+    )
+    clamp(
+      26px,
+      4vw,
+      46px
+    );
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius:
+    clamp(
+      16px,
+      2vw,
+      24px
+    );
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 253, 242, 0.97),
+      rgba(247, 235, 198, 0.97)
+    );
+
+  box-shadow:
+    0 15px 40px
+    rgba(0, 0, 0, 0.30);
+
+  animation:
+    isimKanaCardIn
+    0.35s ease;
+}
+
+@keyframes isimKanaCardIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+/* =========================================================
+   STAGE LABEL
+========================================================= */
+
+.isim-kana-stage-label {
+  display:
+    flex;
+
+  justify-content:
+    center;
+
+  align-items:
+    center;
+
+  gap:
+    0;
+
+  margin-top:
+    -57px;
+
+  margin-bottom:
+    clamp(
+      16px,
+      3vh,
+      24px
+    );
+}
+
+.isim-kana-stage-label span,
+.isim-kana-stage-label strong {
+  padding:
+    9px 20px;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  background:
+    #08735a;
+
+  color:
+    white;
+
+  font-weight:
+    800;
+}
+
+.isim-kana-stage-label span {
+  border-radius:
+    24px 0 0 24px;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size:
+    clamp(
+      0.95rem,
+      1.5vw,
+      1.15rem
+    );
+}
+
+.isim-kana-stage-label strong {
+  margin-left:
+    -2px;
+
+  border-left:
+    none;
+
+  border-radius:
+    0 24px 24px 0;
+
+  font-size:
+    clamp(
+      0.72rem,
+      1vw,
+      0.9rem
+    );
+}
+
+
+/* =========================================================
+   ARABIC SENTENCE
+========================================================= */
+
+.isim-kana-full-sentence {
+  display:
+    flex;
+
+  justify-content:
+    center;
+
+  align-items:
+    center;
+
+  gap:
+    clamp(
+      12px,
+      2vw,
+      22px
+    );
+
+  min-height:
+    clamp(
+      80px,
+      13vh,
+      110px
+    );
+
+  direction:
+    rtl;
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size:
+    clamp(
+      2.5rem,
+      5vw,
+      4.8rem
+    );
+
+  line-height:
+    1.15;
+
+  color:
+    #173f34;
+}
+
+.isim-kana-before {
+  color:
+    #222;
+}
+
+.isim-kana-focus-word {
+  position:
+    relative;
+
+  display:
+    inline-block;
+
+  color:
+    #08735a;
+
+  font-weight:
+    700;
+}
+
+.isim-kana-word-base {
+  display:
+    inline;
+}
+
+.isim-kana-changing-ending {
+  display:
+    inline-block;
+
+  color:
+    #c51f1f;
+
+  font-weight:
+    900;
+
+  animation:
+    endingPop
+    0.45s ease;
+}
+
+@keyframes endingPop {
+  from {
+    opacity:
+      0;
+
+    transform:
+      scale(0.6);
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      scale(1);
+  }
+}
+
+
+/* =========================================================
+   SIGN
+========================================================= */
+
+.isim-kana-sign-information {
+  display:
+    flex;
+
+  justify-content:
+    center;
+
+  align-items:
+    stretch;
+
+  margin:
+    7px auto
+    clamp(
+      10px,
+      2vh,
+      18px
+    );
+
+  width:
+    fit-content;
+
+  overflow:
+    hidden;
+
+  border-radius:
+    22px;
+
+  border:
+    1px solid
+    #d8ad3c;
+}
+
+.isim-kana-sign-information span,
+.isim-kana-sign-information strong {
+  padding:
+    8px 18px;
+}
+
+.isim-kana-sign-information span {
+  background:
+    #08735a;
+
+  color:
+    white;
+
+  font-size:
+    clamp(
+      0.68rem,
+      1vw,
+      0.8rem
+    );
+
+  font-weight:
+    800;
+}
+
+.isim-kana-sign-information strong {
+  background:
+    #f3c84b;
+
+  color:
+    #684c0d;
+
+  font-size:
+    clamp(
+      0.7rem,
+      1vw,
+      0.85rem
+    );
+}
+
+
+/* =========================================================
+   NOTE
+========================================================= */
+
+.isim-kana-stage-note {
+  max-width:
+    720px;
+
+  margin:
+    0 auto
+    clamp(
+      10px,
+      2vh,
+      18px
+    );
+
+  text-align:
+    center;
+
+  color:
+    #403d34;
+
+  font-size:
+    clamp(
+      0.75rem,
+      1.2vw,
+      0.9rem
+    );
+
+  font-weight:
+    600;
+
+  line-height:
+    1.5;
+}
+
+
+/* =========================================================
+   COMPARISON
+========================================================= */
+
+.isim-kana-comparison-flow {
+  display:
+    flex;
+
+  justify-content:
+    center;
+
+  align-items:
+    center;
+
+  gap:
+    clamp(
+      8px,
+      1.5vw,
+      18px
+    );
+
+  padding:
+    9px 16px;
+
+  border-radius:
+    14px;
+
+  background:
+    rgba(
+      224,
+      215,
+      179,
+      0.55
+    );
+
+  font-family:
+    "Amiri",
+    "Traditional Arabic",
+    serif;
+
+  font-size:
+    clamp(
+      1.1rem,
+      2vw,
+      1.5rem
+    );
+}
+
+.isim-kana-comparison-flow span {
+  padding:
+    4px 10px;
+
+  color:
+    #756b58;
+
+  border-radius:
+    9px;
+
+  transition:
+    0.25s ease;
+}
+
+.isim-kana-comparison-flow span.current {
+  background:
+    #08735a;
+
+  color:
+    white;
+
+  box-shadow:
+    0 5px 14px
+    rgba(
+      0,
+      0,
+      0,
+      0.18
+    );
+}
+
+.isim-kana-comparison-flow b {
+  color:
+    #c4972c;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size:
+    clamp(
+      0.8rem,
+      1.2vw,
+      1rem
+    );
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.isim-kana-animation-actions {
+  position:
+    relative;
+
+  z-index:
+    2;
+
+  width:
+    min(
+      900px,
+      86vw
+    );
+
+  display:
+    flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    center;
+
+  margin-top:
+    auto;
+
+  padding-top:
+    10px;
+
+  padding-bottom:
+    clamp(
+      6px,
+      2vh,
+      28px
+    );
+}
+
+.isim-kana-animation-button {
+  min-width:
+    clamp(
+      130px,
+      14vw,
+      180px
+    );
+
+  padding:
+    10px 20px;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  border-radius:
+    28px;
+
+  font-size:
+    clamp(
+      0.72rem,
+      1.1vw,
+      0.9rem
+    );
+
+  font-weight:
+    800;
+
+  cursor:
+    pointer;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.isim-kana-animation-button:hover {
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 6px 15px
+    rgba(
+      0,
+      0,
+      0,
+      0.22
+    );
+}
+
+.isim-kana-animation-button.secondary {
+  background:
+    #fffdf2;
+
+  color:
+    #075d49;
+}
+
+.isim-kana-animation-button.primary {
+  background:
+    #08735a;
+
+  color:
+    white;
+}
+
+
+/* =========================================================
+   STAGE INDICATOR
+========================================================= */
+
+.isim-kana-stage-indicator {
+  display:
+    flex;
+
+  gap:
+    8px;
+}
+
+.isim-kana-stage-book {
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  width:
+    clamp(
+      32px,
+      4vw,
+      42px
+    );
+
+  height:
+    clamp(
+      32px,
+      4vw,
+      42px
+    );
+
+  border-radius:
+    8px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.55
+    );
+
+  font-size:
+    clamp(
+      1rem,
+      1.5vw,
+      1.35rem
+    );
+
+  opacity:
+    0.55;
+}
+
+.isim-kana-stage-book.done {
+  opacity:
+    0.8;
+
+  background:
+    #b7d0c5;
+}
+
+.isim-kana-stage-book.active {
+  opacity:
+    1;
+
+  background:
+    white;
+
+  border:
+    2px solid
+    #d8ad3c;
+
+  box-shadow:
+    0 0 18px
+    rgba(
+      255,
+      218,
+      76,
+      0.85
+    );
+}
+
+
+/* =========================================================
+   LAPTOP PENDEK
+========================================================= */
+
+@media
+  (max-height: 800px)
+  and (min-width: 701px) {
+
+  .isim-kana-animation-screen {
+    padding-top:
+      10px;
+
+    padding-bottom:
+      8px;
+  }
+
+  .isim-kana-animation-header h1 {
+    margin-top:
+      4px;
+
+    font-size:
+      1.65rem;
+  }
+
+  .isim-kana-animation-card {
+    margin-top:
+      32px;
+
+    padding:
+      25px 38px;
+  }
+
+  .isim-kana-full-sentence {
+    font-size:
+      3.5rem;
+
+    min-height:
+      80px;
+  }
+
+  .isim-kana-stage-note {
+    margin-bottom:
+      10px;
+  }
+
+  .isim-kana-animation-actions {
+    padding-bottom:
+      6px;
+  }
+}
+
+
+/* =========================================================
+   HP LANDSCAPE
+========================================================= */
+
+@media
+  (max-width: 700px)
+  and (orientation: landscape) {
+
+  .isim-kana-animation-screen {
+    padding:
+      5px 10px;
+  }
+
+  .isim-kana-animation-header {
+    margin-top:
+      0;
+  }
+
+  .isim-kana-animation-kicker {
+    padding:
+      4px 12px;
+
+    font-size:
+      0.58rem;
+  }
+
+  .isim-kana-animation-header h1 {
+    margin-top:
+      3px;
+
+    font-size:
+      1.05rem;
+  }
+
+
+  /* CARD */
+
+  .isim-kana-animation-card {
+    width:
+      92vw;
+
+    max-height:
+      76dvh;
+
+    margin-top:
+      28px;
+
+    padding:
+      13px 16px;
+
+    border-radius:
+      14px;
+  }
+
+
+  /* LABEL */
+
+  .isim-kana-stage-label {
+    margin-top:
+      -34px;
+
+    margin-bottom:
+      9px;
+  }
+
+  .isim-kana-stage-label span,
+  .isim-kana-stage-label strong {
+    padding:
+      5px 11px;
+  }
+
+  .isim-kana-stage-label span {
+    font-size:
+      0.82rem;
+  }
+
+  .isim-kana-stage-label strong {
+    font-size:
+      0.62rem;
+  }
+
+
+  /* SENTENCE */
+
+  .isim-kana-full-sentence {
+    gap:
+      10px;
+
+    min-height:
+      55px;
+
+    font-size:
+      clamp(
+        2rem,
+        6vw,
+        2.8rem
+      );
+  }
+
+
+  /* SIGN */
+
+  .isim-kana-sign-information {
+    margin:
+      4px auto 8px;
+  }
+
+  .isim-kana-sign-information span,
+  .isim-kana-sign-information strong {
+    padding:
+      5px 10px;
+
+    font-size:
+      0.58rem;
+  }
+
+
+  /* NOTE */
+
+  .isim-kana-stage-note {
+    margin-bottom:
+      7px;
+
+    font-size:
+      0.62rem;
+
+    line-height:
+      1.3;
+  }
+
+
+  /* COMPARISON */
+
+  .isim-kana-comparison-flow {
+    gap:
+      5px;
+
+    padding:
+      5px 8px;
+
+    font-size:
+      0.9rem;
+  }
+
+  .isim-kana-comparison-flow span {
+    padding:
+      3px 6px;
+  }
+
+  .isim-kana-comparison-flow b {
+    font-size:
+      0.65rem;
+  }
+
+
+  /* ACTIONS */
+
+  .isim-kana-animation-actions {
+    width:
+      92vw;
+
+    padding-bottom:
+      4px;
+  }
+
+  .isim-kana-animation-button {
+    min-width:
+      105px;
+
+    padding:
+      6px 12px;
+
+    font-size:
+      0.62rem;
+  }
+
+
+  /* INDICATOR */
+
+  .isim-kana-stage-indicator {
+    gap:
+      4px;
+  }
+
+  .isim-kana-stage-book {
+    width:
+      27px;
+
+    height:
+      27px;
+
+    font-size:
+      0.85rem;
+  }
+}
+
+
+/* =========================================================
+   HP LANDSCAPE SANGAT PENDEK
+========================================================= */
+
+@media
+  (max-width: 700px)
+  and (orientation: landscape)
+  and (max-height: 430px) {
+
+  .isim-kana-animation-card {
+    margin-top:
+      23px;
+
+    padding:
+      9px 13px;
+  }
+
+  .isim-kana-stage-label {
+    margin-top:
+      -30px;
+
+    margin-bottom:
+      5px;
+  }
+
+  .isim-kana-full-sentence {
+    min-height:
+      45px;
+
+    font-size:
+      1.8rem;
+  }
+
+  .isim-kana-stage-note {
+    font-size:
+      0.55rem;
+
+    margin-bottom:
+      4px;
+  }
+
+  .isim-kana-comparison-flow {
+    padding:
+      3px 6px;
+
+    font-size:
+      0.75rem;
+  }
+
+  .isim-kana-animation-button {
+    min-width:
+      90px;
+
+    padding:
+      4px 9px;
+
+    font-size:
+      0.55rem;
+  }
+
+  .isim-kana-stage-book {
+    width:
+      23px;
+
+    height:
+      23px;
+
+    font-size:
+      0.7rem;
+  }
+}
